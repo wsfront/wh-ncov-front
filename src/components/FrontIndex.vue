@@ -27,9 +27,9 @@
                     @select="handleSelect"
                     @open="handleOpen"
                     @close="handleClose">
-                    <el-menu-item index="全部" style="height:2em;" :disabled="menustate">
+                    <el-menu-item index="全部地区" style="height:2em;" :disabled="menustate">
                       <i class="el-icon-menu"></i>
-                      <span slot="title">全部</span>
+                      <span slot="title">全部地区</span>
                     </el-menu-item>
                     <el-menu-item index="江岸区" :disabled="menustate">
                       <i class="el-icon-position"></i>
@@ -366,14 +366,11 @@ export default {
 
       let that = this
       if (params === 'all=1') {
-        if (item === '全部') {
-          params = 'all=1'
-        } else {
+        if (item !== '全部地区') {
           params = 'all=3&area=' + item
         }
       } else {
-        if (item === '全部') {
-        } else {
+        if (item !== '全部地区') {
           params = params + '&area=' + item
         }
       }
