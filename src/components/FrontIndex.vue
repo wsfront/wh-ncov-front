@@ -357,8 +357,8 @@ export default {
       if (this.receive_check_radio !== '全部') {
         params = params + '&receive_check=' + this.receive_check_radio
       }
-      if (this.areaName !== '全部地区') {
-        params = params + '&area=' + this.areaName
+      if (item !== '全部地区') {
+        params = params + '&area=' + item
       }
       if (params === 'all=2') {
         params = 'all=1'
