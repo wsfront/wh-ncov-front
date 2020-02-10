@@ -357,7 +357,7 @@ export default {
       if (this.receive_check_radio !== '全部') {
         params = params + '&receive_check=' + this.receive_check_radio
       }
-      if (this.areaName !== '全部') {
+      if (this.areaName !== '全部地区') {
         params = params + '&area=' + this.areaName
       }
       if (params === 'all=2') {
@@ -469,7 +469,7 @@ export default {
       if (this.receive_check_radio !== '全部') {
         params = params + '&receive_check=' + this.receive_check_radio
       }
-      if (this.areaName !== '全部') {
+      if (this.areaName !== '全部地区') {
         params = params + '&area=' + this.areaName
       }
       if (params === 'all=2') {
