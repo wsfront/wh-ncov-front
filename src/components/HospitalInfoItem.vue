@@ -1,51 +1,44 @@
 <template>
-<div>
-  <div class="hospital-info-item" v-if="name=='普通孕妇'">
-     <div class="name">{{name}}</div>
-     <div class="value" v-if="data=='否'">
-       不接收 <i class="el-icon-error" /> 
-     </div>
-     <div class="value suc" v-else-if="data='是'">
+  <div>
+    <div class="hospital-info-item" v-if="name == '普通孕妇'">
+      <div class="name">{{ name }}</div>
+      <div class="value" v-if="data == '否'">
+        不接收 <i class="el-icon-error" />
+      </div>
+      <div class="value suc" v-else-if="(data = '是')">
         接收 <i class="el-icon-success" />
-     </div>
-  </div>
-  <div class="hospital-info-item" v-if="name=='疑似/确诊孕妇'">
-     <div class="name">{{name}}</div>
-     <div class="value warn" v-if="data=='否'">
-       疑似/确诊孕妇 <i class="el-icon-warning" /> 
-     </div>
-     <div class="value suc" v-if="data!='否'">
+      </div>
+    </div>
+    <div class="hospital-info-item" v-if="name == '疑似/确诊孕妇'">
+      <div class="name">{{ name }}</div>
+      <div class="value warn" v-if="data == '否'">
+        疑似/确诊孕妇 <i class="el-icon-warning" />
+      </div>
+      <div class="value suc" v-if="data != '否'">
         接收 <i class="el-icon-success" />
-     </div>
-  </div>
-   <div class="hospital-info-item" v-else>
-     <div class="name">{{name}}</div>
-     <div class="value warn" v-if="data=='否'">
-       需要预约或其他 <i class="el-icon-warning" /> 
-     </div>
-     <div class="value suc" v-if="data!='否'">
+      </div>
+    </div>
+    <div class="hospital-info-item" v-else>
+      <div class="name">{{ name }}</div>
+      <div class="value warn" v-if="data == '否'">
+        需要预约或其他 <i class="el-icon-warning" />
+      </div>
+      <div class="value suc" v-if="data != '否'">
         可做 <i class="el-icon-success" />
-     </div>
+      </div>
+    </div>
   </div>
-</div>
 </template>
 <script>
 export default {
-  props: ['data', 'name'],
-  data () {
-    return {
-
-    }
+  props: ["data", "name"],
+  data() {
+    return {};
   },
-  mounted () {
+  mounted() {},
 
-  },
-
-  computed: {
-
-  }
-
-}
+  computed: {}
+};
 </script>
 <style scoped>
 .hospital-info-item {
@@ -85,6 +78,6 @@ export default {
   color: rgba(53, 198, 85, 1);
 }
 .hospital-info-item .value.warn {
-  color:#EE9611;
+  color: #ee9611;
 }
 </style>
