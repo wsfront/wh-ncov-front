@@ -72,9 +72,9 @@
 
     <el-dialog :visible.sync="showPlace" center>
       <el-menu default-active="1" @select="handleSelect" @open="handleOpen" @close="handleClose">
-        <el-menu-item index="全部" style="height:2em;">
+        <el-menu-item index="全部地区" style="height:2em;">
           <i class="el-icon-menu"></i>
-          <span slot="title">全部</span>
+          <span slot="title">全部地区</span>
         </el-menu-item>
         <el-menu-item index="江岸区">
           <i class="el-icon-position"></i>
@@ -237,9 +237,22 @@
 <script>
 
 import HospitalInfoItem from './HospitalInfoItem'
+
 export default {
   name: 'FrontIndex',
   components: { HospitalInfoItem },
+  created () {
+    this.hospitalOptions = [
+      'receive_accouche',
+      'receive_normal',
+      'receive_sick',
+      'receive_normal_check',
+      'receive_ultrasound',
+      'receive_clour_ultrasound',
+      'verify',
+      'receive_check'
+    ]
+  },
   data () {
     return {
       lastUpdateTime: '',
@@ -269,7 +282,8 @@ export default {
       // 新增
       showPlace: false,
       showFilter: false,
-      activeName: 'hospital'
+      activeName: 'hospital',
+      queryParams: {}
     }
   },
   computed: {
@@ -320,13 +334,12 @@ export default {
     handleSelect (item, keyPath) {
       console.log(item, keyPath)
       let that = this
-      var params = ''
-      if (item === '全部') {
-        params = 'all=1'
+      if (item === '全部地区') {
+        delete this.queryParams.area
       } else {
-        params = 'all=3&area=' + item
+        this.queryParams.area = item
       }
-      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + params)
+      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + this._buildQueryString())
         .then(function (response) {
           console.log(response)
           if (response.data.code === '0000') {
@@ -353,13 +366,12 @@ export default {
     },
     searchHospital () {
       let that = this
-      var params = 'all=0'
       if (this.hospitalname !== '') {
-        params = params + '&name=' + this.hospitalname
+        this.queryParams.name = this.hospitalname
       } else {
         return
       }
-      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + params)
+      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + this._buildQueryString())
         .then(function (response) {
           console.log(response)
           if (response.data.code === '0000') {
@@ -389,40 +401,19 @@ export default {
     },
     searchHospitalByOption () {
       let that = this
-      var params = ''
-      params = 'all=2'
-      if (this.receive_accouche_radio !== '全部') {
-        params = params + '&receive_accouche=' + this.receive_accouche_radio
-      }
-      if (this.receive_normal_radio !== '全部') {
-        params = params + '&receive_normal=' + this.receive_normal_radio
-      }
-      if (this.receive_sick_radio !== '全部') {
-        params = params + '&receive_sick=' + this.receive_sick_radio
-      }
-      if (this.receive_normal_check_radio !== '全部') {
-        params = params + '&receive_normal_check=' + this.receive_normal_check_radio
-      }
-      if (this.receive_ultrasound_radio !== '全部') {
-        params = params + '&receive_ultrasound=' + this.receive_ultrasound_radio
-      }
-      if (this.receive_clour_ultrasound_radio !== '全部') {
-        params = params + '&receive_clour_ultrasound=' + this.receive_clour_ultrasound_radio
-      }
-      if (this.verify_radio !== '全部') {
-        params = params + '&verify=' + this.verify_radio
-      }
-      if (this.receive_check_radio !== '全部') {
-        params = params + '&receive_check=' + this.receive_check_radio
-      }
-      if (this.areaName !== '全部') {
-        params = params + '&area=' + this.areaName
-      }
-      if (params === 'all=2') {
-        params = 'all=1'
+
+      for (const option of this.hospitalOptions) {
+        const optionRadioKey = `${option}_radio`
+
+        const optionValue = this[optionRadioKey]
+        if (optionValue !== '全部') {
+          this.queryParams[option] = optionValue
+        } else {
+          delete this.queryParams[option]
+        }
       }
 
-      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + params)
+      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + this._buildQueryString())
         .then(function (response) {
           console.log(response)
           if (response.data.code === '0000') {
@@ -441,6 +432,26 @@ export default {
           console.log(error)
           that.visibleOption = false
         })
+    },
+    _buildQueryString () {
+      this.queryParams.all = 1
+
+      // 如果含有医院名搜索
+      if (this.queryParams.name) {
+        this.queryParams.all = 0
+
+      // 如果queryParams含有医院筛选选项
+      } else if (this.hospitalOptions.some(option => this.queryParams[option])) {
+        this.queryParams.all = 2
+
+      // queryParams含有地区
+      } else if (this.queryParams.area) {
+        this.queryParams.all = 3
+      }
+
+      return Object.keys(this.queryParams)
+        .map(queryKey => `${queryKey}=${this.queryParams[queryKey]}`)
+        .join('&')
     }
   },
   mounted () {
