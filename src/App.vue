@@ -6,8 +6,8 @@
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App"
+};
 </script>
 
 <style>
@@ -16,7 +16,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #FAFAFA;
   background: #fafafa;
   /*margin-top: 60px;*/
 }
