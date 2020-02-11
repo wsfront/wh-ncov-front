@@ -573,7 +573,7 @@ export default {
   margin-right: 5px;
 }
 .hospital-search-bar .small-btn .btn-text {
-  width: 24px;
+  /* width: 24px; */
   height: 17px;
   font-size: 12px;
   font-family: Source Han Sans;
