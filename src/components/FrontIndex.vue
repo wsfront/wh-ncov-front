@@ -28,7 +28,6 @@
         <!-- <div class="small-btn" :class="{act:false}" @click="showFilter=!showFilter">
           <img class="btn-icon" src="../assets/filter.png"> -->
           <!-- <img class="btn-icon" src="../assets/filter-act.png"> -->
-          
           <!-- <i class="el-icon-s-operation"></i>
           <div class="btn-text">筛选</div>
         </div> -->
@@ -92,7 +91,6 @@
               </div>
             </div>
             <div class="hospital-info" v-show="hospital.show">
-              <div class="info-title">可接收:</div>
               <br />
               <HospitalInfoItem
                 name="普通孕妇"
@@ -103,7 +101,6 @@
                 :data="hospital.receive_sick"
               />
               <el-divider />
-              <div class="info-title">可检测:</div>
               <HospitalInfoItem
                 name="常规产检"
                 :data="hospital.receive_normal_check"
@@ -121,7 +118,6 @@
                 :data="hospital.receive_clour_ultrasound"
               />
               <el-divider />
-              <div class="info-title">可接生:</div>
               <HospitalInfoItem name="接生" :data="hospital.receive_accouche" />
               <el-divider />
               <div>
@@ -137,17 +133,11 @@
         </div>
       </transition>
     </div>
-    <el-dialog title="医院信息" :visible.sync="dialogFormVisible" width="80%">
-      <el-row v-for="phone in currentHospital.phones" v-bind:key="phone.id">
-        <el-col :span="5" style="text-align: left">{{
-          phone.department
-        }}</el-col>
-        <el-col :span="18" style="text-align: left">
-          <span>{{ phone.phone }}</span>
-          <a
-            v-bind:href="'tel:' + phone.phone"
-            style="margin-left: 20%;text-decoration-line: none;background-color: #409EFF;color: #fff;padding: 4px;border-radius: 2px"
-            >拨打电话</a
+    <el-dialog v-bind:title="currentHospital.name" :visible.sync="dialogFormVisible" width="80%" class="wh-dialog">
+      <el-row v-for="phone in currentHospital.phones" v-bind:key="phone.id" class="wh-phone">
+        <el-col :span="6">{{phone.department==''?"--":phone.department}}</el-col>
+        <el-col :span="10" :offset="8">
+          <a class="wh-phone-btn" v-bind:href="'tel:' + phone.phone">{{ phone.phone }}</a
           >
         </el-col>
       </el-row>
@@ -166,28 +156,76 @@ export default {
   components: { HospitalInfoItem, HeaderLayout },
   data() {
     return {
-      lastUpdateTime: '',
-      areaName: '全部地区',
+      lastUpdateTime: "",
+      areaName: "全部地区",
       areas: {
-        center: ['江岸区', '江汉区', '硚口区', '汉阳区', '武昌区', '青山区', '洪山区'],
-        other: ['蔡甸区', '江夏区', '黄陂区', '新洲区', '东西湖区', '汉南区'],
-        selected: '全部'
+        center: [
+          "江岸区",
+          "江汉区",
+          "硚口区",
+          "汉阳区",
+          "武昌区",
+          "青山区",
+          "洪山区"
+        ],
+        other: ["蔡甸区", "江夏区", "黄陂区", "新洲区", "东西湖区", "汉南区"],
+        selected: "全部"
       },
       filterConditions: [
-        {type: 'accept', symbol: 'receive_normal', name: '普通孕妇', checked: false},
-        {type: 'accept', symbol: 'receive_sick', name: '疑似/确诊孕妇', checked: false},
-        {type: 'check', symbol: 'receive_normal_check', name: '常规产检', checked: false},
-        {type: 'check', symbol: 'receive_ultrasound', name: '孕期产检B超', checked: false},
-        {type: 'check', symbol: 'receive_clour_ultrasound', name: '中孕期三维排畸彩超（大排畸）', checked: false},
-        {type: 'check', symbol: 'receive_accouche', name: '可接生', checked: false},
-        {type: 'other', symbol: 'receive_check', name: '可做核酸检测', checked: false},
-        {type: 'other', symbol: 'verify', name: '医院信息已核实', checked: false},
+        {
+          type: "accept",
+          symbol: "receive_normal",
+          name: "普通孕妇",
+          checked: false
+        },
+        {
+          type: "accept",
+          symbol: "receive_sick",
+          name: "疑似/确诊孕妇",
+          checked: false
+        },
+        {
+          type: "check",
+          symbol: "receive_normal_check",
+          name: "常规产检",
+          checked: false
+        },
+        {
+          type: "check",
+          symbol: "receive_ultrasound",
+          name: "孕期产检B超",
+          checked: false
+        },
+        {
+          type: "check",
+          symbol: "receive_clour_ultrasound",
+          name: "中孕期三维排畸彩超（大排畸）",
+          checked: false
+        },
+        {
+          type: "check",
+          symbol: "receive_accouche",
+          name: "可接生",
+          checked: false
+        },
+        {
+          type: "other",
+          symbol: "receive_check",
+          name: "可做核酸检测",
+          checked: false
+        },
+        {
+          type: "other",
+          symbol: "verify",
+          name: "医院信息已核实",
+          checked: false
+        }
       ],
       conditions: [],
       restaurants: [],
-      state: '',
-      activeNames: ['1'],
-      hospitalname: '',
+      state: "",
+      activeNames: ["1"],
+      hospitalname: "",
       hospitallist: [],
       visiblemenu: false,
       visibleOption: false,
@@ -196,71 +234,65 @@ export default {
       loading: false,
       dialogFormVisible: false,
       currentHospital: [],
-      // receive_accouche_radio: '全部',
-      // receive_normal_radio: '全部',
-      // receive_sick_radio: '全部',
-      // receive_normal_check_radio: '全部',
-      // receive_ultrasound_radio: '全部',
-      // receive_clour_ultrasound_radio: '全部',
-      // verify_radio: '全部',
-      // receive_check_radio: '全部',
       // 新增
       showPlace: false,
       showFilter: false,
-      activeName: 'hospital'
-    }
+      activeName: "hospital"
+    };
   },
   computed: {
-    acceptConditions () {
-      return this.filterConditions.filter(i => i.type === 'accept')
+    acceptConditions() {
+      return this.filterConditions.filter(i => i.type === "accept");
     },
-    checkConditions () {
-      return this.filterConditions.filter(i => i.type === 'check')
+    checkConditions() {
+      return this.filterConditions.filter(i => i.type === "check");
     },
-    otherConditions () {
-      return this.filterConditions.filter(i => i.type === 'other')
+    otherConditions() {
+      return this.filterConditions.filter(i => i.type === "other");
     },
-    allConditionChecked () {
-      console.log('999', this.filterConditions.length === this.conditions.length)
-      return this.filterConditions.length === this.conditions.length
+    allConditionChecked() {
+      console.log(
+        "999",
+        this.filterConditions.length === this.conditions.length
+      );
+      return this.filterConditions.length === this.conditions.length;
     }
   },
   methods: {
-    changeShowPlace (visible) {
-      this.showPlace = visible
+    changeShowPlace(visible) {
+      this.showPlace = visible;
     },
-    changeShowFilter (visible) {
-      this.showFilter = visible
+    changeShowFilter(visible) {
+      this.showFilter = visible;
     },
-    clickHospital (hospital) {
-      console.log(hospital)
-      hospital.show = !hospital.show
+    clickHospital(hospital) {
+      console.log(hospital);
+      hospital.show = !hospital.show;
     },
-    toggleFilterCondition (condition) {
+    toggleFilterCondition(condition) {
       this.filterConditions.forEach(c => {
         if (c.symbol === condition.symbol) {
-          c.checked = !c.checked
+          c.checked = !c.checked;
         }
-      })
+      });
     },
-    checkAllFilterCondition () {
-      const checked = this.allConditionChecked
+    checkAllFilterCondition() {
+      const checked = this.allConditionChecked;
       if (!checked) {
-        this.conditions = this.filterConditions.map(c => c.symbol)
+        this.conditions = this.filterConditions.map(c => c.symbol);
       } else {
-        this.conditions = []
+        this.conditions = [];
       }
     },
-    showPhoneDialog (hospital) {
-      let that = this
-      this.currentHospital = hospital
-      this.$http.get('/wh/msg/phone?uuid=' + hospital.uuid)
-        .then(function (response) {
-          if (response.data.code === '0000') {
-            that.currentHospital.phones = response.data.result
-            console.log(that.currentHospital.phones)
-            that.currentHospital = hospital
-            that.dialogFormVisible = true
+    showPhoneDialog(hospital) {
+      let that = this;
+      this.currentHospital = hospital;
+      this.$http
+        .get("/wh/msg/phone?uuid=" + hospital.uuid)
+        .then(function(response) {
+          if (response.data.code === "0000") {
+            that.currentHospital.phones = response.data.result;
+            that.dialogFormVisible = true;
           }
         })
         .catch(function(error) {
@@ -274,19 +306,19 @@ export default {
         this.loading = false;
       }, 2000);
     },
-    handleSelect (item) {
-      console.log(item)
-      this.showPlace = !this.showPlace
-      this.areas.selected = item
-      var params = ''
-      if (item === '全部') {
-        params = 'all=1'
+    handleSelect(item) {
+      console.log(item);
+      this.showPlace = !this.showPlace;
+      this.areas.selected = item;
+      var params = "";
+      if (item === "全部") {
+        params = "all=1";
       } else {
         params = "all=3&area=" + item;
       }
       this.conditions.forEach(c => {
-        params += `&${c}=是`
-      })
+        params += `&${c}=是`;
+      });
       this.fetchHospitalInfo(params);
     },
     handleOpen() {},
@@ -300,34 +332,24 @@ export default {
       }
       this.fetchHospitalInfo(params);
     },
-    // resetHospitalOption () {
-    //   this.receive_accouche_radio = '全部'
-    //   this.receive_normal_radio = '全部'
-    //   this.receive_sick_radio = '全部'
-    //   this.receive_normal_check_radio = '全部'
-    //   this.receive_ultrasound_radio = '全部'
-    //   this.receive_clour_ultrasound_radio = '全部'
-    //   this.verify_radio = '全部'
-    //   this.receive_check_radio = '全部'
-    // },
-    searchHospitalByOption (filterClick) {
-      let that = this
-      var params = ''
+    searchHospitalByOption(filterClick) {
+      let that = this;
+      var params = "";
       if (!this.conditions.length) {
-        params = 'all=1'
+        params = "all=1";
       } else {
-        params = 'all=2'
+        params = "all=2";
 
         this.conditions.forEach(c => {
-          params += `&${c}=是`
-        })
+          params += `&${c}=是`;
+        });
       }
-      if (this.areas.selected !== '全部') {
-        params = params + '&area=' + this.areas.selected
+      if (this.areas.selected !== "全部") {
+        params = params + "&area=" + this.areas.selected;
       }
       this.fetchHospitalInfo(params);
       if (filterClick) {
-        that.$refs.domFilter.click()
+        that.$refs.domFilter.click();
       }
     },
 
@@ -353,7 +375,7 @@ export default {
         .catch(function(error) {
           console.log(error);
           this.visibleOption = false;
-        })
+        });
     }
   },
   mounted() {
@@ -363,54 +385,64 @@ export default {
 </script>
 
 <style scoped style="css">
-  .sub-text{
-    color: #ACACAC;
-    font-size: 12px;
-    padding: 5px 0 5px 12px;
-  }
-  .el-button+.el-button {
-    margin-left: 0px;
-  }
-  .el-button.sort{
-    margin-right: 10px;
-    margin-bottom: 10px;
-  }
-  .pop-bottom{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 50px;
-  }
-  .pop-bottom__btn{
-    flex: 1;
-    color: #9D9D9D;
-    text-align: center;
-  }
-  .pop-bottom__btn.active{
-    color: #5887FF;
-  }
-
+.sub-text {
+  color: #acacac;
+  font-size: 12px;
+  padding: 5px 0 5px 12px;
+}
+.el-button + .el-button {
+  margin-left: 0px;
+}
+.el-button.sort {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.pop-bottom {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+}
+.pop-bottom__btn {
+  flex: 1;
+  color: #9d9d9d;
+  text-align: center;
+}
+.pop-bottom__btn.active {
+  color: #5887ff;
+}
 </style>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.el-checkbox__label{
+.wh-phone {
+  text-align: left;
+}
+.wh-phone-btn {
+  text-decoration-line: none;
+  color: #5384ff;
+}
+.wh-dialog .el-dialog__title {
+  display: inline-block;
+  margin-right: 20px;
+}
+.el-checkbox__label {
   font-size: 12px;
 }
 .el-dropdown-menu {
   max-height: 72vh;
   overflow: scroll;
 }
-.el-dropdown-menu__item.act{
-  color: #6792FC
+.el-dropdown-menu__item.act {
+  color: #6792fc;
 }
 .el-checkbox {
   display: block;
   margin: 10px 12px;
 }
-  .el-dialog__footer{
-    padding: 0;
-  }
+.el-dialog__footer {
+  padding: 0;
+}
 .wh-container {
   background: #fafafa;
   color: #333;
@@ -486,8 +518,8 @@ export default {
   height: 16px;
   margin-right: 5px;
 }
-.hospital-search-bar .small-btn{
-  color: #ACACAC;
+.hospital-search-bar .small-btn {
+  color: #acacac;
 }
 .hospital-search-bar .small-btn .btn-text {
   /* width: 24px; */

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <header class="tips">
-      数据至少两天更新一次
-      <span v-if="lastUpdateTime">（{{ lastUpdateTime }}更新）</span>
+      <span v-if="lastUpdateTime">{{ lastUpdateTime }}更新; </span>
+        数据至少两天更新一次
     </header>
     <router-view />
     <footer class="footer">
@@ -40,7 +40,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background: #fafafa;
-  padding: 25px 0;
+  padding: 0 0 25px;
   /*margin-top: 60px;*/
 }
 .tips {
@@ -52,10 +52,6 @@ body {
   box-sizing: border-box;
   background: white;
   width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
 }
 .footer {
   height: 25px;
@@ -77,6 +73,10 @@ body {
   text-decoration: none;
   font-size: 12px;
   font-weight: bold;
+}
+.footer a:hover {
+  cursor: pointer;
+  color: #5887ff;
 }
 ::-webkit-input-placeholder {
   /* WebKit browsers */

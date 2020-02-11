@@ -33,7 +33,7 @@
             title="早孕期（6-8周）确定宫内妊娠，预约NT"
             name="2"
           >
-            <p>建议36-37周检测。决定分娩方式和时间</p>
+            <p>血/尿HCG、彩超、 宫颈TCT + HPV</p>
           </el-collapse-item>
         </el-collapse>
       </el-col>
@@ -52,7 +52,7 @@
       <el-col :span="24">
         <el-collapse v-model="activeNames" class="wh-collapse">
           <el-collapse-item
-            title="中孕期（20-28周）建议在24周检测。主要做大排"
+            title="中孕期（20-28周）建议在24周检测。主要做大排畸"
             name="4"
           >
             <p>血常规、尿常规、唐氏、糖尿病筛查、B超大畸形排查、肝肾功能</p>
@@ -63,11 +63,10 @@
       <el-col :span="24">
         <el-collapse v-model="activeNames" class="wh-collapse">
           <el-collapse-item
-            title="晚孕期（30-41周）建议30-32周检测。主要做小排畸，根据
-有无并发症再评估风险 "
+            title="晚孕期（30-32周）建议在32周检测。并发症再评估风险"
             name="5"
           >
-            <p>产科超声检查、NST检查、血常规、尿常规</p>
+            <p>血常规、尿常规、小排畸超声、ICP筛查</p>
           </el-collapse-item>
         </el-collapse>
       </el-col>
@@ -78,7 +77,7 @@
             title="晚孕期（30-41周）建议36-37周检测。决定分娩方式和时间"
             name="6"
           >
-            <p>要查啥？</p>
+            <p>产科超声检查、NST检查</p>
           </el-collapse-item>
         </el-collapse>
       </el-col>
@@ -120,7 +119,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .wh-content-container {
-  padding: 0 20px;
+  padding: 0px;
 }
 .wh-intro {
   text-align: left;
@@ -128,6 +127,11 @@ export default {
 .wh-collapse {
   border: 0;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.wh-container {
+  background: #fafafa;
+  color: #333;
+  padding: 10px 16px;
 }
 .wh-content-container .el-col-24 {
   margin-bottom: 10px;
