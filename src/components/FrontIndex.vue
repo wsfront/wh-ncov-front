@@ -25,6 +25,7 @@
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item icon="el-icon-menu" command="全部" :class="{act : areas.selected === '全部'}">全部城区</el-dropdown-item>
+            <el-divider></el-divider>
             <div class="sub-text">中心城区</div>
             <el-dropdown-item icon="el-icon-place" v-for="area in areas.center" :key="area" :command="area" :class="{act : areas.selected === area}">{{ area }}</el-dropdown-item>
             <div class="sub-text">其他城区</div>
@@ -547,7 +548,7 @@ export default {
   .sub-text{
     color: #ACACAC;
     font-size: 12px;
-    padding: 5px;
+    padding: 5px 0 5px 12px;
   }
   .el-button+.el-button {
     margin-left: 0px;
