@@ -1,7 +1,8 @@
 <template>
   <div class="wh-container">
     <HeaderLayout :activeIndex="0" />
-    <div name="hospital" v-show="activeName == 'hospital'">
+
+    <div name="hospital">
       <div class="hospital-search-bar">
         <div
           class="small-btn"
@@ -30,65 +31,74 @@
           />
         </div>
       </div>
-
-      <div
-        class="hospital-con"
-        v-for="(hospital, i) in hospitallist"
-        v-bind:key="i"
-      >
-        <div
-          class="hospital-con-title"
-          :class="{ shadow: !hospital.show }"
-          @click="hospital.show = !hospital.show"
-        >
-          <div class="info-con">
-            <div class="name">{{ hospital.name }}</div>
-            <div class="updata-time">
-              {{ hospital.verify == 1 ? "已核实" : "未核实" }}
-              {{ hospital.update_time }} 更新
+      <transition name="fade">
+        <div class="hospital-list" v-if="hospitallist.length">
+          <div
+            class="hospital-con"
+            v-for="(hospital, i) in hospitallist"
+            v-bind:key="i"
+          >
+            <div
+              class="hospital-con-title"
+              :class="{ shadow: !hospital.show }"
+              @click="hospital.show = !hospital.show"
+            >
+              <div class="info-con">
+                <div class="name">{{ hospital.name }}</div>
+                <div class="updata-time">
+                  {{ hospital.verify == 1 ? "已核实" : "未核实" }}
+                  {{ hospital.update_time }} 更新
+                </div>
+              </div>
+              <div class="tel-btn" @click.stop="showPhoneDialog(hospital)">
+                <img class="tel-btn-icon" src="../assets/phone.png" />
+              </div>
+            </div>
+            <div class="hospital-info" v-show="hospital.show">
+              <div class="info-title">可接收:</div>
+              <br />
+              <HospitalInfoItem
+                name="普通孕妇"
+                :data="hospital.receive_normal"
+              />
+              <HospitalInfoItem
+                name="疑似/确诊孕妇"
+                :data="hospital.receive_sick"
+              />
+              <el-divider />
+              <div class="info-title">可检测:</div>
+              <HospitalInfoItem
+                name="常规产检"
+                :data="hospital.receive_normal_check"
+              />
+              <HospitalInfoItem
+                name="孕期产检B超"
+                :data="hospital.receive_ultrasound"
+              />
+              <HospitalInfoItem
+                name="核酸检测"
+                :data="hospital.receive_check"
+              />
+              <HospitalInfoItem
+                name="中孕期三维排畸彩超（大排畸）"
+                :data="hospital.receive_clour_ultrasound"
+              />
+              <el-divider />
+              <div class="info-title">可接生:</div>
+              <HospitalInfoItem name="接生" :data="hospital.receive_accouche" />
+              <el-divider />
+              <div>
+                <div class="other-msg-title">补充说明</div>
+                <div class="other-msg">{{ hospital.remark }}</div>
+              </div>
+              <div class="address-btn">
+                <i class="el-icon-location" />
+                医院地址: {{ hospital.address }}
+              </div>
             </div>
           </div>
-          <div class="tel-btn" @click.stop="showPhoneDialog(hospital)">
-            <img class="tel-btn-icon" src="../assets/phone.png" />
-          </div>
         </div>
-        <div class="hospital-info" v-show="hospital.show">
-          <div class="info-title">可接收:</div>
-          <br />
-          <HospitalInfoItem name="普通孕妇" :data="hospital.receive_normal" />
-          <HospitalInfoItem
-            name="疑似/确诊孕妇"
-            :data="hospital.receive_sick"
-          />
-          <el-divider />
-          <div class="info-title">可检测:</div>
-          <HospitalInfoItem
-            name="常规产检"
-            :data="hospital.receive_normal_check"
-          />
-          <HospitalInfoItem
-            name="孕期产检B超"
-            :data="hospital.receive_ultrasound"
-          />
-          <HospitalInfoItem name="核酸检测" :data="hospital.receive_check" />
-          <HospitalInfoItem
-            name="中孕期三维排畸彩超（大排畸）"
-            :data="hospital.receive_clour_ultrasound"
-          />
-          <el-divider />
-          <div class="info-title">可接生:</div>
-          <HospitalInfoItem name="接生" :data="hospital.receive_accouche" />
-          <el-divider />
-          <div>
-            <div class="other-msg-title">补充说明</div>
-            <div class="other-msg">{{ hospital.remark }}</div>
-          </div>
-          <div class="address-btn">
-            <i class="el-icon-location" />
-            医院地址: {{ hospital.address }}
-          </div>
-        </div>
-      </div>
+      </transition>
     </div>
 
     <el-dialog :visible.sync="showPlace" center>
@@ -262,17 +272,13 @@ export default {
         "东西湖区",
         "汉南区"
       ],
-      state: "",
-      activeNames: ["1"],
       hospitalname: "",
       hospitallist: [],
-      timeout: null,
       visiblemenu: false,
       visibleOption: false,
       radio1: "全部",
       count: 10,
       loading: false,
-      nomordata: false,
       dialogFormVisible: false,
       currentHospital: [],
       receive_accouche_radio: "全部",
@@ -285,8 +291,7 @@ export default {
       receive_check_radio: "全部",
       // 新增
       showPlace: false,
-      showFilter: false,
-      activeName: "hospital"
+      showFilter: false
     };
   },
   computed: {},
@@ -391,6 +396,7 @@ export default {
     },
 
     fetchHospitalInfo(params) {
+      this.hospitallist = [];
       this.$http
         .get("/wh/msg/hospital?page_num=1&page_size=100&" + params)
         .then(response => {
@@ -422,11 +428,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.wh-container {
+  background: #fafafa;
+  color: #333;
+  padding: 10px 16px;
+}
 .el-row {
   margin-bottom: 10px;
-  /* &:last-child {
-      margin-bottom: 0;
-    } */
 }
 .el-col {
   border-radius: 4px;

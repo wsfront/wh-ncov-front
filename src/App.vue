@@ -1,10 +1,11 @@
 <template>
   <div id="app">
-    <div class="tips">
+    <header class="tips">
       数据至少两天更新一次
       <span v-if="lastUpdateTime">（{{ lastUpdateTime }}更新）</span>
-    </div>
+    </header>
     <router-view />
+    <footer></footer>
   </div>
 </template>
 
@@ -13,7 +14,8 @@ export default {
   name: "App",
   data() {
     return {
-      lastUpdateTime: ""
+      lastUpdateTime: "",
+      show: false
     };
   },
   mounted() {
@@ -25,23 +27,32 @@ export default {
 </script>
 
 <style>
+body {
+  margin: 0;
+  padding: 0;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background: #fafafa;
+  padding-top: 25px;
   /*margin-top: 60px;*/
 }
 .tips {
   height: 25px;
   line-height: 25px;
-  background: rgba(255, 255, 255, 1);
-  border-bottom: 1px solid rgba(230, 229, 229, 1);
-  opacity: 1;
+  border-bottom: 1px solid #e6e5e5;
   font-size: 10px;
-  font-family: Source Han Sans;
-  font-weight: 500;
+  color: #acacac;
+  box-sizing: border-box;
+  background: white;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
 }
 ::-webkit-input-placeholder {
   /* WebKit browsers */
@@ -59,5 +70,12 @@ export default {
 :-ms-input-placeholder {
   /* Internet Explorer 10+ */
   color: #e2e2e2;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

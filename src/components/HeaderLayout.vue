@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <div class="tab-btn-con">
-      <router-link class="tab-btn" :class="{ act: activeIndex === 0 }" to="/">
-        医院信息
-      </router-link>
-      <router-link
-        class="tab-btn"
-        :class="{ act: activeIndex === 1 }"
-        to="/FrontCheckIndex"
-      >
-        疫期产检
-      </router-link>
-    </div>
+  <div class="tab-btn-con">
+    <router-link class="tab-btn" :class="{ act: activeIndex === 0 }" to="/">
+      医院信息
+    </router-link>
+    <router-link
+      class="tab-btn"
+      :class="{ act: activeIndex === 1 }"
+      to="/FrontCheckIndex"
+    >
+      疫期产检
+    </router-link>
   </div>
 </template>
 <script>
@@ -25,18 +23,12 @@ export default {
 
 <style scoped>
 /* 新增样式 */
-
-.tips {
-  font-size: 12px;
-}
 .tab-btn-con {
-  margin-top: 10px;
   width: 100%;
-  height: 37px;
+  margin-bottom: 16px;
   display: flex;
-  justify-content: space-around;
-  align-items: top;
-  padding: 0 40px;
+  justify-content: center;
+  align-items: flex-start;
   box-sizing: border-box;
 }
 .tab-btn-con .tab-btn {

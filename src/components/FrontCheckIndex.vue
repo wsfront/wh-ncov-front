@@ -119,10 +119,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-.wh-container {
-  background: #fafafa;
-  color: #333;
-}
 .wh-content-container {
   padding: 0 20px;
 }
@@ -153,17 +149,5 @@ export default {
   text-align: left;
   padding: 0 10px;
   padding-bottom: 0px;
-}
-.tips {
-  height: 25px;
-  font-size: 12px;
-  line-height: 25px;
-  color: #333;
-  background: rgba(255, 255, 255, 1);
-  border-bottom: 1px solid rgba(230, 229, 229, 1);
-  opacity: 1;
-  font-size: 10px;
-  font-family: Source Han Sans;
-  font-weight: 500;
 }
 </style>
