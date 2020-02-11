@@ -55,7 +55,7 @@
           <div class="info-title">可接生:</div>
           <HospitalInfoItem name="接生" :data="hospital.receive_accouche" />
           <el-divider />
-          <div>
+          <div v-show="hospital.remark!=''">
             <div class="other-msg-title">补充说明</div>
             <div class="other-msg">{{ hospital.remark }}</div>
           </div>

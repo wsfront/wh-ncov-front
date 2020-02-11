@@ -3,28 +3,25 @@
   <div class="hospital-info-item" v-if="name=='普通孕妇'">
      <div class="name">{{name}}</div>
      <div class="value" v-if="data=='否'">
-       不接收 <i class="el-icon-error" /> 
+       不接收 <i class="el-icon-error"/>
      </div>
      <div class="value suc" v-else-if="data='是'">
-        接收 <i class="el-icon-success" />
+        可接收 <i class="el-icon-success"/>
      </div>
-  </div>
-  <div class="hospital-info-item" v-if="name=='疑似/确诊孕妇'">
-     <div class="name">{{name}}</div>
-     <div class="value warn" v-if="data=='否'">
-       疑似/确诊孕妇 <i class="el-icon-warning" /> 
-     </div>
-     <div class="value suc" v-if="data!='否'">
-        接收 <i class="el-icon-success" />
+     <div class="value warn" v-else>
+       {{itemStatus}}
      </div>
   </div>
    <div class="hospital-info-item" v-else>
      <div class="name">{{name}}</div>
-     <div class="value warn" v-if="data=='否'">
-       需要预约或其他 <i class="el-icon-warning" /> 
+     <div class="value" v-if="data=='否'">
+       不接收 <i class="el-icon-error"/>
      </div>
-     <div class="value suc" v-if="data!='否'">
-        可做 <i class="el-icon-success" />
+     <div class="value suc" v-else-if="data=='是'">
+        可做 <i class="el-icon-success"/>
+     </div>
+     <div class="value warn" v-else>
+       {{itemStatus}} <i class="el-icon-warning"/>
      </div>
   </div>
 </div>
@@ -40,11 +37,11 @@ export default {
   mounted () {
 
   },
-
   computed: {
-
+    itemStatus: function () {
+      return this.data.includes('是,') ? this.data.replace('是,', ' ') : this.data
+    }
   }
-
 }
 </script>
 <style scoped>
