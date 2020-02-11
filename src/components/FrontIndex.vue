@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <HeaderLayout :activeIndex="0" :lastUpdateTime="lastUpdateTime" />
+  <div class="wh-container">
+    <HeaderLayout :activeIndex="0" />
     <div name="hospital" v-show="activeName == 'hospital'">
       <div class="hospital-search-bar">
         <div
@@ -262,7 +262,6 @@ export default {
         "东西湖区",
         "汉南区"
       ],
-      restaurants: [],
       state: "",
       activeNames: ["1"],
       hospitalname: "",
@@ -322,63 +321,24 @@ export default {
     },
     handleSelect(item, keyPath) {
       console.log(item, keyPath);
-      let that = this;
-      var params = "";
+      let params = "";
       if (item === "全部") {
         params = "all=1";
       } else {
         params = "all=3&area=" + item;
       }
-      this.$http
-        .get("/wh/msg/hospital?page_num=1&page_size=100&" + params)
-        .then(function(response) {
-          console.log(response);
-          if (response.data.code === "0000") {
-            response.data.result.forEach(element => {
-              element.show = false;
-              element.showdetail = false;
-              if (element.update_time > that.lastUpdateTime) {
-                that.lastUpdateTime = element.update_time;
-              }
-            });
-            that.hospitallist = response.data.result;
-            that.areaName = item;
-          }
-          that.visiblemenu = false;
-        })
-        .catch(function(error) {
-          console.log(error);
-          that.visiblemenu = false;
-        });
+      this.fetchHospitalInfo(params);
     },
     handleOpen() {},
     handleClose() {},
     searchHospital() {
-      let that = this;
-      var params = "all=0";
+      let params = "all=0";
       if (this.hospitalname !== "") {
         params = params + "&name=" + this.hospitalname;
       } else {
         return;
       }
-      this.$http
-        .get("/wh/msg/hospital?page_num=1&page_size=100&" + params)
-        .then(function(response) {
-          console.log(response);
-          if (response.data.code === "0000") {
-            response.data.result.forEach(element => {
-              element.show = false;
-              element.showdetail = false;
-              if (element.update_time > that.lastUpdateTime) {
-                that.lastUpdateTime = element.update_time;
-              }
-            });
-            that.hospitallist = response.data.result;
-          }
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
+      this.fetchHospitalInfo(params);
     },
     resetHospitalOption() {
       this.receive_accouche_radio = "全部";
@@ -391,9 +351,7 @@ export default {
       this.receive_check_radio = "全部";
     },
     searchHospitalByOption() {
-      let that = this;
-      var params = "";
-      params = "all=2";
+      let params = "all=2";
       if (this.receive_accouche_radio !== "全部") {
         params = params + "&receive_accouche=" + this.receive_accouche_radio;
       }
@@ -429,31 +387,35 @@ export default {
       if (params === "all=2") {
         params = "all=1";
       }
+      this.fetchHospitalInfo(params);
+    },
 
+    fetchHospitalInfo(params) {
       this.$http
         .get("/wh/msg/hospital?page_num=1&page_size=100&" + params)
-        .then(function(response) {
+        .then(response => {
           console.log(response);
           if (response.data.code === "0000") {
             response.data.result.forEach(element => {
               element.show = false;
               element.showdetail = false;
-              if (element.update_time > that.lastUpdateTime) {
-                that.lastUpdateTime = element.update_time;
+              if (element.update_time > this.lastUpdateTime) {
+                this.lastUpdateTime = element.update_time;
               }
             });
-            that.hospitallist = response.data.result;
+            this.$EventBus.$emit("refreshUpdateTime", this.lastUpdateTime);
+            this.hospitallist = response.data.result;
           }
-          that.visibleOption = false;
+          this.visibleOption = false;
         })
         .catch(function(error) {
           console.log(error);
-          that.visibleOption = false;
+          this.visibleOption = false;
         });
     }
   },
   mounted() {
-    this.restaurants = this.searchHospitalByOption();
+    this.searchHospitalByOption();
   }
 };
 </script>
@@ -696,15 +658,5 @@ export default {
   line-height: 20px;
   color: rgba(172, 172, 172, 1);
   opacity: 1;
-}
-.tips {
-  height: 25px;
-  line-height: 25px;
-  background: rgba(255, 255, 255, 1);
-  border-bottom: 1px solid rgba(230, 229, 229, 1);
-  opacity: 1;
-  font-size: 10px;
-  font-family: Source Han Sans;
-  font-weight: 500;
 }
 </style>

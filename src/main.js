@@ -9,6 +9,7 @@ import axios from 'axios'
 
 Vue.use(ElementUI)
 Vue.prototype.$http = axios
+Vue.prototype.$EventBus = new Vue()
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -20,9 +21,9 @@ new Vue({
 })
 /* eslint-disable */
 router.beforeEach((to, from, next) => {
-  setTimeout(()=>{
+  setTimeout(() => {
     var _hmt = _hmt || [];
-    (function() {
+    (function () {
       //每次执行前，先移除上次插入的代码
       document.getElementById('baidu_tj') && document.getElementById('baidu_tj').remove();   //判断有没有 baidu_tj  元素，有就删除
       var hm = document.createElement("script");
@@ -31,6 +32,6 @@ router.beforeEach((to, from, next) => {
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
-  },0);
+  }, 0);
   next();
 })

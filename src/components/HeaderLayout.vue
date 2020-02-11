@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div class="tips">
-      <span v-if="lastUpdateTime">{{ lastUpdateTime }}更新;</span
-      >数据至少两天更新一次
-    </div>
     <div class="tab-btn-con">
       <router-link class="tab-btn" :class="{ act: activeIndex === 0 }" to="/">
         医院信息
@@ -22,8 +18,7 @@
 export default {
   name: "HeaderLayout",
   props: {
-    activeIndex: Number,
-    lastUpdateTime: String
+    activeIndex: Number
   }
 };
 </script>
