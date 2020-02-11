@@ -28,14 +28,9 @@
 </template>
 <script>
 export default {
-  props: ['data', 'name'],
-  data () {
-    return {
-
-    }
-  },
-  mounted () {
-
+  props: ["data", "name"],
+  data() {
+    return {};
   },
   computed: {
     itemStatus: function () {
@@ -82,6 +77,6 @@ export default {
   color: rgba(53, 198, 85, 1);
 }
 .hospital-info-item .value.warn {
-  color:#EE9611;
+  color: #ee9611;
 }
 </style>
