@@ -181,8 +181,16 @@
       </div> -->
       <div>
         <h3 style="color:#000000">请选择就诊条件</h3>
-        <div>
-          <!-- <el-button size="small" type="primary" :plain="areas.selected !== '全部'" @click="handleSelect('全部')" class="sort">全部</el-button> -->
+        <el-checkbox :value="allConditionChecked" @change="checkAllFilterCondition">全选</el-checkbox>
+        <el-checkbox-group v-model="conditions" >
+            <div class="sub-text">接收</div>
+            <el-checkbox v-for="condition in acceptConditions" :label="condition.symbol" :key="condition.symbol">{{condition.name}}</el-checkbox>
+            <div class="sub-text">孕检及接生</div>
+            <el-checkbox v-for="condition in checkConditions" :label="condition.symbol" :key="condition.symbol">{{condition.name}}</el-checkbox>
+            <div class="sub-text">其他</div>
+            <el-checkbox v-for="condition in otherConditions" :label="condition.symbol" :key="condition.symbol">{{condition.name}}</el-checkbox>
+        </el-checkbox-group>
+        <!-- <div>
           <div class="sub-text">接受</div>
           <div>
             <el-button class="sort" size="small"  v-for="condition in acceptConditions" :key="condition.symbol" @click="toggleFilterCondition(condition)" :type="condition.checked ? 'primary':''">{{ condition.name }}</el-button>
@@ -196,12 +204,12 @@
         </div>
         <div>
           <div class="sub-text">接生</div>
-            <el-button class="sort" size="small"  v-for="condition in birthConditions" :key="condition.symbol" @click="toggleFilterCondition(condition)" :type="condition.checked ? 'primary':''">{{ condition.name }}</el-button>
-        </div>
+            <el-button class="sort" size="small"  v-for="condition in otherConditions" :key="condition.symbol" @click="toggleFilterCondition(condition)" :type="condition.checked ? 'primary':''">{{ condition.name }}</el-button>
+        </div> -->
       </div>
       <div slot="footer" class="dialog-footer">
-        <el-button :type="allConditionChecked ? 'primary' : ''" @click="checkAllFilterCondition">全选</el-button>
-        <el-button @click="searchHospitalByOption">确认</el-button>
+        <el-button @click="conditions=[]">重置</el-button>
+        <el-button @click="searchHospitalByOption">确认查看</el-button>
       </div>
     </el-dialog>
     <el-dialog title="医院信息" :visible.sync="dialogFormVisible" width="80%">
@@ -240,10 +248,12 @@ export default {
         {type: 'accept', symbol: 'receive_sick', name: '疑似/确诊孕妇', checked: false},
         {type: 'check', symbol: 'receive_normal_check', name: '常规产检', checked: false},
         {type: 'check', symbol: 'receive_ultrasound', name: '孕期产检B超', checked: false},
-        {type: 'check', symbol: 'receive_check', name: '核酸检测', checked: false},
         {type: 'check', symbol: 'receive_clour_ultrasound', name: '中孕期三维排畸彩超（大排畸）', checked: false},
-        {type: 'birth', symbol: 'receive_accouche', name: '可接生', checked: false}
+        {type: 'check', symbol: 'receive_accouche', name: '可接生', checked: false},
+        {type: 'other', symbol: 'receive_check', name: '可做核酸检测', checked: false},
+        {type: 'other', symbol: 'verify', name: '医院信息已核实', checked: false},
       ],
+      conditions: [],
       restaurants: [],
       state: '',
       activeNames: ['1'],
@@ -279,11 +289,12 @@ export default {
     checkConditions () {
       return this.filterConditions.filter(i => i.type === 'check')
     },
-    birthConditions () {
-      return this.filterConditions.filter(i => i.type === 'birth')
+    otherConditions () {
+      return this.filterConditions.filter(i => i.type === 'other')
     },
     allConditionChecked () {
-      return this.filterConditions.every(c => c.checked)
+      console.log('999', this.filterConditions.length === this.conditions.length)
+      return this.filterConditions.length === this.conditions.length
     }
   },
   methods: {
@@ -300,9 +311,11 @@ export default {
     },
     checkAllFilterCondition () {
       const checked = this.allConditionChecked
-      this.filterConditions.forEach(c => {
-        c.checked = !checked
-      })
+      if (!checked) {
+        this.conditions = this.filterConditions.map(c => c.symbol)
+      } else {
+        this.conditions = []
+      }
     },
     showPhoneDialog (hospital) {
       let that = this
@@ -417,10 +430,8 @@ export default {
       var params = ''
       params = 'all=2'
 
-      this.filterConditions.forEach(c => {
-        if (c.checked) {
-          params += `&${c.symbol}=是`
-        }
+      this.conditions.forEach(c => {
+        params += `&${c}=是`
       })
       // if (this.receive_accouche_radio !== '全部') {
       //   params = params + '&receive_accouche=' + this.receive_accouche_radio
@@ -475,7 +486,23 @@ export default {
         .finally(() => {
           that.showFilter = false
         })
-    }
+    },
+    // _buildQueryString () {
+    //   this.queryParams.all = 1
+    //   // 如果含有医院名搜索
+    //   if (this.queryParams.name) {
+    //     this.queryParams.all = 0
+    //   // 如果queryParams含有医院筛选选项
+    //   } else if (this.hospitalOptions.some(option => this.queryParams[option])) {
+    //     this.queryParams.all = 2
+    //   // queryParams含有地区
+    //   } else if (this.queryParams.area) {
+    //     this.queryParams.all = 3
+    //   }
+    //   return Object.keys(this.queryParams)
+    //     .map(queryKey => `${queryKey}=${this.queryParams[queryKey]}`)
+    //     .join('&')
+    // }
   },
   mounted () {
     this.restaurants = this.searchHospitalByOption()
