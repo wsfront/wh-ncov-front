@@ -250,6 +250,8 @@
 <script>
 import HospitalInfoItem from "./HospitalInfoItem";
 import HeaderLayout from "./HeaderLayout";
+import SearchParamManager from '../utils/SearchParamManager'
+
 export default {
   name: "FrontIndex",
   components: { HospitalInfoItem, HeaderLayout },
@@ -291,7 +293,8 @@ export default {
       receive_check_radio: "全部",
       // 新增
       showPlace: false,
-      showFilter: false
+      showFilter: false,
+      searchParamManager: new SearchParamManager()
     };
   },
   computed: {},
@@ -326,24 +329,20 @@ export default {
     },
     handleSelect(item, keyPath) {
       console.log(item, keyPath);
-      let params = "";
-      if (item === "全部") {
-        params = "all=1";
-      } else {
-        params = "all=3&area=" + item;
-      }
-      this.fetchHospitalInfo(params);
+      // delete "name", our API doesn't support search name + other criteria together so we have to drop it
+      this.hospitalname = ''
+      this.searchParamManager.handleAreaChange(item)
+
+      this.fetchHospitalInfo();
     },
     handleOpen() {},
     handleClose() {},
     searchHospital() {
-      let params = "all=0";
-      if (this.hospitalname !== "") {
-        params = params + "&name=" + this.hospitalname;
-      } else {
+      if (!this.hospitalname) {
         return;
       }
-      this.fetchHospitalInfo(params);
+      this.searchParamManager.handleNameChange(this.hospitalname)
+      this.fetchHospitalInfo();
     },
     resetHospitalOption() {
       this.receive_accouche_radio = "全部";
@@ -356,49 +355,17 @@ export default {
       this.receive_check_radio = "全部";
     },
     searchHospitalByOption() {
-      let params = "all=2";
-      if (this.receive_accouche_radio !== "全部") {
-        params = params + "&receive_accouche=" + this.receive_accouche_radio;
-      }
-      if (this.receive_normal_radio !== "全部") {
-        params = params + "&receive_normal=" + this.receive_normal_radio;
-      }
-      if (this.receive_sick_radio !== "全部") {
-        params = params + "&receive_sick=" + this.receive_sick_radio;
-      }
-      if (this.receive_normal_check_radio !== "全部") {
-        params =
-          params + "&receive_normal_check=" + this.receive_normal_check_radio;
-      }
-      if (this.receive_ultrasound_radio !== "全部") {
-        params =
-          params + "&receive_ultrasound=" + this.receive_ultrasound_radio;
-      }
-      if (this.receive_clour_ultrasound_radio !== "全部") {
-        params =
-          params +
-          "&receive_clour_ultrasound=" +
-          this.receive_clour_ultrasound_radio;
-      }
-      if (this.verify_radio !== "全部") {
-        params = params + "&verify=" + this.verify_radio;
-      }
-      if (this.receive_check_radio !== "全部") {
-        params = params + "&receive_check=" + this.receive_check_radio;
-      }
-      if (this.areaName !== "全部") {
-        params = params + "&area=" + this.areaName;
-      }
-      if (params === "all=2") {
-        params = "all=1";
-      }
-      this.fetchHospitalInfo(params);
+      // delete "name", our API doesn't support search name + other criteria together so we have to drop it
+      this.hospitalname = ''
+      this.searchParamManager.handleSearchOptionsChange(this)
+
+      this.fetchHospitalInfo();
     },
 
     fetchHospitalInfo(params) {
       this.hospitallist = [];
       this.$http
-        .get("/wh/msg/hospital?page_num=1&page_size=100&" + params)
+        .get("/wh/msg/hospital?page_num=1&page_size=100&" + this.searchParamManager.buildQueryString())
         .then(response => {
           console.log(response);
           if (response.data.code === "0000") {
