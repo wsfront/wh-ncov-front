@@ -5,7 +5,10 @@
       <span v-if="lastUpdateTime">（{{ lastUpdateTime }}更新）</span>
     </header>
     <router-view />
-    <footer></footer>
+    <footer class="footer">
+      <a href="https://shimo.im/docs/5zAZVlQzEDc5FgAo">关于我们</a>
+      <a href="https://shimo.im/forms/XRkgJOZm4YCrFbqM/fill">反馈意见</a>
+    </footer>
   </div>
 </template>
 
@@ -37,7 +40,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background: #fafafa;
-  padding-top: 25px;
+  padding: 25px 0;
   /*margin-top: 60px;*/
 }
 .tips {
@@ -53,6 +56,27 @@ body {
   top: 0;
   left: 0;
   z-index: 2;
+}
+.footer {
+  height: 25px;
+  border-radius: 16px 16px 0 0;
+  background: white;
+  position: fixed;
+  box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.05);
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer a {
+  padding: 6px 40px;
+  color: #333;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
 }
 ::-webkit-input-placeholder {
   /* WebKit browsers */
