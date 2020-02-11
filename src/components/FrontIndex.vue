@@ -11,16 +11,60 @@
     </div>
     <div name="hospital" v-show="activeName=='hospital'">
       <div class="hospital-search-bar">
-        <div class="small-btn" :class="{act:true}" @click="showPlace=!showPlace">
-          <!-- <img class="btn-icon" src="../assets/place.png"> -->
+        <!-- <div class="small-btn" :class="{act:true}" @click="showPlace=!showPlace">
           <img class="btn-icon" src="../assets/place-act.png">
           <div class="btn-text">城区</div>
-        </div>
-        <div class="small-btn" :class="{act:false}" @click="showFilter=!showFilter">
-          <img class="btn-icon" src="../assets/filter.png">
+        </div> -->
+        <el-dropdown trigger="click" @command="handleSelect" @visible-change="changeShowPlace">
+          <span class="el-dropdown-link">
+            <div class="small-btn" :class="{act:showPlace}">
+              <!-- <img class="btn-icon" src="../assets/place-act.png"> -->
+              <i class="el-icon-location"></i>
+              <div class="btn-text">城区</div>
+            </div>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item icon="el-icon-menu" command="全部" :class="{act : areas.selected === '全部'}">全部城区</el-dropdown-item>
+            <div class="sub-text">中心城区</div>
+            <el-dropdown-item icon="el-icon-place" v-for="area in areas.center" :key="area" :command="area" :class="{act : areas.selected === area}">{{ area }}</el-dropdown-item>
+            <div class="sub-text">其他城区</div>
+            <el-dropdown-item icon="el-icon-place" v-for="area in areas.other" :key="area" :command="area" :class="{act : areas.selected === area}">{{ area }}</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <!-- <div class="small-btn" :class="{act:false}" @click="showFilter=!showFilter">
+          <img class="btn-icon" src="../assets/filter.png"> -->
           <!-- <img class="btn-icon" src="../assets/filter-act.png"> -->
+          
+          <!-- <i class="el-icon-s-operation"></i>
           <div class="btn-text">筛选</div>
-        </div>
+        </div> -->
+        <el-dropdown trigger="click" :hide-on-click="false" placement="bottom" @visible-change="changeShowFilter">
+          <div class="small-btn" :class="{act:showFilter}" ref="domFilter">
+            <!-- <img class="btn-icon" src="../assets/filter.png"> -->
+            <!-- <img class="btn-icon" src="../assets/filter-act.png"> -->
+            <i class="el-icon-s-operation"></i>
+            <div class="btn-text">筛选</div>
+          </div>
+          <el-dropdown-menu slot="dropdown">
+            <!-- <el-checkbox :value="allConditionChecked" @change="checkAllFilterCondition">全部医院信息</el-checkbox> -->
+            <el-dropdown-item icon="el-icon-menu" :class="{act : !conditions.length}">全部医院信息</el-dropdown-item>
+              <el-divider></el-divider>
+              <el-checkbox-group v-model="conditions" >
+                <div class="sub-text">接收</div>
+                <el-checkbox v-for="condition in acceptConditions" :label="condition.symbol" :key="condition.symbol">{{condition.name}}</el-checkbox>
+                <div class="sub-text">孕检及接生</div>
+                <el-checkbox v-for="condition in checkConditions" :label="condition.symbol" :key="condition.symbol">{{condition.name}}</el-checkbox>
+                <div class="sub-text">其他</div>
+                <el-checkbox v-for="condition in otherConditions" :label="condition.symbol" :key="condition.symbol">{{condition.name}}</el-checkbox>
+            </el-checkbox-group>
+            <el-divider></el-divider>
+            <div class="pop-bottom">
+              <span class="pop-bottom__btn" @click="conditions=[]">重置</span>
+              <el-divider direction="vertical"></el-divider>
+              <span class="pop-bottom__btn active" @click="searchHospitalByOption(true)">确认查看</span>
+            </div>
+          </el-dropdown-menu>
+        </el-dropdown>
         <div class="search-con">
           <input v-model="hospitalname" placeholder="请输入医院名字">
           <img class="btn-icon" src="../assets/search.png" @click="searchHospital">
@@ -70,7 +114,7 @@
       正在积极努力中！
     </div>
 
-    <el-dialog :visible.sync="showPlace" width="80%" center>
+    <!-- <el-dialog :visible.sync="showPlace" width="80%" center>
       <div>
         <h3 style="color:#000000">请选择城区</h3>
         <div>
@@ -87,12 +131,8 @@
           </div>
         </div>
       </div>
-      <!-- <div slot="footer" class="dialog-footer">
-        <el-button >全选</el-button>
-        <el-button>确认</el-button>
-      </div> -->
-    </el-dialog>
-    <el-dialog :visible.sync="showFilter" width="80%" center>
+    </el-dialog> -->
+    <!-- <el-dialog :visible.sync="showFilter" width="80%" center> -->
       <!-- <div class="filter-con">
         <el-row type="flex">
           <el-col :span="12">医院核实情况</el-col>
@@ -179,9 +219,9 @@
           <el-button type="primary" size="mini" @click="searchHospitalByOption" style="width: 10em;" plain>查看</el-button>
         </div>
       </div> -->
-      <div>
+      <!-- <div> -->
         <!-- <h3 style="color:#000000">请选择就诊条件</h3> -->
-        <el-checkbox :value="allConditionChecked" @change="checkAllFilterCondition">全部医院信息</el-checkbox>
+        <!-- <el-checkbox :value="allConditionChecked" @change="checkAllFilterCondition">全部医院信息</el-checkbox>
         <el-divider></el-divider>
         <el-checkbox-group v-model="conditions" >
             <div class="sub-text">接收</div>
@@ -190,7 +230,7 @@
             <el-checkbox v-for="condition in checkConditions" :label="condition.symbol" :key="condition.symbol">{{condition.name}}</el-checkbox>
             <div class="sub-text">其他</div>
             <el-checkbox v-for="condition in otherConditions" :label="condition.symbol" :key="condition.symbol">{{condition.name}}</el-checkbox>
-        </el-checkbox-group>
+        </el-checkbox-group> -->
         <!-- <div>
           <div class="sub-text">接受</div>
           <div>
@@ -207,13 +247,13 @@
           <div class="sub-text">接生</div>
             <el-button class="sort" size="small"  v-for="condition in otherConditions" :key="condition.symbol" @click="toggleFilterCondition(condition)" :type="condition.checked ? 'primary':''">{{ condition.name }}</el-button>
         </div> -->
-      </div>
+      <!-- </div>
       <el-divider></el-divider>
       <div slot="footer" class="dialog-footer">
         <el-button @click="conditions=[]">重置</el-button>
         <el-button @click="searchHospitalByOption">确认查看</el-button>
       </div>
-    </el-dialog>
+    </el-dialog> -->
     <el-dialog title="医院信息" :visible.sync="dialogFormVisible" width="80%">
       <el-row v-for="phone in currentHospital.phones" v-bind:key="phone.id">
         <el-col :span="5" style="text-align: left">
@@ -300,6 +340,12 @@ export default {
     }
   },
   methods: {
+    changeShowPlace (visible) {
+      this.showPlace = visible
+    },
+    changeShowFilter (visible) {
+      this.showFilter = visible
+    },
     clickHospital (hospital) {
       console.log(hospital)
       hospital.show = !hospital.show
@@ -359,6 +405,7 @@ export default {
     },
     handleSelect (item) {
       console.log(item)
+      this.showPlace = !this.showPlace
       this.areas.selected = item
       let that = this
       var params = ''
@@ -367,6 +414,10 @@ export default {
       } else {
         params = 'all=3&area=' + item
       }
+      this.conditions.forEach(c => {
+        params += `&${c}=是`
+      })
+
       this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + params)
         .then(function (response) {
           if (response.data.code === '0000') {
@@ -427,43 +478,20 @@ export default {
     //   this.verify_radio = '全部'
     //   this.receive_check_radio = '全部'
     // },
-    searchHospitalByOption () {
+    searchHospitalByOption (filterClick) {
       let that = this
       var params = ''
-      params = 'all=2'
-
-      this.conditions.forEach(c => {
-        params += `&${c}=是`
-      })
-      // if (this.receive_accouche_radio !== '全部') {
-      //   params = params + '&receive_accouche=' + this.receive_accouche_radio
-      // }
-      // if (this.receive_normal_radio !== '全部') {
-      //   params = params + '&receive_normal=' + this.receive_normal_radio
-      // }
-      // if (this.receive_sick_radio !== '全部') {
-      //   params = params + '&receive_sick=' + this.receive_sick_radio
-      // }
-      // if (this.receive_normal_check_radio !== '全部') {
-      //   params = params + '&receive_normal_check=' + this.receive_normal_check_radio
-      // }
-      // if (this.receive_ultrasound_radio !== '全部') {
-      //   params = params + '&receive_ultrasound=' + this.receive_ultrasound_radio
-      // }
-      // if (this.receive_clour_ultrasound_radio !== '全部') {
-      //   params = params + '&receive_clour_ultrasound=' + this.receive_clour_ultrasound_radio
-      // }
-      // if (this.verify_radio !== '全部') {
-      //   params = params + '&verify=' + this.verify_radio
-      // }
-      // if (this.receive_check_radio !== '全部') {
-      //   params = params + '&receive_check=' + this.receive_check_radio
-      // }
-      if (this.areaName !== '全部') {
-        params = params + '&area=' + this.areaName
-      }
-      if (params === 'all=2') {
+      if (!this.conditions.length) {
         params = 'all=1'
+      } else {
+        params = 'all=2'
+
+        this.conditions.forEach(c => {
+          params += `&${c}=是`
+        })
+      }
+      if (this.areas.selected !== '全部') {
+        params = params + '&area=' + this.areas.selected
       }
 
       this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + params)
@@ -486,9 +514,12 @@ export default {
           that.visibleOption = false
         })
         .finally(() => {
-          that.showFilter = false
+          // that.showFilter = false
+          if (filterClick) {
+            that.$refs.domFilter.click()
+          }
         })
-    },
+    }
     // _buildQueryString () {
     //   this.queryParams.all = 1
     //   // 如果含有医院名搜索
@@ -525,14 +556,38 @@ export default {
     margin-right: 10px;
     margin-bottom: 10px;
   }
+  .pop-bottom{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+  }
+  .pop-bottom__btn{
+    flex: 1;
+    color: #9D9D9D;
+    text-align: center;
+  }
+  .pop-bottom__btn.active{
+    color: #5887FF;
+  }
 
 </style>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.el-checkbox__label{
+  font-size: 12px;
+}
+.el-dropdown-menu {
+  max-height: 72vh;
+  overflow: scroll;
+}
+.el-dropdown-menu__item.act{
+  color: #6792FC
+}
 .el-checkbox {
   display: block;
-  margin: 10px 0;
+  margin: 10px 12px;
 }
   .el-dialog__footer{
     padding: 0;
@@ -658,6 +713,9 @@ export default {
   height: 16px;
   margin-right: 5px;
 }
+.hospital-search-bar .small-btn{
+  color: #ACACAC;
+}
 .hospital-search-bar .small-btn .btn-text {
   /* width: 24px; */
   height: 17px;
@@ -665,10 +723,10 @@ export default {
   font-family: Source Han Sans;
   font-weight: bold;
   line-height: 17px;
-  color: rgba(226, 226, 226, 1);
+  /* color: rgba(226, 226, 226, 1); */
   opacity: 1;
 }
-.hospital-search-bar .small-btn.act .btn-text {
+.hospital-search-bar .small-btn.act {
   color: #5887ff;
 }
 .hospital-search-bar .search-con {
