@@ -180,8 +180,9 @@
         </div>
       </div> -->
       <div>
-        <h3 style="color:#000000">请选择就诊条件</h3>
-        <el-checkbox :value="allConditionChecked" @change="checkAllFilterCondition">全选</el-checkbox>
+        <!-- <h3 style="color:#000000">请选择就诊条件</h3> -->
+        <el-checkbox :value="allConditionChecked" @change="checkAllFilterCondition">全部医院信息</el-checkbox>
+        <el-divider></el-divider>
         <el-checkbox-group v-model="conditions" >
             <div class="sub-text">接收</div>
             <el-checkbox v-for="condition in acceptConditions" :label="condition.symbol" :key="condition.symbol">{{condition.name}}</el-checkbox>
@@ -207,6 +208,7 @@
             <el-button class="sort" size="small"  v-for="condition in otherConditions" :key="condition.symbol" @click="toggleFilterCondition(condition)" :type="condition.checked ? 'primary':''">{{ condition.name }}</el-button>
         </div> -->
       </div>
+      <el-divider></el-divider>
       <div slot="footer" class="dialog-footer">
         <el-button @click="conditions=[]">重置</el-button>
         <el-button @click="searchHospitalByOption">确认查看</el-button>
@@ -525,8 +527,13 @@ export default {
   }
 
 </style>
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.el-checkbox {
+  display: block;
+  margin: 10px 0;
+}
   .el-dialog__footer{
     padding: 0;
   }
