@@ -2,11 +2,11 @@
   <div>
     <div class="tips" v-if="lastUpdateTime" style="font-size: 12px">{{lastUpdateTime}}更新;数据至少两天更新一次</div>
     <div class="tab-btn-con">
-      <div class="tab-btn" size="small" @click="activeName='hospital'" :class="{act:activeName=='hospital'}">
+      <div class="tab-btn" size="small" @click="tabChange('hospital')" :class="{act:activeName=='hospital'}">
         医院信息
       </div>
-      <div class="tab-btn" :class="{act:activeName=='obstetricCheck'}" size="small" @click="activeName='obstetricCheck'">
-        产检知识
+      <div class="tab-btn" :class="{act:activeName=='obstetricCheck'}" size="small" @click="tabChange('obstetricCheck')">
+        疫期产检
       </div>
     </div>
     <div name="hospital" v-show="activeName=='hospital'">
@@ -327,11 +327,20 @@ export default {
         this.loading = false
       }, 2000)
     },
-    handleClick (tab, event) {
-      console.log(tab, event)
-    },
-    handleChange (val) {
-      console.log(val)
+    tabChange (activeNameParam) {
+      let routerPath = '/'
+      this.activeName = activeNameParam
+      switch (activeNameParam) {
+        case 'hospital':
+          routerPath = '/FrontIndex'
+          break
+        case 'obstetricCheck':
+          routerPath = '/FrontCheckIndex'
+          break
+        default:
+          break
+      }
+      this.$router.push(routerPath)
     },
     handleSelect (item) {
       console.log(item)
@@ -616,7 +625,7 @@ export default {
   margin-right: 5px;
 }
 .hospital-search-bar .small-btn .btn-text {
-  width: 24px;
+  /* width: 24px; */
   height: 17px;
   font-size: 12px;
   font-family: Source Han Sans;

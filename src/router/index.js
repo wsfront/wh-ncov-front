@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import FrontIndex from '@/components/FrontIndex'
+import FrontCheckIndex from '@/components/FrontCheckIndex'
 import EndIndex from '@/components/EndIndex'
 import EndHospitalDetail from '@/components/EndHospitalDetail'
 import EndHospitalEdit from '@/components/EndHospitalEdit'
@@ -19,6 +20,11 @@ export default new Router({
       path: '/FrontIndex',
       name: 'FrontIndex',
       component: FrontIndex
+    },
+    {
+      path: '/FrontCheckIndex',
+      name: 'FrontCheckIndex',
+      component: FrontCheckIndex
     },
     {
       path: '/EndIndex',
