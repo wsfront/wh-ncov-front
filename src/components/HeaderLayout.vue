@@ -25,7 +25,7 @@ export default {
 /* 新增样式 */
 .tab-btn-con {
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -49,7 +49,7 @@ export default {
 .tab-btn.act::after {
   content: "";
   position: absolute;
-  bottom: -4px;
+  bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
   width: 34px;
