@@ -237,6 +237,7 @@
 <script>
 
 import HospitalInfoItem from './HospitalInfoItem'
+import SearchParamManager from '../utils/SearchParamManager'
 
 export default {
   name: 'FrontIndex',
@@ -283,7 +284,7 @@ export default {
       showPlace: false,
       showFilter: false,
       activeName: 'hospital',
-      queryParams: {}
+      searchParamManager: new SearchParamManager()
     }
   },
   computed: {
@@ -334,12 +335,12 @@ export default {
     handleSelect (item, keyPath) {
       console.log(item, keyPath)
       let that = this
-      if (item === '全部地区') {
-        delete this.queryParams.area
-      } else {
-        this.queryParams.area = item
-      }
-      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + this._buildQueryString())
+
+      // delete "name", our API doesn't support search name + other criteria together so we have to drop it
+      this.hospitalname = ''
+      this.searchParamManager.handleAreaChange(item)
+
+      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + this.searchParamManager.buildQueryString())
         .then(function (response) {
           console.log(response)
           if (response.data.code === '0000') {
@@ -366,12 +367,12 @@ export default {
     },
     searchHospital () {
       let that = this
-      if (this.hospitalname !== '') {
-        this.queryParams.name = this.hospitalname
-      } else {
+      if (!this.hospitalname) {
         return
       }
-      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + this._buildQueryString())
+
+      this.searchParamManager.handleNameChange(this.hospitalname)
+      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + this.searchParamManager.buildQueryString())
         .then(function (response) {
           console.log(response)
           if (response.data.code === '0000') {
@@ -402,18 +403,11 @@ export default {
     searchHospitalByOption () {
       let that = this
 
-      for (const option of this.hospitalOptions) {
-        const optionRadioKey = `${option}_radio`
+      // delete "name", our API doesn't support search name + other criteria together so we have to drop it
+      this.hospitalname = ''
+      this.searchParamManager.handleSearchOptionsChange(this)
 
-        const optionValue = this[optionRadioKey]
-        if (optionValue !== '全部') {
-          this.queryParams[option] = optionValue
-        } else {
-          delete this.queryParams[option]
-        }
-      }
-
-      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + this._buildQueryString())
+      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + this.searchParamManager.buildQueryString())
         .then(function (response) {
           console.log(response)
           if (response.data.code === '0000') {
@@ -432,26 +426,6 @@ export default {
           console.log(error)
           that.visibleOption = false
         })
-    },
-    _buildQueryString () {
-      this.queryParams.all = 1
-
-      // 如果含有医院名搜索
-      if (this.queryParams.name) {
-        this.queryParams.all = 0
-
-      // 如果queryParams含有医院筛选选项
-      } else if (this.hospitalOptions.some(option => this.queryParams[option])) {
-        this.queryParams.all = 2
-
-      // queryParams含有地区
-      } else if (this.queryParams.area) {
-        this.queryParams.all = 3
-      }
-
-      return Object.keys(this.queryParams)
-        .map(queryKey => `${queryKey}=${this.queryParams[queryKey]}`)
-        .join('&')
     }
   },
   mounted () {
