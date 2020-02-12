@@ -5,7 +5,7 @@
       <div class="value" v-if="data == '否'">
         不接收 <i class="el-icon-error" />
       </div>
-      <div class="value suc" v-else-if="(data = '是')">
+      <div class="value suc" v-else-if="(data == '是')">
         接收 <i class="el-icon-success" />
       </div>
     </div>
