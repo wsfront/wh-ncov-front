@@ -21,8 +21,15 @@ export default {
       show: false
     };
   },
+  created() {
+    const lastUpdateTime = sessionStorage.getItem('lastUpdateTime')
+    if (lastUpdateTime) {
+      this.lastUpdateTime = lastUpdateTime
+    }
+  },
   mounted() {
     this.$EventBus.$on("refreshUpdateTime", time => {
+      sessionStorage.setItem('lastUpdateTime', time)
       this.lastUpdateTime = time;
     });
   }
