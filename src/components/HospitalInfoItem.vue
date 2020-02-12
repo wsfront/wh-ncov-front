@@ -1,30 +1,9 @@
 <template>
   <div>
-    <div class="hospital-info-item" v-if="name == '普通孕妇'">
+    <div class="hospital-info-item">
       <div class="name">{{ name }}</div>
-      <div class="value" v-if="data == '否'">
-        不接收 <i class="el-icon-error" />
-      </div>
-      <div class="value suc" v-else-if="(data == '是')">
-        接收 <i class="el-icon-success" />
-      </div>
-    </div>
-    <div class="hospital-info-item" v-if="name == '疑似/确诊孕妇'">
-      <div class="name">{{ name }}</div>
-      <div class="value warn" v-if="data == '否'">
-        疑似/确诊孕妇 <i class="el-icon-warning" />
-      </div>
-      <div class="value suc" v-if="data != '否'">
-        接收 <i class="el-icon-success" />
-      </div>
-    </div>
-    <div class="hospital-info-item" v-else>
-      <div class="name">{{ name }}</div>
-      <div class="value warn" v-if="data == '否'">
-        需要预约或其他 <i class="el-icon-warning" />
-      </div>
-      <div class="value suc" v-if="data != '否'">
-        可做 <i class="el-icon-success" />
+      <div :class="data | parentTrans">
+        {{data | wordTrans(name)}} <i :class="data | iconTrans" />
       </div>
     </div>
   </div>
@@ -32,11 +11,54 @@
 <script>
 export default {
   props: ["data", "name"],
-  data() {
-    return {};
+  filters: {
+    wordTrans(value, name) {
+      let isNormal = name.indexOf("孕妇") > -1;
+      let dataWord = "";
+      switch (value) {
+        case "是":
+          dataWord = isNormal ? "接收" : "可做";
+          break;
+        case "否":
+          dataWord = isNormal ? "不接收" : "不可做";
+          break;
+        default:
+          dataWord = value.substr(2);
+          break;
+      }
+      return dataWord;
+    },
+    iconTrans(value) {
+      let dataIcon = "";
+      switch (value) {
+        case "是":
+          dataIcon = "el-icon-success";
+          break;
+        case "否":
+          dataIcon = "el-icon-error";
+          break;
+        default:
+          dataIcon = "el-icon-warning";
+          break;
+      }
+      return dataIcon;
+    },
+    parentTrans(value) {
+      let dataColor = "value";
+      switch (value) {
+        case "是":
+          dataColor = "value suc";
+          break;
+        case "否":
+          dataColor = "value";
+          break;
+        default:
+          dataColor = "value warn";
+          break;
+      }
+      return dataColor;
+    }
   },
-  mounted() {},
-
   computed: {}
 };
 </script>

@@ -270,7 +270,6 @@ export default {
       this.showFilter = visible;
     },
     clickHospital(hospital) {
-      console.log(hospital);
       hospital.show = !hospital.show;
     },
     toggleFilterCondition(condition) {
@@ -315,7 +314,6 @@ export default {
       }, 2000);
     },
     handleSelect(item) {
-      console.log(item);
       this.showPlace = !this.showPlace;
       this.areas.selected = item;
       var params = "";
@@ -366,7 +364,6 @@ export default {
       this.$http
         .get("/wh/msg/hospital?page_num=1&page_size=100&" + params)
         .then(response => {
-          console.log(response);
           if (response.data.code === "0000") {
             response.data.result.forEach(element => {
               element.show = false;
@@ -685,9 +682,7 @@ export default {
 .address-btn {
   padding: 10px 0;
   text-align: center;
-  height: 20px;
-  font-size: 14px;
-  font-family: Source Han Sans;
+  font-size: 12px;
   font-weight: 500;
   line-height: 20px;
   color: rgba(172, 172, 172, 1);
