@@ -69,7 +69,7 @@ body {
 }
 .footer a {
   padding: 6px 40px;
-  color: #333;
+  color: #ACACAC;
   text-decoration: none;
   font-size: 12px;
   font-weight: bold;
