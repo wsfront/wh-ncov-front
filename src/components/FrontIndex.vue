@@ -124,7 +124,7 @@
                 <div class="other-msg-title">补充说明</div>
                 <div class="other-msg">{{ hospital.remark }}</div>
               </div>
-              <div class="address-btn">
+              <div class="address-btn" @click="showAddressDialog(hospital)">
                 <i class="el-icon-location" />
                 医院地址: {{ hospital.address }}
               </div>
@@ -144,6 +144,9 @@
       <div slot="footer" class="dialog-footer">
         <!--<el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>-->
       </div>
+    </el-dialog>
+    <el-dialog title="医院地址" :visible.sync="addressDialogVisible" width="80%" class="wh-dialog">
+      {{currentHospital.address}}
     </el-dialog>
   </div>
 </template>
@@ -233,7 +236,8 @@ export default {
       count: 10,
       loading: false,
       dialogFormVisible: false,
-      currentHospital: [],
+      addressDialogVisible: false,
+      currentHospital: {},
       // 新增
       showPlace: false,
       showFilter: false,
@@ -298,6 +302,10 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+    },
+    showAddressDialog(hospital) {
+      this.currentHospital = hospital;
+      this.addressDialogVisible = true;
     },
     load() {
       this.loading = true;
