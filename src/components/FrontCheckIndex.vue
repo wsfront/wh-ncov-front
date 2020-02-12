@@ -4,8 +4,8 @@
       <HeaderLayout :activeIndex="1" />
     </div>
     <div class="wh-tab">
-      <div class="wh-tab-item" @click="activeIndex=0" :class="{ active: activeIndex === 0 }">发热孕妇确诊流程</div>
       <div class="wh-tab-item" @click="activeIndex=1" :class="{ active: activeIndex === 1 }">疫期建议必查产检项目</div>
+      <div class="wh-tab-item" @click="activeIndex=0" :class="{ active: activeIndex === 0 }">发热孕妇确诊流程</div>
     </div>
     <div class="block">
       <el-row class="wh-content-container" v-show="activeIndex === 0">
@@ -24,7 +24,7 @@
         </el-col>
       </el-row>
       <div class="wh-content-container" v-show="activeIndex === 1">
-        <div class="wh-intro">
+        <div class="wh-intro" style="margin-bottom: 15px">
           <!--<h3>疫期建议必查产检项目</h3>-->
           <p class="wh-intro-p">
             疫情期为降低因出门而遭受病毒感染的可能，我们建议孕期 妈妈们按下方的孕期表安排最低限度共五次的常规检查。每次产检由：常规产检、血检和以下特殊检查组成。<br/><br/>
@@ -33,8 +33,6 @@
             这里的信息仅囊括最基础的产检项目，若诊断为高危产妇，请加强产检，与医生沟通来制定适合个人情况的治疗方案。
           </p>
         </div>
-        <div style="height: 15px"></div>
-
         <div class="info-box">
           <div class="head">
             <span class="label">早孕期（6-8周）</span>
@@ -90,7 +88,7 @@ export default {
   components: { HeaderLayout },
   data() {
     return {
-      activeIndex: 0,
+      activeIndex: 1,
       activeNames: [],
       dialogShow: false,
       activeName: "obstetricCheck"
@@ -137,8 +135,10 @@ export default {
   color: #2F3036;
   font-size: 12px;
   box-shadow: rgba(0,0,0,.1) 0 0 5px;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  background: #FFFFFF;
 }
+
 .info-box .head{
   display: block;
   align-items: center;
@@ -199,14 +199,15 @@ export default {
 }
 .process-box{
   box-shadow: rgba(0,0,0,.1) 0 0 5px;
+  background: #FFFFFF;
 }
 .wh-intro {
   text-align: left;
 }
 .wh-intro-p{
   margin: 10px 0;
-  line-height: 20px;
-  font-size: 14px;
+  line-height: 18px;
+  font-size: 12px;
   color: #2F3036;
 }
 .wh-collapse {
