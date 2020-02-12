@@ -392,7 +392,7 @@ export default {
 };
 </script>
 
-<style scoped style="css">
+<style scoped lang="scss">
 .sub-text {
   color: #acacac;
   font-size: 12px;
@@ -417,18 +417,18 @@ export default {
   text-align: center;
 }
 .pop-bottom__btn.active {
-  color: #5887ff;
+  color: $--color-primary;
 }
 </style>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style lang="scss" scoped>
 .wh-phone {
   text-align: left;
 }
 .wh-phone-btn {
   text-decoration-line: none;
-  color: #5384ff;
+  color: $--color-primary;
 }
 .wh-dialog .el-dialog__title {
   display: inline-block;
@@ -442,7 +442,7 @@ export default {
   overflow: scroll;
 }
 .el-dropdown-menu__item.act {
-  color: #6792fc;
+  color: $--color-primary;
 }
 .el-checkbox {
   display: block;
@@ -540,7 +540,7 @@ export default {
   opacity: 1;
 }
 .hospital-search-bar .small-btn.act {
-  color: #5887ff;
+  color: $--color-primary;
 }
 .hospital-search-bar .search-con {
   width: 196px;
