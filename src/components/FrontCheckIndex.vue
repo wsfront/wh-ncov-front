@@ -37,7 +37,7 @@
 
         <div class="info-box">
           <div class="head">
-            <h3 class="label">早孕期（6-8周）</h3>
+            <span class="label">早孕期（6-8周）</span>
             <span class="title">确定宫内妊娠，预约NT</span>
           </div>
           <p class="content">血/尿HCG、彩超、 宫颈TCT + HPV</p>
@@ -45,7 +45,7 @@
 
         <div class="info-box">
           <div class="head">
-            <h3 class="label">早孕期（11-14周）</h3>
+            <span class="label">早孕期（11-14周）</span>
             <span class="title">建议在12周检测</span>
           </div>
           <p class="content">血常规、尿常规、B超、 NT、 无创DNA、甲状腺、传染病筛查、血型、凝血功能、生化全套</p>
@@ -53,7 +53,7 @@
 
         <div class="info-box">
           <div class="head">
-            <h3 class="label">中孕期（20-28周）</h3>
+            <span class="label">中孕期（20-28周）</span>
             <span class="title">建议在24周检测。主要做大排畸</span>
           </div>
           <p class="content">血常规、尿常规、唐氏、糖尿病筛查、B超大畸形排查、肝肾功能</p>
@@ -61,7 +61,7 @@
 
         <div class="info-box">
           <div class="head">
-            <h3 class="label">晚孕期（30-32周）</h3>
+            <span class="label">晚孕期（30-32周）</span>
             <span class="title">建议在32周检测。并发症再评估风险</span>
           </div>
           <p class="content">血常规、尿常规、小排畸超声、ICP筛查</p>
@@ -69,7 +69,7 @@
 
         <div class="info-box">
           <div class="head">
-            <h3 class="label">晚孕期（30-41周）</h3>
+            <span class="label">晚孕期（30-41周）</span>
             <span class="title">建议36-37周检测。决定分娩方式和时间</span>
           </div>
           <p class="content">产科超声检查、NST检查</p>
@@ -142,19 +142,20 @@ export default {
 .info-box .head{
   display: block;
   align-items: center;
-  height: 35px;
-  line-height: 35px;
+  padding: 6px 0;
   border-bottom: 1px solid #F0F0F0;
   text-align: left;
 }
 .info-box .head .label{
   font-weight: bold;
-  display: inline-block;
+  line-height: 20px;
+  /*display: inline-block;*/
   margin: 0;
   padding: 0;
 }
 .info-box .head .title{
-  display: inline-block;
+  line-height: 20px;
+  /*display: inline-block;*/
 }
 .info-box .content{
   padding: 8px 0;
