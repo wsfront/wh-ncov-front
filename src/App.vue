@@ -21,8 +21,15 @@ export default {
       show: false
     };
   },
+  created() {
+    const lastUpdateTime = sessionStorage.getItem('lastUpdateTime')
+    if (lastUpdateTime) {
+      this.lastUpdateTime = lastUpdateTime
+    }
+  },
   mounted() {
     this.$EventBus.$on("refreshUpdateTime", time => {
+      sessionStorage.setItem('lastUpdateTime', time)
       this.lastUpdateTime = time;
     });
   }
@@ -69,7 +76,7 @@ body {
 }
 .footer a {
   padding: 6px 40px;
-  color: #333;
+  color: #ACACAC;
   text-decoration: none;
   font-size: 12px;
   font-weight: bold;
