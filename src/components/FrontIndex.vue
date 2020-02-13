@@ -193,7 +193,7 @@
         class="wh-phone"
       >
         <el-col :span="9" style="color: $--color-text-regular;">{{
-          phone.department == "" ? "--" : phone.department
+          phone.department == "" ? "总机" : phone.department
         }}</el-col>
         <el-col :span="15" style="text-align: right;">
           <a class="wh-phone-btn" v-bind:href="'tel:' + phone.phone">{{
@@ -202,9 +202,9 @@
           ><span style="color:$--color-text-regular;">{{ phone.phone | phonestr(2) }}</span>
         </el-col>
       </el-row>
-      <div slot="footer" class="dialog-footer">
+      <!-- <div slot="footer" class="dialog-footer"> -->
         <!--<el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>-->
-      </div>
+      <!-- </div> -->
     </el-dialog>
     <el-dialog
       title="医院地址"
@@ -571,7 +571,7 @@ export default {
   text-decoration-line: none;
   color: $--color-primary;
 }
-.wh-dialog .el-dialog__title {
+.wh-dialog /deep/.el-dialog__title {
   display: inline-block;
   margin-right: 20px;
 }
