@@ -67,7 +67,6 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
-  height: 20px;
   border-radius: 10px;
   /* background: #ffce44; */
   margin-left: 2px;
