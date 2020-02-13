@@ -24,38 +24,23 @@ export default {
 <style scoped>
 /* 新增样式 */
 .tab-btn-con {
-  width: 100%;
-  margin-bottom: 20px;
+  margin: -2px -16px 20px -16px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
+  border-bottom: 1px solid #e2e2e2;
 }
 .tab-btn-con .tab-btn {
-  height: 26px;
   font-size: 18px;
-  font-family: Source Han Sans;
   font-weight: bold;
-  line-height: 26px;
-  color: rgba(193, 197, 205, 1);
-  opacity: 1;
-  padding: 0 15px;
-  position: relative;
+  color: #c1c5cd;
+  margin: 2px 18px -2px 18px;
+  padding-bottom: 8px;
   text-decoration: none;
 }
 .tab-btn.act {
   color: #5887ff;
-}
-.tab-btn.act::after {
-  content: "";
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 34px;
-  height: 4px;
-  background: rgba(88, 135, 255, 1);
-  opacity: 1;
-  border-radius: 5px;
+  border-bottom: 2px solid #5887ff;
 }
 </style>
