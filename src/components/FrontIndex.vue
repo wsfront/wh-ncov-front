@@ -32,13 +32,13 @@
           <div class="btn-text">筛选</div>
         </div> -->
         <el-dropdown trigger="click" :hide-on-click="false" placement="bottom" @visible-change="changeShowFilter">
-          <div class="small-btn" :class="{act:showFilter}" ref="domFilter">
+          <div class="small-btn" :class="{act:shouldHighlightFilterButton}" ref="domFilter">
             <!-- <img class="btn-icon" src="../assets/filter.png"> -->
             <!-- <img class="btn-icon" src="../assets/filter-act.png"> -->
             <i class="el-icon-s-operation"></i>
             <div class="btn-text">筛选</div>
           </div>
-          <el-dropdown-menu slot="dropdown">
+          <el-dropdown-menu slot="dropdown" class="hospital-filter-dialog">
             <!-- <el-checkbox :value="allConditionChecked" @change="checkAllFilterCondition">全部医院信息</el-checkbox> -->
             <el-dropdown-item icon="el-icon-menu" :class="{act : !conditions.length}">全部医院信息</el-dropdown-item>
               <el-divider></el-divider>
@@ -53,7 +53,6 @@
             <el-divider></el-divider>
             <div class="pop-bottom">
               <span class="pop-bottom__btn" @click="conditions=[]">重置</span>
-              <el-divider direction="vertical"></el-divider>
               <span class="pop-bottom__btn active" @click="searchHospitalByOption(true)">确认查看</span>
             </div>
           </el-dropdown-menu>
@@ -260,6 +259,12 @@ export default {
         this.filterConditions.length === this.conditions.length
       );
       return this.filterConditions.length === this.conditions.length;
+    },
+    /**
+     * highlight the filter button if the filter dialog is open, or if there are existing filter conditions
+     */
+    shouldHighlightFilterButton() {
+      return this.conditions.length !== 0 || this.showFilter;
     }
   },
   methods: {
@@ -319,6 +324,8 @@ export default {
       var params = "";
       if (item === "全部") {
         params = "all=1";
+      } else if (this.conditions.length > 0) {
+        params = "all=2&area=" + item;
       } else {
         params = "all=3&area=" + item;
       }
@@ -406,12 +413,17 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 50px;
 }
 .pop-bottom__btn {
   flex: 1;
+  height: 100%;
+  padding: 10px;
   color: #9d9d9d;
   text-align: center;
+  border-right: 1px #dcdfe6 solid;
+}
+.pop-bottom__btn:last-child {
+  border-right: none;
 }
 .pop-bottom__btn.active {
   color: $--color-primary;
@@ -440,6 +452,9 @@ export default {
 }
 .el-dropdown-menu__item.act {
   color: $--color-primary;
+}
+.hospital-filter-dialog {
+  padding-bottom: 0;
 }
 .el-checkbox {
   display: block;
@@ -496,7 +511,7 @@ export default {
   display: block;
   height: 1px;
   width: 100%;
-  margin: 5px 0;
+  margin: 0;
 }
 .el-button--mini,
 .el-button--mini.is-round {
