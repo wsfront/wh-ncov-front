@@ -32,7 +32,7 @@ export default {
   border-bottom: 1px solid #e2e2e2;
 }
 .tab-btn-con .tab-btn {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: #c1c5cd;
   margin: 2px 18px -2px 18px;
