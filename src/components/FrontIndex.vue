@@ -83,7 +83,7 @@
                 <div class="name">{{ hospital.name }}</div>
                 <div class="info-text">
                   <span :class="{success:!!hospital.verify,error:!hospital.verify}">{{ hospital.verify == 1 ? "已核实" : "待核实" }}</span>
-                  {{ hospital.update_6time }} 更新
+                  {{ hospital.update_time }} 更新
                 </div>
               </div>
               <div class="tel-btn" @click.stop="showPhoneDialog(hospital)">
