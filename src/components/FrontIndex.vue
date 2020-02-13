@@ -11,8 +11,8 @@
         >
           <span class="el-dropdown-link">
             <div class="btn long" :class="{act:showPlace}">
-              <i class="el-icon-location" :class="areas.selected ? 'btn-icon-act' : 'btn-icon'"></i>
-              <div :class="areas.selected ? 'btn-text-act' : 'btn-text'">{{areas.selected ? areas.selected : '城区'}}</div>
+              <i class="el-icon-location" :class="itemSelected ? 'btn-icon-act' : 'btn-icon'"></i>
+              <div :class="itemSelected ? 'btn-text-act' : 'btn-text'">{{itemSelected ? areas.selected : '城区'}}</div>
             </div>
           </span>
           <el-dropdown-menu slot="dropdown">
@@ -238,7 +238,7 @@ export default {
         other: ["蔡甸区", "江夏区", "黄陂区", "新洲区", "东西湖区", "汉南区"],
         new: ["东湖高新技术开发区", "经济技术开发区"],
         noData: ["临空港开发区"],
-        selected: ""
+        selected: "全部"
       },
       filterConditions: [
         {
@@ -308,7 +308,8 @@ export default {
       // 新增
       showPlace: false,
       showFilter: false,
-      activeName: "hospital"
+      activeName: "hospital",
+      itemSelected: false
     };
   },
   computed: {
@@ -432,6 +433,7 @@ export default {
     },
     handleSelect(item) {
       this.showPlace = !this.showPlace;
+      this.itemSelected = true
       this.areas.selected = item;
       var params = "";
       if (item === "全部") {
