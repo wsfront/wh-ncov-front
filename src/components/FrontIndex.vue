@@ -114,14 +114,21 @@
             </div>
           </el-dropdown-menu>
         </el-dropdown>
-        <div class="search-con" :class="{act:shouldHighlightSearchBar}">
-          <input v-model="hospitalname" placeholder="请输入医院名字"  @focus="input_active = true" @blur="input_active = false"/>
-          <img v-if="!input_active"
+        <div class="search-con" :class="{ act: shouldHighlightSearchBar }">
+          <input
+            v-model="hospitalname"
+            placeholder="请输入医院名字"
+            @focus="input_active = true"
+            @blur="input_active = false"
+          />
+          <img
+            v-if="!input_active"
             class="btn-icon"
             src="../assets/search.png"
             @click="searchHospital"
           />
-          <img v-if="input_active"
+          <img
+            v-if="input_active"
             class="btn-icon"
             src="../assets/search-blue.png"
             @click="searchHospital"
@@ -654,9 +661,13 @@ export default {
   padding: 3px 8px;
 }
 .hospital-search-bar {
-  margin-top: 5px;
+  margin: 6px -4px 0 -4px;
   display: flex;
   justify-content: space-between;
+}
+
+.hospital-search-bar div {
+  margin: 0 4px;
 }
 .hospital-search-bar .small-btn {
   width: 64px;
@@ -702,7 +713,9 @@ export default {
   border-width: 2px;
   border-color: transparent;
   transition: border 0.5s;
-  &:active, &:focus, &:hover{
+  &:active,
+  &:focus,
+  &:hover {
     border-color: $--color-primary;
   }
 }
@@ -712,16 +725,16 @@ export default {
   border-color: $--color-primary;
 }
 .hospital-search-bar .search-con input {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
   border-radius: 2px;
   border: none;
-  outline: none;
-  position: absolute;
-  top: 0;
-  left: 0;
   display: block;
-  /* width:196px; */
-  height: 31px;
-  padding: 0 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  outline: none;
+  margin-right: 4px;
 }
 .hospital-search-bar .search-con img {
   position: absolute;
