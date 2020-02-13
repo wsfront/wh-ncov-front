@@ -436,16 +436,28 @@ export default {
       this.itemSelected = true
       this.areas.selected = item;
       var params = "";
-      if (item === "全部") {
-        params = "all=1";
-      } else if (this.conditions.length > 0) {
-        params = "all=2&area=" + item;
-      } else {
-        params = "all=3&area=" + item;
+      // if (item === "全部") {
+      //   params = "all=1";
+      // } else if (this.conditions.length > 0) {
+      //   params = "all=2&area=" + item;
+      // } else {
+      //   params = "all=3&area=" + item;
+      // }
+      if (item === "全部" && this.conditions.length < 1) {
+        params = "all=1"
+      } 
+      if (item === "全部" && this.conditions.length > 0) {
+        params = "all=2"
+      } 
+      if (item !== "全部" && this.conditions.length > 0) {
+        params = "all=2&area=" + item
+      }
+      if (item !== "全部" && this.conditions.length < 1) {
+        params = "all=3&area=" + item
       }
       this.conditions.forEach(c => {
         params += `&${c}=是`;
-      });
+      })
       this.fetchHospitalInfo(params);
     },
     handleOpen() {},
@@ -695,12 +707,12 @@ export default {
   text-overflow: ellipsis;
 }
 .btn-text-act {
-  height: 17px;
+  // height: 17px;
   font-size: 12px;
   font-family: Source Han Sans;
   font-weight: bold;
-  line-height: 17px;
-  opacity: 1;
+  // line-height: 17px;
+  // opacity: 1;
   color: $--color-primary;
   overflow: hidden;
   text-overflow: ellipsis;
