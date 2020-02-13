@@ -749,6 +749,10 @@ export default {
   outline: none;
   margin-right: 4px;
 }
+.hospital-search-bar .search-con.act {
+  border: $--color-primary 1px solid;
+  border-radius: 2px;
+}
 .hospital-search-bar .search-con img {
   width: 13px;
   height: 13px;
