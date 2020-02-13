@@ -655,12 +655,13 @@ export default {
   justify-content: space-between;
 }
 
-.hospital-search-bar div {
+.hospital-search-bar > div {
   margin: 0 2px;
 }
 .hospital-search-bar .btn {
   height: 30px;
   padding: 0 6px;
+  box-sizing: border-box;
   background: rgba(255, 255, 255, 1);
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
   opacity: 1;
