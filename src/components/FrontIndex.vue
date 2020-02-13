@@ -438,10 +438,10 @@ export default {
       var params = ""
       if (item === "全部" && this.conditions.length < 1) {
         params = "all=1"
-      } 
+      }
       if (item === "全部" && this.conditions.length > 0) {
         params = "all=2"
-      } 
+      }
       if (item !== "全部" && this.conditions.length > 0) {
         params = "all=2&area=" + item
       }
@@ -571,7 +571,7 @@ export default {
   display: inline-block;
   margin-right: 20px;
 }
-.el-checkbox__label {
+.el-checkbox /deep/ .el-checkbox__label {
   font-size: 12px;
 }
 .success {
