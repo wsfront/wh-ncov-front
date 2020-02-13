@@ -27,7 +27,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'quotes': 'off',
     'semi': 'off',
-    'space-before-function-paren': 'off'
+    'space-before-function-paren': 'off',
+    indent: ["error", 2, { "ignoredNodes": ["ConditionalExpression", "SwitchCase"] }],
 
   }
 }
