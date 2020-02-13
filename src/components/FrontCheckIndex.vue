@@ -12,10 +12,7 @@
         <el-col :span="24" class="wh-intro">
           <!--<h3>发热孕妇确诊流程</h3>-->
           <p class="wh-intro-p">
-            因各个医院对确诊孕妇的就诊的规定不一，请根据以下流程来进
-            行发热孕妇的确诊并获取相关资料。此流程根据1月X日XXX规定
-            制作且仅确保适用于湖北省的疫情规范。其他省份请根据各自省
-            份对新型冠状病毒的诊断标准进行确诊。
+              因各地对疑似/感染孕妇的就诊规定不一，以下流程仅供武汉地区参考，社区登记报备流程请咨询所在社区。
           </p>
         </el-col>
         <el-col class="process-box">
@@ -116,7 +113,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.dialog{
+.dialog {
   position: fixed;
   z-index: 99;
   padding: 10px;
@@ -129,61 +126,61 @@ export default {
   overflow-x: hidden;
   overflow-y: scroll;
 }
-.info-box{
+.info-box {
   padding: 0 15px;
   display: block;
   color: $--color-text-regular;
   font-size: 12px;
-  box-shadow: rgba(0,0,0,.1) 0 0 5px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px;
   margin-top: 10px;
-  background: #FFFFFF;
+  background: #ffffff;
 }
 
-.info-box .head{
+.info-box .head {
   display: block;
   align-items: center;
   padding: 6px 0;
-  border-bottom: 1px solid #F0F0F0;
+  border-bottom: 1px solid #f0f0f0;
   text-align: left;
 }
-.info-box .head .label{
+.info-box .head .label {
   font-weight: bold;
   line-height: 20px;
   /*display: inline-block;*/
   margin: 0;
   padding: 0;
 }
-.info-box .head .title{
+.info-box .head .title {
   line-height: 20px;
   /*display: inline-block;*/
 }
-.info-box .content{
+.info-box .content {
   padding: 8px 0;
   margin: 0;
   text-align: left;
 }
-.block{
+.block {
   padding: 10px 16px;
 }
-.wh-tab{
+.wh-tab {
   display: flex;
   height: 36px;
   line-height: 36px;
-  border-top:1px solid $--color-text-placeholder;
-  border-bottom: 5px solid #F0F0F0;
+  border-top: 1px solid $--color-text-placeholder;
+  border-bottom: 5px solid #f0f0f0;
   font-size: 14px;
   padding: 0 -16px;
 }
-.wh-tab-item{
+.wh-tab-item {
   flex: 1;
   text-align: center;
-  color: #ACACAC;
+  color: #acacac;
 }
-.wh-tab-item.active{
-  color: #5887FF;
+.wh-tab-item.active {
+  color: #5887ff;
 }
 
-.process-title{
+.process-title {
   color: $--color-text-regular;
   font-size: 12px;
   height: 36px;
@@ -191,20 +188,20 @@ export default {
   line-height: 36px;
   font-weight: bold;
   text-align: left;
-  border-bottom: 1px solid #F0F0F0;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .wh-content-container {
   padding: 0px;
 }
-.process-box{
-  box-shadow: rgba(0,0,0,.1) 0 0 5px;
-  background: #FFFFFF;
+.process-box {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px;
+  background: #ffffff;
 }
 .wh-intro {
   text-align: left;
 }
-.wh-intro-p{
+.wh-intro-p {
   margin: 10px 0;
   line-height: 18px;
   font-size: 12px;
@@ -217,7 +214,6 @@ export default {
 .wh-container {
   background: #fafafa;
   color: #333;
-
 }
 .wh-content-container .el-col-24 {
   margin-bottom: 10px;
