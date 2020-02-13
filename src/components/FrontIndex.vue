@@ -4,18 +4,13 @@
 
     <div name="hospital">
       <div class="hospital-search-bar">
-        <!-- <div class="small-btn" :class="{act:true}" @click="showPlace=!showPlace">
-          <img class="btn-icon" src="../assets/place-act.png">
-          <div class="btn-text">城区</div>
-        </div> -->
         <el-dropdown
           trigger="click"
           @command="handleSelect"
           @visible-change="changeShowPlace"
         >
           <span class="el-dropdown-link">
-            <div class="small-btn" :class="{ act: showPlace }">
-              <!-- <img class="btn-icon" src="../assets/place-act.png"> -->
+            <div class="btn long" :class="{ act: showPlace }">
               <i class="el-icon-location"></i>
               <div class="btn-text">城区</div>
             </div>
@@ -48,12 +43,6 @@
             >
           </el-dropdown-menu>
         </el-dropdown>
-        <!-- <div class="small-btn" :class="{act:false}" @click="showFilter=!showFilter">
-          <img class="btn-icon" src="../assets/filter.png"> -->
-        <!-- <img class="btn-icon" src="../assets/filter-act.png"> -->
-        <!-- <i class="el-icon-s-operation"></i>
-          <div class="btn-text">筛选</div>
-        </div> -->
         <el-dropdown
           trigger="click"
           @command="handleCommandFunc"
@@ -62,7 +51,7 @@
           @visible-change="changeShowFilter"
         >
           <div
-            class="small-btn"
+            class="btn small"
             :class="{ act: shouldHighlightFilterButton }"
             ref="domFilter"
           >
@@ -667,11 +656,11 @@ export default {
 }
 
 .hospital-search-bar div {
-  margin: 0 4px;
+  margin: 0 2px;
 }
-.hospital-search-bar .small-btn {
-  width: 64px;
-  height: 31px;
+.hospital-search-bar .btn {
+  height: 30px;
+  padding: 0 6px;
   background: rgba(255, 255, 255, 1);
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
   opacity: 1;
@@ -680,49 +669,41 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.hospital-search-bar .small-btn .btn-icon {
+.hospital-search-bar .btn.small {
+  width: 64px;
+}
+.hospital-search-bar .btn.long {
+  width: 100px;
+}
+
+.hospital-search-bar .btn .btn-icon {
   width: 12px;
   height: 16px;
   margin-right: 5px;
 }
-.hospital-search-bar .small-btn {
+.hospital-search-bar .btn {
   color: #acacac;
 }
-.hospital-search-bar .small-btn .btn-text {
-  /* width: 24px; */
-  height: 17px;
+.hospital-search-bar .btn .btn-text {
   font-size: 12px;
   font-family: Source Han Sans;
   font-weight: bold;
-  line-height: 17px;
-  /* color: rgba(226, 226, 226, 1); */
-  opacity: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-.hospital-search-bar .small-btn.act {
+.hospital-search-bar .btn.act {
   color: $--color-primary;
 }
 .hospital-search-bar .search-con {
-  width: 196px;
-  height: 31px;
-  background: rgba(255, 255, 255, 1);
+  width: 200px;
+  height: 30px;
+  padding: 0 6px;
+  background: white;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
-  opacity: 1;
-  border-radius: 4px;
-  position: relative;
-  border-style: solid;
-  border-width: 2px;
-  border-color: transparent;
-  transition: border 0.5s;
-  &:active,
-  &:focus,
-  &:hover {
-    border-color: $--color-primary;
-  }
-}
-.hospital-search-bar .search-con.act {
-  border-style: solid;
-  border-width: 2px;
-  border-color: $--color-primary;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
 }
 .hospital-search-bar .search-con input {
   width: 100%;
@@ -737,10 +718,6 @@ export default {
   margin-right: 4px;
 }
 .hospital-search-bar .search-con img {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10px;
   width: 13px;
   height: 13px;
 }
