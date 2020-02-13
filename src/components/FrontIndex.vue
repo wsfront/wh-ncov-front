@@ -10,9 +10,9 @@
           @visible-change="changeShowPlace"
         >
           <span class="el-dropdown-link">
-            <div class="btn long" :class="{ act: showPlace }">
-              <i class="el-icon-location"></i>
-              <div class="btn-text">城区</div>
+            <div class="btn long" :class="{act:showPlace}">
+              <i class="el-icon-location" :class="areas.selected ? 'btn-icon-act' : 'btn-icon'"></i>
+              <div :class="areas.selected ? 'btn-text-act' : 'btn-text'">{{areas.selected ? areas.selected : '城区'}}</div>
             </div>
           </span>
           <el-dropdown-menu slot="dropdown">
@@ -33,14 +33,9 @@
               >{{ area }}</el-dropdown-item
             >
             <div class="sub-text">其他城区</div>
-            <el-dropdown-item
-              icon="el-icon-place"
-              v-for="area in areas.other"
-              :key="area"
-              :command="area"
-              :class="{ act: areas.selected === area }"
-              >{{ area }}</el-dropdown-item
-            >
+            <el-dropdown-item icon="el-icon-place" v-for="area in areas.other" :key="area" :command="area" :class="{act : areas.selected === area}">{{ area }}</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-place" v-for="area in areas.new" :key="area" :command="area" :class=" areas.selected === area ? 'act' : 'new-area'">{{ area }}</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-place" v-for="area in areas.noData" :key="area" :command="area" :class=" areas.selected === area ? 'act' : 'no-data-area'">{{ area }}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
         <el-dropdown
@@ -241,7 +236,9 @@ export default {
           "洪山区"
         ],
         other: ["蔡甸区", "江夏区", "黄陂区", "新洲区", "东西湖区", "汉南区"],
-        selected: "全部"
+        new: ["东湖高新技术开发区", "经济技术开发区"],
+        noData: ["临空港开发区"],
+        selected: ""
       },
       filterConditions: [
         {
@@ -693,6 +690,27 @@ export default {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.btn-text-act {
+  height: 17px;
+  font-size: 12px;
+  font-family: Source Han Sans;
+  font-weight: bold;
+  line-height: 17px;
+  opacity: 1;
+  color: $--color-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.btn-icon-act {
+  color: $--color-primary;
+}
+.new-area {
+  color: #D0595C;
+}
+.no-data-area {
+  color: #E4AF3D;
 }
 .hospital-search-bar .btn.act {
   color: $--color-primary;

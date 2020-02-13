@@ -3,7 +3,7 @@
     <div class="hospital-info-item">
       <div class="name">{{ name }}</div>
       <div :class="data | parentTrans">
-        {{ data | wordTrans(name) }} <i :class="data | iconTrans" />
+        {{data | wordTrans(name)}} <i :class="data | iconTrans" />
       </div>
     </div>
   </div>
