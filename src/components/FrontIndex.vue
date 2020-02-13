@@ -57,11 +57,16 @@
             </div>
           </el-dropdown-menu>
         </el-dropdown>
-        <div class="search-con">
-          <input v-model="hospitalname" placeholder="请输入医院名字" />
-          <img
+        <div class="search-con" :class="{act:shouldHighlightSearchBar}">
+          <input v-model="hospitalname" placeholder="请输入医院名字"  @focus="input_active = true" @blur="input_active = false"/>
+          <img v-if="!input_active"
             class="btn-icon"
             src="../assets/search.png"
+            @click="searchHospital"
+          />
+          <img v-if="input_active"
+            class="btn-icon"
+            src="../assets/search-blue.png"
             @click="searchHospital"
           />
         </div>
@@ -230,6 +235,7 @@ export default {
       state: "",
       activeNames: ["1"],
       hospitalname: "",
+      input_active: false,
       hospitallist: [],
       visiblemenu: false,
       visibleOption: false,
@@ -267,6 +273,12 @@ export default {
      */
     shouldHighlightFilterButton() {
       return this.conditions.length !== 0 || this.showFilter;
+    },
+    /**
+     * highlight the text search bar when input is not empty.
+     */
+    shouldHighlightSearchBar() {
+      return this.hospitalname !== "" || this.input_active;
     }
   },
   methods: {
@@ -343,9 +355,13 @@ export default {
       if (this.hospitalname !== "") {
         params = params + "&name=" + this.hospitalname;
       } else {
+        this.searchHospitalByOption(false);
         return;
       }
       this.fetchHospitalInfo(params);
+      // reset other filters
+      this.conditions = [];
+      this.areas.selected = "全部";
     },
     searchHospitalByOption(filterClick) {
       let that = this;
@@ -570,12 +586,25 @@ export default {
   background: rgba(255, 255, 255, 1);
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
   opacity: 1;
-  border-radius: 2px;
+  border-radius: 4px;
   position: relative;
+  border-style: solid;
+  border-width: 2px;
+  border-color: transparent;
+  transition: border 0.5s;
+  &:active, &:focus, &:hover{
+    border-color: $--color-primary;
+  }
+}
+.hospital-search-bar .search-con.act {
+  border-style: solid;
+  border-width: 2px;
+  border-color: $--color-primary;
 }
 .hospital-search-bar .search-con input {
   border-radius: 2px;
   border: none;
+  outline: none;
   position: absolute;
   top: 0;
   left: 0;
