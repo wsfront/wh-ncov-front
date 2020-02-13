@@ -1,11 +1,11 @@
 <template>
   <div class="wh-container">
     <HeaderLayout :activeIndex="0" />
-
     <div name="hospital">
       <div class="hospital-search-bar">
         <el-dropdown
           trigger="click"
+          placement="bottom-start"
           @command="handleSelect"
           @visible-change="changeShowPlace"
         >
@@ -42,7 +42,7 @@
           trigger="click"
           @command="handleCommandFunc"
           :hide-on-click="false"
-          placement="bottom"
+          placement="bottom-start"
           @visible-change="changeShowFilter"
         >
           <div
@@ -190,14 +190,14 @@
         v-bind:key="phone.id"
         class="wh-phone"
       >
-        <el-col :span="9" style="color: #2F3036;">{{
+        <el-col :span="9" style="color: $--color-text-regular;">{{
           phone.department == "" ? "--" : phone.department
         }}</el-col>
         <el-col :span="15" style="text-align: right;">
           <a class="wh-phone-btn" v-bind:href="'tel:' + phone.phone">{{
             phone.phone | phonestr(1)
           }}</a
-          ><span style="color:#2F3036;">{{ phone.phone | phonestr(2) }}</span>
+          ><span style="color:$--color-text-regular;">{{ phone.phone | phonestr(2) }}</span>
         </el-col>
       </el-row>
       <div slot="footer" class="dialog-footer">
@@ -325,7 +325,7 @@ export default {
             ? sofar.accept.push(curr)
             : curr.symbol === "receive_accouche"
             ? sofar.delive.push(curr)
-            : sofar.check.push(curr);
+            : sofar.check.push(curr)
           return sofar;
         }, initdata);
     },
@@ -514,7 +514,7 @@ export default {
 
 <style scoped lang="scss">
 .sub-text {
-  color: #acacac;
+  color: $--color-text-secondary;
   font-size: 12px;
   padding: 5px 0 5px 12px;
 }
@@ -672,7 +672,8 @@ export default {
   width: 64px;
 }
 .hospital-search-bar .btn.long {
-  width: 100px;
+  max-width: 100px;
+  min-width: 64px;
 }
 
 .hospital-search-bar .btn .btn-icon {
@@ -681,7 +682,7 @@ export default {
   margin-right: 5px;
 }
 .hospital-search-bar .btn {
-  color: #acacac;
+  color: $--color-text-secondary;
 }
 .hospital-search-bar .btn .btn-text {
   font-size: 12px;
@@ -751,7 +752,7 @@ export default {
   display: block;
   width: 20px;
   height: 20px;
-  color: #acacac;
+  color: $--color-text-secondary;
   font-size: 14px;
   margin-top: 10px;
 }
@@ -779,17 +780,17 @@ export default {
   font-size: 14px;
   font-weight: bold;
   line-height: 20px;
-  color: #2f3036;
+  color: $--color-text-regular;
 }
 .info-container .info-text {
   text-align: left;
   font-size: 8px;
-  color: #acacac;
+  color: $--color-text-secondary;
 }
 .tel-btn .info-text {
   text-align: left;
   font-size: 8px;
-  color: #acacac;
+  color: $--color-text-secondary;
   white-space: nowrap;
   display: block;
 }

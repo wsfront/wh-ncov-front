@@ -21,7 +21,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 /* 新增样式 */
 .tab-btn-con {
   margin: -2px -16px 20px -16px;
@@ -29,7 +29,7 @@ export default {
   justify-content: center;
   align-items: flex-start;
   box-sizing: border-box;
-  border-bottom: 1px solid #e2e2e2;
+  border-bottom: 1px solid $--color-text-placeholder;
 }
 .tab-btn-con .tab-btn {
   font-size: 16px;

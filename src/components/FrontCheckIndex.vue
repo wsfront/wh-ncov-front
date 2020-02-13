@@ -132,7 +132,7 @@ export default {
 .info-box{
   padding: 0 15px;
   display: block;
-  color: #2F3036;
+  color: $--color-text-regular;
   font-size: 12px;
   box-shadow: rgba(0,0,0,.1) 0 0 5px;
   margin-top: 10px;
@@ -169,7 +169,7 @@ export default {
   display: flex;
   height: 36px;
   line-height: 36px;
-  border-top:1px solid #E2E2E2;
+  border-top:1px solid $--color-text-placeholder;
   border-bottom: 5px solid #F0F0F0;
   font-size: 14px;
   padding: 0 -16px;
@@ -184,7 +184,7 @@ export default {
 }
 
 .process-title{
-  color: #2F3036;
+  color: $--color-text-regular;
   font-size: 12px;
   height: 36px;
   padding-left: 15px;
@@ -208,7 +208,7 @@ export default {
   margin: 10px 0;
   line-height: 18px;
   font-size: 12px;
-  color: #2F3036;
+  color: $--color-text-regular;
 }
 .wh-collapse {
   border: 0;
