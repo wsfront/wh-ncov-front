@@ -78,15 +78,17 @@
               :class="{ shadow: !hospital.show }"
               @click="hospital.show = !hospital.show"
             >
-              <div class="info-con">
+              <i class="el-collapse-item__arrow el-icon-arrow-right hospital-icon" :class="{'is-active': hospital.show}"></i>
+              <div class="info-container">
                 <div class="name">{{ hospital.name }}</div>
-                <div class="updata-time">
-                  {{ hospital.verify == 1 ? "已核实" : "未核实" }}
-                  {{ hospital.update_time }} 更新
+                <div class="info-text">
+                  <span :class="{success:!!hospital.verify,error:!hospital.verify}">{{ hospital.verify == 1 ? "已核实" : "待核实" }}</span>
+                  {{ hospital.update_6time }} 更新
                 </div>
               </div>
               <div class="tel-btn" @click.stop="showPhoneDialog(hospital)">
                 <img class="tel-btn-icon" src="../assets/phone.png" />
+                <span class="info-text"> 电话咨询 </span>
               </div>
             </div>
             <div class="hospital-info" v-show="hospital.show">
@@ -446,6 +448,14 @@ export default {
 .el-checkbox__label {
   font-size: 12px;
 }
+.success {
+  margin-right: 5px;
+  color: $--color-success;
+}
+.error {
+  margin-right: 5px;
+  color: $--color-error;
+}
 .el-dropdown-menu {
   max-height: 72vh;
   overflow: scroll;
@@ -588,13 +598,19 @@ export default {
 .hospital-con {
   font-size: 0;
 }
+.hospital-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  color: #acacac;
+  font-size: 14px;
+  margin-top: 10px;
+}
 .hospital-con-title {
   padding: 10px 10px;
   margin-top: 10px;
   width: 100%;
-  /* height: 47px; */
-  background: rgba(255, 255, 255, 1);
-  opacity: 1;
+  background: #fff;
   border-radius: 2px;
   display: flex;
   justify-content: space-between;
@@ -604,43 +620,35 @@ export default {
 .hospital-con-title.shadow {
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 }
-
-.info-con {
+.info-container {
   position: relative;
-  width: 280px;
+  width: 100%;
 }
-.info-con .name {
+.info-container .name {
   margin-bottom: 5px;
   text-align: left;
-  /* height: 20px; */
   font-size: 14px;
-  font-family: Source Han Sans;
   font-weight: bold;
   line-height: 20px;
-  color: rgba(47, 48, 54, 1);
-  opacity: 1;
+  color: #2f3036;
 }
-.info-con .updata-time {
+.info-container .info-text {
   text-align: left;
-  height: 11px;
   font-size: 8px;
-  font-family: Source Han Sans;
-  font-weight: 400;
-  line-height: 11px;
-  color: rgba(172, 172, 172, 1);
-  opacity: 1;
+  color: #acacac;
 }
-.tel-btn {
-  /* width: 70px; */
+.tel-btn .info-text {
+  text-align: left;
+  font-size: 8px;
+  color: #acacac;
+  white-space: nowrap;
+  display: block;
 }
-
 .tel-btn .tel-btn-icon {
   display: inline-block;
-
-  margin-bottom: 5px;
-
-  width: 25px;
-  height: 25px;
+  margin-bottom: 6px;
+  width: 20px;
+  height: 20px;
 }
 .tel-btn .tel-btn-text {
   text-align: center;
