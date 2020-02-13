@@ -657,6 +657,7 @@ export default {
 
 .hospital-search-bar > div {
   margin: 0 2px;
+  box-sizing: border-box;
 }
 .hospital-search-bar .btn {
   height: 30px;
