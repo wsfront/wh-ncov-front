@@ -31,7 +31,7 @@
           <!-- <i class="el-icon-s-operation"></i>
           <div class="btn-text">筛选</div>
         </div> -->
-        <el-dropdown trigger="click" :hide-on-click="false" placement="bottom" @visible-change="changeShowFilter">
+        <el-dropdown trigger="click" @command="handleCommandFunc" :hide-on-click="false" placement="bottom" @visible-change="changeShowFilter">
           <div class="small-btn" :class="{act:shouldHighlightFilterButton}" ref="domFilter">
             <!-- <img class="btn-icon" src="../assets/filter.png"> -->
             <!-- <img class="btn-icon" src="../assets/filter-act.png"> -->
@@ -40,7 +40,7 @@
           </div>
           <el-dropdown-menu slot="dropdown" class="hospital-filter-dialog">
             <!-- <el-checkbox :value="allConditionChecked" @change="checkAllFilterCondition">全部医院信息</el-checkbox> -->
-            <el-dropdown-item icon="el-icon-menu" :class="{act : !conditions.length}">全部医院信息</el-dropdown-item>
+            <el-dropdown-item command="rest" icon="el-icon-menu" :class="{act : !conditions.length}">全部医院信息</el-dropdown-item>
               <el-divider></el-divider>
               <el-checkbox-group v-model="conditions" >
                 <div class="sub-text">接收</div>
@@ -49,7 +49,7 @@
                 <el-checkbox v-for="condition in checkConditions" :label="condition.symbol" :key="condition.symbol">{{condition.name}}</el-checkbox>
                 <div class="sub-text">其他</div>
                 <el-checkbox v-for="condition in otherConditions" :label="condition.symbol" :key="condition.symbol">{{condition.name}}</el-checkbox>
-            </el-checkbox-group>
+              </el-checkbox-group>
             <el-divider></el-divider>
             <div class="pop-bottom">
               <span class="pop-bottom__btn" @click="conditions=[]">重置</span>
@@ -136,10 +136,9 @@
     </div>
     <el-dialog v-bind:title="currentHospital.name" :visible.sync="dialogFormVisible" width="80%" class="wh-dialog">
       <el-row v-for="phone in currentHospital.phones" v-bind:key="phone.id" class="wh-phone">
-        <el-col :span="6">{{phone.department==''?"--":phone.department}}</el-col>
-        <el-col :span="10" :offset="8">
-          <a class="wh-phone-btn" v-bind:href="'tel:' + phone.phone">{{ phone.phone }}</a
-          >
+        <el-col :span="9" style="color: #2F3036;">{{phone.department==''?"--":phone.department}}</el-col>
+        <el-col :span="15" style="text-align: right;">
+          <a class="wh-phone-btn" v-bind:href="'tel:' + phone.phone">{{ phone.phone|phonestr(1) }}</a><span style="color:#2F3036;">{{ phone.phone|phonestr(2) }}</span>
         </el-col>
       </el-row>
       <div slot="footer" class="dialog-footer">
@@ -269,7 +268,27 @@ export default {
       return this.conditions.length !== 0 || this.showFilter;
     }
   },
+  filters: {
+    phonestr(str, idx) {
+      console.log(idx)
+      if (!str) return '';
+      if (str.indexOf('转') > -1) {
+        let tempArr = str.split('转')
+        if (idx === 1) return tempArr[0]
+        if (idx === 2) return '转' + tempArr[1]
+      } else {
+        if (idx === 1) return str
+        if (idx === 2) return ''
+      }
+    }
+  },
   methods: {
+    handleCommandFunc(action) {
+      if (action === 'rest') {
+        this.conditions = []
+        this.$refs.domFilter.click();
+      }
+    },
     changeShowPlace(visible) {
       this.showPlace = visible;
     },
@@ -436,6 +455,11 @@ export default {
 <style lang="scss" scoped>
 .wh-phone {
   text-align: left;
+  padding: 0px 0 10px;
+  border-bottom: 1px solid #F0F0F0;
+}
+.wh-phone:last-child{
+  border-bottom: none;
 }
 .wh-phone-btn {
   text-decoration-line: none;
