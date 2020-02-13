@@ -57,13 +57,13 @@
           </div>
           <el-dropdown-menu slot="dropdown" class="hospital-filter-dialog">
             <!-- <el-checkbox :value="allConditionChecked" @change="checkAllFilterCondition">全部医院信息</el-checkbox> -->
-            <el-dropdown-item
+            <!-- <el-dropdown-item
               command="rest"
               icon="el-icon-menu"
               :class="{ act: !conditions.length }"
               >全部医院信息</el-dropdown-item
             >
-            <el-divider></el-divider>
+            <el-divider></el-divider> -->
             <el-checkbox-group v-model="conditions">
               <div class="sub-text">接收</div>
               <el-checkbox
@@ -324,8 +324,8 @@ export default {
           curr.type === "accept"
             ? sofar.accept.push(curr)
             : curr.symbol === "receive_accouche"
-            ? sofar.delive.push(curr)
-            : sofar.check.push(curr)
+              ? sofar.delive.push(curr)
+              : sofar.check.push(curr);
           return sofar;
         }, initdata);
     },
@@ -585,6 +585,11 @@ export default {
 .hospital-filter-dialog {
   padding-bottom: 0;
 }
+.hospital-filter-dialog .el-checkbox__label {
+  font-size: 12px;
+  font-weight: normal;
+  color: #2f3036;
+}
 .el-checkbox {
   display: block;
   margin: 10px 12px;
@@ -708,10 +713,10 @@ export default {
   color: $--color-primary;
 }
 .new-area {
-  color: #D0595C;
+  color: #d0595c;
 }
 .no-data-area {
-  color: #E4AF3D;
+  color: #e4af3d;
 }
 .hospital-search-bar .btn.act {
   color: $--color-primary;
