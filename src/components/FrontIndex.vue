@@ -1,6 +1,8 @@
 <template>
   <div class="wh-container">
+    <div class="hearder-block">
     <HeaderLayout :activeIndex="0" />
+    </div>
     <div name="hospital">
       <div class="hospital-search-bar">
         <el-dropdown
@@ -594,7 +596,7 @@ export default {
 .hospital-filter-dialog {
   padding-bottom: 0;
 }
-.hospital-filter-dialog .el-checkbox__label {
+.hospital-filter-dialog /deep/ .el-checkbox .el-checkbox__label {
   font-size: 12px;
   font-weight: normal;
   color: #2f3036;
@@ -610,6 +612,9 @@ export default {
   background: #fafafa;
   color: #333;
   padding: 10px 16px;
+}
+.hearder-block {
+  margin: 0 -16px 15px -16px;
 }
 .el-row {
   margin-bottom: 10px;

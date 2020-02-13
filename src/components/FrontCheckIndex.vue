@@ -1,10 +1,10 @@
 <template>
   <div class="wh-container">
-    <div class="block">
+    <div class="hearder-block">
       <HeaderLayout :activeIndex="1" />
     </div>
     <div class="wh-tab">
-      <div class="wh-tab-item" @click="activeIndex=1" :class="{ active: activeIndex === 1 }">疫期建议必查产检项目</div>
+      <div class="wh-tab-item" @click="activeIndex=1" :class="{ active: activeIndex === 1 }">建议必查产检项目</div>
       <div class="wh-tab-item" @click="activeIndex=0" :class="{ active: activeIndex === 0 }">发热孕妇确诊流程</div>
     </div>
     <div class="block">
@@ -158,6 +158,9 @@ export default {
   padding: 8px 0;
   margin: 0;
   text-align: left;
+}
+.hearder-block {
+  margin: 10px 0 5px;
 }
 .block {
   padding: 10px 16px;
