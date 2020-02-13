@@ -433,24 +433,25 @@ export default {
     },
     handleSelect(item) {
       this.showPlace = !this.showPlace;
-      this.itemSelected = true
+      this.itemSelected = true;
       this.areas.selected = item;
-      var params = ""
+      this.hospitalname = "";
+      var params = "";
       if (item === "全部" && this.conditions.length < 1) {
-        params = "all=1"
-      } 
+        params = "all=1";
+      }
       if (item === "全部" && this.conditions.length > 0) {
-        params = "all=2"
-      } 
+        params = "all=2";
+      }
       if (item !== "全部" && this.conditions.length > 0) {
-        params = "all=2&area=" + item
+        params = "all=2&area=" + item;
       }
       if (item !== "全部" && this.conditions.length < 1) {
-        params = "all=3&area=" + item
+        params = "all=3&area=" + item;
       }
       this.conditions.forEach(c => {
         params += `&${c}=是`;
-      })
+      });
       this.fetchHospitalInfo(params);
     },
     handleOpen() {},
@@ -467,6 +468,7 @@ export default {
       // reset other filters
       this.conditions = [];
       this.areas.selected = "全部";
+      this.itemSelected = false;
     },
     searchHospitalByOption(filterClick) {
       let that = this;
