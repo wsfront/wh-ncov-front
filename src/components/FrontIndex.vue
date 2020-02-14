@@ -21,7 +21,7 @@
             <el-dropdown-item
               icon="el-icon-menu"
               command="全部"
-              :class="{ act: areas.selected === '全部' }"
+              :class="{ act: itemSelected&&areas.selected==='全部'}"
               >全部城区</el-dropdown-item
             >
             <el-divider></el-divider>
@@ -604,7 +604,7 @@ export default {
   max-height: 72vh;
   overflow: scroll;
 }
-.el-dropdown-menu__item.act {
+.city-filter-dialog .el-dropdown-menu__item.act {
   color: $--color-primary;
 }
 .hospital-filter-dialog {
