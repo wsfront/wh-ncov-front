@@ -43,7 +43,7 @@
             <span class="label">早孕期（11-14周）</span>
             <span class="title">建议在12周检测</span>
           </div>
-          <p class="content">血常规、尿常规、B超、 NT、 无创DNA、甲状腺、传染病筛查、血型、凝血功能、生化全套</p>
+          <p class="content">血常规、尿常规、B超、 NT、 无创DNA、甲状腺、传染病筛查、血型、凝血功能、生化全套、血清铁蛋白</p>
         </div>
 
         <div class="info-box">
@@ -59,12 +59,12 @@
             <span class="label">晚孕期（30-32周）</span>
             <span class="title">建议在32周检测。并发症再评估风险</span>
           </div>
-          <p class="content">血常规、尿常规、小排畸超声、ICP筛查</p>
+          <p class="content">血常规、尿常规、小排畸超声、ICP筛查、肝肾功能空腹血糖</p>
         </div>
 
         <div class="info-box">
           <div class="head">
-            <span class="label">晚孕期（30-41周）</span>
+            <span class="label">晚孕期（36-41周）</span>
             <span class="title">建议36-37周检测。决定分娩方式和时间</span>
           </div>
           <p class="content">产科超声检查、NST检查</p>
