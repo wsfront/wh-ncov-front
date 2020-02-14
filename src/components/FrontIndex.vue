@@ -17,7 +17,7 @@
               <div :class="itemSelected ? 'btn-text-act' : 'btn-text'">{{itemSelected ? areas.selected : '城区'}}</div>
             </div>
           </span>
-          <el-dropdown-menu slot="dropdown">
+          <el-dropdown-menu slot="dropdown"  class="city-filter-dialog">
             <el-dropdown-item
               icon="el-icon-menu"
               command="全部"
@@ -609,6 +609,11 @@ export default {
 }
 .hospital-filter-dialog {
   padding-bottom: 0;
+}
+.city-filter-dialog /deep/ .el-dropdown-menu__item {
+  font-size: 12px;
+  font-weight: normal;
+  color: #2f3036;
 }
 .hospital-filter-dialog /deep/ .el-checkbox .el-checkbox__label {
   font-size: 12px;
