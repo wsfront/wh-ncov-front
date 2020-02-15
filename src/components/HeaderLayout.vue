@@ -24,7 +24,6 @@ export default {
 <style scoped lang="scss">
 /* 新增样式 */
 .tab-btn-con {
-  margin: -2px -16px 20px -16px;
   display: flex;
   justify-content: center;
   align-items: flex-start;

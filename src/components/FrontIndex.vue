@@ -1,6 +1,8 @@
 <template>
   <div class="wh-container">
+    <div class="hearder-block">
     <HeaderLayout :activeIndex="0" />
+    </div>
     <div name="hospital">
       <div class="hospital-search-bar">
         <el-dropdown
@@ -433,24 +435,25 @@ export default {
     },
     handleSelect(item) {
       this.showPlace = !this.showPlace;
-      this.itemSelected = true
+      this.itemSelected = true;
       this.areas.selected = item;
-      var params = ""
+      this.hospitalname = "";
+      var params = "";
       if (item === "全部" && this.conditions.length < 1) {
-        params = "all=1"
+        params = "all=1";
       }
       if (item === "全部" && this.conditions.length > 0) {
-        params = "all=2"
+        params = "all=2";
       }
       if (item !== "全部" && this.conditions.length > 0) {
-        params = "all=2&area=" + item
+        params = "all=2&area=" + item;
       }
       if (item !== "全部" && this.conditions.length < 1) {
-        params = "all=3&area=" + item
+        params = "all=3&area=" + item;
       }
       this.conditions.forEach(c => {
         params += `&${c}=是`;
-      })
+      });
       this.fetchHospitalInfo(params);
     },
     handleOpen() {},
@@ -467,6 +470,7 @@ export default {
       // reset other filters
       this.conditions = [];
       this.areas.selected = "全部";
+      this.itemSelected = false;
     },
     searchHospitalByOption(filterClick) {
       let that = this;
@@ -571,7 +575,7 @@ export default {
   display: inline-block;
   margin-right: 20px;
 }
-.el-checkbox /deep/ .el-checkbox__label {
+.el-checkbox__label {
   font-size: 12px;
 }
 .success {
@@ -592,7 +596,7 @@ export default {
 .hospital-filter-dialog {
   padding-bottom: 0;
 }
-.hospital-filter-dialog .el-checkbox__label {
+.hospital-filter-dialog /deep/ .el-checkbox .el-checkbox__label {
   font-size: 12px;
   font-weight: normal;
   color: #2f3036;
@@ -608,6 +612,9 @@ export default {
   background: #fafafa;
   color: #333;
   padding: 10px 16px;
+}
+.hearder-block {
+  margin: 0 -16px 15px -16px;
 }
 .el-row {
   margin-bottom: 10px;
@@ -746,6 +753,10 @@ export default {
   text-overflow: ellipsis;
   outline: none;
   margin-right: 4px;
+}
+.hospital-search-bar .search-con.act {
+  border: $--color-primary 1px solid;
+  border-radius: 2px;
 }
 .hospital-search-bar .search-con img {
   width: 13px;
