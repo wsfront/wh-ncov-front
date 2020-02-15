@@ -203,6 +203,7 @@ export default {
     font-size: 11px;
     font-family: Source Han Sans;
     padding: 0;
+    margin-top: 40px;
   }
   .login-title {
     font-size: 16px;
