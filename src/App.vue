@@ -22,14 +22,14 @@ export default {
     };
   },
   created() {
-    const lastUpdateTime = sessionStorage.getItem('lastUpdateTime')
+    const lastUpdateTime = sessionStorage.getItem("lastUpdateTime");
     if (lastUpdateTime) {
-      this.lastUpdateTime = lastUpdateTime
+      this.lastUpdateTime = lastUpdateTime;
     }
   },
   mounted() {
     this.$EventBus.$on("refreshUpdateTime", time => {
-      sessionStorage.setItem('lastUpdateTime', time)
+      sessionStorage.setItem("lastUpdateTime", time);
       this.lastUpdateTime = time;
     });
   }
@@ -47,7 +47,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   background: #fafafa;
-  padding: 0 0 25px;
+  padding: 0 0 36px;
   /*margin-top: 60px;*/
 }
 .tips {
@@ -61,7 +61,7 @@ body {
   width: 100%;
 }
 .footer {
-  height: 25px;
+  height: 36px;
   border-radius: 16px 16px 0 0;
   background: white;
   position: fixed;
@@ -76,7 +76,7 @@ body {
 }
 .footer a {
   padding: 6px 40px;
-  color: #ACACAC;
+  color: #acacac;
   text-decoration: none;
   font-size: 12px;
   font-weight: bold;

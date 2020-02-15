@@ -17,11 +17,11 @@
               <div :class="itemSelected ? 'btn-text-act' : 'btn-text'">{{itemSelected ? areas.selected : '城区'}}</div>
             </div>
           </span>
-          <el-dropdown-menu slot="dropdown">
+          <el-dropdown-menu slot="dropdown"  class="city-filter-dialog">
             <el-dropdown-item
               icon="el-icon-menu"
               command="全部"
-              :class="{ act: areas.selected === '全部' }"
+              :class="{ act: itemSelected&&areas.selected==='全部'}"
               >全部城区</el-dropdown-item
             >
             <el-divider></el-divider>
@@ -36,8 +36,8 @@
             >
             <div class="sub-text">其他城区</div>
             <el-dropdown-item icon="el-icon-place" v-for="area in areas.other" :key="area" :command="area" :class="{act : areas.selected === area}">{{ area }}</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-place" v-for="area in areas.new" :key="area" :command="area" :class=" areas.selected === area ? 'act' : 'new-area'">{{ area }}</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-place" v-for="area in areas.noData" :key="area" :command="area" :class=" areas.selected === area ? 'act' : 'no-data-area'">{{ area }}</el-dropdown-item>
+            <!-- <el-dropdown-item icon="el-icon-place" v-for="area in areas.new" :key="area" :command="area" :class=" areas.selected === area ? 'act' : 'new-area'">{{ area }}</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-place" v-for="area in areas.noData" :key="area" :command="area" :class=" areas.selected === area ? 'act' : 'no-data-area'">{{ area }}</el-dropdown-item> -->
           </el-dropdown-menu>
         </el-dropdown>
         <el-dropdown
@@ -168,14 +168,18 @@
                   :data="hospital[item.symbol]"
                 />
               </div>
-              <div class="ohter-msg-wrapper">
+              <div class="info-wrapper">
                 <div class="other-msg-title">补充说明</div>
                 <div class="other-msg">{{ hospital.remark }}</div>
               </div>
-              <div class="address-btn" @click="showAddressDialog(hospital)">
+              <div class="info-wrapper">
+                <div class="other-msg-title">医院地址</div>
+                <div class="other-msg">{{ hospital.address }}</div>
+              </div>
+              <!-- <div class="address-btn" @click="showAddressDialog(hospital)">
                 <i class="el-icon-location" />
                 医院地址: {{ hospital.address }}
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -193,18 +197,18 @@
         class="wh-phone"
       >
         <el-col :span="9" style="color: $--color-text-regular;">{{
-          phone.department == "" ? "--" : phone.department
+          phone.department == "" ? "总机" : phone.department
         }}</el-col>
         <el-col :span="15" style="text-align: right;">
           <a class="wh-phone-btn" v-bind:href="'tel:' + phone.phone">{{
             phone.phone | phonestr(1)
           }}</a
-          ><span style="color:$--color-text-regular;">{{ phone.phone | phonestr(2) }}</span>
+          ><span style="color:$--color-text-regular;display:block">{{ phone.phone | phonestr(2) }}</span>
         </el-col>
       </el-row>
-      <div slot="footer" class="dialog-footer">
+      <!-- <div slot="footer" class="dialog-footer"> -->
         <!--<el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>-->
-      </div>
+      <!-- </div> -->
     </el-dialog>
     <el-dialog
       title="医院地址"
@@ -237,9 +241,19 @@ export default {
           "青山区",
           "洪山区"
         ],
-        other: ["蔡甸区", "江夏区", "黄陂区", "新洲区", "东西湖区", "汉南区"],
-        new: ["东湖高新技术开发区", "经济技术开发区"],
-        noData: ["临空港开发区"],
+        other: [
+          "蔡甸区",
+          "江夏区",
+          "黄陂区",
+          "新洲区",
+          "东西湖区",
+          "汉南区",
+          "东湖高新技术开发区",
+          "经济技术开发区",
+          "临空港开发区"
+        ],
+        // new: [],
+        // noData: [],
         selected: "全部"
       },
       filterConditions: [
@@ -274,15 +288,15 @@ export default {
           checked: false
         },
         {
-          type: "other",
-          symbol: "receive_check",
-          name: "可做核酸检测",
+          type: "check",
+          symbol: "receive_accouche",
+          name: "接生",
           checked: false
         },
         {
-          type: "check",
-          symbol: "receive_accouche",
-          name: "可接生",
+          type: "other",
+          symbol: "receive_check",
+          name: "核酸检测",
           checked: false
         },
         {
@@ -326,7 +340,7 @@ export default {
         .reduce((sofar, curr) => {
           curr.type === "accept"
             ? sofar.accept.push(curr)
-            : curr.symbol === "receive_accouche"
+            : curr.symbol === "receive_check"
               ? sofar.delive.push(curr)
               : sofar.check.push(curr);
           return sofar;
@@ -571,7 +585,7 @@ export default {
   text-decoration-line: none;
   color: $--color-primary;
 }
-.wh-dialog .el-dialog__title {
+.wh-dialog /deep/.el-dialog__title {
   display: inline-block;
   margin-right: 20px;
 }
@@ -590,11 +604,16 @@ export default {
   max-height: 72vh;
   overflow: scroll;
 }
-.el-dropdown-menu__item.act {
+.city-filter-dialog .el-dropdown-menu__item.act {
   color: $--color-primary;
 }
 .hospital-filter-dialog {
   padding-bottom: 0;
+}
+.city-filter-dialog /deep/ .el-dropdown-menu__item {
+  font-size: 12px;
+  font-weight: normal;
+  color: #2f3036;
 }
 .hospital-filter-dialog /deep/ .el-checkbox .el-checkbox__label {
   font-size: 12px;
@@ -851,7 +870,6 @@ export default {
   text-align: left;
 }
 .other-msg-title {
-  margin-top: 10px;
   padding: 0 10px;
   text-align: left;
   height: 17px;
