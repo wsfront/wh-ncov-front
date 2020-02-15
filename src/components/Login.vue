@@ -252,6 +252,7 @@ export default {
     font-weight: 700;
     line-height: 24px;
     color: rgba(172,172,172,1);
+    margin-bottom: 50px;
   }
   .error-msg {
     margin-top: 5px;
