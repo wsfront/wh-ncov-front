@@ -5,22 +5,28 @@
       <p class="login-title">管理后台</p>
     </el-row>
     <el-row align="center" justify="center" class="mobile-input">
-        <el-input placeholder="请输入手机号" v-model="mobile" class="login-input">
-            <template slot="prepend">手机号</template>
+        <el-input placeholder="请输入手机号" v-model="mobile" :class="mobile ? 'login-input-act' : 'login-input'">
+              <template slot="prepend" v-if="!mobile">手机号</template>
         </el-input>
     </el-row>
-    <el-row align="center" justify="center" class="verify-input" style="font-size:0">
-        <el-input placeholder="短信验证码" v-model="smsverifycode" :disabled="!smsstate" class="login-input">
-            <template slot="prepend">验证码</template>
+    <el-row align="center" justify="center" class="verify-input" style="font-size:0;margin-top:17px">
+        <el-input placeholder="短信验证码" v-model="smsverifycode" :disabled="!smsstate" :class="smsverifycode ? 'login-input-act' : 'login-input'">
+            <template slot="prepend" v-if="!smsverifycode">验证码</template>
         </el-input>
-        <el-button class="verify-btn" v-on:click="getVerifycode" v-model="verifyCodeTime">{{this.verifyCodeTime}}</el-button>
+        <el-button :class="smsstate ? 'timer-btn' : 'verify-btn'" v-on:click="getVerifycode" v-model="verifyCodeTime">{{this.verifyCodeTime}}</el-button>
+    </el-row>
+    <el-row align="center" justify="center" v-show="errorMsg">
+      <div class="error-msg">
+        <img width="12px" style="vertical-align:middle" src="@/assets/info_icon.png" />
+        <span class="error-text">{{ errorMsg }}</span>
+      </div>
     </el-row>
     <el-row align="center" justify="center">
       <el-col :span="24">
-        <el-button :disabled="!smsstate" v-on:click="loginWithCode" class="login-btn">登录</el-button>
+        <el-button :disabled="!smsstate" v-on:click="loginWithCode" :class="smsstate ? 'login-btn-act' : 'login-btn'">登录</el-button>
       </el-col>
     </el-row>
-    <el-dialog
+    <!-- <el-dialog
       title="登陆提示"
       :visible.sync="msgModel"
       width="50%"
@@ -30,7 +36,7 @@
         <el-button @click="msgModel = false">取 消</el-button>
         <el-button type="primary" @click="msgModel = false">确 定</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 
@@ -51,6 +57,7 @@ export default {
   },
   methods: {
     getVerifycode () {
+      this.errorMsg = ''
       var params = {'phone': this.mobile}
       let that = this
       this.$http.post('/wh/admin/sms', params)
@@ -75,7 +82,7 @@ export default {
       if (this.timer === 0 || this.timer < 0) {
         clearInterval(this.interval)
         this.smsstate = false
-        this.verifyCodeTime = '获取'
+        this.verifyCodeTime = '重新获取'
         this.timer = 60
       }
     },
@@ -91,7 +98,7 @@ export default {
             localStorage.setItem('tokendate', new Date())
             that.$router.push({ 'name': 'EndIndex' })
           } else {
-            that.msgModel = true
+            that.smsstate = false
             that.errorMsg = response.data.msg
           }
         })
@@ -107,7 +114,7 @@ export default {
 <style scoped>
   .login-page {
     position: absolute;
-    top: 20%;
+    top: 18%;
     left: 0;
     right: 0;
     margin: 20px;
@@ -117,6 +124,23 @@ export default {
     border-radius: 2px;
     border: none;
     width: 164px;
+    text-align: left;
+  }
+  .mobile-input /deep/ .login-input-act .el-input__inner{
+    height: 31px;
+    border-radius: 2px;
+    border: none;
+    width: 220px;
+    text-align: left;
+    font-size: 11px;
+  }
+  .verify-input /deep/ .login-input-act .el-input__inner{
+    height: 31px;
+    border-radius: 2px;
+    border: none;
+    width: 140px !important;
+    text-align: left;
+    font-size: 11px;
   }
   .login-page /deep/ .el-input .el-input-group__prepend{
     border-radius: 2px;
@@ -134,6 +158,7 @@ export default {
     border-radius: 2px;
     border: none;
     width: 84px;
+    text-align: left;
   }
   .verify-input /deep/ .el-input {
     border-radius: 2px;
@@ -149,12 +174,6 @@ export default {
   }
   .wh-btn-login {
     width: 200px;
-  }
-  .el-row {
-    margin-bottom: 20px;
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
   .el-col {
     border-radius: 4px;
@@ -182,12 +201,21 @@ export default {
     width: 80px;
     height: 31px;
     font-size: 11px;
-    font-family: Source Han Sans;
     border-radius: 0px 2px 2px 0px;
     border: none;
     padding: 0;
   }
-  .login-input {
+  .timer-btn {
+    color: #5887FC;
+    width: 80px;
+    height: 31px;
+    font-size: 11px;
+    border-radius: 0px 2px 2px 0px;
+    border: 1px solid rgba(88,135,252,1);
+    box-shadow:0px 0px 5px rgba(0,0,0,0.1);
+    padding: 0;
+  }
+  .login-input, .login-input-act {
     box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
     border-radius: 2px;
     font-size: 11px;
@@ -205,11 +233,36 @@ export default {
     padding: 0;
     margin-top: 40px;
   }
+  .login-btn-act {
+    background-color: #5887FF;
+    width: 220px;
+    height: 31px;
+    border: none;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    color: #FFF;
+    font-size: 11px;
+    font-family: Source Han Sans;
+    padding: 0;
+    margin-top: 40px;
+  }
   .login-title {
     font-size: 16px;
     font-family: Source Han Sans;
     font-weight: 700;
     line-height: 24px;
     color: rgba(172,172,172,1);
+  }
+  .error-msg {
+    margin-top: 5px;
+  }
+  .error-text {
+    font-size: 12px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 17px;
+    color: rgba(221,57,57,1);
+    vertical-align: middle;
+    margin-left: 2px;
   }
 </style>
