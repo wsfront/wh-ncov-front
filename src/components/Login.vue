@@ -1,42 +1,37 @@
 <template>
-<div class="login-page">
-<el-row align="center" justify="center" class="wh-header">
-  <el-col :span="24"><h3 >nCoV 武汉孕妇支援-管理后台</h3></el-col>
-</el-row>
-<el-row align="center" justify="center">
-  <el-col :span="16" :offset="1">
-    <el-input placeholder="请输入手机号" v-model="mobile" class="wh-input-width">
-        <template slot="prepend">手机号</template>
-    </el-input>
-  </el-col>
-  <el-col :span="4" :offset="1">
-    <el-button v-on:click="getVerifycode" v-model="verifyCodeTime">{{this.verifyCodeTime}}</el-button>
-  </el-col>
-</el-row>
-<el-row align="center" justify="center">
-  <el-col :span="16" :offset="1">
-    <el-input placeholder="短信验证码" v-model="smsverifycode" :disabled="!smsstate" class="wh-input-width">
-        <template slot="prepend">验证码</template>
-    </el-input>
-  </el-col>
-</el-row>
-<el-row align="center" justify="center">
-  <el-col :span="24">
-    <el-button :disabled="!smsstate" v-on:click="loginWithCode" class="wh-btn-login">登录</el-button>
-  </el-col>
-</el-row>
-<el-dialog
-  title="登陆提示"
-  :visible.sync="msgModel"
-  width="50%"
-  center>
-  <span>{{errorMsg}}</span>
-  <span slot="footer" class="dialog-footer">
-    <el-button @click="msgModel = false">取 消</el-button>
-    <el-button type="primary" @click="msgModel = false">确 定</el-button>
-  </span>
-</el-dialog>
-</div>
+  <div class="login-page">
+    <el-row align="center" justify="center" >
+      <img width="109px" src="@/assets/NCP_Logo.png" />
+      <p class="login-title">管理后台</p>
+    </el-row>
+    <el-row align="center" justify="center" class="mobile-input">
+        <el-input placeholder="请输入手机号" v-model="mobile" class="login-input">
+            <template slot="prepend">手机号</template>
+        </el-input>
+    </el-row>
+    <el-row align="center" justify="center" class="verify-input" style="font-size:0">
+        <el-input placeholder="短信验证码" v-model="smsverifycode" :disabled="!smsstate" class="login-input">
+            <template slot="prepend">验证码</template>
+        </el-input>
+        <el-button class="verify-btn" v-on:click="getVerifycode" v-model="verifyCodeTime">{{this.verifyCodeTime}}</el-button>
+    </el-row>
+    <el-row align="center" justify="center">
+      <el-col :span="24">
+        <el-button :disabled="!smsstate" v-on:click="loginWithCode" class="login-btn">登录</el-button>
+      </el-col>
+    </el-row>
+    <el-dialog
+      title="登陆提示"
+      :visible.sync="msgModel"
+      width="50%"
+      center>
+      <span>{{errorMsg}}</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="msgModel = false">取 消</el-button>
+        <el-button type="primary" @click="msgModel = false">确 定</el-button>
+      </span>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -116,7 +111,33 @@ export default {
     left: 0;
     right: 0;
     margin: 20px;
-    border: 1px #ddd solid;
+  }
+  .mobile-input /deep/ .el-input .el-input__inner{
+    height: 31px;
+    border-radius: 2px;
+    border: none;
+    width: 164px;
+  }
+  .login-page /deep/ .el-input .el-input-group__prepend{
+    border-radius: 2px;
+    border: 1px solid rgba(226,226,226,1);
+    width: 56px;
+    padding: 0 5px;
+    color: rgba(172,172,172,1);
+  }
+  .mobile-input /deep/ .el-input {
+    border-radius: 2px;
+    width: 220px;
+  }
+  .verify-input /deep/ .el-input .el-input__inner{
+    height: 31px;
+    border-radius: 2px;
+    border: none;
+    width: 84px;
+  }
+  .verify-input /deep/ .el-input {
+    border-radius: 2px;
+    width: 140px;
   }
   .wh-header {
     background: #4093ff;
@@ -154,5 +175,40 @@ export default {
   .row-bg {
     padding: 10px 0;
     background-color: #f9fafc;
+  }
+  .verify-btn {
+    background-color: #5887FF;
+    color: #fff;
+    width: 80px;
+    height: 31px;
+    font-size: 11px;
+    font-family: Source Han Sans;
+    border-radius: 0px 2px 2px 0px;
+    border: none;
+    padding: 0;
+  }
+  .login-input {
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    font-size: 11px;
+    font-family: Source Han Sans;
+  }
+  .login-btn {
+    width: 220px;
+    height: 31px;
+    border: 1px solid rgba(88,135,252,1);
+    box-shadow:0px 0px 5px rgba(0,0,0,0.1);
+    border-radius: 2px;
+    color: #5887FC;
+    font-size: 11px;
+    font-family: Source Han Sans;
+    padding: 0;
+  }
+  .login-title {
+    font-size: 16px;
+    font-family: Source Han Sans;
+    font-weight: 700;
+    line-height: 24px;
+    color: rgba(172,172,172,1);
   }
 </style>
