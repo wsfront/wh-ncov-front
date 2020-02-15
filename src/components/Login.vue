@@ -10,10 +10,10 @@
         </el-input>
     </el-row>
     <el-row align="center" justify="center" class="verify-input" style="font-size:0;margin-top:17px">
-        <el-input placeholder="短信验证码" v-model="smsverifycode" :disabled="!smsstate" :class="smsverifycode ? 'login-input-act' : 'login-input'">
+        <el-input placeholder="短信验证码" v-model="smsverifycode" :disabled="!smsstate" :class="smsverifycode ? 'login-input-act' : 'login-input'" style="vertical-align:middle">
             <template slot="prepend" v-if="!smsverifycode">验证码</template>
         </el-input>
-        <el-button :class="smsstate ? 'timer-btn' : 'verify-btn'" v-on:click="getVerifycode" v-model="verifyCodeTime">{{this.verifyCodeTime}}</el-button>
+        <el-button style="vertical-align:middle" :class="smsstate ? 'timer-btn' : 'verify-btn'" v-on:click="getVerifycode" v-model="verifyCodeTime">{{this.verifyCodeTime}}</el-button>
     </el-row>
     <el-row align="center" justify="center" v-show="errorMsg">
       <div class="error-msg">
