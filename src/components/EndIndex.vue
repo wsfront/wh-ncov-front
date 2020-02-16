@@ -1,458 +1,818 @@
 <template>
-  <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="医院" name="hospital">
-      <el-row>
-        <el-col :span="19">
-          <el-input v-model="hospitalname" placeholder="请输入医院名字"  ></el-input>
-        </el-col>
-        <el-col :span="4">
-          <el-button icon="el-icon-search" circle v-on:click="searchHospital"></el-button>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="12">
-          <el-popover
-            placement="bottom-start"
-            width="400"
-            v-model="visiblemenu">
-            <el-divider></el-divider>
-            <el-row>
-                <el-col :span="24">
-                  <el-menu
-                    default-active="1"
-                    @select="handleSelect"
-                    @open="handleOpen"
-                    @close="handleClose">
-                    <el-menu-item index="全部" style="height:2em;">
-                      <i class="el-icon-menu"></i>
-                      <span slot="title">全部</span>
-                    </el-menu-item>
-                    <el-menu-item index="江岸区">
-                      <i class="el-icon-position"></i>
-                      <span slot="title">江岸区</span>
-                    </el-menu-item>
-                    <el-menu-item index="江汉区">
-                      <i class="el-icon-position"></i>
-                      <span slot="title">江汉区</span>
-                    </el-menu-item>
-                    <el-menu-item index="硚口区">
-                      <i class="el-icon-position"></i>
-                      <span slot="title">硚口区</span>
-                    </el-menu-item>
-                    <el-menu-item index="汉阳区">
-                      <i class="el-icon-position"></i>
-                      <span slot="title">汉阳区</span>
-                    </el-menu-item>
-                    <el-menu-item index="武昌区">
-                      <i class="el-icon-position"></i>
-                      <span slot="title">武昌区</span>
-                    </el-menu-item>
-                    <el-menu-item index="青山区">
-                      <i class="el-icon-position"></i>
-                      <span slot="title">青山区</span>
-                    </el-menu-item>
-                    <el-menu-item index="洪山区">
-                      <i class="el-icon-position"></i>
-                      <span slot="title">洪山区</span>
-                    </el-menu-item>
-                    <el-menu-item index="蔡甸区">
-                      <i class="el-icon-position"></i>
-                      <span slot="title">蔡甸区</span>
-                    </el-menu-item>
-                    <el-menu-item index="江夏区">
-                      <i class="el-icon-position"></i>
-                      <span slot="title">江夏区</span>
-                    </el-menu-item>
-                    <el-menu-item index="黄陂区">
-                      <i class="el-icon-position"></i>
-                      <span slot="title">黄陂区</span>
-                    </el-menu-item>
-                    <el-menu-item index="新洲区">
-                      <i class="el-icon-position"></i>
-                      <span slot="title">新洲区</span>
-                    </el-menu-item>
-                    <el-menu-item index="东西湖区">
-                      <i class="el-icon-position"></i>
-                      <span slot="title">东西湖区</span>
-                    </el-menu-item>
-                    <el-menu-item index="汉南区">
-                      <i class="el-icon-position"></i>
-                      <span slot="title">汉南区</span>
-                    </el-menu-item>
-                    </el-menu>
-                </el-col>
-            </el-row>
-            <el-button slot="reference" v-model="areaName" >{{this.areaName}}<i class="el-icon-caret-bottom el-icon--right"></i> </el-button>
-           </el-popover>
-        </el-col>
-        <el-col :span="12">
-           <el-popover
-            placement="bottom-start"
-            width="300"
-            v-model="visibleOption">
-            <el-row type="flex">
-                <el-col :span="12">医院核实情况</el-col>
-                <el-col :span="12">
-                    <el-radio-group v-model="verify_radio" size="mini">
-                    <el-radio-button label="全部"></el-radio-button>
-                    <el-radio-button label="是"></el-radio-button>
-                    <el-radio-button label="否"></el-radio-button>
-                    </el-radio-group>
-                </el-col>
-            </el-row>
-            <el-row type="flex">
-                <el-col :span="12">可接收普通孕妇</el-col>
-                <el-col :span="12">
-                    <el-radio-group v-model="receive_normal_radio" size="mini">
-                    <el-radio-button label="全部"></el-radio-button>
-                    <el-radio-button label="是"></el-radio-button>
-                    <el-radio-button label="否"></el-radio-button>
-                    </el-radio-group>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="12">可接收疑似/确诊孕妇</el-col>
-                <el-col :span="12">
-                    <el-radio-group v-model="receive_sick_radio" size="mini">
-                    <el-radio-button label="全部"></el-radio-button>
-                    <el-radio-button label="是"></el-radio-button>
-                    <el-radio-button label="否"></el-radio-button>
-                    </el-radio-group>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="12">可做常规产检</el-col>
-                <el-col :span="12">
-                    <el-radio-group v-model="receive_normal_check_radio" size="mini">
-                    <el-radio-button label="全部"></el-radio-button>
-                    <el-radio-button label="是"></el-radio-button>
-                    <el-radio-button label="否"></el-radio-button>
-                    </el-radio-group>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="12">可做孕期产检B超</el-col>
-                <el-col :span="12">
-                    <el-radio-group v-model="receive_ultrasound_radio" size="mini">
-                    <el-radio-button label="全部"></el-radio-button>
-                    <el-radio-button label="是"></el-radio-button>
-                    <el-radio-button label="否"></el-radio-button>
-                    </el-radio-group>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="12">可接生</el-col>
-                <el-col :span="12">
-                    <el-radio-group v-model="receive_accouche_radio" size="mini">
-                    <el-radio-button label="全部"></el-radio-button>
-                    <el-radio-button label="是"></el-radio-button>
-                    <el-radio-button label="否"></el-radio-button>
-                    </el-radio-group>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="12">可做核酸检测</el-col>
-                <el-col :span="12">
-                    <el-radio-group v-model="receive_check_radio" size="mini">
-                    <el-radio-button label="全部"></el-radio-button>
-                    <el-radio-button label="是"></el-radio-button>
-                    <el-radio-button label="否"></el-radio-button>
-                    </el-radio-group>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="12">可做中孕期三维<br/>排畸彩超（大排畸）</el-col>
-                <el-col :span="12">
-                    <el-radio-group v-model="receive_clour_ultrasound_radio" size="mini">
-                    <el-radio-button label="全部"></el-radio-button>
-                    <el-radio-button label="是"></el-radio-button>
-                    <el-radio-button label="否"></el-radio-button>
-                    </el-radio-group>
-                </el-col>
-            </el-row>
-            <div style="text-align: center; margin: 0">
-                <el-button size="mini" type="text" @click="resetHospitalOption">重置</el-button>
-                <el-button type="primary" size="mini" @click="searchHospitalByOption">查看</el-button>
+  <div class="wh-container">
+    <div class="hearder-block">
+    <HeaderLayout :activeIndex="0" />
+    </div>
+    <div name="hospital">
+      <div class="hospital-search-bar">
+        <el-dropdown
+          trigger="click"
+          placement="bottom-start"
+          @command="handleSelect"
+          @visible-change="changeShowPlace"
+        >
+          <span class="el-dropdown-link">
+            <div class="btn long" :class="{act:showPlace}">
+              <i class="el-icon-location" :class="itemSelected ? 'btn-icon-act' : 'btn-icon'"></i>
+              <div :class="itemSelected ? 'btn-text-act' : 'btn-text'">{{itemSelected ? areas.selected : '城区'}}</div>
             </div>
-            <el-button slot="reference">筛选<i class="el-icon-caret-bottom el-icon--right"></i> </el-button>
-           </el-popover>
-        </el-col>
-      </el-row>
-      <el-row v-for="hospital in hospitallist" v-bind:key="hospital.uuid" class="hospital-detail-info">
-        <router-link :to="{name: 'EndHospitalDetail', params: {'hospital':hospital}}">
-          <el-col :span="20" align="left">{{ hospital.name }}</el-col>
-          <el-col :span="4"><i class="el-icon-arrow-right"></i></el-col>
-        </router-link>
-          <el-divider></el-divider>
-      </el-row>
-    </el-tab-pane>
-    <el-tab-pane label="产检知识" name="obstetricCheck">产检知识</el-tab-pane>
-    <el-dialog title="医院信息" :visible.sync="dialogFormVisible" width="80%">
-      <el-row v-for="phone in currentHospital.phones" v-bind:key="phone.id">
-        <el-col :span="4">
-          {{phone.department}}
-        </el-col>
-        <el-col :span="12">
-          <a v-bind:href="'tel:'+phone.phone">{{phone.phone}}</a>
-        </el-col>
-      </el-row>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+          </span>
+          <el-dropdown-menu slot="dropdown"  class="city-filter-dialog">
+            <el-dropdown-item
+              icon="el-icon-menu"
+              command="全部"
+              :class="{ act: itemSelected&&areas.selected==='全部'}"
+              >全部城区</el-dropdown-item
+            >
+            <el-divider></el-divider>
+            <div class="sub-text">中心城区</div>
+            <el-dropdown-item
+              icon="el-icon-place"
+              v-for="area in areas.center"
+              :key="area"
+              :command="area"
+              :class="{ act: areas.selected === area }"
+              >{{ area }}</el-dropdown-item
+            >
+            <div class="sub-text">其他城区</div>
+            <el-dropdown-item icon="el-icon-place" v-for="area in areas.other" :key="area" :command="area" :class="{act : areas.selected === area}">{{ area }}</el-dropdown-item>
+                 </el-dropdown-menu>
+        </el-dropdown>
+        <el-dropdown
+          trigger="click"
+          @command="handleCommandFunc"
+          :hide-on-click="false"
+          placement="bottom-start"
+          @visible-change="changeShowFilter"
+        >
+          <div
+            class="btn small"
+            :class="{ act: shouldHighlightFilterButton }"
+            ref="domFilter"
+          >
+            <i class="el-icon-s-operation"></i>
+            <div class="btn-text">筛选</div>
+          </div>
+          <el-dropdown-menu slot="dropdown" class="hospital-filter-dialog">
+            <el-checkbox-group v-model="conditions">
+              <div class="sub-text">接收</div>
+              <el-checkbox
+                v-for="condition in acceptConditions"
+                :label="condition.symbol"
+                :key="condition.symbol"
+                >{{ condition.name }}</el-checkbox
+              >
+              <div class="sub-text">孕检及接生</div>
+              <el-checkbox
+                v-for="condition in checkConditions"
+                :label="condition.symbol"
+                :key="condition.symbol"
+                >{{ condition.name }}</el-checkbox
+              >
+              <div class="sub-text">其他</div>
+              <el-checkbox
+                v-for="condition in otherConditions"
+                :label="condition.symbol"
+                :key="condition.symbol"
+                >{{ condition.name }}</el-checkbox
+              >
+            </el-checkbox-group>
+            <el-divider></el-divider>
+            <div class="pop-bottom">
+              <span class="pop-bottom__btn" @click="conditions = []">重置</span>
+              <span
+                class="pop-bottom__btn active"
+                @click="searchHospitalByOption(true)"
+                >确认查看</span
+              >
+            </div>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <div class="search-con" :class="{ act: shouldHighlightSearchBar }">
+          <input
+            v-model="hospitalname"
+            placeholder="请输入医院名字"
+            @focus="input_active = true"
+            @blur="input_active = false"
+          />
+          <img
+            v-if="!input_active"
+            class="btn-icon"
+            src="../assets/search.png"
+            @click="searchHospital"
+          />
+          <img
+            v-if="input_active"
+            class="btn-icon"
+            src="../assets/search-blue.png"
+            @click="searchHospital"
+          />
+        </div>
       </div>
-    </el-dialog>
-  </el-tabs>
+      <transition name="fade">
+        <div class="hospital-list" v-if="hospitallist.length">
+          <div
+            class="hospital-con"
+            v-for="(hospital, i) in hospitallist"
+            v-bind:key="i"
+          >
+            <div
+              class="hospital-con-title"
+              :class="{ shadow: !hospital.show }"
+              @click="hospital.show = !hospital.show"
+            >
+
+              <div class="info-container">
+                <div class="name">{{ hospital.name }}</div>
+                <div class="info-text">
+                  <span
+                    :class="{
+                      success: !!hospital.verify,
+                      error: !hospital.verify
+                    }"
+                    >{{ hospital.verify == 1 ? "已核实" : "待核实" }}</span
+                  >
+                  {{ hospital.update_time }} 更新
+                </div>
+              </div>
+                           <i
+                class="el-collapse-item__arrow el-icon-arrow-right hospital-icon"
+                :class="{ 'is-active': hospital.show }"
+              ></i>
+
+            </div>
+            <div class="hospital-info" v-show="hospital.show">
+            <!-- @TODO use EndhospitalDetail EndhospitalEdit-->
+              <div class="info-wrapper">
+                <div class="other-msg-title">补充说明</div>
+                <div class="other-msg">todo detail</div>
+              </div>
+            <!-- @TODO -->
+            </div>
+          </div>
+        </div>
+      </transition>
+    </div>
+  </div>
 </template>
 
 <script>
+import HeaderLayout from "./HeaderLayout";
 export default {
-  name: 'EndIndex',
-  data () {
+  name: "EndIndex",
+  components: { HeaderLayout },
+  data() {
     return {
-      activeName: 'hospital',
-      areaName: '全部地区',
+      lastUpdateTime: "",
+      areaName: "全部地区",
+      areas: {
+        center: [
+          "江岸区",
+          "江汉区",
+          "硚口区",
+          "汉阳区",
+          "武昌区",
+          "青山区",
+          "洪山区"
+        ],
+        other: [
+          "蔡甸区",
+          "江夏区",
+          "黄陂区",
+          "新洲区",
+          "东西湖区",
+          "汉南区",
+          "东湖高新技术开发区",
+          "经济技术开发区",
+          "临空港开发区"
+        ],
+        // new: [],
+        // noData: [],
+        selected: "全部"
+      },
+      filterConditions: [
+        {
+          type: "accept",
+          symbol: "receive_normal",
+          name: "普通孕妇",
+          checked: false
+        },
+        {
+          type: "accept",
+          symbol: "receive_sick",
+          name: "疑似/确诊孕妇",
+          checked: false
+        },
+        {
+          type: "check",
+          symbol: "receive_normal_check",
+          name: "常规产检",
+          checked: false
+        },
+        {
+          type: "check",
+          symbol: "receive_ultrasound",
+          name: "孕期产检B超",
+          checked: false
+        },
+        {
+          type: "check",
+          symbol: "receive_clour_ultrasound",
+          name: "中孕期三维排畸彩超（大排畸）",
+          checked: false
+        },
+        {
+          type: "check",
+          symbol: "receive_accouche",
+          name: "接生",
+          checked: false
+        },
+        {
+          type: "other",
+          symbol: "receive_check",
+          name: "核酸检测",
+          checked: false
+        },
+        {
+          type: "other",
+          symbol: "verify",
+          name: "医院信息已核实",
+          checked: false
+        }
+      ],
+      conditions: [],
       restaurants: [],
-      state: '',
-      activeNames: ['1'],
-      hospitalname: '',
+      state: "",
+      activeNames: ["1"],
+      hospitalname: "",
+      input_active: false,
       hospitallist: [],
-      timeout: null,
       visiblemenu: false,
       visibleOption: false,
-      radio1: '全部',
+      radio1: "全部",
       count: 10,
       loading: false,
-      nomordata: false,
       dialogFormVisible: false,
-      currentHospital: [],
-      receive_accouche_radio: '全部',
-      receive_normal_radio: '全部',
-      receive_sick_radio: '全部',
-      receive_normal_check_radio: '全部',
-      receive_ultrasound_radio: '全部',
-      receive_clour_ultrasound_radio: '全部',
-      verify_radio: '全部',
-      receive_check_radio: '全部'
-    }
+      addressDialogVisible: false,
+      currentHospital: {},
+      // 新增
+      showPlace: false,
+      showFilter: false,
+      activeName: "hospital",
+      itemSelected: false
+    };
   },
   computed: {
-    noMore () {
-      return this.count >= 200 || this.nomoredata
+    hopitalInfo() {
+      const initdata = {
+        accept: [],
+        check: [],
+        delive: []
+      };
+      return this.filterConditions
+        .filter(item => item.symbol !== "verify")
+        .reduce((sofar, curr) => {
+          curr.type === "accept"
+            ? sofar.accept.push(curr)
+            : curr.symbol === "receive_check"
+              ? sofar.delive.push(curr)
+              : sofar.check.push(curr);
+          return sofar;
+        }, initdata);
     },
-    disabled () {
-      return this.loading || this.noMore
+
+    acceptConditions() {
+      return this.filterConditions.filter(i => i.type === "accept");
+    },
+    checkConditions() {
+      return this.filterConditions.filter(i => i.type === "check");
+    },
+    otherConditions() {
+      return this.filterConditions.filter(i => i.type === "other");
+    },
+    allConditionChecked() {
+      console.log(
+        "999",
+        this.filterConditions.length === this.conditions.length
+      );
+      return this.filterConditions.length === this.conditions.length;
+    },
+    /**
+     * highlight the filter button if the filter dialog is open, or if there are existing filter conditions
+     */
+    shouldHighlightFilterButton() {
+      return this.conditions.length !== 0 || this.showFilter;
+    },
+    /**
+     * highlight the text search bar when input is not empty.
+     */
+    shouldHighlightSearchBar() {
+      return this.hospitalname !== "" || this.input_active;
+    }
+  },
+  filters: {
+    phonestr(str, idx) {
+      console.log(idx);
+      if (!str) return "";
+      if (str.indexOf("转") > -1) {
+        let tempArr = str.split("转");
+        if (idx === 1) return tempArr[0];
+        if (idx === 2) return "转" + tempArr[1];
+      } else {
+        if (idx === 1) return str;
+        if (idx === 2) return "";
+      }
     }
   },
   methods: {
-    clickHospital (hospital) {
-      console.log(hospital)
-      hospital.show = !hospital.show
-    },
-    showPhoneDialog (hospital) {
-      let that = this
-      this.currentHospital = hospital
-      this.$http.get('/wh/msg/phone?uuid=' + hospital.uuid)
-        .then(function (response) {
-          console.log(response)
-          if (response.data.code === '0000') {
-            that.currentHospital.phones = response.data.result
-            console.log(that.currentHospital.phones)
-            that.currentHospital = hospital
-            that.dialogFormVisible = true
-          }
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
-    },
-    load () {
-      this.loading = true
-      setTimeout(() => {
-        this.count += 2
-        this.loading = false
-      }, 2000)
-    },
-    handleClick (tab, event) {
-      console.log(tab, event)
-    },
-    handleChange (val) {
-      console.log(val)
-    },
-    loadAll () {
-      return []
-    },
-    querySearchAsync (queryString, cb) {
-      var restaurants = this.restaurants
-      var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
-
-      clearTimeout(this.timeout)
-      this.timeout = setTimeout(() => {
-        cb(results)
-      }, 3000 * Math.random())
-    },
-    createStateFilter (queryString) {
-      return (state) => {
-        return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+    handleCommandFunc(action) {
+      if (action === "rest") {
+        this.conditions = [];
+        this.$refs.domFilter.click();
       }
     },
-    handleSelect (item, keyPath) {
-      console.log(item, keyPath)
-      let that = this
-      var params = ''
-      if (item === '全部') {
-        params = 'all=1'
+    changeShowPlace(visible) {
+      this.showPlace = visible;
+    },
+    changeShowFilter(visible) {
+      this.showFilter = visible;
+    },
+    clickHospital(hospital) {
+      hospital.show = !hospital.show;
+    },
+    toggleFilterCondition(condition) {
+      this.filterConditions.forEach(c => {
+        if (c.symbol === condition.symbol) {
+          c.checked = !c.checked;
+        }
+      });
+    },
+    checkAllFilterCondition() {
+      const checked = this.allConditionChecked;
+      if (!checked) {
+        this.conditions = this.filterConditions.map(c => c.symbol);
       } else {
-        params = 'all=3&area=' + item
+        this.conditions = [];
       }
-      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + params)
-        .then(function (response) {
-          console.log(response)
-          if (response.data.code === '0000') {
-            response.data.result.forEach(element => {
-              element.show = false
-              element.showdetail = false
-            })
-            that.areaName = item
-            that.hospitallist = response.data.result
-          }
-          that.visiblemenu = false
-        })
-        .catch(function (error) {
-          console.log(error)
-          that.visiblemenu = false
-        })
     },
-    handleOpen () {
+    load() {
+      this.loading = true;
+      setTimeout(() => {
+        this.count += 2;
+        this.loading = false;
+      }, 2000);
     },
-    handleClose () {
+    handleSelect(item) {
+      this.showPlace = !this.showPlace;
+      this.itemSelected = true;
+      this.areas.selected = item;
+      this.hospitalname = "";
+      var params = "";
+      if (item === "全部" && this.conditions.length < 1) {
+        params = "all=1";
+      }
+      if (item === "全部" && this.conditions.length > 0) {
+        params = "all=2";
+      }
+      if (item !== "全部" && this.conditions.length > 0) {
+        params = "all=2&area=" + item;
+      }
+      if (item !== "全部" && this.conditions.length < 1) {
+        params = "all=3&area=" + item;
+      }
+      this.conditions.forEach(c => {
+        params += `&${c}=是`;
+      });
+      this.fetchHospitalInfo(params);
     },
-    searchHospital () {
-      let that = this
-      var params = 'all=0'
-      if (this.hospitalname !== '') {
-        params = params + '&name=' + this.hospitalname
+    searchHospital() {
+      let params = "all=0";
+      if (this.hospitalname !== "") {
+        params = params + "&name=" + this.hospitalname;
+      } else {
+        this.searchHospitalByOption(false);
+        return;
       }
-      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + params)
-        .then(function (response) {
-          console.log(response)
-          if (response.data.code === '0000') {
-            response.data.result.forEach(element => {
-              element.show = false
-              element.showdetail = false
-            })
-            that.hospitallist = response.data.result
-          }
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+      this.fetchHospitalInfo(params);
+      // reset other filters
+      this.conditions = [];
+      this.areas.selected = "全部";
+      this.itemSelected = false;
     },
-    resetHospitalOption () {
-      this.receive_accouche_radio = '全部'
-      this.receive_normal_radio = '全部'
-      this.receive_sick_radio = '全部'
-      this.receive_normal_check_radio = '全部'
-      this.receive_ultrasound_radio = '全部'
-      this.receive_clour_ultrasound_radio = '全部'
-      this.verify_radio = '全部'
-      this.receive_check_radio = '全部'
-    },
-    searchHospitalByOption () {
-      let that = this
-      var params = ''
-      params = 'all=2'
-      if (this.receive_accouche_radio !== '全部') {
-        params = params + '&receive_accouche=' + this.receive_accouche_radio
-      }
-      if (this.receive_normal_radio !== '全部') {
-        params = params + '&receive_normal=' + this.receive_normal_radio
-      }
-      if (this.receive_sick_radio !== '全部') {
-        params = params + '&receive_sick=' + this.receive_sick_radio
-      }
-      if (this.receive_normal_check_radio !== '全部') {
-        params = params + '&receive_normal_check=' + this.receive_normal_check_radio
-      }
-      if (this.receive_ultrasound_radio !== '全部') {
-        params = params + '&receive_ultrasound=' + this.receive_ultrasound_radio
-      }
-      if (this.receive_clour_ultrasound_radio !== '全部') {
-        params = params + '&receive_clour_ultrasound=' + this.receive_clour_ultrasound_radio
-      }
-      if (this.verify_radio !== '全部') {
-        params = params + '&verify=' + this.verify_radio
-      }
-      if (this.receive_check_radio !== '全部') {
-        params = params + '&receive_check=' + this.receive_check_radio
-      }
+    searchHospitalByOption(filterClick) {
+      let that = this;
+      var params = "";
+      if (!this.conditions.length) {
+        params = "all=1";
+      } else {
+        params = "all=2";
 
-      this.$http.get('/wh/msg/hospital?page_num=1&page_size=100&' + params)
-        .then(function (response) {
-          console.log(response)
-          if (response.data.code === '0000') {
+        this.conditions.forEach(c => {
+          params += `&${c}=是`;
+        });
+      }
+      if (this.areas.selected !== "全部") {
+        params = params + "&area=" + this.areas.selected;
+      }
+      this.fetchHospitalInfo(params);
+      if (filterClick) {
+        that.$refs.domFilter.click();
+      }
+    },
+
+    fetchHospitalInfo(params) {
+      this.hospitallist = [];
+      this.$http
+        .get("/wh/msg/hospital?page_num=1&page_size=100&" + params)
+        .then(response => {
+          if (response.data.code === "0000") {
             response.data.result.forEach(element => {
-              element.show = false
-              element.showdetail = false
-            })
-            that.hospitallist = response.data.result
+              element.show = false;
+              element.showdetail = false;
+              if (element.update_time > this.lastUpdateTime) {
+                this.lastUpdateTime = element.update_time;
+              }
+            });
+            this.$EventBus.$emit("refreshUpdateTime", this.lastUpdateTime);
+            this.hospitallist = response.data.result;
           }
-          that.visibleOption = false
+          this.visibleOption = false;
         })
-        .catch(function (error) {
-          console.log(error)
-          that.visibleOption = false
-        })
+        .catch(function(error) {
+          console.log(error);
+          this.visibleOption = false;
+        });
     }
   },
-  mounted () {
+  mounted() {
+    this.searchHospitalByOption();
   }
-}
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  .el-row {
-    margin-bottom: 10px;
-  &:last-child {
-     margin-bottom: 0;
-   }
-  }
-  .el-col {
-    border-radius: 4px;
-  }
-  .bg-purple-dark {
-    background: #99a9bf;
-  }
-  .bg-purple {
-    background: #d3dce6;
-  }
-  .bg-purple-light {
-    background: #e5e9f2;
-  }
-  .grid-content {
-    border-radius: 4px;
-    min-height: 36px;
-  }
-  .row-bg {
-    padding: 10px 0;
-    background-color: #f9fafc;
-  }
-  .el-menu-item {
-    height:2em;
-    line-height: 2em;
-  }
-  .el-tabs__item {
-    width: 10em;
-  }
-  .hospital-detail-info {
-    font-size: 15px;
-  }
-  .content-color-normal {
-    color:rgb(77, 235, 19);
-  }
-  .content-color-warning {
-    color:rgb(228, 39, 15);
-  }
-  .el-divider{
-    display: none;
-  }
+.sub-text {
+  color: $--color-text-secondary;
+  font-size: 12px;
+  padding: 5px 0 5px 12px;
+}
+.el-button + .el-button {
+  margin-left: 0px;
+}
+.el-button.sort {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.pop-bottom {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.pop-bottom__btn {
+  flex: 1;
+  height: 100%;
+  padding: 10px;
+  color: #9d9d9d;
+  text-align: center;
+  border-right: 1px #dcdfe6 solid;
+}
+.pop-bottom__btn:last-child {
+  border-right: none;
+}
+.pop-bottom__btn.active {
+  color: $--color-primary;
+}
+</style>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style lang="scss" scoped>
+.wh-phone {
+  text-align: left;
+  padding: 0px 0 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.wh-phone:last-child {
+  border-bottom: none;
+}
+.wh-phone-btn {
+  text-decoration-line: none;
+  color: $--color-primary;
+}
+.wh-dialog /deep/.el-dialog__title {
+  display: inline-block;
+  margin-right: 20px;
+}
+.el-checkbox__label {
+  font-size: 12px;
+}
+.success {
+  margin-right: 5px;
+  color: $--color-success;
+}
+.error {
+  margin-right: 5px;
+  color: $--color-error;
+}
+.el-dropdown-menu {
+  max-height: 72vh;
+  overflow: scroll;
+}
+.city-filter-dialog .el-dropdown-menu__item.act {
+  color: $--color-primary;
+}
+.hospital-filter-dialog {
+  padding-bottom: 0;
+}
+.city-filter-dialog /deep/ .el-dropdown-menu__item {
+  font-size: 12px;
+  font-weight: normal;
+  color: #2f3036;
+}
+.hospital-filter-dialog /deep/ .el-checkbox .el-checkbox__label {
+  font-size: 12px;
+  font-weight: normal;
+  color: #2f3036;
+}
+.el-checkbox {
+  display: block;
+  margin: 10px 12px;
+}
+.el-dialog__footer {
+  padding: 0;
+}
+.wh-container {
+  background: #fafafa;
+  color: #333;
+  padding: 10px 16px;
+}
+.hearder-block {
+  margin: 0 -16px 15px -16px;
+}
+.el-row {
+  margin-bottom: 10px;
+}
+.el-col {
+  border-radius: 4px;
+}
+.bg-purple-dark {
+  background: #99a9bf;
+}
+.bg-purple {
+  background: #d3dce6;
+}
+.bg-purple-light {
+  background: #e5e9f2;
+}
+.grid-content {
+  border-radius: 4px;
+  min-height: 36px;
+}
+.row-bg {
+  padding: 10px 0;
+  background-color: #f9fafc;
+}
+.el-menu-item {
+  height: 2em;
+  line-height: 2em;
+}
+.el-tabs__item {
+  width: 10em;
+}
+.hospital-detail-info {
+  font-size: 15px;
+}
+.content-color-normal-black {
+  color: #2c3e50;
+}
+.content-color-warning {
+  color: rgb(228, 39, 15);
+}
+.el-divider--horizontal {
+  display: block;
+  height: 1px;
+  width: 100%;
+  margin: 0;
+}
+.el-button--mini,
+.el-button--mini.is-round {
+  padding: 3px 8px;
+}
+.hospital-search-bar {
+  margin: 6px -4px 0 -4px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hospital-search-bar > div {
+  margin: 0 2px;
+  box-sizing: border-box;
+}
+.hospital-search-bar .btn {
+  height: 30px;
+  padding: 0 6px;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hospital-search-bar .btn.small {
+  width: 64px;
+}
+.hospital-search-bar .btn.long {
+  max-width: 100px;
+  min-width: 64px;
+}
+
+.hospital-search-bar .btn .btn-icon {
+  width: 12px;
+  height: 16px;
+  margin-right: 5px;
+}
+.hospital-search-bar .btn {
+  color: $--color-text-secondary;
+}
+.hospital-search-bar .btn .btn-text {
+  font-size: 12px;
+  font-family: Source Han Sans;
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.btn-text-act {
+  font-size: 12px;
+  font-family: Source Han Sans;
+  font-weight: bold;
+  color: $--color-primary;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.btn-icon-act {
+  color: $--color-primary;
+}
+.new-area {
+  color: #d0595c;
+}
+.no-data-area {
+  color: #e4af3d;
+}
+.hospital-search-bar .btn.act {
+  color: $--color-primary;
+}
+.hospital-search-bar .search-con {
+  width: 200px;
+  height: 30px;
+  padding: 0 6px;
+  background: white;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+}
+.hospital-search-bar .search-con input {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 2px;
+  border: none;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  outline: none;
+  margin-right: 4px;
+}
+.hospital-search-bar .search-con.act {
+  border: $--color-primary 1px solid;
+  border-radius: 2px;
+}
+.hospital-search-bar .search-con img {
+  width: 13px;
+  height: 13px;
+}
+.filter-con {
+  width: 300px;
+}
+.hospital-con {
+  font-size: 0;
+}
+.hospital-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  color: $--color-text-secondary;
+  font-size: 14px;
+  margin-top: 10px;
+}
+.hospital-con-title {
+  padding: 10px 10px;
+  margin-top: 10px;
+  width: 100%;
+  background: #fff;
+  border-radius: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+  box-sizing: border-box;
+}
+.hospital-con-title.shadow {
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+}
+.info-container {
+  position: relative;
+  width: 100%;
+}
+.info-container .name {
+  margin-bottom: 5px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 20px;
+  color: $--color-text-regular;
+}
+.info-container .info-text {
+  text-align: left;
+  font-size: 8px;
+  color: $--color-text-secondary;
+}
+.tel-btn .info-text {
+  text-align: left;
+  font-size: 8px;
+  color: $--color-text-secondary;
+  white-space: nowrap;
+  display: block;
+}
+.tel-btn .tel-btn-icon {
+  display: inline-block;
+  margin-bottom: 6px;
+  width: 20px;
+  height: 20px;
+}
+.tel-btn .tel-btn-text {
+  text-align: center;
+
+  height: 11px;
+  font-size: 8px;
+  font-family: Source Han Sans;
+  font-weight: 400;
+  line-height: 11px;
+  color: rgba(172, 172, 172, 1);
+  opacity: 1;
+  white-space: nowrap;
+}
+.hospital-info {
+  border-top: solid #dcdfe6 1px;
+  width: 100%;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  border-radius: 2px;
+  text-align: left;
+}
+.hospital-info .info-wrapper {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.hospital-info .info-title {
+  font-size: 17px;
+  font-weight: bold;
+  text-align: left;
+}
+.other-msg-title {
+  padding: 0 10px;
+  text-align: left;
+  height: 17px;
+  font-size: 12px;
+  font-family: Source Han Sans;
+  font-weight: 500;
+  line-height: 17px;
+  color: rgba(47, 48, 54, 1);
+  opacity: 1;
+  box-sizing: border-box;
+}
+.other-msg {
+  text-align: left;
+  padding: 0 10px;
+  width: 100%;
+  font-size: 12px;
+  font-family: Source Han Sans;
+  font-weight: 500;
+  line-height: 17px;
+  color: rgba(47, 48, 54, 1);
+  opacity: 1;
+  box-sizing: border-box;
+}
+.address-btn {
+  padding: 10px 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  color: rgba(172, 172, 172, 1);
+  opacity: 1;
+}
 </style>
