@@ -119,7 +119,7 @@
             <div
               class="hospital-con-title"
               :class="{ shadow: !hospital.show }"
-              @click="hospital.show = !hospital.show"
+              @click="currentHospital=hospital"
             >
 
               <div class="info-container">
@@ -141,6 +141,7 @@
               ></i>
 
             </div>
+            
             <div class="hospital-info" v-show="hospital.show">
             <!-- @TODO use EndhospitalDetail EndhospitalEdit-->
               <div class="info-wrapper">
@@ -153,14 +154,16 @@
         </div>
       </transition>
     </div>
+    <edit-hospital :current="currentHospital" @back="currentHospital=''"></edit-hospital>
   </div>
 </template>
 
 <script>
 import HeaderLayout from "./HeaderLayout";
+import EditHospital from './EditHospital'
 export default {
   name: "EndIndex",
-  components: { HeaderLayout },
+  components: { HeaderLayout,EditHospital },
   data() {
     return {
       lastUpdateTime: "",
@@ -254,12 +257,12 @@ export default {
       loading: false,
       dialogFormVisible: false,
       addressDialogVisible: false,
-      currentHospital: {},
+      currentHospital: '',
       // 新增
       showPlace: false,
       showFilter: false,
       activeName: "hospital",
-      itemSelected: false
+      itemSelected: false,      
     };
   },
   computed: {
