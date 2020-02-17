@@ -119,7 +119,7 @@
             <div
               class="hospital-con-title"
               :class="{ shadow: !hospital.show }"
-              @click="currentHospital=hospital"
+              @click="clickHospital(hospital)"
             >
 
               <div class="info-container">
@@ -141,9 +141,10 @@
               ></i>
 
             </div>
-            
             <div class="hospital-info" v-show="hospital.show">
             <!-- @TODO use EndhospitalDetail EndhospitalEdit-->
+
+                <edit-hospital :ref="mychild + hospital.id" ></edit-hospital>
               <div class="info-wrapper">
                 <div class="other-msg-title">补充说明</div>
                 <div class="other-msg">todo detail</div>
@@ -154,7 +155,6 @@
         </div>
       </transition>
     </div>
-    <edit-hospital :current="currentHospital" @back="currentHospital=''"></edit-hospital>
   </div>
 </template>
 
@@ -163,7 +163,7 @@ import HeaderLayout from "./HeaderLayout";
 import EditHospital from './EditHospital'
 export default {
   name: "EndIndex",
-  components: { HeaderLayout,EditHospital },
+  components: { HeaderLayout, EditHospital },
   data() {
     return {
       lastUpdateTime: "",
@@ -257,12 +257,13 @@ export default {
       loading: false,
       dialogFormVisible: false,
       addressDialogVisible: false,
-      currentHospital: '',
+      currentHospital: {},
+      mychild: "mychild",
       // 新增
       showPlace: false,
       showFilter: false,
       activeName: "hospital",
-      itemSelected: false,      
+      itemSelected: false
     };
   },
   computed: {
@@ -292,13 +293,6 @@ export default {
     },
     otherConditions() {
       return this.filterConditions.filter(i => i.type === "other");
-    },
-    allConditionChecked() {
-      console.log(
-        "999",
-        this.filterConditions.length === this.conditions.length
-      );
-      return this.filterConditions.length === this.conditions.length;
     },
     /**
      * highlight the filter button if the filter dialog is open, or if there are existing filter conditions
@@ -341,7 +335,24 @@ export default {
       this.showFilter = visible;
     },
     clickHospital(hospital) {
-      hospital.show = !hospital.show;
+      if (hospital.show === true) {
+        hospital.show = false;
+        return
+      }
+      let that = this;
+      this.currentHospital = hospital;
+      hospital.show = true;
+      this.$http
+        .get("/wh/msg/phone?uuid=" + hospital.uuid)
+        .then(function(response) {
+          if (response.data.code === "0000") {
+            that.currentHospital.phones = response.data.result;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+      this.$refs["mychild" + hospital.id][0].updateData(this.currentHospital);
     },
     toggleFilterCondition(condition) {
       this.filterConditions.forEach(c => {
@@ -349,14 +360,6 @@ export default {
           c.checked = !c.checked;
         }
       });
-    },
-    checkAllFilterCondition() {
-      const checked = this.allConditionChecked;
-      if (!checked) {
-        this.conditions = this.filterConditions.map(c => c.symbol);
-      } else {
-        this.conditions = [];
-      }
     },
     load() {
       this.loading = true;
