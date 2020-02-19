@@ -2,7 +2,7 @@
   <div class="info-wrapper">
     <el-form
       label-position="left"
-      label-width="100px"
+      label-width="180px"
       size="small"
     >
       <el-form-item  v-for="item in info" :key="item.key" :label="item.name" class="form-title">
@@ -12,7 +12,8 @@
         v-model="item.value"
         :disabled="readonly"
         active-color="#13ce66"
-        inactive-color="#ff4949">
+        inactive-color="#ff4949"
+        style="float:right">
         </el-switch>
 
         <el-input
@@ -20,8 +21,22 @@
          type="textarea"
          :disabled="readonly"
          :autosize="{ minRows: 2, maxRows: 8}"
-        v-model="item.value">
+          v-model="item.value">
         </el-input>
+
+        <el-select
+         v-else-if="item.type==='base'"
+         :disabled="readonly"
+          v-model="item.value"
+          placeholder="请选择">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          >
+          </el-option>
+        </el-select>
 
         <div v-else-if="item.type==='special'"
            v-for="phone in item.value"
@@ -39,23 +54,24 @@
         <el-input
           v-else
           v-model="item.value"
-          :disabled="readonly"
-        ></el-input>
+          :disabled="readonly">
+        </el-input>
 
       </el-form-item>
     </el-form>
     <div>
       <div v-if="readonly">
-        <el-button @click="goToList">返回</el-button>
-        <el-button @click="goEdit">编辑</el-button>
+        <el-button @click="goToList" class="cancel-btn">返回列表</el-button>
+        <el-button @click="goEdit" class="save-btn">编辑</el-button>
       </div>
       <div v-else>
-        <el-button @click="goCancel">取消</el-button>
-        <el-button @click="goSave">保存</el-button>
+        <el-button @click="goCancel" class="cancel-btn">取消</el-button>
+        <el-button @click="goSave" class="save-btn">保存</el-button>
       </div>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   data() {
@@ -94,16 +110,17 @@ export default {
         },
         {
           type: "check",
-          key: "receive_clour_ultrasound",
-          name: "中孕期三维排畸彩超（大排畸）",
-          value: ''
-        },
-        {
-          type: "check",
           key: "receive_accouche",
           name: "接生",
           value: ''
         },
+        {
+          type: "check",
+          key: "receive_clour_ultrasound",
+          name: "中孕期三维排畸彩超（大排畸）",
+          value: ''
+        },
+
         {
           type: "other",
           key: "receive_check",
@@ -142,7 +159,17 @@ export default {
           ]
         }
       ],
-      readonly: true
+      readonly: true,
+      options: [{
+        value: '江汉区',
+        label: '江汉区'
+      }, {
+        value: '洪山区',
+        label: '洪山区'
+      }, {
+        value: '东湖高新开发区',
+        label: '东湖高新开发区'
+      }]
     };
   },
   methods: {
@@ -166,8 +193,97 @@ export default {
   }
 };
 </script>
-<style lang="scss">
-.info-wrapper /deep/.el-form-item--small{
-  padding:0 10px;
-}
+<style lang="scss" scoped>
+  .info-wrapper /deep/.el-form-item--small{
+    padding: 0 20px;
+  }
+  .info-wrapper .el-form {
+    padding-top: 10px;
+  }
+  .info-wrapper /deep/ .el-form-item__label{
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .el-form-item--small, .el-form-item__label {
+    line-height: 17px;
+  }
+  .el-form-item /deep/ .el-input, .el-form-item__content, .el-input__inner {
+    height: 24px;
+  }
+  .el-form-item--small .el-form-item__label {
+    line-height: 24px;
+  }
+  .el-form-item /deep/ .el-input__inner {
+    height: 24px;
+    border: 1px solid rgba(193,197,205,1);
+    border-radius: 2px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+  .el-form-item /deep/ .el-textarea__inner {
+    border: 1px solid rgba(193,197,205,1);
+    border-radius: 2px;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  .el-form-item {
+    margin-bottom: 2px;
+  }
+  .info-wrapper /deep/ .el-input__icon {
+    line-height: 24px;
+  }
+  .info-wrapper /deep/ .el-select {
+    color: #ACACAC;
+  }
+  .cancel-btn {
+    width: 50%;
+    height: 31px;
+    border: 1px solid rgba(112,112,112,1);
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+    border-radius: 2px 0px 0px 2px;
+    font-size: 12px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 7px;
+    color: rgba(47,48,54,1);
+    margin-right: 0;
+    margin-top: 20px;
+  }
+  .save-btn {
+    width: 50%;
+    height: 31px;
+    border: 1px solid #5887FF;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+    border-radius: 2px 0px 0px 2px;
+    font-size: 12px;
+    font-family: PingFang SC;
+    font-weight: 400;
+    line-height: 7px;
+    color: #5887FF;
+    margin-left: 0;
+  }
+  .info-wrapper /deep/ .el-input.is-disabled .el-input__inner {
+    color: #ACACAC;
+  }
+  .info-wrapper /deep/ .el-textarea.is-disabled .el-textarea__inner {
+    color: #ACACAC;
+  }
+  .info-wrapper /deep/ .el-input__inner::-webkit-input-placeholder {
+    color: #ACACAC;
+  }
+  .info-wrapper /deep/ .el-input__inner::-moz-placeholder {
+      color: #ACACAC;
+  }
+  .info-wrapper /deep/ .el-input__inner::-ms-input-placeholder {
+      color: #ACACAC;
+  }
+  .info-wrapper /deep/ input:focus {
+    border-color: #5887FF;
+    color: #5887FF;
+  }
+  .info-wrapper /deep/ textarea:focus {
+    border-color: #5887FF;
+    color: #5887FF;
+  }
+
 </style>
