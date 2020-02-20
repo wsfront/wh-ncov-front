@@ -145,10 +145,7 @@
             <!-- @TODO use EndhospitalDetail EndhospitalEdit-->
 
                 <edit-hospital :ref="mychild + hospital.id" ></edit-hospital>
-              <div class="info-wrapper">
-                <div class="other-msg-title">补充说明</div>
-                <div class="other-msg">todo: api to get district list</div>
-              </div>
+
             <!-- @TODO -->
             </div>
           </div>

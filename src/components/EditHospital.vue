@@ -32,7 +32,7 @@
           <el-option
             v-for="item in options"
             :key="item.value"
-            :label="item.label"
+            :label="item.value"
             :value="item.value"
           >
           </el-option>
@@ -66,7 +66,7 @@
       </div>
       <div v-else>
         <el-button @click="goCancel" class="cancel-btn">取消</el-button>
-        <el-button @click="goSave" class="save-btn">保存</el-button>
+        <el-button @click="goSave" :disabled="saveBtn" class="save-btn">保存</el-button>
       </div>
     </div>
   </div>
@@ -75,8 +75,8 @@
 <script>
 export default {
   data() {
-    //   console.log('ddd',this)
     return {
+      token: localStorage.getItem('token'),
       info: [
         {
           type: "switch",
@@ -160,15 +160,40 @@ export default {
         }
       ],
       readonly: true,
+      saveBtn: false,
+      originData: null,
       options: [{
-        value: '江汉区',
-        label: '江汉区'
+        value: '江岸区'
       }, {
-        value: '洪山区',
-        label: '洪山区'
+        value: '江汉区'
       }, {
-        value: '东湖高新开发区',
-        label: '东湖高新开发区'
+        value: '硚口区'
+      }, {
+        value: '汉阳区'
+      }, {
+        value: '武昌区'
+      }, {
+        value: '青山区'
+      }, {
+        value: '洪山区'
+      }, {
+        value: '蔡甸区'
+      }, {
+        value: '江夏区'
+      }, {
+        value: '黄陂区'
+      }, {
+        value: '新洲区'
+      }, {
+        value: '东西湖区'
+      }, {
+        value: '汉南区'
+      }, {
+        value: '东湖高新技术开发区'
+      }, {
+        value: '经济技术开发区'
+      }, {
+        value: '临空港开发区'
       }]
     };
   },
@@ -177,21 +202,67 @@ export default {
       this.$emit("back");
     },
     goEdit() {
-      console.log(this.info)
       this.readonly = false;
     },
     goCancel() {
-      Object.assign(this.info, this.current);
+      Object.assign(this.info, this.originData);
       this.readonly = true;
     },
-    goSave() { },
-    updateData(v) {
+    async goSave() {
+      this.saveBtn = true
+      let {hospitalData, phoneData} = this.dataHandle()
+      await this.sendData(2, hospitalData)
+      await this.sendData(1, phoneData)
+      this.saveBtn = false
+      this.readonly = true
+    },
+    sendData(type, data) {
+      let params = Object.assign(data, {type})
+      this.$http
+        .post("/wh/admin/manage?", params, {headers: {'access-token': this.token}})
+        .then(function(response) {
+          if (response.data.code === "0000") {
+            console.log(response.data)
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    dataHandle() {
+      let [type, isPhoneChange, isHospitalChange, phoneData, hospitalData] = [0, false, false, {}, {}]; // eslint-disable-line no-unused-vars
       this.info.forEach(item => {
-        item.value = v[item.key]
+        switch (item.key) {
+          case "verify":
+           let value = item.value ? 1 : 0
+           isHospitalChange = this.originData["verify"] === value ? isHospitalChange : true
+           hospitalData = Object.assign(hospitalData, {"verify": value})
+           break
+          case "phones":
+            // isPhoneChange = this.originData["phones"] === item.value ? isPhoneChange : true
+            phoneData = Object.assign(phoneData, {"phone_list": item.value})
+           break
+          default:
+            isHospitalChange = this.originData[item.key] === item.value ? isHospitalChange : true
+          hospitalData = Object.assign(hospitalData, {[item.key]: item.value})
+        }
+      })
+      return {hospitalData, phoneData}
+    },
+    updateData(v) {
+      this.originData = Object.assign({}, v)
+      this.info.forEach(item => {
+        switch (item.key) {
+          case "verify":
+           item.value = v[item.key] === 1
+           break
+        default:
+            item.value = v[item.key]
+        }
       })
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
   .info-wrapper /deep/.el-form-item--small{
