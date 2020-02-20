@@ -147,7 +147,7 @@
                 <edit-hospital :ref="mychild + hospital.id" ></edit-hospital>
               <div class="info-wrapper">
                 <div class="other-msg-title">补充说明</div>
-                <div class="other-msg">todo detail</div>
+                <div class="other-msg">todo: api to get district list</div>
               </div>
             <!-- @TODO -->
             </div>
@@ -341,12 +341,14 @@ export default {
       }
       let that = this;
       this.currentHospital = hospital;
+      this.$set(this.currentHospital, 'phones', [])
       hospital.show = true;
       this.$http
         .get("/wh/msg/phone?uuid=" + hospital.uuid)
         .then(function(response) {
           if (response.data.code === "0000") {
             that.currentHospital.phones = response.data.result;
+            that.$refs["mychild" + hospital.id][0].updateData(that.currentHospital);
           }
         })
         .catch(function(error) {
@@ -771,7 +773,7 @@ export default {
   white-space: nowrap;
 }
 .hospital-info {
-  border-top: solid #dcdfe6 1px;
+  // border-top: solid #dcdfe6 1px;
   width: 100%;
   background: rgba(255, 255, 255, 1);
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
