@@ -144,7 +144,7 @@
             <div class="hospital-info" v-show="hospital.show">
             <!-- @TODO use EndhospitalDetail EndhospitalEdit-->
 
-                <edit-hospital :ref="mychild + hospital.id" ></edit-hospital>
+                <edit-hospital :ref="mychild + hospital.id" @back="refreshList"></edit-hospital>
 
             <!-- @TODO -->
             </div>
@@ -324,6 +324,9 @@ export default {
         this.conditions = [];
         this.$refs.domFilter.click();
       }
+    },
+    refreshList() {
+      this.searchHospitalByOption();
     },
     changeShowPlace(visible) {
       this.showPlace = visible;

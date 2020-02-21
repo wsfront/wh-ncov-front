@@ -215,6 +215,7 @@ export default {
       await this.sendData(1, phoneData)
       this.saveBtn = false
       this.readonly = true
+      this.$emit("back");
     },
     sendData(type, data) {
       let params = Object.assign(data, {type})
@@ -247,6 +248,7 @@ export default {
             hospitalData = Object.assign(hospitalData, {[item.key]: item.value})
         }
       })
+      hospitalData = Object.assign(hospitalData, {'id': this.originData.id, 'name': this.originData.name})
       return {hospitalData, phoneData}
     },
     updateData(v) {
