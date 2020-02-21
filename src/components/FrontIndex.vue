@@ -14,7 +14,7 @@
           <span class="el-dropdown-link">
             <div class="btn long" :class="{act:showPlace}">
               <i class="el-icon-location" :class="itemSelected ? 'btn-icon-act' : 'btn-icon'"></i>
-              <div :class="itemSelected ? 'btn-text-act' : 'btn-text'">{{itemSelected ? areas.selected : '城区'}}</div>
+              <div :class="itemSelected ? 'btn-text-act' : 'btn-text'">{{itemSelected ? areas.selected : '选择城区'}}</div>
             </div>
           </span>
           <el-dropdown-menu slot="dropdown"  class="city-filter-dialog">
@@ -48,14 +48,14 @@
           @visible-change="changeShowFilter"
         >
           <div
-            class="btn small"
+            class="btn long"
             :class="{ act: shouldHighlightFilterButton }"
             ref="domFilter"
           >
             <!-- <img class="btn-icon" src="../assets/filter.png"> -->
             <!-- <img class="btn-icon" src="../assets/filter-act.png"> -->
             <i class="el-icon-s-operation"></i>
-            <div class="btn-text">筛选</div>
+            <div class="btn-text">筛选医院</div>
           </div>
           <el-dropdown-menu slot="dropdown" class="hospital-filter-dialog">
             <!-- <el-checkbox :value="allConditionChecked" @change="checkAllFilterCondition">全部医院信息</el-checkbox> -->
@@ -103,7 +103,7 @@
         <div class="search-con" :class="{ act: shouldHighlightSearchBar }">
           <input
             v-model="hospitalname"
-            placeholder="请输入医院名字"
+            placeholder="搜索医院名字"
             @focus="input_active = true"
             @blur="input_active = false"
           />
