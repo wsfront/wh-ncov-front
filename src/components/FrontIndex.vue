@@ -133,10 +133,16 @@
               :class="{ shadow: !hospital.show }"
               @click="hospital.show = !hospital.show"
             >
-              <i
-                class="el-collapse-item__arrow el-icon-arrow-right hospital-icon"
-                :class="{ 'is-active': hospital.show }"
-              ></i>
+              <img
+                v-if="!hospital.show"
+                class="arrow_icon_right"
+                src="../assets/arrow_right.png"
+              />
+              <img
+                v-if="hospital.show"
+                class="arrow_icon_down"
+                src="../assets/arrow_down.png"
+              />
               <div class="info-container">
                 <div class="name">{{ hospital.name }}</div>
                 <div class="info-text">
@@ -914,4 +920,15 @@ export default {
     border: none;
     margin: 5px 10px 10px 10px;
 }
+.arrow_icon_right {
+    width: 8.5px;
+    height: 10px;
+    margin: 10px 12px 0 12px;
+}
+.arrow_icon_down {
+    width: 12px;
+    height: 6px;
+    margin: 12px 12px 0 9px;
+}
+
 </style>
