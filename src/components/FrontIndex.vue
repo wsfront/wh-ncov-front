@@ -169,7 +169,8 @@
                 />
               </div>
               <div class="info-wrapper">
-                <div class="other-msg-title">补充说明</div>
+                <!-- <div class="other-msg-title ">补充说明</div> -->
+                <button class="additional-desc">补充说明</button>
                 <div class="other-msg">{{ hospital.remark }}</div>
               </div>
               <div class="info-wrapper">
@@ -901,5 +902,16 @@ export default {
   line-height: 20px;
   color: rgba(172, 172, 172, 1);
   opacity: 1;
+}
+.additional-desc {
+    width: 68px;
+    height: 20px;
+    background: rgba(88,135,255,1);
+    border-radius: 2px;
+    color: #fff;
+    font-size: 12px;
+    box-shadow: none;
+    border: none;
+    margin: 5px 10px 10px 10px;
 }
 </style>
