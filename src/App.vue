@@ -32,6 +32,12 @@ export default {
       sessionStorage.setItem("lastUpdateTime", time);
       this.lastUpdateTime = time;
     });
+    let showLaunch = sessionStorage.getItem("isNoLaunch");
+    if (!showLaunch) {
+      sessionStorage.setItem("isNoLaunch", false)
+    } else {
+      sessionStorage.setItem("isNoLaunch", true)
+    }
   }
 };
 </script>
