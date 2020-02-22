@@ -235,17 +235,17 @@ export default {
       this.info.forEach(item => {
         switch (item.key) {
           case "verify":
-           let value = item.value ? 1 : 0
-           isHospitalChange = this.originData["verify"] === value ? isHospitalChange : true
-           hospitalData = Object.assign(hospitalData, {"verify": value})
-           break
+            let value = item.value ? 1 : 0
+            isHospitalChange = this.originData["verify"] === value ? isHospitalChange : true
+            hospitalData = Object.assign(hospitalData, {"verify": value})
+            break
           case "phones":
             // isPhoneChange = this.originData["phones"] === item.value ? isPhoneChange : true
             phoneData = Object.assign(phoneData, {"phone_list": item.value})
-           break
+            break
           default:
             isHospitalChange = this.originData[item.key] === item.value ? isHospitalChange : true
-          hospitalData = Object.assign(hospitalData, {[item.key]: item.value})
+            hospitalData = Object.assign(hospitalData, {[item.key]: item.value})
         }
       })
       hospitalData = Object.assign(hospitalData, {'id': this.originData.id, 'name': this.originData.name})
@@ -256,9 +256,9 @@ export default {
       this.info.forEach(item => {
         switch (item.key) {
           case "verify":
-           item.value = v[item.key] === 1
-           break
-        default:
+            item.value = v[item.key] === 1
+            break
+          default:
             item.value = v[item.key]
         }
       })

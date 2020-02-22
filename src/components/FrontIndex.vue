@@ -14,7 +14,7 @@
           <span class="el-dropdown-link">
             <div class="btn long" :class="{act:showPlace}">
               <i class="el-icon-location" :class="itemSelected ? 'btn-icon-act' : 'btn-icon'"></i>
-              <div :class="itemSelected ? 'btn-text-act' : 'btn-text'">{{itemSelected ? areas.selected : '城区'}}</div>
+              <div :class="itemSelected ? 'btn-text-act' : 'btn-text'">{{itemSelected ? areas.selected : '选择城区'}}</div>
             </div>
           </span>
           <el-dropdown-menu slot="dropdown"  class="city-filter-dialog">
@@ -48,14 +48,14 @@
           @visible-change="changeShowFilter"
         >
           <div
-            class="btn small"
+            class="btn long"
             :class="{ act: shouldHighlightFilterButton }"
             ref="domFilter"
           >
             <!-- <img class="btn-icon" src="../assets/filter.png"> -->
             <!-- <img class="btn-icon" src="../assets/filter-act.png"> -->
             <i class="el-icon-s-operation"></i>
-            <div class="btn-text">筛选</div>
+            <div class="btn-text">筛选医院</div>
           </div>
           <el-dropdown-menu slot="dropdown" class="hospital-filter-dialog">
             <!-- <el-checkbox :value="allConditionChecked" @change="checkAllFilterCondition">全部医院信息</el-checkbox> -->
@@ -103,7 +103,7 @@
         <div class="search-con" :class="{ act: shouldHighlightSearchBar }">
           <input
             v-model="hospitalname"
-            placeholder="请输入医院名字"
+            placeholder="搜索医院名字"
             @focus="input_active = true"
             @blur="input_active = false"
           />
@@ -133,10 +133,16 @@
               :class="{ shadow: !hospital.show }"
               @click="hospital.show = !hospital.show"
             >
-              <i
-                class="el-collapse-item__arrow el-icon-arrow-right hospital-icon"
-                :class="{ 'is-active': hospital.show }"
-              ></i>
+              <img
+                v-if="!hospital.show"
+                class="arrow_icon_right"
+                src="../assets/arrow_right.png"
+              />
+              <img
+                v-if="hospital.show"
+                class="arrow_icon_down"
+                src="../assets/arrow_down.png"
+              />
               <div class="info-container">
                 <div class="name">{{ hospital.name }}</div>
                 <div class="info-text">
@@ -169,7 +175,8 @@
                 />
               </div>
               <div class="info-wrapper">
-                <div class="other-msg-title">补充说明</div>
+                <!-- <div class="other-msg-title ">补充说明</div> -->
+                <button class="additional-desc">补充说明</button>
                 <div class="other-msg">{{ hospital.remark }}</div>
               </div>
               <div class="info-wrapper">
@@ -902,4 +909,26 @@ export default {
   color: rgba(172, 172, 172, 1);
   opacity: 1;
 }
+.additional-desc {
+    width: 68px;
+    height: 20px;
+    background: rgba(88,135,255,1);
+    border-radius: 2px;
+    color: #fff;
+    font-size: 12px;
+    box-shadow: none;
+    border: none;
+    margin: 5px 10px 10px 10px;
+}
+.arrow_icon_right {
+    width: 8.5px;
+    height: 10px;
+    margin: 10px 12px 0 12px;
+}
+.arrow_icon_down {
+    width: 12px;
+    height: 6px;
+    margin: 12px 12px 0 9px;
+}
+
 </style>
