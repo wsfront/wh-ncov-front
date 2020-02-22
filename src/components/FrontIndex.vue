@@ -192,6 +192,9 @@
             </div>
           </div>
         </div>
+        <div class="no-data-text" v-else>
+          暂未找到符合的医院
+        </div>
       </transition>
     </div>
     <el-dialog
@@ -658,13 +661,14 @@ export default {
   padding: 0;
 }
 .wh-container {
-  background: #fafafa;
+  position: relative;
+  height: calc(100vh - 81px);
   color: #333;
   padding: 10px 16px;
 }
-.hearder-block {
-  margin: 0 -16px 15px -16px;
-}
+// .hearder-block {
+//   margin: 0 -16px 15px -16px;
+// }
 .el-row {
   margin-bottom: 10px;
 }
@@ -715,7 +719,7 @@ export default {
   padding: 3px 8px;
 }
 .hospital-search-bar {
-  margin: 6px -4px 0 -4px;
+  margin: 15px -4px 0 -4px;
   display: flex;
   justify-content: space-between;
 }
@@ -811,6 +815,9 @@ export default {
   width: 13px;
   height: 13px;
 }
+.hospital-list {
+  padding-bottom: 60px;
+}
 .filter-con {
   width: 300px;
 }
@@ -841,6 +848,7 @@ export default {
 .info-container {
   position: relative;
   width: 100%;
+  padding-right: 25px;
 }
 .info-container .name {
   margin-bottom: 5px;
@@ -977,5 +985,13 @@ export default {
   position: absolute;
   bottom: 2vh;
   left: 40%;
+}
+.no-data-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  color: #acacac;
 }
 </style>
