@@ -235,17 +235,28 @@
     <div
       v-show="isShowLaunch"
       class="el-dialog__wrapper wh-dialog"
+      <<<<<<<
+      HEAD
       style="z-index: 2020"
     >
+      ======= style="z-index: 2020"> >>>>>>> test push pro1
       <!-- <div class="launch-mask">
         <img class="launch-logo" src="@/assets/launch.jpg" />
       </div> -->
       <div role="dialog" class="launch-main" @touchmove.prevent>
+        <<<<<<< HEAD
         <img
           v-on:click="isShowLaunch = false"
           class="launch-btn"
           src="@/assets/btn_launch.png"
         />
+        =======
+        <img
+          v-on:click="isShowLaunch = false"
+          class="launch-btn"
+          src="@/assets/btn_launch.png"
+        />
+        >>>>>>> test push pro1
         <a href="https://shimo.im/docs/5zAZVlQzEDc5FgAo/read">
           <img class="launch-aboutme" src="@/assets/aboutme.png" />
         </a>
