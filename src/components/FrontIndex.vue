@@ -218,6 +218,20 @@
     >
       {{ currentHospital.address }}
     </el-dialog>
+    <div
+      v-show="isShowLaunch"
+      class="el-dialog__wrapper wh-dialog"
+      style="z-index: 2020">
+      <!-- <div class="launch-mask">
+        <img class="launch-logo" src="@/assets/launch.jpg" />
+      </div> -->
+      <div role="dialog" class="launch-main" @touchmove.prevent>
+        <img v-on:click="isShowLaunch = false" class="launch-btn" src="@/assets/btn_launch.png" />
+        <a href="https://shimo.im/docs/5zAZVlQzEDc5FgAo/read">
+          <img class="launch-aboutme" src="@/assets/aboutme.png" />
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -325,7 +339,8 @@ export default {
       showPlace: false,
       showFilter: false,
       activeName: "hospital",
-      itemSelected: false
+      itemSelected: false,
+      isShowLaunch: !sessionStorage.getItem("isNoLaunch")
     };
   },
   computed: {
@@ -532,6 +547,10 @@ export default {
     }
   },
   mounted() {
+    let timer = setTimeout(() => {
+      this.isShowLaunch = false;
+      clearTimeout(timer);
+    }, 3000);
     this.searchHospitalByOption();
   }
 };
@@ -924,4 +943,32 @@ export default {
     margin: 7px 12px 0 9px;
 }
 
+.launch-mask {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+.launch-logo {
+  width: 75%;
+  margin-top: 25vh;
+}
+.launch-btn {
+  width: 58%;
+  margin-top: 54vh;
+}
+.launch-main {
+  width: 100%;
+  height: 100%;
+  background-image: url('/static/img/bg_launch.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+.launch-aboutme {
+  width: 20%;
+  position: absolute;
+  bottom: 2vh;
+  left: 40%;
+}
 </style>
