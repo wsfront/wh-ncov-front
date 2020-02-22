@@ -733,6 +733,7 @@ export default {
 .info-container {
   position: relative;
   width: 100%;
+  padding-right: 25px;
 }
 .info-container .name {
   margin-bottom: 5px;
@@ -776,7 +777,7 @@ export default {
   // border-top: solid #dcdfe6 1px;
   width: 100%;
   background: rgba(255, 255, 255, 1);
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px -4px 10px rgba(0, 0, 0, 0.1);
   opacity: 1;
   border-radius: 2px;
   text-align: left;
