@@ -101,23 +101,16 @@
           </el-dropdown-menu>
         </el-dropdown>
         <div class="search-con" :class="{ act: shouldHighlightSearchBar }">
+          <img
+            class="btn-icon"
+            src="../assets/search.png"
+          />
           <input
             v-model="hospitalname"
             placeholder="请输入医院名字"
             @focus="input_active = true"
             @blur="input_active = false"
-          />
-          <img
-            v-if="!input_active"
-            class="btn-icon"
-            src="../assets/search.png"
-            @click="searchHospital"
-          />
-          <img
-            v-if="input_active"
-            class="btn-icon"
-            src="../assets/search-blue.png"
-            @click="searchHospital"
+            @keyup.enter="searchHospital"
           />
         </div>
       </div>
@@ -771,7 +764,7 @@ export default {
   white-space: nowrap;
   text-overflow: ellipsis;
   outline: none;
-  margin-right: 4px;
+  margin-left: 4px;
 }
 .hospital-search-bar .search-con.act {
   border: $--color-primary 1px solid;
