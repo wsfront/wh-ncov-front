@@ -133,7 +133,6 @@
           >
             <div
               class="hospital-con-title"
-              :class="{ shadow: !hospital.show }"
               @click="hospital.show = !hospital.show"
             >
               <img
@@ -793,6 +792,8 @@ export default {
 }
 .hospital-con {
   font-size: 0;
+  background: #fff;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 }
 .hospital-icon {
   display: block;
@@ -812,9 +813,6 @@ export default {
   justify-content: space-between;
   align-items: top;
   box-sizing: border-box;
-}
-.hospital-con-title.shadow {
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 }
 .info-container {
   position: relative;
@@ -859,10 +857,8 @@ export default {
   white-space: nowrap;
 }
 .hospital-info {
-  border-top: solid #dcdfe6 1px;
   width: 100%;
   background: rgba(255, 255, 255, 1);
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
   opacity: 1;
   border-radius: 2px;
   text-align: left;
