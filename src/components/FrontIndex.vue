@@ -916,12 +916,12 @@ export default {
 .arrow_icon_right {
     width: 8.5px;
     height: 10px;
-    margin: 10px 12px 0 12px;
+    margin: 5px 12px 0 12px;
 }
 .arrow_icon_down {
     width: 12px;
     height: 6px;
-    margin: 12px 12px 0 9px;
+    margin: 7px 12px 0 9px;
 }
 
 </style>
