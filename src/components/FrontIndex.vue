@@ -192,6 +192,9 @@
             </div>
           </div>
         </div>
+        <div class="no-data-text" v-else>
+          暂未找到符合的医院
+        </div>
       </transition>
     </div>
     <el-dialog
@@ -229,6 +232,25 @@
     >
       {{ currentHospital.address }}
     </el-dialog>
+    <div
+      v-show="isShowLaunch"
+      class="el-dialog__wrapper wh-dialog"
+      style="z-index: 2020"
+    >
+      <!-- <div class="launch-mask">
+        <img class="launch-logo" src="@/assets/launch.jpg" />
+      </div> -->
+      <div role="dialog" class="launch-main" @touchmove.prevent>
+        <img
+          v-on:click="isShowLaunch = false"
+          class="launch-btn"
+          src="@/assets/btn_launch.png"
+        />
+        <a href="https://shimo.im/docs/5zAZVlQzEDc5FgAo/read">
+          <img class="launch-aboutme" src="@/assets/aboutme.png" />
+        </a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -336,7 +358,8 @@ export default {
       showPlace: false,
       showFilter: false,
       activeName: "hospital",
-      itemSelected: false
+      itemSelected: false,
+      isShowLaunch: !sessionStorage.getItem("isNoLaunch")
     };
   },
   computed: {
@@ -538,6 +561,10 @@ export default {
     }
   },
   mounted() {
+    let timer = setTimeout(() => {
+      this.isShowLaunch = false;
+      clearTimeout(timer);
+    }, 3000);
     this.searchHospitalByOption();
   }
 };
@@ -634,13 +661,14 @@ export default {
   padding: 0;
 }
 .wh-container {
-  background: #fafafa;
+  position: relative;
+  height: calc(100vh - 81px);
   color: #333;
   padding: 10px 16px;
 }
-.hearder-block {
-  margin: 0 -16px 15px -16px;
-}
+// .hearder-block {
+//   margin: 0 -16px 15px -16px;
+// }
 .el-row {
   margin-bottom: 10px;
 }
@@ -691,7 +719,7 @@ export default {
   padding: 3px 8px;
 }
 .hospital-search-bar {
-  margin: 6px -4px 0 -4px;
+  margin: 15px -4px 0 -4px;
   display: flex;
   justify-content: space-between;
 }
@@ -787,6 +815,9 @@ export default {
   width: 13px;
   height: 13px;
 }
+.hospital-list {
+  padding-bottom: 60px;
+}
 .filter-con {
   width: 300px;
 }
@@ -817,6 +848,7 @@ export default {
 .info-container {
   position: relative;
   width: 100%;
+  padding-right: 25px;
 }
 .info-container .name {
   margin-bottom: 5px;
@@ -925,5 +957,41 @@ export default {
   width: 12px;
   height: 6px;
   margin: 7px 12px 0 9px;
+}
+.launch-mask {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+.launch-logo {
+  width: 75%;
+  margin-top: 25vh;
+}
+.launch-btn {
+  width: 58%;
+  margin-top: 54vh;
+}
+.launch-main {
+  width: 100%;
+  height: 100%;
+  background-image: url("/static/img/bg_launch.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: #fff;
+}
+.launch-aboutme {
+  width: 20%;
+  position: absolute;
+  bottom: 2vh;
+  left: 40%;
+}
+.no-data-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12px;
+  color: #acacac;
 }
 </style>
