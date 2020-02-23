@@ -391,10 +391,6 @@ export default {
       return this.filterConditions.filter(i => i.type === "other");
     },
     allConditionChecked() {
-      console.log(
-        "999",
-        this.filterConditions.length === this.conditions.length
-      );
       return this.filterConditions.length === this.conditions.length;
     },
     /**
