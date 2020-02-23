@@ -786,7 +786,7 @@ export default {
   color: $--color-primary;
 }
 .hospital-search-bar .search-con {
-  width: 200px;
+  width: 50%;
   height: 30px;
   padding: 0 6px;
   background: white;
