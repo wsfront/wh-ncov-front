@@ -59,16 +59,18 @@
           placement="bottom-start"
           @visible-change="changeShowFilter"
         >
-          <div
-            class="btn long"
-            :class="{ act: shouldHighlightFilterButton }"
-            ref="domFilter"
-          >
-            <!-- <img class="btn-icon" src="../assets/filter.png"> -->
-            <!-- <img class="btn-icon" src="../assets/filter-act.png"> -->
-            <i class="el-icon-s-operation"></i>
-            <div class="btn-text">筛选医院</div>
-          </div>
+          <span class="el-dropdown-link">
+            <div
+              class="btn long"
+              :class="{ act: shouldHighlightFilterButton }"
+              ref="domFilter"
+            >
+              <!-- <img class="btn-icon" src="../assets/filter.png"> -->
+              <!-- <img class="btn-icon" src="../assets/filter-act.png"> -->
+              <i class="el-icon-s-operation"></i>
+              <div class="btn-text">筛选医院</div>
+            </div>
+          </span>
           <el-dropdown-menu slot="dropdown" class="hospital-filter-dialog">
             <!-- <el-checkbox :value="allConditionChecked" @change="checkAllFilterCondition">全部医院信息</el-checkbox> -->
             <!-- <el-dropdown-item
@@ -359,7 +361,7 @@ export default {
       showFilter: false,
       activeName: "hospital",
       itemSelected: false,
-      isOpening: true,
+      isOpening: false,
       isShowLaunch: false
     };
   },
@@ -560,6 +562,7 @@ export default {
     fetchShowLaunch() {
       let showLaunch = sessionStorage.getItem("isNoLaunch");
       if (!showLaunch) {
+        this.isOpening = true;
         this.$http
           .get("/wh/msg/popup")
           .then(response => {
@@ -832,7 +835,7 @@ export default {
   height: 13px;
 }
 .hospital-list {
-  padding-bottom: 60px;
+  padding-bottom: 50px;
 }
 .filter-con {
   width: 300px;
@@ -956,7 +959,7 @@ export default {
   opacity: 1;
 }
 .additional-desc {
-  width: 68px;
+  // width: 68px;
   height: 20px;
   background: rgba(88, 135, 255, 1);
   border-radius: 2px;

@@ -6,18 +6,14 @@
     </header>
     <router-view />
     <footer class="footer">
-      <el-row :gutter="10" style="width: 100%;">
-        <el-col :span="12">
-          <a href="https://shimo.im/docs/5zAZVlQzEDc5FgAo">
-            <img class="text-icon" src="@/assets/icon_atme.png" />
-          </a>
-        </el-col>
-        <el-col :span="12">
-          <a href="https://shimo.im/forms/XRkgJOZm4YCrFbqM/fill">
-            <img class="text-icon" src="@/assets/icon_fb.png" />
-          </a>
-        </el-col>
-      </el-row>
+      <a href="https://shimo.im/docs/5zAZVlQzEDc5FgAo">
+        <img class="text-icon" src="@/assets/icon_atme.png" />
+        关于我们
+      </a>
+      <a href="https://shimo.im/forms/XRkgJOZm4YCrFbqM/fill">
+        <img class="text-icon" src="@/assets/icon_fb.png" />
+        反馈意见
+      </a>
     </footer>
   </div>
 </template>
@@ -73,11 +69,11 @@ body {
   width: 100%;
 }
 .footer {
-  /* height: 36px;
-  border-radius: 16px 16px 0 0; */
-  /* background: white; */
+  height: 36px;
+  border-radius: 16px 16px 0 0;
+  background: white;
   position: fixed;
-  /* box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.05); */
+  box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.05);
   bottom: 0;
   left: 0;
   width: 100%;
@@ -89,19 +85,21 @@ body {
   box-sizing: border-box;
 }
 .footer a {
-  margin-bottom: 10px;
-  padding: 8px 0;
+  /* margin-bottom: 10px; */
+  /* padding: 8px 0; */
   color: #acacac;
   text-decoration: none;
   font-size: 12px;
   font-weight: bold;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0px 0 10px rgba(0, 0, 0, 0.1);
-  display: block;
+  /* background: white; */
+  /* border-radius: 8px; */
+  /* box-shadow: 0px 0 10px rgba(0, 0, 0, 0.1); */
+  /* display: block; */
 }
 .footer a .text-icon {
-  height: 18px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: bottom;
 }
 .footer a:hover {
   cursor: pointer;
