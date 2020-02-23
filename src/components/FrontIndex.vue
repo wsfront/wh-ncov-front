@@ -959,7 +959,7 @@ export default {
   opacity: 1;
 }
 .additional-desc {
-  width: 68px;
+  // width: 68px;
   height: 20px;
   background: rgba(88, 135, 255, 1);
   border-radius: 2px;
