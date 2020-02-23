@@ -59,16 +59,18 @@
           placement="bottom-start"
           @visible-change="changeShowFilter"
         >
-          <div
-            class="btn long"
-            :class="{ act: shouldHighlightFilterButton }"
-            ref="domFilter"
-          >
-            <!-- <img class="btn-icon" src="../assets/filter.png"> -->
-            <!-- <img class="btn-icon" src="../assets/filter-act.png"> -->
-            <i class="el-icon-s-operation"></i>
-            <div class="btn-text">筛选医院</div>
-          </div>
+          <span class="el-dropdown-link">
+            <div
+              class="btn long"
+              :class="{ act: shouldHighlightFilterButton }"
+              ref="domFilter"
+            >
+              <!-- <img class="btn-icon" src="../assets/filter.png"> -->
+              <!-- <img class="btn-icon" src="../assets/filter-act.png"> -->
+              <i class="el-icon-s-operation"></i>
+              <div class="btn-text">筛选医院</div>
+            </div>
+          </span>
           <el-dropdown-menu slot="dropdown" class="hospital-filter-dialog">
             <!-- <el-checkbox :value="allConditionChecked" @change="checkAllFilterCondition">全部医院信息</el-checkbox> -->
             <!-- <el-dropdown-item
@@ -177,13 +179,13 @@
                 />
               </div>
               <div class="info-wrapper">
+                <div class="other-msg-title">医院地址</div>
+                <div class="other-msg">{{ hospital.address }}</div>
+              </div>
+              <div class="info-wrapper">
                 <!-- <div class="other-msg-title ">补充说明</div> -->
                 <button class="additional-desc">补充说明</button>
                 <div class="other-msg">{{ hospital.remark }}</div>
-              </div>
-              <div class="info-wrapper">
-                <div class="other-msg-title">医院地址</div>
-                <div class="other-msg">{{ hospital.address }}</div>
               </div>
               <!-- <div class="address-btn" @click="showAddressDialog(hospital)">
                 <i class="el-icon-location" />
@@ -233,19 +235,19 @@
       {{ currentHospital.address }}
     </el-dialog>
     <div
-      v-show="isShowLaunch"
+      v-show="isOpening || isShowLaunch"
       class="el-dialog__wrapper wh-dialog"
-      style="z-index: 2020"
-    >
-      <!-- <div class="launch-mask">
+      style="z-index: 2020">
+      <div
+        v-show="isOpening"
+        class="launch-mask">
         <img class="launch-logo" src="@/assets/launch.jpg" />
-      </div> -->
-      <div role="dialog" class="launch-main" @touchmove.prevent>
-        <img
-          v-on:click="isShowLaunch = false"
-          class="launch-btn"
-          src="@/assets/btn_launch.png"
-        />
+      </div>
+      <div v-show="isShowLaunch"
+        role="dialog"
+        class="launch-main"
+        @touchmove.prevent>
+        <img v-on:click="isShowLaunch = false" class="launch-btn" src="@/assets/btn_launch.png" />
         <a href="https://shimo.im/docs/5zAZVlQzEDc5FgAo/read">
           <img class="launch-aboutme" src="@/assets/aboutme.png" />
         </a>
@@ -362,7 +364,8 @@ export default {
       showFilter: false,
       activeName: "hospital",
       itemSelected: false,
-      isShowLaunch: !sessionStorage.getItem("isNoLaunch")
+      isOpening: false,
+      isShowLaunch: false
     };
   },
   computed: {
@@ -557,13 +560,33 @@ export default {
           console.log(error);
           this.visibleOption = false;
         });
+    },
+
+    fetchShowLaunch() {
+      let showLaunch = sessionStorage.getItem("isNoLaunch");
+      if (!showLaunch) {
+        this.isOpening = true;
+        this.$http
+          .get("/wh/msg/popup")
+          .then(response => {
+            this.isOpening = false;
+            if (response.data.code === "0000") {
+              this.isShowLaunch = true;
+              let timer = setTimeout(() => {
+                this.isShowLaunch = false;
+                clearTimeout(timer);
+              }, 3000);
+            } else {
+              sessionStorage.setItem("isNoLaunch", true)
+            }
+          })
+      } else {
+        this.isOpening = false;
+      }
     }
   },
   mounted() {
-    let timer = setTimeout(() => {
-      this.isShowLaunch = false;
-      clearTimeout(timer);
-    }, 3000);
+    this.fetchShowLaunch();
     this.searchHospitalByOption();
   }
 };
@@ -815,7 +838,7 @@ export default {
   height: 13px;
 }
 .hospital-list {
-  padding-bottom: 60px;
+  padding-bottom: 50px;
 }
 .filter-con {
   width: 300px;
@@ -888,8 +911,10 @@ export default {
   white-space: nowrap;
 }
 .hospital-info {
+  // border-top: solid #dcdfe6 1px;
   width: 100%;
   background: rgba(255, 255, 255, 1);
+  // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   opacity: 1;
   border-radius: 2px;
   text-align: left;
@@ -937,7 +962,7 @@ export default {
   opacity: 1;
 }
 .additional-desc {
-  width: 68px;
+  // width: 68px;
   height: 20px;
   background: rgba(88, 135, 255, 1);
   border-radius: 2px;
