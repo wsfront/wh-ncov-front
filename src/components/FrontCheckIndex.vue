@@ -111,8 +111,11 @@
 
 <script>
 import HeaderLayout from "./HeaderLayout";
+import {wxShare} from "../common/mixins";
+
 export default {
   name: "FrontCheckIndex",
+  mixins: [wxShare],
   components: { HeaderLayout },
   data() {
     return {

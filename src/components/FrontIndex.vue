@@ -257,8 +257,11 @@
 <script>
 import HospitalInfoItem from "./HospitalInfoItem";
 import HeaderLayout from "./HeaderLayout";
+import {wxShare} from "../common/mixins";
+
 export default {
   name: "FrontIndex",
+  mixins: [wxShare],
   components: { HospitalInfoItem, HeaderLayout },
   data() {
     return {
