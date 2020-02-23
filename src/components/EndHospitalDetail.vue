@@ -71,8 +71,10 @@
 </template>
 
 <script>
+import {wxShare} from "../common/mixins";
 export default {
   name: 'EndDetail',
+  mixins: [wxShare],
   data () {
     return {
       params: {},

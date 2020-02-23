@@ -157,9 +157,12 @@
 
 <script>
 import HeaderLayout from "./HeaderLayout";
-import EditHospital from './EditHospital'
+import EditHospital from './EditHospital';
+import {wxShare} from "../common/mixins";
+
 export default {
   name: "EndIndex",
+  mixins: [wxShare],
   components: { HeaderLayout, EditHospital },
   data() {
     return {
