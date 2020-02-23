@@ -3,7 +3,7 @@
     <div class="hospital-info-item">
       <div class="name">{{ name }}</div>
       <div :class="data | parentTrans">
-        {{data | wordTrans(name)}} <i :class="data | iconTrans" />
+        {{ data | wordTrans(name) }} <i :class="data | iconTrans" />
       </div>
     </div>
   </div>
@@ -14,19 +14,15 @@ export default {
   filters: {
     wordTrans(value, name) {
       let isNormal = name.indexOf("孕妇") > -1;
-      let dataWord = "";
+      const splitValue = value.split(",");
       switch (value) {
         case "是":
-          dataWord = isNormal ? "接收" : "可做";
-          break;
+          return isNormal ? "接收" : "可做";
         case "否":
-          dataWord = isNormal ? "不接收" : "不可做";
-          break;
+          return isNormal ? "不接收" : "不可做";
         default:
-          dataWord = value.substr(2);
-          break;
+          return splitValue[1] || splitValue[0];
       }
-      return dataWord;
     },
     iconTrans(value) {
       let dataIcon = "";
