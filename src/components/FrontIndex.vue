@@ -361,7 +361,7 @@ export default {
       showFilter: false,
       activeName: "hospital",
       itemSelected: false,
-      isOpening: true,
+      isOpening: false,
       isShowLaunch: false
     };
   },
@@ -562,6 +562,7 @@ export default {
     fetchShowLaunch() {
       let showLaunch = sessionStorage.getItem("isNoLaunch");
       if (!showLaunch) {
+        this.isOpening = true;
         this.$http
           .get("/wh/msg/popup")
           .then(response => {
