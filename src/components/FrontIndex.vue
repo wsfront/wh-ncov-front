@@ -222,13 +222,17 @@
       {{ currentHospital.address }}
     </el-dialog>
     <div
-      v-show="isShowLaunch"
       class="el-dialog__wrapper wh-dialog"
       style="z-index: 2020">
-      <!-- <div class="launch-mask">
+      <div
+        v-show="isOpening"
+        class="launch-mask">
         <img class="launch-logo" src="@/assets/launch.jpg" />
-      </div> -->
-      <div role="dialog" class="launch-main" @touchmove.prevent>
+      </div>
+      <div v-show="isShowLaunch"
+        role="dialog"
+        class="launch-main"
+        @touchmove.prevent>
         <img v-on:click="isShowLaunch = false" class="launch-btn" src="@/assets/btn_launch.png" />
         <a href="https://shimo.im/docs/5zAZVlQzEDc5FgAo/read">
           <img class="launch-aboutme" src="@/assets/aboutme.png" />
@@ -343,7 +347,8 @@ export default {
       showFilter: false,
       activeName: "hospital",
       itemSelected: false,
-      isShowLaunch: !sessionStorage.getItem("isNoLaunch")
+      isOpening: true,
+      isShowLaunch: false
     };
   },
   computed: {
@@ -547,13 +552,32 @@ export default {
           console.log(error);
           this.visibleOption = false;
         });
+    },
+
+    fetchShowLaunch() {
+      let showLaunch = sessionStorage.getItem("isNoLaunch");
+      if (!showLaunch) {
+        this.$http
+          .get("/wh/msg/popup")
+          .then(response => {
+            this.isOpening = false;
+            if (response.data.code === "0000") {
+              this.isShowLaunch = true;
+              let timer = setTimeout(() => {
+                this.isShowLaunch = false;
+                clearTimeout(timer);
+              }, 3000);
+            } else {
+              sessionStorage.setItem("isNoLaunch", true)
+            }
+          })
+      } else {
+        this.isOpening = false;
+      }
     }
   },
   mounted() {
-    let timer = setTimeout(() => {
-      this.isShowLaunch = false;
-      clearTimeout(timer);
-    }, 3000);
+    this.fetchShowLaunch();
     this.searchHospitalByOption();
   }
 };
