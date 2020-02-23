@@ -4,27 +4,48 @@
       <HeaderLayout :activeIndex="1" />
     </div>
     <div class="wh-tab">
-      <div class="wh-tab-item" @click="activeIndex=1" :class="{ active: activeIndex === 1 }">建议必查产检项目</div>
-      <div class="wh-tab-item" @click="activeIndex=0" :class="{ active: activeIndex === 0 }">发热孕妇确诊流程</div>
+      <div
+        class="wh-tab-item"
+        @click="activeIndex = 1"
+        :class="{ active: activeIndex === 1 }"
+      >
+        建议必查产检项目
+      </div>
+      <div
+        class="wh-tab-item"
+        @click="activeIndex = 0"
+        :class="{ active: activeIndex === 0 }"
+      >
+        发热孕妇确诊流程
+      </div>
     </div>
     <div class="block">
       <el-row class="wh-content-container" v-show="activeIndex === 0">
         <el-col :span="24" class="wh-intro">
           <!--<h3>发热孕妇确诊流程</h3>-->
           <p class="wh-intro-p">
-              因各地对疑似/感染孕妇的就诊规定不一，以下流程仅供武汉地区参考，社区登记报备流程请咨询所在社区。
+            因各地对疑似/感染孕妇的就诊规定不一，以下流程仅供武汉地区参考，社区登记报备流程请咨询所在社区。
           </p>
         </el-col>
         <el-col class="process-box">
-          <div class="process-title">确诊流程图<span style="color: #666;padding-left: 4px;">(点击图片可放大)</span></div>
-          <img @click="dialogShow=true" width="100%" src="@/assets/check-flow.png" />
+          <div class="process-title">
+            确诊流程图<span style="color: #666;padding-left: 4px;"
+              >(点击图片可放大)</span
+            >
+          </div>
+          <img
+            @click="dialogShow = true"
+            width="100%"
+            src="@/assets/check-flow.png"
+          />
         </el-col>
       </el-row>
       <div class="wh-content-container" v-show="activeIndex === 1">
         <div class="wh-intro" style="margin-bottom: 15px">
           <!--<h3>疫期建议必查产检项目</h3>-->
           <p class="wh-intro-p">
-            疫情期为降低因出门而遭受病毒感染的可能，我们建议孕期 妈妈们按下方的孕期表安排最低限度共五次的常规检查。每次产检由：常规产检、血检和以下特殊检查组成。<br/><br/>
+            疫情期为降低因出门而遭受病毒感染的可能，我们建议孕期
+            妈妈们按下方的孕期表安排最低限度共五次的常规检查。每次产检由：常规产检、血检和以下特殊检查组成。<br /><br />
           </p>
           <p class="wh-intro-p">
             这里的信息仅囊括最基础的产检项目，若诊断为高危产妇，请加强产检，与医生沟通来制定适合个人情况的治疗方案。
@@ -43,7 +64,10 @@
             <span class="label">早孕期（11-14周）</span>
             <span class="title">建议在12周检测</span>
           </div>
-          <p class="content">血常规、尿常规、B超、 NT、 无创DNA、甲状腺、传染病筛查、血型、凝血功能、生化全套、血清铁蛋白</p>
+          <p class="content">
+            血常规、尿常规、B超、 NT、
+            无创DNA、甲状腺、传染病筛查、血型、凝血功能、生化全套、血清铁蛋白
+          </p>
         </div>
 
         <div class="info-box">
@@ -51,7 +75,9 @@
             <span class="label">中孕期（20-28周）</span>
             <span class="title">建议在24周检测。主要做大排畸</span>
           </div>
-          <p class="content">血常规、尿常规、唐氏、糖尿病筛查、B超大畸形排查、肝肾功能</p>
+          <p class="content">
+            血常规、尿常规、唐氏、糖尿病筛查、B超大畸形排查、肝肾功能
+          </p>
         </div>
 
         <div class="info-box">
@@ -59,7 +85,9 @@
             <span class="label">晚孕期（30-32周）</span>
             <span class="title">建议在32周检测。并发症再评估风险</span>
           </div>
-          <p class="content">血常规、尿常规、小排畸超声、ICP筛查、肝肾功能空腹血糖</p>
+          <p class="content">
+            血常规、尿常规、小排畸超声、ICP筛查、肝肾功能空腹血糖
+          </p>
         </div>
 
         <div class="info-box">
@@ -69,11 +97,14 @@
           </div>
           <p class="content">产科超声检查、NST检查</p>
         </div>
-
       </div>
     </div>
-    <div class="dialog" v-if="dialogShow" >
-      <img @click="dialogShow=false" width="100%" src="@/assets/check-flow.png" />
+    <div class="dialog" v-if="dialogShow">
+      <img
+        @click="dialogShow = false"
+        width="100%"
+        src="@/assets/check-flow.png"
+      />
     </div>
   </div>
 </template>
@@ -112,7 +143,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
 .dialog {
   position: fixed;
   z-index: 99;
