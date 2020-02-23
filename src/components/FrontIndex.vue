@@ -1,7 +1,7 @@
 <template>
   <div class="wh-container">
     <div class="hearder-block">
-    <HeaderLayout :activeIndex="0" />
+      <HeaderLayout :activeIndex="0" />
     </div>
     <div name="hospital">
       <div class="hospital-search-bar">
@@ -12,16 +12,21 @@
           @visible-change="changeShowPlace"
         >
           <span class="el-dropdown-link">
-            <div class="btn long" :class="{act:showPlace}">
-              <i class="el-icon-location" :class="itemSelected ? 'btn-icon-act' : 'btn-icon'"></i>
-              <div :class="itemSelected ? 'btn-text-act' : 'btn-text'">{{itemSelected ? areas.selected : '选择城区'}}</div>
+            <div class="btn long" :class="{ act: showPlace }">
+              <i
+                class="el-icon-location"
+                :class="itemSelected ? 'btn-icon-act' : 'btn-icon'"
+              ></i>
+              <div :class="itemSelected ? 'btn-text-act' : 'btn-text'">
+                {{ itemSelected ? areas.selected : "选择城区" }}
+              </div>
             </div>
           </span>
-          <el-dropdown-menu slot="dropdown"  class="city-filter-dialog">
+          <el-dropdown-menu slot="dropdown" class="city-filter-dialog">
             <el-dropdown-item
               icon="el-icon-menu"
               command="全部"
-              :class="{ act: itemSelected&&areas.selected==='全部'}"
+              :class="{ act: itemSelected && areas.selected === '全部' }"
               >全部城区</el-dropdown-item
             >
             <el-divider></el-divider>
@@ -35,7 +40,14 @@
               >{{ area }}</el-dropdown-item
             >
             <div class="sub-text">其他城区</div>
-            <el-dropdown-item icon="el-icon-place" v-for="area in areas.other" :key="area" :command="area" :class="{act : areas.selected === area}">{{ area }}</el-dropdown-item>
+            <el-dropdown-item
+              icon="el-icon-place"
+              v-for="area in areas.other"
+              :key="area"
+              :command="area"
+              :class="{ act: areas.selected === area }"
+              >{{ area }}</el-dropdown-item
+            >
             <!-- <el-dropdown-item icon="el-icon-place" v-for="area in areas.new" :key="area" :command="area" :class=" areas.selected === area ? 'act' : 'new-area'">{{ area }}</el-dropdown-item>
             <el-dropdown-item icon="el-icon-place" v-for="area in areas.noData" :key="area" :command="area" :class=" areas.selected === area ? 'act' : 'no-data-area'">{{ area }}</el-dropdown-item> -->
           </el-dropdown-menu>
@@ -100,14 +112,12 @@
             </div>
           </el-dropdown-menu>
         </el-dropdown>
-        <div class="search-con" :class="{ act: shouldHighlightSearchBar }">
-          <img
-            class="btn-icon"
-            src="../assets/search.png"
-          />
+        <div class="search-con" :class="{ act: input_active }">
+          <img class="btn-icon" src="../assets/search.png" />
           <input
             v-model="hospitalname"
             placeholder="搜索医院名字"
+            ref="domInput"
             @focus="input_active = true"
             @blur="input_active = false"
             @keyup.enter="searchHospital"
@@ -123,7 +133,6 @@
           >
             <div
               class="hospital-con-title"
-              :class="{ shadow: !hospital.show }"
               @click="hospital.show = !hospital.show"
             >
               <img
@@ -206,11 +215,13 @@
           <a class="wh-phone-btn" v-bind:href="'tel:' + phone.phone">{{
             phone.phone | phonestr(1)
           }}</a
-          ><span style="color:$--color-text-regular;display:block">{{ phone.phone | phonestr(2) }}</span>
+          ><span style="color:$--color-text-regular;display:block">{{
+            phone.phone | phonestr(2)
+          }}</span>
         </el-col>
       </el-row>
       <!-- <div slot="footer" class="dialog-footer"> -->
-        <!--<el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>-->
+      <!--<el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>-->
       <!-- </div> -->
     </el-dialog>
     <el-dialog
@@ -364,8 +375,8 @@ export default {
           curr.type === "accept"
             ? sofar.accept.push(curr)
             : curr.symbol === "receive_check"
-              ? sofar.delive.push(curr)
-              : sofar.check.push(curr);
+            ? sofar.delive.push(curr)
+            : sofar.check.push(curr);
           return sofar;
         }, initdata);
     },
@@ -391,12 +402,6 @@ export default {
      */
     shouldHighlightFilterButton() {
       return this.conditions.length !== 0 || this.showFilter;
-    },
-    /**
-     * highlight the text search bar when input is not empty.
-     */
-    shouldHighlightSearchBar() {
-      return this.hospitalname !== "" || this.input_active;
     }
   },
   filters: {
@@ -496,6 +501,7 @@ export default {
     handleOpen() {},
     handleClose() {},
     searchHospital() {
+      this.$refs.domInput.blur();
       let params = "all=0";
       if (this.hospitalname !== "") {
         params = params + "&name=" + this.hospitalname;
@@ -836,6 +842,8 @@ export default {
 }
 .hospital-con {
   font-size: 0;
+  background: #fff;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 }
 .hospital-icon {
   display: block;
@@ -855,9 +863,6 @@ export default {
   justify-content: space-between;
   align-items: top;
   box-sizing: border-box;
-}
-.hospital-con-title.shadow {
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 }
 .info-container {
   position: relative;
@@ -954,27 +959,26 @@ export default {
   opacity: 1;
 }
 .additional-desc {
-    width: 68px;
-    height: 20px;
-    background: rgba(88,135,255,1);
-    border-radius: 2px;
-    color: #fff;
-    font-size: 12px;
-    box-shadow: none;
-    border: none;
-    margin: 5px 10px 10px 10px;
+  width: 68px;
+  height: 20px;
+  background: rgba(88, 135, 255, 1);
+  border-radius: 2px;
+  color: #fff;
+  font-size: 12px;
+  box-shadow: none;
+  border: none;
+  margin: 5px 10px 10px 10px;
 }
 .arrow_icon_right {
-    width: 8.5px;
-    height: 10px;
-    margin: 5px 12px 0 12px;
+  width: 8.5px;
+  height: 10px;
+  margin: 5px 12px 0 12px;
 }
 .arrow_icon_down {
-    width: 12px;
-    height: 6px;
-    margin: 7px 12px 0 9px;
+  width: 12px;
+  height: 6px;
+  margin: 7px 12px 0 9px;
 }
-
 .launch-mask {
   position: relative;
   width: 100%;
@@ -992,7 +996,7 @@ export default {
 .launch-main {
   width: 100%;
   height: 100%;
-  background-image: url('/static/img/bg_launch.jpg');
+  background-image: url("/static/img/bg_launch.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-color: #fff;
