@@ -233,6 +233,7 @@
       {{ currentHospital.address }}
     </el-dialog>
     <div
+      v-show="isOpening || isShowLaunch"
       class="el-dialog__wrapper wh-dialog"
       style="z-index: 2020">
       <div
