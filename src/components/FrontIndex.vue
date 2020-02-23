@@ -391,10 +391,6 @@ export default {
       return this.filterConditions.filter(i => i.type === "other");
     },
     allConditionChecked() {
-      console.log(
-        "999",
-        this.filterConditions.length === this.conditions.length
-      );
       return this.filterConditions.length === this.conditions.length;
     },
     /**
@@ -805,7 +801,7 @@ export default {
   color: $--color-primary;
 }
 .hospital-search-bar .search-con {
-  width: 200px;
+  width: 50%;
   height: 30px;
   padding: 0 6px;
   background: white;
