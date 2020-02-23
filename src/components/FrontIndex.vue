@@ -999,7 +999,7 @@ export default {
 .launch-main {
   width: 100%;
   height: 100%;
-  background-image: url("/static/img/bg_launch.jpg");
+  background-image: url("https://static.qingclouds.cn/bg_launch.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-color: #fff;
