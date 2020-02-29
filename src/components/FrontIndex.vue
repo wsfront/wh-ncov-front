@@ -234,15 +234,16 @@
     >
       {{ currentHospital.address }}
     </el-dialog>
+    <!-- isOpening ||  -->
     <div
-      v-show="isOpening || isShowLaunch"
+      v-show="isShowLaunch"
       class="el-dialog__wrapper wh-dialog"
       style="z-index: 2020">
-      <div
+      <!-- <div
         v-show="isOpening"
         class="launch-mask">
         <img class="launch-logo" src="@/assets/launch.jpg" />
-      </div>
+      </div> -->
       <div v-show="isShowLaunch"
         role="dialog"
         class="launch-main"
@@ -364,7 +365,7 @@ export default {
       showFilter: false,
       activeName: "hospital",
       itemSelected: false,
-      isOpening: false,
+      // isOpening: false,
       isShowLaunch: false
     };
   },
@@ -565,24 +566,32 @@ export default {
     fetchShowLaunch() {
       let showLaunch = sessionStorage.getItem("isNoLaunch");
       if (!showLaunch) {
-        this.isOpening = true;
+        // this.isOpening = true;
         this.$http
           .get("/wh/msg/popup")
           .then(response => {
-            this.isOpening = false;
-            if (response.data.code === "0000") {
-              this.isShowLaunch = true;
-              let timer = setTimeout(() => {
-                this.isShowLaunch = false;
-                clearTimeout(timer);
-              }, 3000);
+            // this.isOpening = false;
+            if (response.data.code !== "0000") {
+              let img = new Image();
+              img.src = "/static/img/bg_launch.jpg";
+              let imgLoad = setInterval(() => {
+                if (img.complete) {
+                  clearInterval(imgLoad);
+                  this.isShowLaunch = true;
+                  let timer = setTimeout(() => {
+                    this.isShowLaunch = false;
+                    clearTimeout(timer);
+                  }, 3000);
+                }
+              }, 50);
             } else {
               sessionStorage.setItem("isNoLaunch", true)
             }
           })
-      } else {
-        this.isOpening = false;
       }
+      // else {
+      //   this.isOpening = false;
+      // }
     }
   },
   mounted() {
