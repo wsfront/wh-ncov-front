@@ -571,7 +571,7 @@ export default {
           .get("/wh/msg/popup")
           .then(response => {
             // this.isOpening = false;
-            if (response.data.code !== "0000") {
+            if (response.data.code === "0000") {
               let img = new Image();
               img.src = "/static/img/bg_launch.jpg";
               let imgLoad = setInterval(() => {
