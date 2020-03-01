@@ -12,10 +12,15 @@ Vue.use(Router)
 const loginCheck = (to, from, next) => {
   const tokenDate = localStorage.getItem('tokendate');
   const token = localStorage.getItem('token');
-  if (!(tokenDate && token)) return next('/Login');
+  const isLogin = to.path === '/Login';
+  if (!(tokenDate && token)) return isLogin ? next() : next('/Login');
   const nowDate = new Date();
   const timeDiff = Math.floor((nowDate.getTime() - new Date(tokenDate).getTime()) / (24 * 3600 * 1000));
-  return timeDiff >= 30 ? next('/Login') : next();
+  return timeDiff >= 30
+    ? isLogin
+      ? next() : next('/Login')
+    : isLogin
+      ? next('/EndIndex') : next();
 }
 
 export default new Router({
@@ -56,7 +61,8 @@ export default new Router({
     {
       path: '/Login',
       name: 'Login',
-      component: Login
+      component: Login,
+      beforeEnter: loginCheck
     }
   ]
 })
