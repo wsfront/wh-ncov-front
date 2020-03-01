@@ -93,7 +93,16 @@
             </el-checkbox-group>
             <el-divider></el-divider>
             <div class="pop-bottom">
-              <span class="pop-bottom__btn" @click="conditions = []">重置</span>
+              <span
+                class="pop-bottom__btn"
+                @click="
+                  () => {
+                    conditions = [];
+                    searchHospitalByOption(true);
+                  }
+                "
+                >重置</span
+              >
               <span
                 class="pop-bottom__btn active"
                 @click="
