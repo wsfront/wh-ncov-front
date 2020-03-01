@@ -96,7 +96,12 @@
               <span class="pop-bottom__btn" @click="conditions = []">重置</span>
               <span
                 class="pop-bottom__btn active"
-                @click="searchHospitalByOption(true)"
+                @click="
+                  () => {
+                    this.hospitalname = '';
+                    searchHospitalByOption(true);
+                  }
+                "
                 >确认查看</span
               >
             </div>
