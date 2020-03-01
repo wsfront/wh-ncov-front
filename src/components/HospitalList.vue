@@ -130,7 +130,10 @@
         </div>
       </div>
       <transition name="fade">
-        <div class="hospital-list" v-if="hospitallist.length">
+        <div class="no-data-text" v-if="!hospitallist">
+          <img class="loading-icon" src="../assets/loading.gif" />
+        </div>
+        <div class="hospital-list" v-else-if="hospitallist.length">
           <div
             class="hospital-con"
             v-for="(hospital, i) in hospitallist"
@@ -342,7 +345,7 @@ export default {
       activeNames: ["1"],
       hospitalname: "",
       input_active: false,
-      hospitallist: [],
+      hospitallist: null,
       visiblemenu: false,
       visibleOption: false,
       radio1: "全部",
@@ -548,7 +551,7 @@ export default {
     },
 
     fetchHospitalInfo(params) {
-      this.hospitallist = [];
+      this.hospitallist = null;
       this.$http
         .get("/wh/msg/hospital?page_num=1&page_size=100&" + params)
         .then(response => {
@@ -974,5 +977,9 @@ export default {
   transform: translate(-50%, -50%);
   font-size: 12px;
   color: #acacac;
+}
+.loading-icon {
+  width: 66px;
+  height: auto;
 }
 </style>
