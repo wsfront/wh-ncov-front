@@ -98,6 +98,7 @@
                 @click="
                   () => {
                     conditions = [];
+                    this.hospitalname = '';
                     searchHospitalByOption(true);
                   }
                 "
@@ -481,6 +482,7 @@ export default {
       }, 2000);
     },
     handleSelect(item) {
+      console.log(666, item);
       this.showPlace = !this.showPlace;
       this.itemSelected = true;
       this.areas.selected = item;
@@ -524,7 +526,7 @@ export default {
     searchHospitalByOption(filterClick) {
       let that = this;
       var params = "";
-      if (!this.conditions.length) {
+      if (!this.conditions.length && this.areas.selected === "全部") {
         params = "all=1";
       } else {
         params = "all=2";
