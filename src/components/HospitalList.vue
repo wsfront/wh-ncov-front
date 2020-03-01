@@ -195,7 +195,7 @@
                   <div class="other-msg-title">医院地址</div>
                   <div class="other-msg">{{ hospital.address }}</div>
                 </div>
-                <div class="info-wrapper">
+                <div class="info-wrapper" v-if="!!hospital.remark">
                   <button class="additional-desc">补充说明</button>
                   <div class="other-msg">{{ hospital.remark }}</div>
                 </div>
@@ -404,7 +404,6 @@ export default {
   },
   filters: {
     phonestr(str, idx) {
-      console.log(idx);
       if (!str) return "";
       if (str.indexOf("转") > -1) {
         let tempArr = str.split("转");
@@ -432,7 +431,11 @@ export default {
     clickHospital(hospital) {
       hospital.show = !hospital.show;
       return this.fetchPhoneInfo(hospital).then(() => {
-        this.$refs["mychild" + hospital.id][0].updateData(this.currentHospital);
+        if (this.EndType) {
+          this.$refs["mychild" + hospital.id][0].updateData(
+            this.currentHospital
+          );
+        }
       });
     },
     toggleFilterCondition(condition) {
