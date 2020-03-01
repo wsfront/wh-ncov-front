@@ -130,7 +130,10 @@
         </div>
       </div>
       <transition name="fade">
-        <div class="hospital-list" v-if="hospitallist.length">
+        <div class="no-data-text" v-if="!hospitallist">
+          <img class="loading-icon" src="../assets/loading.gif" />
+        </div>
+        <div class="hospital-list" v-else-if="hospitallist.length">
           <div
             class="hospital-con"
             v-for="(hospital, i) in hospitallist"
@@ -195,7 +198,7 @@
                   <div class="other-msg-title">医院地址</div>
                   <div class="other-msg">{{ hospital.address }}</div>
                 </div>
-                <div class="info-wrapper">
+                <div class="info-wrapper" v-if="!!hospital.remark">
                   <button class="additional-desc">补充说明</button>
                   <div class="other-msg">{{ hospital.remark }}</div>
                 </div>
@@ -342,7 +345,7 @@ export default {
       activeNames: ["1"],
       hospitalname: "",
       input_active: false,
-      hospitallist: [],
+      hospitallist: null,
       visiblemenu: false,
       visibleOption: false,
       radio1: "全部",
@@ -404,7 +407,6 @@ export default {
   },
   filters: {
     phonestr(str, idx) {
-      console.log(idx);
       if (!str) return "";
       if (str.indexOf("转") > -1) {
         let tempArr = str.split("转");
@@ -432,7 +434,11 @@ export default {
     clickHospital(hospital) {
       hospital.show = !hospital.show;
       return this.fetchPhoneInfo(hospital).then(() => {
-        this.$refs["mychild" + hospital.id][0].updateData(this.currentHospital);
+        if (this.EndType) {
+          this.$refs["mychild" + hospital.id][0].updateData(
+            this.currentHospital
+          );
+        }
       });
     },
     toggleFilterCondition(condition) {
@@ -545,7 +551,7 @@ export default {
     },
 
     fetchHospitalInfo(params) {
-      this.hospitallist = [];
+      this.hospitallist = null;
       this.$http
         .get("/wh/msg/hospital?page_num=1&page_size=100&" + params)
         .then(response => {
@@ -971,5 +977,9 @@ export default {
   transform: translate(-50%, -50%);
   font-size: 12px;
   color: #acacac;
+}
+.loading-icon {
+  width: 66px;
+  height: auto;
 }
 </style>
