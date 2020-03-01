@@ -240,30 +240,6 @@
       >
         {{ currentHospital.address }}
       </el-dialog>
-      <div
-        v-show="isOpening || isShowLaunch"
-        class="el-dialog__wrapper wh-dialog"
-        style="z-index: 2020"
-      >
-        <div v-show="isOpening" class="launch-mask">
-          <img class="launch-logo" src="@/assets/launch.jpg" />
-        </div>
-        <div
-          v-show="isShowLaunch"
-          role="dialog"
-          class="launch-main"
-          @touchmove.prevent
-        >
-          <img
-            v-on:click="isShowLaunch = false"
-            class="launch-btn"
-            src="@/assets/btn_launch.png"
-          />
-          <a href="https://shimo.im/docs/5zAZVlQzEDc5FgAo/read">
-            <img class="launch-aboutme" src="@/assets/aboutme.png" />
-          </a>
-        </div>
-      </div>
     </template>
   </div>
 </template>
@@ -378,9 +354,7 @@ export default {
       showPlace: false,
       showFilter: false,
       activeName: "hospital",
-      itemSelected: false,
-      isOpening: false,
-      isShowLaunch: false
+      itemSelected: false
     };
   },
   computed: {
@@ -529,8 +503,6 @@ export default {
       });
       this.fetchHospitalInfo(params);
     },
-    handleOpen() {},
-    handleClose() {},
     refreshList() {
       this.searchHospitalByOption();
     },
@@ -592,31 +564,9 @@ export default {
           console.log(error);
           this.visibleOption = false;
         });
-    },
-
-    fetchShowLaunch() {
-      let showLaunch = sessionStorage.getItem("isNoLaunch");
-      if (!showLaunch) {
-        this.isOpening = true;
-        this.$http.get("/wh/msg/popup").then(response => {
-          this.isOpening = false;
-          if (response.data.code === "0000") {
-            this.isShowLaunch = true;
-            let timer = setTimeout(() => {
-              this.isShowLaunch = false;
-              clearTimeout(timer);
-            }, 3000);
-          } else {
-            sessionStorage.setItem("isNoLaunch", true);
-          }
-        });
-      } else {
-        this.isOpening = false;
-      }
     }
   },
   mounted() {
-    this.fetchShowLaunch();
     this.searchHospitalByOption();
   }
 };
@@ -1011,34 +961,6 @@ export default {
   width: 12px;
   height: 6px;
   margin: 7px 12px 0 9px;
-}
-.launch-mask {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-}
-.launch-logo {
-  width: 75%;
-  margin-top: 25vh;
-}
-.launch-btn {
-  width: 58%;
-  margin-top: 54vh;
-}
-.launch-main {
-  width: 100%;
-  height: 100%;
-  background-image: url("https://static.qingclouds.cn/bg_launch.jpg");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-color: #fff;
-}
-.launch-aboutme {
-  width: 20%;
-  position: absolute;
-  bottom: 2vh;
-  left: 40%;
 }
 .no-data-text {
   position: absolute;
