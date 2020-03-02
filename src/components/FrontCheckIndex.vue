@@ -3,108 +3,128 @@
     <div class="hearder-block">
       <HeaderLayout :activeIndex="1" />
     </div>
-    <div class="wh-tab">
-      <div
-        class="wh-tab-item"
-        @click="activeIndex = 1"
-        :class="{ active: activeIndex === 1 }"
-      >
-        建议必查产检项目
-      </div>
-      <div
-        class="wh-tab-item"
-        @click="activeIndex = 0"
-        :class="{ active: activeIndex === 0 }"
-      >
-        发热孕妇确诊流程
-      </div>
+    <div v-if="activeIndex === 0" class="launch-main">
+      <img @click="handleNav('prev1_01')" class="launch-btn" src="@/assets/btn_epi.png" />
+      <img @click="handleNav('prev5_01')" class="launch-btn mt-10" src="@/assets/btn_won.png" />
     </div>
-    <div class="block">
-      <el-row class="wh-content-container" v-show="activeIndex === 0">
-        <el-col :span="24" class="wh-intro">
-          <!--<h3>发热孕妇确诊流程</h3>-->
-          <p class="wh-intro-p">
-            因各地对疑似/感染孕妇的就诊规定不一，以下流程仅供武汉地区参考，社区登记报备流程请咨询所在社区。
-          </p>
-        </el-col>
-        <el-col class="process-box">
-          <div class="process-title">
-            确诊流程图<span style="color: #666;padding-left: 4px;"
-              >(点击图片可放大)</span
-            >
-          </div>
-          <img
-            @click="dialogShow = true"
-            width="100%"
-            src="@/assets/check-flow.png"
-          />
-        </el-col>
-      </el-row>
-      <div class="wh-content-container" v-show="activeIndex === 1">
-        <div class="wh-intro" style="margin-bottom: 15px">
-          <!--<h3>疫期建议必查产检项目</h3>-->
-          <p class="wh-intro-p">
-            疫情期为降低因出门而遭受病毒感染的可能，我们建议孕期
-            妈妈们按下方的孕期表安排最低限度共五次的常规检查。每次产检由：常规产检、血检和以下特殊检查组成。<br /><br />
-          </p>
-          <p class="wh-intro-p">
-            这里的信息仅囊括最基础的产检项目，若诊断为高危产妇，请加强产检，与医生沟通来制定适合个人情况的治疗方案。
-          </p>
-        </div>
-        <div class="info-box">
-          <div class="head">
-            <span class="label">早孕期（6-8周）</span>
-            <span class="title">确定宫内妊娠，预约NT</span>
-          </div>
-          <p class="content">血/尿HCG、彩超、 宫颈TCT + HPV</p>
-        </div>
-
-        <div class="info-box">
-          <div class="head">
-            <span class="label">早孕期（11-14周）</span>
-            <span class="title">建议在12周检测</span>
-          </div>
-          <p class="content">
-            血常规、尿常规、B超、 NT、
-            无创DNA、甲状腺、传染病筛查、血型、凝血功能、生化全套、血清铁蛋白
-          </p>
-        </div>
-
-        <div class="info-box">
-          <div class="head">
-            <span class="label">中孕期（20-28周）</span>
-            <span class="title">建议在24周检测。主要做大排畸</span>
-          </div>
-          <p class="content">
-            血常规、尿常规、唐氏、糖尿病筛查、B超大畸形排查、肝肾功能
-          </p>
-        </div>
-
-        <div class="info-box">
-          <div class="head">
-            <span class="label">晚孕期（30-32周）</span>
-            <span class="title">建议在32周检测。并发症再评估风险</span>
-          </div>
-          <p class="content">
-            血常规、尿常规、小排畸超声、ICP筛查、肝肾功能空腹血糖
-          </p>
-        </div>
-
-        <div class="info-box">
-          <div class="head">
-            <span class="label">晚孕期（36-41周）</span>
-            <span class="title">建议36-37周检测。决定分娩方式和时间</span>
-          </div>
-          <p class="content">产科超声检查、NST检查</p>
-        </div>
-      </div>
-    </div>
-    <div class="dialog" v-if="dialogShow">
+    <div v-else class="block">
+      <img @click="activeIndex = 0" class="home-btn" src="@/assets/btn_home.png" />
       <img
-        @click="dialogShow = false"
-        width="100%"
-        src="@/assets/check-flow.png"
-      />
+        v-if="!isShow"
+        @click="isShow = true"
+        class="catalog-btn"
+        src="@/assets/prev_catalog.png" />
+      <el-drawer
+        :visible.sync="isShow"
+        size="64%"
+        :modal="false"
+        :with-header="false">
+        <div class="catalog">
+          <div class="catalog-header">
+            <h2>孕妇防疫手册</h2>
+            <span @click="goAnchor('prev1_01')">回到顶部<i class="el-icon-arrow-right"></i></span>
+          </div>
+          <ul class="catalog-body" style="margin-top: 14px;">
+            <li
+              v-for="item in catalogs"
+              :key="item.code"
+              class="catalog-item mt-6">
+              <span
+                @click="goAnchor(item.code)"
+                class="catalog-title">{{ item.name }}</span>
+              <ul
+                v-if="item.children && item.children.length"
+                class="catalog-body">
+                <li
+                  v-for="citem in item.children"
+                  :key="citem.code"
+                   class="catalog-item">
+                  <span @click="goAnchor(citem.code)">{{ citem.name }}</span>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </el-drawer>
+      <div class="booklet">
+        <div id="prev1_01" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev1/prev1_01.jpg" />
+        </div>
+        <div id="prev1_02" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev1/prev1_02.jpg" />
+        </div>
+        <div id="prev1_03" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev1/prev1_03.jpg" />
+        </div>
+        <div id="prev1_04" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev1/prev1_04.jpg" />
+        </div>
+        <div id="prev1_05" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev1/prev1_05.jpg" />
+        </div>
+        <div id="prev1_06" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev1/prev1_06.jpg" />
+          <a class="goto" href="http://yf.shcnwl.cn/"></a>
+        </div>
+
+        <div id="prev2_01" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev2/prev2_01.jpg" />
+        </div>
+        <div id="prev2_02" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev2/prev2_02.jpg" />
+        </div>
+        <div id="prev2_03" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev2/prev2_03.jpg" />
+        </div>
+
+        <div id="prev3_01" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev3/prev3_01.jpg" />
+        </div>
+        <div id="prev3_02" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev3/prev3_02.jpg" />
+        </div>
+        <div id="prev3_03" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev3/prev3_03.jpg" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+
+        <div id="prev4_01" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev4/prev4_01.jpg" />
+        </div>
+        <div id="prev4_02" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev4/prev4_02.jpg" />
+        </div>
+        <div id="prev4_03" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev4/prev4_03.jpg" />
+        </div>
+
+        <div id="prev5_01" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev5/prev5_01.jpg" />
+        </div>
+        <div id="prev5_02" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev5/prev5_02.jpg" />
+        </div>
+        <div id="prev5_03" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev5/prev5_03.jpg" />
+        </div>
+        <div id="prev5_04" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev5/prev5_04.jpg" />
+        </div>
+        <div id="prev5_05" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev5/prev5_05.jpg" />
+        </div>
+        <div id="prev5_06" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev5/prev5_06.jpg" />
+        </div>
+
+        <div id="prev6_ref" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev6/prev6_ref.jpg" />
+        </div>
+        <div id="prev6_team" class="booklet-item">
+          <img class="booklet-img" src="/static/img/prev6/prev6_team.jpg" />
+          <a class="get-more" href="https://weibo.com/u/6892480749"></a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -119,27 +139,72 @@ export default {
   components: { HeaderLayout },
   data() {
     return {
-      activeIndex: 1,
-      activeNames: [],
-      dialogShow: false,
-      activeName: "obstetricCheck"
+      activeIndex: 0,
+      isShow: false,
+      catalogs: [
+        {
+          code: "prev1_01",
+          name: "一、产前防疫",
+          children: [
+            { code: "prev1_02", name: "1 产检频率" },
+            { code: "prev1_05", name: "2 产检防护" },
+            { code: "prev1_06", name: "3 防疫时期武汉孕产妇就诊指南" }
+          ]
+        },
+        {
+          code: "prev2_01",
+          name: "二、产后防疫",
+          children: [
+            { code: "prev2_02", name: "1 产后发热" },
+            { code: "prev2_03", name: "2 母乳喂养" }
+            // { code: "prev2_03", name: "3 感染孕妇康复后" }
+          ]
+        },
+        {
+          code: "prev3_01",
+          name: "三、心理抗疫",
+          children: [
+            { code: "prev3_02", name: "1 识别症状" },
+            { code: "prev3_03", name: "2 缓解方式" }
+          ]
+        },
+        {
+          code: "prev4_01",
+          name: "四、宝宝防疫",
+          children: [
+            { code: "prev4_02", name: "1 新生儿隔离" },
+            { code: "prev4_03", name: "2 宝宝防护和用品清洁" }
+          ]
+        },
+        {
+          code: "prev5_01",
+          name: "五、疑似/感染孕产妇须知",
+          children: [
+            { code: "prev5_02", name: "1 胸部CT检查" },
+            { code: "prev5_03", name: "2 接诊医院" },
+            { code: "prev5_04", name: "3 用药须知" },
+            { code: "prev5_05", name: "4 康复隔离" },
+            { code: "prev5_06", name: "5 宝宝隔离" }
+          ]
+        },
+        {
+          code: "prev6_ref",
+          name: "参考来源"
+        },
+        {
+          code: "prev6_team",
+          name: "手册制作团队"
+        }
+      ]
     };
   },
   methods: {
-    tabChange(activeNameParam) {
-      let routerPath = "/";
-      this.activeName = activeNameParam;
-      switch (activeNameParam) {
-        case "hospital":
-          routerPath = "/FrontIndex";
-          break;
-        case "obstetricCheck":
-          routerPath = "/FrontCheckIndex";
-          break;
-        default:
-          break;
-      }
-      this.$router.push(routerPath);
+    handleNav(selector) {
+      this.activeIndex = selector;
+    },
+    goAnchor(selector) {
+      this.isShow = false;
+      this.$el.querySelector('#' + selector).scrollIntoView();
     }
   }
 };
@@ -147,130 +212,118 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-.dialog {
-  position: fixed;
-  z-index: 99;
-  padding: 10px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  box-sizing: border-box;
-  background: #fafafa;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-.info-box {
-  padding: 0 15px;
-  display: block;
-  color: $--color-text-regular;
-  font-size: 12px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px;
-  margin-top: 10px;
-  background: #ffffff;
-}
-
-.info-box .head {
-  display: block;
-  align-items: center;
-  padding: 6px 0;
-  border-bottom: 1px solid #f0f0f0;
-  text-align: left;
-}
-.info-box .head .label {
-  font-weight: bold;
-  line-height: 20px;
-  /*display: inline-block;*/
-  margin: 0;
-  padding: 0;
-}
-.info-box .head .title {
-  line-height: 20px;
-  /*display: inline-block;*/
-}
-.info-box .content {
-  padding: 8px 0;
-  margin: 0;
-  text-align: left;
-}
 .hearder-block {
-  margin: 10px 0 5px;
-}
-.block {
-  padding: 10px 16px;
-}
-.wh-tab {
-  display: flex;
-  height: 36px;
-  line-height: 36px;
-  border-top: 1px solid $--color-text-placeholder;
-  border-bottom: 5px solid #f0f0f0;
-  font-size: 14px;
-  padding: 0 -16px;
-}
-.wh-tab-item {
-  flex: 1;
-  text-align: center;
-  color: #acacac;
-}
-.wh-tab-item.active {
-  color: #5887ff;
-}
-
-.process-title {
-  color: $--color-text-regular;
-  font-size: 12px;
-  height: 36px;
-  padding-left: 15px;
-  line-height: 36px;
-  font-weight: bold;
-  text-align: left;
-  border-bottom: 1px solid #f0f0f0;
-}
-
-.wh-content-container {
-  padding: 0px;
-}
-.process-box {
-  box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px;
-  background: #ffffff;
-}
-.wh-intro {
-  text-align: left;
-}
-.wh-intro-p {
-  margin: 10px 0;
-  line-height: 18px;
-  font-size: 12px;
-  color: $--color-text-regular;
-}
-.wh-collapse {
-  border: 0;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 10px 0 0;
 }
 .wh-container {
-  background: #fafafa;
+  position: relative;
+  height: calc(100vh - 82px);
   color: #333;
 }
-.wh-content-container .el-col-24 {
-  margin-bottom: 10px;
-}
-.el-divider--horizontal {
-  display: block;
-  height: 1px;
+.launch-main {
   width: 100%;
-  margin: 5px 0;
-}
-.el-collapse-item__header {
-  display: block;
-  line-height: 24px;
-  padding: 10px;
   height: 100%;
-  text-align: left;
+  background-image: url("/static/img/bg_antie.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: #fff;
 }
-.el-collapse-item__content {
-  text-align: left;
-  padding: 0 10px;
-  padding-bottom: 0px;
+.launch-btn {
+  width: 64%;
+  margin-top: 56vh;
+  &.mt-10 {
+    margin-top: 3vh;
+  }
+}
+.block {
+  height: 100%;
+  background: #faf1fa;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+.home-btn {
+  position: fixed;
+  width: 60px;
+  top: 80px;
+  left: 10px;
+  z-index: 1;
+}
+.catalog {
+  font-size: 14px;
+  color: #2f3036;
+  &-btn {
+    height: 60px;
+    position: fixed;
+    top: 50%;
+    margin-top: -30px;
+    right: 0;
+    z-index: 1;
+  }
+  &-header {
+    height: 44px;
+    position: relative;
+    border-bottom: 1px solid #e6e5e5;
+    h2 {
+      position: absolute;
+      left: 20px;
+      top: 2px;
+      font-size: 18px;
+      color: #453cd3;
+    }
+    span {
+      position: absolute;
+      right: 10px;
+      bottom: 2px;
+    }
+  }
+  &-body {
+    margin: 0 0 0 24px;
+    padding: 0;
+    text-align: left;
+    list-style: none;
+  }
+  &-item {
+    line-height: 28px;
+    &.mt-6 {
+      margin-top: 6px;
+    }
+  }
+  &-title {
+    color: #453cd3;
+  }
+}
+.booklet {
+  position: relative;
+  &-img {
+    width: 100%;
+    display: block;
+  }
+  &-item {
+    position: relative;
+  }
+}
+.goto {
+  width: 26.5%;
+  height: 5%;
+  position: absolute;
+  top: 38.7%;
+  left: 37.5%;
+  display: block;
+}
+.findme {
+  width: 32.25%;
+  height: 2.35%;
+  position: absolute;
+  left: 14%;
+  bottom: 8.35%;
+  display: block;
+}
+.get-more {
+  width: 32.2%;
+  height: 4.5%;
+  position: absolute;
+  right: 13.5%;
+  bottom: 17%;
+  display: block;
 }
 </style>
