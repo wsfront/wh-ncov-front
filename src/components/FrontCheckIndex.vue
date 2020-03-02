@@ -7,7 +7,7 @@
       <img @click="handleNav('prev1_01')" class="launch-btn" src="@/assets/btn_epi.png" />
       <img @click="handleNav('prev5_01')" class="launch-btn mt-10" src="@/assets/btn_won.png" />
     </div>
-    <div v-else class="block">
+    <div class="block">
       <img @click="activeIndex = 0" class="home-btn" src="@/assets/btn_home.png" />
       <img
         v-if="!isShow"
@@ -201,6 +201,7 @@ export default {
   methods: {
     handleNav(selector) {
       this.activeIndex = selector;
+      this.goAnchor(selector);
     },
     goAnchor(selector) {
       this.isShow = false;
@@ -221,12 +222,14 @@ export default {
   color: #333;
 }
 .launch-main {
+  position: fixed;
   width: 100%;
   height: 100%;
   background-image: url("/static/img/bg_antie.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-color: #fff;
+  z-index: 2;
 }
 .launch-btn {
   width: 64%;
