@@ -157,7 +157,6 @@ export default {
           children: [
             { code: "prev2_02", name: "1 产后发热" },
             { code: "prev2_03", name: "2 母乳喂养" }
-            // { code: "prev2_03", name: "3 感染孕妇康复后" }
           ]
         },
         {
@@ -183,7 +182,7 @@ export default {
             { code: "prev5_02", name: "1 胸部CT检查" },
             { code: "prev5_03", name: "2 接诊医院" },
             { code: "prev5_04", name: "3 用药须知" },
-            { code: "prev5_05", name: "4 康复隔离" },
+            { code: "prev5_05", name: "4 感染孕妇康复后" },
             { code: "prev5_06", name: "5 宝宝隔离" }
           ]
         },

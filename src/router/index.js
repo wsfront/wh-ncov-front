@@ -10,6 +10,7 @@ import Login from '@/components/Login'
 Vue.use(Router)
 
 const loginCheck = (to, from, next) => {
+  document.title = to.meta.title
   const tokenDate = localStorage.getItem('tokendate');
   const token = localStorage.getItem('token');
   if (!(tokenDate && token)) return next('/Login');
@@ -23,17 +24,38 @@ export default new Router({
     {
       path: '/',
       name: 'FrontIndex',
-      component: FrontIndex
+      component: FrontIndex,
+      meta: {
+        title: 'NCP生命支援 - 武汉孕妇就诊指南'
+      },
+      beforeEnter: (to, from, next) => {
+        document.title = to.meta.title
+        next();
+      }
     },
     {
       path: '/FrontIndex',
       name: 'FrontIndex',
-      component: FrontIndex
+      component: FrontIndex,
+      meta: {
+        title: 'NCP生命支援 - 武汉孕妇就诊指南'
+      },
+      beforeEnter: (to, from, next) => {
+        document.title = to.meta.title
+        next();
+      }
     },
     {
       path: '/FrontCheckIndex',
       name: 'FrontCheckIndex',
-      component: FrontCheckIndex
+      component: FrontCheckIndex,
+      meta: {
+        title: '孕妇防疫手册'
+      },
+      beforeEnter: (to, from, next) => {
+        document.title = to.meta.title
+        next();
+      }
     },
     {
       path: '/EndIndex',
@@ -56,7 +78,14 @@ export default new Router({
     {
       path: '/Login',
       name: 'Login',
-      component: Login
+      component: Login,
+      meta: {
+        title: 'NCP生命支援 - 武汉孕妇就诊指南'
+      },
+      beforeEnter: (to, from, next) => {
+        document.title = to.meta.title
+        next();
+      }
     }
   ]
-})
+});
