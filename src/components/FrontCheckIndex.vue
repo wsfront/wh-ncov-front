@@ -1,5 +1,5 @@
 <template>
-  <div class="wh-container">
+  <div :class="['wh-container', { 'full': activeIndex !== 0 }]">
     <div v-show="activeIndex === 0" class="hearder-block">
       <HeaderLayout :activeIndex="1" />
     </div>
@@ -228,6 +228,9 @@ export default {
   position: relative;
   height: calc(100vh - 82px);
   color: #333;
+  &.full {
+    height: 100vh;
+  }
 }
 .launch-main {
   position: fixed;
