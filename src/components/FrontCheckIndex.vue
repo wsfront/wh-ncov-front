@@ -1,13 +1,13 @@
 <template>
   <div class="wh-container">
-    <div class="hearder-block">
+    <div v-show="activeIndex === 0" class="hearder-block">
       <HeaderLayout :activeIndex="1" />
     </div>
     <div v-if="activeIndex === 0" class="launch-main">
       <img @click="handleNav('prev1_01')" class="launch-btn" src="@/assets/btn_epi.png" />
       <img @click="handleNav('prev5_01')" class="launch-btn mt-10" src="@/assets/btn_won.png" />
     </div>
-    <div class="block">
+    <div v-show="activeIndex !== 0" class="block">
       <img @click="backHome" class="home-btn" src="@/assets/btn_home.png" />
       <img
         v-if="!isShow"
@@ -17,7 +17,6 @@
       <el-drawer
         :visible.sync="isShow"
         size="64%"
-        :modal="false"
         :with-header="false">
         <div class="catalog">
           <div class="catalog-header">
@@ -32,14 +31,15 @@
                 class="catalog-item mt-6">
                 <span
                   @click="goAnchor(item.code)"
-                  class="catalog-title">{{ item.name }}</span>
+                  :class="['catalog-title', { 'active': activeCode === item.code }]">{{ item.name }}</span>
                 <ul
                   v-if="item.children && item.children.length"
                   class="catalog-body">
                   <li
                     v-for="citem in item.children"
                     :key="citem.code"
-                    class="catalog-item">
+                    :class="['catalog-item', { 'active': activeCode === citem.code }]"
+                    style="padding-left: 40px;">
                     <span @click="goAnchor(citem.code)">{{ citem.name }}</span>
                   </li>
                 </ul>
@@ -132,7 +132,6 @@
 </template>
 
 <script>
-import screenfull from 'screenfull';
 import HeaderLayout from "./HeaderLayout";
 import {wxShare} from "../common/mixins";
 
@@ -145,50 +144,50 @@ export default {
       loading: true,
       activeIndex: 0,
       isShow: false,
-      isFullscreen: false,
+      activeCode: 'prev1_01',
       catalogs: [
         {
           code: "prev1_01",
           name: "一、产前防疫",
           children: [
-            { code: "prev1_02", name: "1 产检频率" },
-            { code: "prev1_05", name: "2 产检防护" },
-            { code: "prev1_06", name: "3 防疫时期武汉孕产妇就诊指南" }
+            { code: "prev1_02", name: "01 产检频率" },
+            { code: "prev1_05", name: "02 产检防护" },
+            { code: "prev1_06", name: "03 武汉孕妇就诊指南" }
           ]
         },
         {
           code: "prev2_01",
           name: "二、产后防疫",
           children: [
-            { code: "prev2_02", name: "1 产后发热" },
-            { code: "prev2_03", name: "2 母乳喂养" }
+            { code: "prev2_02", name: "01 产后发热" },
+            { code: "prev2_03", name: "02 母乳喂养" }
           ]
         },
         {
           code: "prev3_01",
           name: "三、心理抗疫",
           children: [
-            { code: "prev3_02", name: "1 识别症状" },
-            { code: "prev3_03", name: "2 缓解方式" }
+            { code: "prev3_02", name: "01 识别症状" },
+            { code: "prev3_03", name: "02 缓解方式" }
           ]
         },
         {
           code: "prev4_01",
           name: "四、宝宝防疫",
           children: [
-            { code: "prev4_02", name: "1 新生儿隔离" },
-            { code: "prev4_03", name: "2 宝宝防护和用品清洁" }
+            { code: "prev4_02", name: "01 新生儿隔离" },
+            { code: "prev4_03", name: "02 宝宝防护和用品清洁" }
           ]
         },
         {
           code: "prev5_01",
           name: "五、疑似/感染孕产妇须知",
           children: [
-            { code: "prev5_02", name: "1 胸部CT检查" },
-            { code: "prev5_03", name: "2 接诊医院" },
-            { code: "prev5_04", name: "3 用药须知" },
-            { code: "prev5_05", name: "4 感染孕妇康复后" },
-            { code: "prev5_06", name: "5 宝宝隔离" }
+            { code: "prev5_02", name: "01 胸部CT检查" },
+            { code: "prev5_03", name: "02 接诊医院" },
+            { code: "prev5_04", name: "03 用药须知" },
+            { code: "prev5_05", name: "04 感染康复后" },
+            { code: "prev5_06", name: "05 宝宝隔离" }
           ]
         },
         {
@@ -205,15 +204,15 @@ export default {
   methods: {
     handleNav(selector) {
       this.activeIndex = selector;
-      screenfull.toggle();
       this.goAnchor(selector);
     },
     backHome() {
+      window.scrollTo(0, 0);
       this.activeIndex = 0;
-      screenfull.toggle();
     },
     goAnchor(selector) {
       this.isShow = false;
+      this.activeCode = selector;
       this.$el.querySelector('#' + selector).scrollIntoView();
     }
   }
@@ -232,17 +231,18 @@ export default {
 }
 .launch-main {
   position: fixed;
+  top: 66px;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 69px);
   background-image: url("/static/img/bg_antie.jpg");
-  background-size: 100% 100%;
+  background-size: 100% auto;
   background-repeat: no-repeat;
   background-color: #fff;
   z-index: 2;
 }
 .launch-btn {
   width: 64%;
-  margin-top: 56vh;
+  margin-top: 50vh;
   &.mt-10 {
     margin-top: 3vh;
   }
@@ -252,11 +252,14 @@ export default {
   background: #faf1fa;
   box-sizing: border-box;
   overflow-y: scroll;
+  .el-drawer:focus {
+    box-shadow: none;
+  }
 }
 .home-btn {
   position: fixed;
   width: 60px;
-  top: 80px;
+  top: 30px;
   left: 10px;
   z-index: 1;
 }
@@ -272,42 +275,48 @@ export default {
     z-index: 1;
   }
   &-header {
-    height: 44px;
+    height: 64px;
     position: relative;
     border-bottom: 1px solid #e6e5e5;
     h2 {
       position: absolute;
       left: 20px;
-      top: 2px;
-      font-size: 18px;
+      font-size: 24px;
       color: #453cd3;
     }
     span {
       position: absolute;
+      top: 50%;
+      margin-top: -7px;
       right: 10px;
-      bottom: 2px;
     }
   }
   &-main {
     height: calc(100vh - 44px);
-    padding: 10px 10px 14px;
+    padding: 10px 0 14px;
     box-sizing: border-box;
     overflow-y: scroll;
   }
   &-body {
-    margin: 0 0 0 10px;
+    margin: 0;
     padding: 0;
     text-align: left;
     list-style: none;
-  }
-  &-item {
-    line-height: 28px;
-    &.mt-6 {
-      margin-top: 6px;
+    .active {
+      font-weight: bold;
+      background-color: rgba(0, 0, 0, .08);
     }
   }
+  &-item {
+    line-height: 40px;
+  }
   &-title {
+    margin-top: 15px;
+    padding-left: 20px;
+    font-size: 18px;
+    font-weight: bold;
     color: #453cd3;
+    display: block;
   }
 }
 .booklet {
