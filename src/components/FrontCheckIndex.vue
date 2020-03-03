@@ -8,7 +8,7 @@
       <img @click="handleNav('prev5_01')" class="launch-btn mt-10" src="@/assets/btn_won.png" />
     </div>
     <div class="block">
-      <img @click="activeIndex = 0" class="home-btn" src="@/assets/btn_home.png" />
+      <img @click="backHome" class="home-btn" src="@/assets/btn_home.png" />
       <img
         v-if="!isShow"
         @click="isShow = true"
@@ -24,104 +24,106 @@
             <h2>孕妇防疫手册</h2>
             <span @click="goAnchor('prev1_01')">回到顶部<i class="el-icon-arrow-right"></i></span>
           </div>
-          <ul class="catalog-body" style="margin-top: 14px;">
-            <li
-              v-for="item in catalogs"
-              :key="item.code"
-              class="catalog-item mt-6">
-              <span
-                @click="goAnchor(item.code)"
-                class="catalog-title">{{ item.name }}</span>
-              <ul
-                v-if="item.children && item.children.length"
-                class="catalog-body">
-                <li
-                  v-for="citem in item.children"
-                  :key="citem.code"
-                   class="catalog-item">
-                  <span @click="goAnchor(citem.code)">{{ citem.name }}</span>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <div class="catalog-main">
+            <ul class="catalog-body">
+              <li
+                v-for="item in catalogs"
+                :key="item.code"
+                class="catalog-item mt-6">
+                <span
+                  @click="goAnchor(item.code)"
+                  class="catalog-title">{{ item.name }}</span>
+                <ul
+                  v-if="item.children && item.children.length"
+                  class="catalog-body">
+                  <li
+                    v-for="citem in item.children"
+                    :key="citem.code"
+                    class="catalog-item">
+                    <span @click="goAnchor(citem.code)">{{ citem.name }}</span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
       </el-drawer>
       <div class="booklet">
         <div id="prev1_01" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev1/prev1_01.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev1/prev1_01.jpg'" />
         </div>
         <div id="prev1_02" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev1/prev1_02.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev1/prev1_02.jpg'" />
         </div>
         <div id="prev1_03" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev1/prev1_03.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev1/prev1_03.jpg'" />
         </div>
         <div id="prev1_04" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev1/prev1_04.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev1/prev1_04.jpg'" />
         </div>
         <div id="prev1_05" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev1/prev1_05.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev1/prev1_05.jpg'" />
         </div>
         <div id="prev1_06" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev1/prev1_06.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev1/prev1_06.jpg'" />
           <a class="goto" href="http://yf.shcnwl.cn/"></a>
         </div>
 
         <div id="prev2_01" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev2/prev2_01.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev2/prev2_01.jpg'" />
         </div>
         <div id="prev2_02" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev2/prev2_02.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev2/prev2_02.jpg'" />
         </div>
         <div id="prev2_03" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev2/prev2_03.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev2/prev2_03.jpg'" />
         </div>
 
         <div id="prev3_01" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev3/prev3_01.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev3/prev3_01.jpg'" />
         </div>
         <div id="prev3_02" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev3/prev3_02.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev3/prev3_02.jpg'" />
         </div>
         <div id="prev3_03" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev3/prev3_03.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev3/prev3_03.jpg'" />
           <a class="findme" href="https://weibo.com/ncplifecare"></a>
         </div>
 
         <div id="prev4_01" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev4/prev4_01.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev4/prev4_01.jpg'" />
         </div>
         <div id="prev4_02" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev4/prev4_02.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev4/prev4_02.jpg'" />
         </div>
         <div id="prev4_03" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev4/prev4_03.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev4/prev4_03.jpg'" />
         </div>
 
         <div id="prev5_01" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev5/prev5_01.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev5/prev5_01.jpg'" />
         </div>
         <div id="prev5_02" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev5/prev5_02.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev5/prev5_02.jpg'" />
         </div>
         <div id="prev5_03" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev5/prev5_03.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev5/prev5_03.jpg'" />
         </div>
         <div id="prev5_04" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev5/prev5_04.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev5/prev5_04.jpg'" />
         </div>
         <div id="prev5_05" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev5/prev5_05.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev5/prev5_05.jpg'" />
         </div>
         <div id="prev5_06" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev5/prev5_06.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev5/prev5_06.jpg'" />
         </div>
 
         <div id="prev6_ref" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev6/prev6_ref.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev6/prev6_ref.jpg'" />
         </div>
         <div id="prev6_team" class="booklet-item">
-          <img class="booklet-img" src="/static/img/prev6/prev6_team.jpg" />
+          <img class="booklet-img" v-lazy="'/static/img/prev6/prev6_team.jpg'" />
           <a class="get-more" href="https://weibo.com/u/6892480749"></a>
         </div>
       </div>
@@ -130,6 +132,7 @@
 </template>
 
 <script>
+import screenfull from 'screenfull';
 import HeaderLayout from "./HeaderLayout";
 import {wxShare} from "../common/mixins";
 
@@ -139,8 +142,10 @@ export default {
   components: { HeaderLayout },
   data() {
     return {
+      loading: true,
       activeIndex: 0,
       isShow: false,
+      isFullscreen: false,
       catalogs: [
         {
           code: "prev1_01",
@@ -200,7 +205,12 @@ export default {
   methods: {
     handleNav(selector) {
       this.activeIndex = selector;
+      screenfull.toggle();
       this.goAnchor(selector);
+    },
+    backHome() {
+      this.activeIndex = 0;
+      screenfull.toggle();
     },
     goAnchor(selector) {
       this.isShow = false;
@@ -278,8 +288,14 @@ export default {
       bottom: 2px;
     }
   }
+  &-main {
+    height: calc(100vh - 44px);
+    padding: 10px 10px 14px;
+    box-sizing: border-box;
+    overflow-y: scroll;
+  }
   &-body {
-    margin: 0 0 0 24px;
+    margin: 0 0 0 10px;
     padding: 0;
     text-align: left;
     list-style: none;
@@ -327,5 +343,9 @@ export default {
   right: 13.5%;
   bottom: 17%;
   display: block;
+}
+img[lazy=loading] {
+  width: 50px;
+  margin: 0 auto;
 }
 </style>
