@@ -1,8 +1,10 @@
 import wx from 'weixin-js-sdk';
+
+let {origin} = location;
 const shareConf = {
   title: 'NCP生命支援-武汉孕妇就诊指南',
   desc: '为爱战“疫” 守护新生',
-  imgUrl: 'https://qingclouds-server.oss-cn-shanghai.aliyuncs.com/NCPlogo.jpg'
+  imgUrl: `${origin}/static/img/NCPlogo.jpg`
 }
 
 export const wxShare = {
