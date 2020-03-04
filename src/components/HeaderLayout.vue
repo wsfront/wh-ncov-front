@@ -8,7 +8,7 @@
       :class="{ act: activeIndex === 1 }"
       to="/FrontCheckIndex"
     >
-      疫期产检
+      孕妇防疫
     </router-link>
   </div>
 </template>

@@ -979,7 +979,7 @@ export default {
   color: #acacac;
 }
 .loading-icon {
-  width: 66px;
+  width: 32px;
   height: auto;
 }
 </style>
