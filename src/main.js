@@ -2,7 +2,6 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import ElementUI from 'element-ui'
-import vueLazyload from 'vue-lazyload'
 import './assets/element-variables.scss'
 import 'element-ui/packages/theme-chalk/src/index.scss'
 import App from './App'
@@ -10,10 +9,6 @@ import router from './router'
 import axios from 'axios'
 
 Vue.use(ElementUI)
-Vue.use(vueLazyload, {
-  loading: '/static/img/loading.gif',
-  preLoad: 1.5
-})
 Vue.prototype.$http = axios
 Vue.prototype.$EventBus = new Vue()
 Vue.config.productionTip = false

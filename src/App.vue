@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <header class="tips">
+    <header class="tips" v-show="show">
       <span v-if="lastUpdateTime">{{ lastUpdateTime }}更新; </span>
         数据至少两天更新一次
     </header>
     <router-view />
-    <footer class="footer">
+    <footer class="footer" v-show="show">
       <a href="https://shimo.im/docs/5zAZVlQzEDc5FgAo">
         <img class="text-icon" src="@/assets/icon_atme.png" />
         关于我们
@@ -19,12 +19,13 @@
 </template>
 
 <script>
+import Info from './components/middleware/Info'
 export default {
   name: "App",
   data() {
     return {
       lastUpdateTime: "",
-      show: false
+      show: true
     };
   },
   created() {
@@ -37,6 +38,9 @@ export default {
     this.$EventBus.$on("refreshUpdateTime", time => {
       sessionStorage.setItem("lastUpdateTime", time);
       this.lastUpdateTime = time;
+    });
+    Info.$on('on-tip-show', value => {
+      this.show = value;
     });
   }
 };
