@@ -209,10 +209,10 @@ export default {
       Info.$emit("frameDisplay", false);
       this.isShow = false;
       this.activeCode = selector;
-      this.fixScroll(selector);
     },
     handleNav(selector) {
       this.activeIndex = selector;
+
       Info.$emit("frameDisplay", false);
       this.goAnchor(selector);
     },
@@ -223,6 +223,7 @@ export default {
         query: { preid: undefined }
       });
       this.activeIndex = 0;
+      this.activeCode = false;
       Info.$emit("frameDisplay", true);
     },
     goAnchor(selector) {
@@ -232,18 +233,33 @@ export default {
         query: { preid: selector }
       });
       this.activeCode = selector;
-      this.fixScroll(selector);
-    },
-    fixScroll(selector) {
-      let that = this;
-      that.$el.querySelector("#" + selector + " img").onload = function() {
-        that.$el.querySelector("#" + selector).scrollIntoView();
-      };
     }
   },
   mounted() {
     var selector = this.$route.query.preid;
     selector && this.init(selector);
+  },
+  updated() {
+    let that = this;
+    if (!that.activeCode) {
+      return;
+    }
+    this.$nextTick(function() {
+      // Code that will run only after the
+      // entire view has been re-rendered
+
+      let targetImg = that.$el.querySelector("#" + that.activeCode + " img");
+      let targetPosition = that.$el.querySelector("#" + that.activeCode);
+      if (targetImg.complete && targetImg.src.indexOf(that.activeCode) > -1) {
+        targetPosition.scrollIntoView();
+      } else {
+        that.$Lazyload.$on("loaded", function(el, src) {
+          if (el.src.indexOf(that.activeCode) > -1) {
+            that.$el.querySelector("#" + that.activeCode).scrollIntoView();
+          }
+        });
+      }
+    });
   }
 };
 </script>
@@ -365,7 +381,11 @@ export default {
   }
   &-item {
     line-height: 36px;
-    padding-left: 40px;
+    text-decoration: none;
+    list-style: none;
+    span {
+      padding-left: 20px;
+    }
   }
   &-title {
     margin-top: 10px;
