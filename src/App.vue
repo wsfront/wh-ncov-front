@@ -59,7 +59,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   /* background: #fafafa; */
-  padding: 0 0 36px;
+  /* padding: 0 0 36px; */
   /*margin-top: 60px;*/
 }
 .tips {
