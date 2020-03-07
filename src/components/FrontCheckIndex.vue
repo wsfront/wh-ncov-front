@@ -51,80 +51,80 @@
       <div class="booklet">
         <el-backtop target=".booklet" :right="20" :bottom="40"></el-backtop>
         <div id="prev1_01" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev1/prev1_01.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_01.jpg" />
         </div>
         <div id="prev1_02" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev1/prev1_02.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_02.jpg" />
         </div>
         <div id="prev1_03" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev1/prev1_03.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_03.jpg" />
         </div>
         <div id="prev1_04" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev1/prev1_04.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_04.jpg" />
         </div>
         <div id="prev1_05" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev1/prev1_05.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_05.jpg" />
         </div>
         <div id="prev1_06" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev1/prev1_06.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_06.jpg" />
           <a class="goto" href="http://yf.shcnwl.cn/"></a>
         </div>
 
         <div id="prev2_01" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev2/prev2_01.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_01.jpg" />
         </div>
         <div id="prev2_02" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev2/prev2_02.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_02.jpg" />
         </div>
         <div id="prev2_03" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev2/prev2_03.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_03.jpg" />
         </div>
 
         <div id="prev3_01" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev3/prev3_01.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_01.jpg" />
         </div>
         <div id="prev3_02" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev3/prev3_02.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_02.jpg" />
         </div>
         <div id="prev3_03" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev3/prev3_03.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_03.jpg" />
           <a class="findme" href="https://weibo.com/ncplifecare"></a>
         </div>
 
         <div id="prev4_01" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev4/prev4_01.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_01.jpg" />
         </div>
         <div id="prev4_02" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev4/prev4_02.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_02.jpg" />
         </div>
         <div id="prev4_03" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev4/prev4_03.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_03.jpg" />
         </div>
 
         <div id="prev5_01" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev5/prev5_01.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_01.jpg" />
         </div>
         <div id="prev5_02" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev5/prev5_02.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_02.jpg" />
         </div>
         <div id="prev5_03" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev5/prev5_03.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_03.jpg" />
         </div>
         <div id="prev5_04" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev5/prev5_04.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_04.jpg" />
         </div>
         <div id="prev5_05" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev5/prev5_05.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_05.jpg" />
         </div>
         <div id="prev5_06" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev5/prev5_06.jpg'" />
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_06.jpg" />
         </div>
 
-        <div id="prev6_ref" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev6/prev6_ref.jpg'" />
+        <div id="prev6_01" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_01.jpg" />
         </div>
-        <div id="prev6_team" class="booklet-item">
-          <img class="booklet-img" v-lazy="'/static/img/prev6/prev6_team.jpg'" />
+        <div id="prev6_02" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_02.jpg" />
           <a class="get-more" href="https://weibo.com/u/6892480749"></a>
         </div>
       </div>
@@ -193,11 +193,11 @@ export default {
           ]
         },
         {
-          code: "prev6_ref",
+          code: "prev6_01",
           name: "参考来源"
         },
         {
-          code: "prev6_team",
+          code: "prev6_02",
           name: "手册制作团队"
         }
       ]
@@ -212,7 +212,6 @@ export default {
     },
     handleNav(selector) {
       this.activeIndex = selector;
-
       Info.$emit("frameDisplay", false);
       this.goAnchor(selector);
     },
@@ -220,7 +219,7 @@ export default {
       window.scrollTo(0, 0);
       this.$router.push({
         path: "/FrontCheckIndex",
-        query: { preid: undefined }
+        query: {} // preid: undefined
       });
       this.activeIndex = 0;
       this.activeCode = false;
@@ -228,10 +227,12 @@ export default {
     },
     goAnchor(selector) {
       this.isShow = false;
-      this.$router.push({
-        path: "/FrontCheckIndex",
-        query: { preid: selector }
-      });
+      var anchor = document.getElementById(selector)
+      document.body.scrollTop = anchor.offsetTop
+      // this.$router.push({
+      //   path: "/FrontCheckIndex",
+      //   query: { preid: selector }
+      // });
       this.activeCode = selector;
     }
   },
@@ -253,11 +254,11 @@ export default {
       if (targetImg.complete && targetImg.src.indexOf(that.activeCode) > -1) {
         targetPosition.scrollIntoView();
       } else {
-        that.$Lazyload.$on("loaded", function(el, src) {
-          if (el.src.indexOf(that.activeCode) > -1) {
-            that.$el.querySelector("#" + that.activeCode).scrollIntoView();
-          }
-        });
+        // that.$Lazyload.$on("loaded", function(el, src) {
+        //   if (el.src.indexOf(that.activeCode) > -1) {
+        //     that.$el.querySelector("#" + that.activeCode).scrollIntoView();
+        //   }
+        // });
       }
     });
   }
