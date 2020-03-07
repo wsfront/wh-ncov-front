@@ -228,6 +228,7 @@ export default {
     goAnchor(selector) {
       this.isShow = false;
       var anchor = document.getElementById(selector)
+      localStorage.setItem('BookOffsetTop', anchor.offsetTop)
       document.body.scrollTop = anchor.offsetTop
       // this.$router.push({
       //   path: "/FrontCheckIndex",
@@ -237,6 +238,10 @@ export default {
     }
   },
   mounted() {
+    let bookOffsetTop = localStorage.getItem('BookOffsetTop')
+    if (this.activeIndex !== 0 && bookOffsetTop) {
+      document.body.scrollTop = bookOffsetTop
+    }
     var selector = this.$route.query.preid;
     selector && this.init(selector);
   },
