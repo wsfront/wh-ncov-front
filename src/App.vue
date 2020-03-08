@@ -26,7 +26,7 @@ export default {
     return {
       lastUpdateTime: "",
       show: false,
-      frameDisplay: true
+      frameDisplay: false
     };
   },
   created() {
@@ -35,7 +35,13 @@ export default {
       this.lastUpdateTime = lastUpdateTime;
     }
   },
+  beforeMount() {
+    Info.$on("frameDisplay", data => {
+      this.frameDisplay = data;
+    });
+  },
   mounted() {
+    this.frameDisplay = true;
     this.$EventBus.$on("refreshUpdateTime", time => {
       sessionStorage.setItem("lastUpdateTime", time);
       this.lastUpdateTime = time;
