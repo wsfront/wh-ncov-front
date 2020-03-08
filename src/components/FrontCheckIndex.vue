@@ -4,8 +4,8 @@
       <HeaderLayout :activeIndex="1" />
     </div>
     <div v-if="activeIndex === 0" class="launch-main">
-      <img @click="handleNav('prev1_01')" class="launch-btn" src="@/assets/btn_epi.png" />
-      <img @click="handleNav('prev5_01')" class="launch-btn mt-10" src="@/assets/btn_won.png" />
+      <img @click="handleNav('prev1_01')" class="launch-btn" src="http://wuhan2099.oss-accelerate.aliyuncs.com/btn_epi.png" />
+      <img @click="handleNav('prev5_01')" class="launch-btn mt-10" src="http://wuhan2099.oss-accelerate.aliyuncs.com/btn_won.png" />
     </div>
     <div v-show="activeIndex !== 0" class="block">
       <div @click="backHome" class="el-backtop" style="top: 40px; left: 20px;"><i class="el-icon-s-home"></i>
@@ -143,6 +143,7 @@ export default {
   components: { HeaderLayout },
   data() {
     return {
+      diyShareTitle: true,
       loading: true,
       activeIndex: 0,
       isShow: false,
@@ -288,7 +289,7 @@ export default {
   top: 66px;
   width: 100%;
   height: calc(100vh - 69px);
-  background-image: url("/static/img/bg_antie.jpg");
+  background-image: url("http://wuhan2099.oss-accelerate.aliyuncs.com/bg_antie.jpg");
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-color: #d9f1fb;
