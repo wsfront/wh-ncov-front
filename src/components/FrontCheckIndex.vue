@@ -204,13 +204,10 @@ export default {
     };
   },
   methods: {
-    init(selector) {
-      this.activeIndex = selector;
-      Info.$emit("frameDisplay", false);
-      this.isShow = false;
-      this.activeCode = selector;
-    },
     handleNav(selector) {
+      if (!selector) {
+        this.backHome();
+      }
       this.activeIndex = selector;
       Info.$emit("frameDisplay", false);
       this.goAnchor(selector);
@@ -227,46 +224,75 @@ export default {
     },
     goAnchor(selector) {
       this.isShow = false;
-      var anchor = document.getElementById(selector)
-      document.body.scrollTop = anchor.offsetTop
-      // this.$router.push({
-      //   path: "/FrontCheckIndex",
-      //   query: { preid: selector }
-      // });
+      this.$router
+        .push({
+          path: "/FrontCheckIndex",
+          query: { preid: selector }
+        })
+        .catch(err => {
+          console.log(err);
+        });
       this.activeCode = selector;
+    },
+    handleHash(event) {
+      let selector = this.$route.query.preid;
+      if (selector) {
+        this.handleNav(selector);
+      } else {
+        this.backHome();
+      }
     }
   },
   mounted() {
-    var selector = this.$route.query.preid;
-    selector && this.init(selector);
+    let that = this;
+    that.handleHash();
+    window.addEventListener(
+      "hashchange",
+      that.handleHash.bind(that, event),
+      false
+    );
+  },
+  beforeCreate() {
+    localStorage.setItem("activeCode", null);
   },
   updated() {
     let that = this;
+    let targetImg = that.$el.querySelector("#" + that.activeCode + " img");
+    let targetPosition = that.$el.querySelector("#" + that.activeCode);
     if (!that.activeCode) {
       return;
     }
+    if (that.isShow) {
+      return;
+    }
+    if (that.activeCode === localStorage.getItem("activeCode")) {
+      return;
+    }
+
     this.$nextTick(function() {
       // Code that will run only after the
       // entire view has been re-rendered
-
-      let targetImg = that.$el.querySelector("#" + that.activeCode + " img");
-      let targetPosition = that.$el.querySelector("#" + that.activeCode);
       if (targetImg.complete && targetImg.src.indexOf(that.activeCode) > -1) {
         targetPosition.scrollIntoView();
-      } else {
-        // that.$Lazyload.$on("loaded", function(el, src) {
-        //   if (el.src.indexOf(that.activeCode) > -1) {
-        //     that.$el.querySelector("#" + that.activeCode).scrollIntoView();
-        //   }
-        // });
+        Info.$emit("frameDisplay", false);
+        // store current postion if there is no catelog operation
+        localStorage.setItem("activeCode", that.activeCode);
       }
     });
+    targetImg.onload = function() {
+      targetPosition.scrollIntoView();
+      Info.$emit("frameDisplay", false);
+      localStorage.setItem("activeCode", that.activeCode);
+    };
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.block /deep/ .el-drawer:focus {
+  outline: none;
+}
 .hearder-block {
   margin: 10px 0 0;
 }
@@ -279,7 +305,6 @@ export default {
   }
 }
 .launch-main {
-  position: fixed;
   top: 66px;
   width: 100%;
   height: calc(100vh - 69px);
