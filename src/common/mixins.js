@@ -8,7 +8,13 @@ const shareConf = {
 }
 
 export const wxShare = {
+  data() {
+    return {
+      diyShareTitle: false // 在实例中需要用自己的title，那就在route.js中配置，然后就会使用当前页面的document.title来做分享的标题
+    }
+  },
   created() {
+    if (this.diyShareTitle) shareConf.title = document.title
     this.initJsSdk(['onMenuShareAppMessage', 'onMenuShareTimeline'])
       .then(wxEnv => {
         console.log(wxEnv)

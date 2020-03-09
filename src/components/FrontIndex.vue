@@ -51,7 +51,7 @@ export default {
         this.$http.get("/wh/msg/popup").then(response => {
           if (response.data.code === "0000") {
             let img = new Image();
-            img.src = "https://static.qingclouds.cn/bg_launch.jpg";
+            img.src = "http://wuhan2099.oss-accelerate.aliyuncs.com/bg_launch.jpg";
             let imgLoad = setInterval(() => {
               if (img.complete) {
                 clearInterval(imgLoad);
@@ -95,7 +95,7 @@ export default {
 .launch-main {
   width: 100%;
   height: 100%;
-  background-image: url("https://static.qingclouds.cn/bg_launch.jpg");
+  background-image: url("http://wuhan2099.oss-accelerate.aliyuncs.com/bg_launch.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-color: #fff;
