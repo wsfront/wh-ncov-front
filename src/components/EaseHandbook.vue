@@ -2,9 +2,9 @@
   <div :class="['wh-container', { 'full': activeIndex !== 0 }]">
     <div v-show="activeIndex === 0" class="hearder-block">
       <HeaderLayout :activeIndex="2" />
-    </div>http://wuhan2099.oss-accelerate.aliyuncs.com/ease3/ease3_00.png 
+    </div>
     <div v-if="activeIndex === 0" class="launch-main">
-      <img @click="handleNav('prev1_01')" class="launch-btn" src="http://wuhan2099.oss-accelerate.aliyuncs.com/btn_epi.png" />
+      <img @click="handleNav('ease1_01')" class="launch-btn" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease_button.png" />
     </div>
     <div v-show="activeIndex !== 0" class="block">
       <div @click="backHome" class="el-backtop" style="top: 40px; left: 20px;"><i class="el-icon-s-home"></i>
@@ -49,82 +49,293 @@
       </el-drawer>
       <div class="booklet">
         <el-backtop target=".booklet" :right="20" :bottom="40"></el-backtop>
-        <div id="prev1_01" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_01.jpg" />
+         <div id="ease1_00" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_00.png" />
         </div>
-        <div id="prev1_02" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_02.jpg" />
+        <div id="ease1_01" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_01.png" />
         </div>
-        <div id="prev1_03" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_03.jpg" />
+        <div id="ease1_02" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_02.png" />
         </div>
-        <div id="prev1_04" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_04.jpg" />
+        <div id="ease1_03" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_03.png" />
         </div>
-        <div id="prev1_05" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_05.jpg" />
+        <div id="ease1_04" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_04.png" />
         </div>
-        <div id="prev1_06" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_06.jpg" />
+        <div id="ease1_05" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_05.png" />
+        </div>
+        <div id="ease1_06" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_06.png" />
+          <a class="goto" href="http://yf.shcnwl.cn/"></a>
+        </div>
+        <div id="ease1_07" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_07.png" />
+          <a class="goto" href="http://yf.shcnwl.cn/"></a>
+        </div>
+        <div id="ease1_08" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_08.png" />
+          <a class="goto" href="http://yf.shcnwl.cn/"></a>
+        </div>
+        <div id="ease1_09" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_09.png" />
           <a class="goto" href="http://yf.shcnwl.cn/"></a>
         </div>
 
-        <div id="prev2_01" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_01.jpg" />
+        <div id="ease2_00" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease2/ease2_00.png" />
         </div>
-        <div id="prev2_02" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_02.jpg" />
+        <div id="ease2_01" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease2/ease2_01.png" />
         </div>
-        <div id="prev2_03" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_03.jpg" />
+        <div id="ease2_02" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease2/ease2_02.png" />
+        </div>
+        <div id="ease2_03" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease2/ease2_03.png" />
+        </div>
+        <div id="ease2_04" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease2/ease2_04.png" />
+        </div>
+        <div id="ease2_05" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease2/ease2_05.png" />
+        </div>
+        <div id="ease2_06" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease2/ease2_06.png" />
+        </div>
+        <div id="ease2_07" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease2/ease2_07.png" />
+        </div>
+        <div id="ease2_08" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease2/ease2_08.png" />
         </div>
 
-        <div id="prev3_01" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_01.jpg" />
+        <div id="ease3_00" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease3/ease3_00.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
         </div>
-        <div id="prev3_02" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_02.jpg" />
+        <div id="ease3_01" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease3/ease3_01.png" />
         </div>
-        <div id="prev3_03" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_03.jpg" />
+        <div id="ease3_02" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease3/ease3_02.png" />
+        </div>
+        <div id="ease3_03" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease3/ease3_03.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+         <div id="ease3_04" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease3/ease3_04.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+         <div id="ease3_05" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease3/ease3_05.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+         <div id="ease3_06" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease3/ease3_06.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+         <div id="ease3_07" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease3/ease3_07.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+         <div id="ease3_08" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease3/ease3_08.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+         <div id="ease3_09" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease3/ease3_09.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+         <div id="ease3_10" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease3/ease3_10.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+         <div id="ease3_11" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease3/ease3_11.png" />
           <a class="findme" href="https://weibo.com/ncplifecare"></a>
         </div>
 
-        <div id="prev4_01" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_01.jpg" />
+        <div id="ease4_00" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease4_00.png" />
         </div>
-        <div id="prev4_02" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_02.jpg" />
+        <div id="ease41_01" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease41_01.png" />
         </div>
-        <div id="prev4_03" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_03.jpg" />
+        <div id="ease41_02" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease41_02.png" />
+        </div>
+        <div id="ease41_03" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease41_03.png" />
+        </div>
+        <div id="ease41_04" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease41_04.png" />
+        </div>
+        <div id="ease41_05" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease41_05.png" />
+        </div>
+        <div id="ease41_06" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease41_06.png" />
+        </div>
+        <div id="ease41_07" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease41_07.png" />
+        </div>
+        <div id="ease41_08" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease41_08.png" />
+        </div>
+        <div id="ease42_01" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease42_01.png" />
+        </div>
+        <div id="ease42_02" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease42_02.png" />
+        </div>
+        <div id="ease42_03" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease42_03.png" />
+        </div>
+        <div id="ease42_04" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease42_04.png" />
+        </div>
+        <div id="ease42_05" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease42_05.png" />
+        </div>
+        <div id="ease42_06" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease42_06.png" />
+        </div>
+        <div id="ease42_07" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease42_07.png" />
+        </div>
+        <div id="ease43_01" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease43_01.png" />
+        </div>
+        <div id="ease43_02" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease43_02.png" />
+        </div>
+        <div id="ease43_03" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease4/ease43_03.png" />
         </div>
 
-        <div id="prev5_01" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_01.jpg" />
+        <div id="ease5_01" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease5/ease5_01.png" />
         </div>
-        <div id="prev5_02" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_02.jpg" />
+        <div id="ease5_02" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease5/ease5_02.png" />
         </div>
-        <div id="prev5_03" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_03.jpg" />
+        <div id="ease5_03" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease5/ease5_03.png" />
         </div>
-        <div id="prev5_04" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_04.jpg" />
-        </div>
-        <div id="prev5_05" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_05.jpg" />
-        </div>
-        <div id="prev5_06" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_06.jpg" />
+        <div id="ease5_04" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease5/ease5_04.png" />
         </div>
 
-        <div id="prev6_01" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_01.jpg" />
+        <div id="ease6_01" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease6/ease6_01.png" />
         </div>
-        <div id="prev6_02" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_02.jpg" />
+        <div id="ease6_02" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease6/ease6_02.png" />
           <a class="get-more" href="https://weibo.com/u/6892480749"></a>
+        </div>
+        <div id="ease6_03" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease6/ease6_03.png" />
+        </div>
+        <div id="ease6_04" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease6/ease6_04.png" />
+        </div>
+
+        <div id="ease6_01" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease6/ease6_01.png" />
+        </div>
+        <div id="ease6_02" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease6/ease6_02.png" />
+          <a class="get-more" href="https://weibo.com/u/6892480749"></a>
+        </div>
+        <div id="ease6_03" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease6/ease6_03.png" />
+        </div>
+        <div id="ease6_04" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease6/ease6_04.png" />
+        </div>
+
+        <div id="ease7_01" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease7/ease7_01.png" />
+        </div>
+        <div id="ease7_02" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease7/ease7_02.png" />
+          <a class="get-more" href="https://weibo.com/u/6892480749"></a>
+        </div>
+        <div id="ease7_03" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease7/ease7_03.png" />
+        </div>
+        <div id="ease7_04" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease7/ease7_04.png" />
+        </div>
+
+        <div id="ease8_00" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_00.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+        <div id="ease8_01" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_01.png" />
+        </div>
+        <div id="ease8_02" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_02.png" />
+        </div>
+        <div id="ease8_03" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_03.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+        <div id="ease8_04" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_04.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+        <div id="ease8_05" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_05.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+        <div id="ease8_06" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_06.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+        <div id="ease8_07" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_07.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+        <div id="ease8_08" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_08.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+        <div id="ease8_09" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_09.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+        <div id="ease8_10" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_10.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+        <div id="ease8_11" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_11.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+        <div id="ease8_12" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_12.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+        <div id="ease8_13" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease8/ease8_13.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
+        </div>
+
+        <div id="ease9_01" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease9/ease9_01.png" />
+        </div>
+        <div id="ease9_02" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease9/ease9_02.png" />
+        </div>
+        <div id="ease9_03" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease9/ease9_03.png" />
+          <a class="findme" href="https://weibo.com/ncplifecare"></a>
         </div>
       </div>
     </div>
@@ -146,92 +357,151 @@ export default {
       loading: true,
       activeIndex: 0,
       isShow: false,
-      activeCode: "prev1_01",
+      activeCode: "ease1_00",
       catalogs: [
         {
-          code: "prev1_01",
+          code: "ease1_00",
           name: "一、产检和产检报告",
           children: [
-            { code: "prev1_02", name: "01 产检频率" },
-            { code: "prev1_05", name: "02 产检防护" },
-            { code: "prev1_06", name: "03 武汉孕妇就诊指南" }
+            { code: "ease1_01", name: "01. 疫情期间，哪些是最重要的产检项目？" },
+            { code: "ease1_02", name: "02. 大排畸不做，做小排畸可以吗？" },
+            { code: "ease1_03", name: "03. 糖筛可以跳过吗？" },
+            { code: "ease1_04", name: "04. 小排畸可以跳过吗？" },
+            { code: "ease1_05", name: "05. 36-37周小结可以不做，直接等生产吗？" },
+            { code: "ease1_06", name: "06. 哪些属于孕期常见的不适情况？" },
+            { code: "ease1_07", name: "07. 哪些情况必须要去医院做检查？" },
+            { code: "ease1_08", name: "08. 临床孕周和超声孕周有何区别？应该以哪个为准？超生孕周偏大或偏小要紧吗？" },
+            { code: "ease1_09", name: "09. 脐带绕颈" }
           ]
         },
         {
-          code: "prev2_01",
+          code: "ease2_00",
           name: "二、心肺和睡眠问题",
           children: [
-            { code: "prev2_02", name: "01 产后发热" },
-            { code: "prev2_03", name: "02 母乳喂养" }
+            { code: "ease2_01", name: "01. 孕期心跳加速是怎么回事？" },
+            { code: "ease2_02", name: "02. 晚上睡觉时感到呼吸困难/胸闷是怎么回事？" },
+            { code: "ease2_03", name: "01. 睡觉盗汗怕热，胸口出汗很多，是怎么回事？" },
+            { code: "ease2_04", name: "04. 何种情况需要就诊，确认是否有心功能异常？" },
+            { code: "ease2_05", name: "05. 孕期一定要左侧卧睡吗？" },
+            { code: "ease2_06", name: "06. 孕期失眠该怎么办？" },
+            { code: "ease2_07", name: "07. 怀孕之后做梦特别多，是怎么回事？" },
           ]
         },
         {
-          code: "prev3_01",
+          code: "ease3_00",
           name: "三、孕期营养的血糖血压问题",
           children: [
-            { code: "prev3_02", name: "01 识别症状" },
-            { code: "prev3_03", name: "02 缓解方式" }
+            { code: "ease3_01", name: "01. 骨头、手腕痛是不是缺钙？" },
+            { code: "ease3_02", name: "02. 头晕是不是缺铁或贫血？" },
+            { code: "ease3_03", name: "03. 为什么孕期会缺铁？" },
+            { code: "ease3_04", name: "04. 孕期如何补铁？" },
+            { code: "ease3_05", name: "05. 孕期有哪些忌口食物？" },
+            { code: "ease3_06", name: "06. 什么情况会被视为孕期血糖偏高？" },
+            { code: "ease3_07", name: "07. 孕期血糖偏高如何管理？" },
+            { code: "ease3_08", name: "08. 血压偏低正常吗？" },
+            { code: "ease3_09", name: "09. 什么情况会被视为孕期血压偏高？" },
+            { code: "ease3_10", name: "10. 孕期高血压有哪些注意事项？" },
           ]
         },
         {
-          code: "prev4_01",
+          code: "ease4_00",
           name: "四、身体疼痛、皮肤和口腔问题",
           children: [
-            { code: "prev4_02", name: "01 新生儿隔离" },
-            { code: "prev4_03", name: "02 宝宝防护和用品清洁" }
+            { code: "ease41_01",
+              name: "身体疼痛",
+              children:[
+                { code: "ease41_01", name: "01. 孕早期腹痛是怎么回事？" },
+                { code: "ease41_02", name: "02. 孕中期腹痛是怎么回事？" },
+                { code: "ease41_03", name: "03. 孕晚期腹痛是怎么回事？" },
+                { code: "ease41_04", name: "04. 胸部胀痛是怎么回事？如何缓解？" },
+                { code: "ease41_05", name: "05. 耻骨联合分离和耻骨痛如何缓解？" },
+                { code: "ease41_06", name: "06. 孕期腰酸和脚后跟痛是怎么回事？如何缓解？" },
+                { code: "ease41_07", name: "07. 手腕痛是怎么回事？" },
+                { code: "ease41_08", name: "延伸阅读" },
+              ] 
+            },
+            { code: "ease42_01",
+              name: "皮肤问题",
+              children:[
+                { code: "ease42_01", name: "01. 孕期红疹有哪些原因，可如何缓解？" },
+                { code: "ease42_02", name: "02. 什么情况是由胆汁酸引起的瘙痒？" },
+                { code: "ease42_03", name: "03. 如何缓解过敏引起的皮肤瘙痒？" },
+                { code: "ease42_04", name: "04. 什么是孕期水肿？" },
+                { code: "ease42_05", name: "05. 什么样的肿胀是不正常的？" },
+                { code: "ease42_06", name: "06. 如何预防孕期水肿？" },
+                { code: "ease42_07", name: "延伸阅读" },
+              ] 
+            },
+            { code: "ease43_01",
+              name: "口腔问题",
+              children:[
+                { code: "ease42_01", name: "01. 孕期牙龈出血有什么原因？该如何缓解？" },
+                { code: "ease42_02", name: "02. 牙髓炎引起的疼痛该如何缓解？" },
+                { code: "ease42_03", name: "03. 嘴里发苦、反酸正常吗？" },
+              ] 
+            },
           ]
         },
         {
-          code: "prev5_01",
+          code: "ease5_00",
           name: "五、便秘、腹泻、痔疮",
           children: [
-            { code: "prev5_02", name: "01 胸部CT检查" },
-            { code: "prev5_03", name: "02 接诊医院" },
-            { code: "prev5_04", name: "03 用药须知" },
-            { code: "prev5_05", name: "04 感染康复后" },
-            { code: "prev5_06", name: "05 宝宝隔离" }
+            { code: "ease5_01", name: "01. 如何避免便秘的发生或加重？" },
+            { code: "ease5_02", name: "02. 孕期腹泻怎么办？" },
+            { code: "ease5_03", name: "03. 孕期痔疮怎么办？" },
+            { code: "ease5_04", name: "延伸阅读" },
           ]
         },
         {
-          code: "prev6_01",
+          code: "ease6_00",
           name: "六、母胎关系",
           children: [
-            { code: "prev5_02", name: "01 胸部CT检查" },
-            { code: "prev5_03", name: "02 接诊医院" },
-            { code: "prev5_04", name: "03 用药须知" },
-            { code: "prev5_05", name: "04 感染康复后" },
-            { code: "prev5_06", name: "05 宝宝隔离" }
+            { code: "ease6_01", name: "01. 一般感冒发热对胎儿有何影响？" },
+            { code: "ease6_02", name: "02. 辐射对胎儿有何影响？" },
+            { code: "ease6_03", name: "03. CT对胎儿有何影响？" },
           ]
         },
         {
-          code: "prev7_01",
+          code: "ease7_00",
           name: "七、阴道分泌物变化",
           children: [
-            { code: "prev5_02", name: "01 胸部CT检查" },
-            { code: "prev5_03", name: "02 接诊医院" },
-            { code: "prev5_04", name: "03 用药须知" },
-            { code: "prev5_05", name: "04 感染康复后" },
-            { code: "prev5_06", name: "05 宝宝隔离" }
+            { code: "ease7_01", name: "01. 阴道有红色或褐色果冻状分泌物是怎么回事？" },
+            { code: "ease7_02", name: "02. 哪些属于正常的白带增多现象？" },
+            { code: "ease7_03", name: "03. 孕期出现何种阴道分泌物时，应立刻就诊？" },
           ]
         },
         {
-          code: "prev7_01",
+          code: "ease8_00",
           name: "八、胎动、见红、破水、宫缩",
           children: [
-            { code: "prev5_02", name: "01 胸部CT检查" },
-            { code: "prev5_03", name: "02 接诊医院" },
-            { code: "prev5_04", name: "03 用药须知" },
-            { code: "prev5_05", name: "04 感染康复后" },
-            { code: "prev5_06", name: "05 宝宝隔离" }
+            { code: "ease8_01", name: "01. 什么是胎动？" },
+            { code: "ease8_02", name: "02. 怎么数胎动？" },
+            { code: "ease8_03", name: "03. 为什么晚上会胎动频繁？" },
+            { code: "ease8_04", name: "04. 肚子一跳一跳的像心跳怎么回事？" },
+            { code: "ease8_05", name: "05. 临产前出现何种情况需要立即就诊？" },
+            { code: "ease8_06", name: "06. 什么是见红？" },
+            { code: "ease8_07", name: "07. 见红后何时需就诊？" },
+            { code: "ease8_08", name: "08. 什么是破水？" },
+            { code: "ease8_09", name: "09. 破水和漏尿有什么区别？" },
+            { code: "ease8_10", name: "10. 破水后多久会分娩？" },
+            { code: "ease8_11", name: "11. 破水之后要注意什么？" },
+            { code: "ease8_12", name: "12. 什么是宫缩？什么是假性宫缩？什么是真性宫缩？" },
+            { code: "ease8_13", name: "13. 开始宫缩后何时需就诊？" },
+            { code: "ease8_14", name: "延伸阅读" },
+
           ]
         },
         {
-          code: "prev6_01",
+          code: "ease9_01",
           name: "附：顺产呼吸法"
         },
         {
-          code: "prev6_02",
-          name: "参考来源和手册制作团队"
+          code: "ease9_02",
+          name: "参考来源"
+        },
+        {
+          code: "ease9_02",
+          name: "手册制作团队"
         }
       ]
     };
@@ -341,7 +611,7 @@ export default {
   top: 66px;
   width: 100%;
   height: calc(100vh - 69px);
-  background-image: url("http://wuhan2099.oss-accelerate.aliyuncs.com/bg_antie.jpg");
+  background-image: url("http://wuhan2099.oss-accelerate.aliyuncs.com/ease_cover.png");
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-color: #d9f1fb;
@@ -382,7 +652,7 @@ export default {
     width: 80px;
     height: 40px;
     border-radius: 20px 0 0 20px;
-    color: $--color-primary;
+    color: #2AA9AE;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -400,7 +670,7 @@ export default {
   }
   &-btn-text {
     font-size: 14px;
-    color: $--color-primary;
+    color: #2AA9AE;
     font-weight: 500;
     padding-left: 5px;
   }
@@ -413,7 +683,14 @@ export default {
       font-size: 18px;
       font-weight: 600;
       padding-left: 10px;
-      color: $--color-primary;
+      color: #2AA9AE;;
+    }
+    .catalog-header-back {
+      float: right;
+      font-size: 0.36rem;
+      font-weight: 600;
+      padding-left: 10px;
+      color:#666;
     }
     span {
       float: right;
@@ -435,7 +712,7 @@ export default {
     .active {
       font-weight: 600;
       color: white;
-      background-color: $--color-primary;
+      background-color: #2AA9AE;
     }
   }
   &-item {
@@ -451,7 +728,7 @@ export default {
     padding-left: 20px;
     font-size: 14px;
     font-weight: bold;
-    color: $--color-primary;
+    color: #2AA9AE;
     display: block;
   }
 }
