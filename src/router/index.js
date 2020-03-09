@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import FrontIndex from '@/components/FrontIndex'
 import FrontCheckIndex from '@/components/FrontCheckIndex'
+import EaseHandbook from '@/components/EaseHandbook'
 import EndIndex from '@/components/EndIndex'
 import EndHospitalDetail from '@/components/EndHospitalDetail'
 import EndHospitalEdit from '@/components/EndHospitalEdit'
@@ -56,6 +57,18 @@ export default new Router({
       component: FrontCheckIndex,
       meta: {
         title: 'NCP生命支援 - 孕妇防疫手册'
+      },
+      beforeEnter: (to, from, next) => {
+        document.title = to.meta.title
+        next();
+      }
+    },
+    {
+      path: '/EaseHandbook',
+      name: 'EaseHandbook',
+      component: EaseHandbook,
+      meta: {
+        title: 'NCP生命支援 - 安心待产手册'
       },
       beforeEnter: (to, from, next) => {
         document.title = to.meta.title
