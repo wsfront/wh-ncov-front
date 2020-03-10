@@ -10,6 +10,9 @@
     >
       孕妇防疫
     </router-link>
+    <router-link class="tab-btn" :class="{ act: activeIndex === 2}" to="/EaseHandbook">
+     待产安心
+    </router-link>
   </div>
 </template>
 <script>
