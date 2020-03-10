@@ -384,7 +384,7 @@ export default {
             { code: "ease2_04", name: "04. 何种情况需要就诊，确认是否有心功能异常？" },
             { code: "ease2_05", name: "05. 孕期一定要左侧卧睡吗？" },
             { code: "ease2_06", name: "06. 孕期失眠该怎么办？" },
-            { code: "ease2_07", name: "07. 怀孕之后做梦特别多，是怎么回事？" },
+            { code: "ease2_07", name: "07. 怀孕之后做梦特别多，是怎么回事？" }
           ]
         },
         {
@@ -400,7 +400,7 @@ export default {
             { code: "ease3_07", name: "07. 孕期血糖偏高如何管理？" },
             { code: "ease3_08", name: "08. 血压偏低正常吗？" },
             { code: "ease3_09", name: "09. 什么情况会被视为孕期血压偏高？" },
-            { code: "ease3_10", name: "10. 孕期高血压有哪些注意事项？" },
+            { code: "ease3_10", name: "10. 孕期高血压有哪些注意事项？" }
           ]
         },
         {
@@ -409,7 +409,7 @@ export default {
           children: [
             { code: "ease41_01",
               name: "身体疼痛",
-              children:[
+              children: [
                 { code: "ease41_01", name: "01. 孕早期腹痛是怎么回事？" },
                 { code: "ease41_02", name: "02. 孕中期腹痛是怎么回事？" },
                 { code: "ease41_03", name: "03. 孕晚期腹痛是怎么回事？" },
@@ -417,29 +417,29 @@ export default {
                 { code: "ease41_05", name: "05. 耻骨联合分离和耻骨痛如何缓解？" },
                 { code: "ease41_06", name: "06. 孕期腰酸和脚后跟痛是怎么回事？如何缓解？" },
                 { code: "ease41_07", name: "07. 手腕痛是怎么回事？" },
-                { code: "ease41_08", name: "延伸阅读" },
-              ] 
+                { code: "ease41_08", name: "延伸阅读" }
+              ]
             },
             { code: "ease42_01",
               name: "皮肤问题",
-              children:[
+              children: [
                 { code: "ease42_01", name: "01. 孕期红疹有哪些原因，可如何缓解？" },
                 { code: "ease42_02", name: "02. 什么情况是由胆汁酸引起的瘙痒？" },
                 { code: "ease42_03", name: "03. 如何缓解过敏引起的皮肤瘙痒？" },
                 { code: "ease42_04", name: "04. 什么是孕期水肿？" },
                 { code: "ease42_05", name: "05. 什么样的肿胀是不正常的？" },
                 { code: "ease42_06", name: "06. 如何预防孕期水肿？" },
-                { code: "ease42_07", name: "延伸阅读" },
-              ] 
+                { code: "ease42_07", name: "延伸阅读" }
+              ]
             },
             { code: "ease43_01",
               name: "口腔问题",
-              children:[
+              children: [
                 { code: "ease42_01", name: "01. 孕期牙龈出血有什么原因？该如何缓解？" },
                 { code: "ease42_02", name: "02. 牙髓炎引起的疼痛该如何缓解？" },
-                { code: "ease42_03", name: "03. 嘴里发苦、反酸正常吗？" },
-              ] 
-            },
+                { code: "ease42_03", name: "03. 嘴里发苦、反酸正常吗？" }
+              ]
+            }
           ]
         },
         {
@@ -449,7 +449,7 @@ export default {
             { code: "ease5_01", name: "01. 如何避免便秘的发生或加重？" },
             { code: "ease5_02", name: "02. 孕期腹泻怎么办？" },
             { code: "ease5_03", name: "03. 孕期痔疮怎么办？" },
-            { code: "ease5_04", name: "延伸阅读" },
+            { code: "ease5_04", name: "延伸阅读" }
           ]
         },
         {
@@ -458,7 +458,7 @@ export default {
           children: [
             { code: "ease6_01", name: "01. 一般感冒发热对胎儿有何影响？" },
             { code: "ease6_02", name: "02. 辐射对胎儿有何影响？" },
-            { code: "ease6_03", name: "03. CT对胎儿有何影响？" },
+            { code: "ease6_03", name: "03. CT对胎儿有何影响？" }
           ]
         },
         {
@@ -467,7 +467,7 @@ export default {
           children: [
             { code: "ease7_01", name: "01. 阴道有红色或褐色果冻状分泌物是怎么回事？" },
             { code: "ease7_02", name: "02. 哪些属于正常的白带增多现象？" },
-            { code: "ease7_03", name: "03. 孕期出现何种阴道分泌物时，应立刻就诊？" },
+            { code: "ease7_03", name: "03. 孕期出现何种阴道分泌物时，应立刻就诊？" }
           ]
         },
         {
@@ -487,8 +487,7 @@ export default {
             { code: "ease8_11", name: "11. 破水之后要注意什么？" },
             { code: "ease8_12", name: "12. 什么是宫缩？什么是假性宫缩？什么是真性宫缩？" },
             { code: "ease8_13", name: "13. 开始宫缩后何时需就诊？" },
-            { code: "ease8_14", name: "延伸阅读" },
-
+            { code: "ease8_14", name: "延伸阅读" }
           ]
         },
         {
