@@ -22,7 +22,7 @@
         <div class="catalog">
           <div class="catalog-header">
             <p class="catalog-header-title">安心待产手册</p>
-            <p target=".booklet" :right="30" :top="20">回到顶部></p>
+            <!-- <p target=".booklet" :right="30" :top="20">回到顶部></p> -->
           </div>
           <div class="catalog-main">
             <ul class="catalog-body">
@@ -31,15 +31,13 @@
                 :key="item.code"
                 class="catalog-item mt-6">
                 <span v-if="index < 8" :class="['catalog-title', { 'active': activeCode === item.code }]" @click="showHide(index,item.code)">
-                  <img
-                    class="arrow_icon_right"
-                    src="../assets/arrow_right.png"
+                  <i
+                    class="el-icon-caret-right"
                     ref="close"
                   />
-                  <img
+                  <i
                     ref="open"
-                    class="arrow_icon_down"
-                    src="../assets/arrow_down.png"
+                    class="el-icon-caret-bottom"
                   />{{ item.name }}
                 </span>
                 <span v-else :class="['catalog-title', { 'active': activeCode === item.code }]"  @click="goAnchor(item.code)">{{ item.name }}</span>
@@ -742,6 +740,7 @@ export default {
       diyShareTitle: true,
       loading: true,
       activeIndex: 0,
+      currentIndex: null,
       isShow: false,
       activeCode: "ease1_00",
       flag: [],
@@ -752,61 +751,61 @@ export default {
           children: [
             {
               code: "ease1_01",
-              name: "01. 疫情期间，哪些是最重要的产检项目？"
+              name: "01 - 疫情期间，哪些是最重要的产检项目？"
             },
-            { code: "ease1_02", name: "02. 大排畸不做，做小排畸可以吗？" },
-            { code: "ease1_03", name: "03. 糖筛可以跳过吗？" },
-            { code: "ease1_04", name: "04. 小排畸可以跳过吗？" },
+            { code: "ease1_02", name: "02 - 大排畸不做，做小排畸可以吗？" },
+            { code: "ease1_03", name: "03 - 糖筛可以跳过吗？" },
+            { code: "ease1_04", name: "04 - 小排畸可以跳过吗？" },
             {
               code: "ease1_05",
-              name: "05. 36-37周小结可以不做，直接等生产吗？"
+              name: "05 - 36-37周小结可以不做，直接等生产吗？"
             },
-            { code: "ease1_06", name: "06. 哪些属于孕期常见的不适情况？" },
-            { code: "ease1_07", name: "07. 哪些情况必须要去医院做检查？" },
+            { code: "ease1_06", name: "06 - 哪些属于孕期常见的不适情况？" },
+            { code: "ease1_07", name: "07 - 哪些情况必须要去医院做检查？" },
             {
               code: "ease1_08",
               name:
-                "08. 临床孕周和超声孕周有何区别？应该以哪个为准？超生孕周偏大或偏小要紧吗？"
+                "08 - 临床孕周和超声孕周有何区别？应该以哪个为准？超生孕周偏大或偏小要紧吗？"
             },
-            { code: "ease1_09", name: "09. 脐带绕颈" }
+            { code: "ease1_09", name: "09 - 脐带绕颈" }
           ]
         },
         {
           code: "ease2_00",
           name: "二、心肺和睡眠问题",
           children: [
-            { code: "ease2_01", name: "01. 孕期心跳加速是怎么回事？" },
+            { code: "ease2_01", name: "01 - 孕期心跳加速是怎么回事？" },
             {
               code: "ease2_02",
-              name: "02. 晚上睡觉时感到呼吸困难/胸闷是怎么回事？"
+              name: "02 - 晚上睡觉时感到呼吸困难/胸闷是怎么回事？"
             },
             {
               code: "ease2_03",
-              name: "01. 睡觉盗汗怕热，胸口出汗很多，是怎么回事？"
+              name: "01 - 睡觉盗汗怕热，胸口出汗很多，是怎么回事？"
             },
             {
               code: "ease2_04",
-              name: "04. 何种情况需要就诊，确认是否有心功能异常？"
+              name: "04 - 何种情况需要就诊，确认是否有心功能异常？"
             },
-            { code: "ease2_05", name: "05. 孕期一定要左侧卧睡吗？" },
-            { code: "ease2_06", name: "06. 孕期失眠该怎么办？" },
-            { code: "ease2_07", name: "07. 怀孕之后做梦特别多，是怎么回事？" }
+            { code: "ease2_05", name: "05 - 孕期一定要左侧卧睡吗？" },
+            { code: "ease2_06", name: "06 - 孕期失眠该怎么办？" },
+            { code: "ease2_07", name: "07 - 怀孕之后做梦特别多，是怎么回事？" }
           ]
         },
         {
           code: "ease3_00",
           name: "三、孕期营养的血糖血压问题",
           children: [
-            { code: "ease3_01", name: "01. 骨头、手腕痛是不是缺钙？" },
-            { code: "ease3_02", name: "02. 头晕是不是缺铁或贫血？" },
-            { code: "ease3_03", name: "03. 为什么孕期会缺铁？" },
-            { code: "ease3_04", name: "04. 孕期如何补铁？" },
-            { code: "ease3_05", name: "05. 孕期有哪些忌口食物？" },
-            { code: "ease3_06", name: "06. 什么情况会被视为孕期血糖偏高？" },
-            { code: "ease3_07", name: "07. 孕期血糖偏高如何管理？" },
-            { code: "ease3_08", name: "08. 血压偏低正常吗？" },
-            { code: "ease3_09", name: "09. 什么情况会被视为孕期血压偏高？" },
-            { code: "ease3_10", name: "10. 孕期高血压有哪些注意事项？" }
+            { code: "ease3_01", name: "01 - 骨头、手腕痛是不是缺钙？" },
+            { code: "ease3_02", name: "02 - 头晕是不是缺铁或贫血？" },
+            { code: "ease3_03", name: "03 - 为什么孕期会缺铁？" },
+            { code: "ease3_04", name: "04 - 孕期如何补铁？" },
+            { code: "ease3_05", name: "05 - 孕期有哪些忌口食物？" },
+            { code: "ease3_06", name: "06 - 什么情况会被视为孕期血糖偏高？" },
+            { code: "ease3_07", name: "07 - 孕期血糖偏高如何管理？" },
+            { code: "ease3_08", name: "08 - 血压偏低正常吗？" },
+            { code: "ease3_09", name: "09 - 什么情况会被视为孕期血压偏高？" },
+            { code: "ease3_10", name: "10 - 孕期高血压有哪些注意事项？" }
           ]
         },
         {
@@ -817,22 +816,22 @@ export default {
               code: "ease41_01",
               name: "4.1 身体疼痛",
               children: [
-                { code: "ease41_01", name: "01. 孕早期腹痛是怎么回事？" },
-                { code: "ease41_02", name: "02. 孕中期腹痛是怎么回事？" },
-                { code: "ease41_03", name: "03. 孕晚期腹痛是怎么回事？" },
+                { code: "ease41_01", name: "01 - 孕早期腹痛是怎么回事？" },
+                { code: "ease41_02", name: "02 - 孕中期腹痛是怎么回事？" },
+                { code: "ease41_03", name: "03 - 孕晚期腹痛是怎么回事？" },
                 {
                   code: "ease41_04",
-                  name: "04. 胸部胀痛是怎么回事？如何缓解？"
+                  name: "04 - 胸部胀痛是怎么回事？如何缓解？"
                 },
                 {
                   code: "ease41_05",
-                  name: "05. 耻骨联合分离和耻骨痛如何缓解？"
+                  name: "05 - 耻骨联合分离和耻骨痛如何缓解？"
                 },
                 {
                   code: "ease41_06",
-                  name: "06. 孕期腰酸和脚后跟痛是怎么回事？如何缓解？"
+                  name: "06 - 孕期腰酸和脚后跟痛是怎么回事？如何缓解？"
                 },
-                { code: "ease41_07", name: "07. 手腕痛是怎么回事？" },
+                { code: "ease41_07", name: "07 - 手腕痛是怎么回事？" },
                 { code: "ease41_08", name: "延伸阅读" }
               ]
             },
@@ -842,16 +841,19 @@ export default {
               children: [
                 {
                   code: "ease42_01",
-                  name: "01. 孕期红疹有哪些原因，可如何缓解？"
+                  name: "01 - 孕期红疹有哪些原因，可如何缓解？"
                 },
                 {
                   code: "ease42_02",
-                  name: "02. 什么情况是由胆汁酸引起的瘙痒？"
+                  name: "02 - 什么情况是由胆汁酸引起的瘙痒？"
                 },
-                { code: "ease42_03", name: "03. 如何缓解过敏引起的皮肤瘙痒？" },
-                { code: "ease42_04", name: "04. 什么是孕期水肿？" },
-                { code: "ease42_05", name: "05. 什么样的肿胀是不正常的？" },
-                { code: "ease42_06", name: "06. 如何预防孕期水肿？" },
+                {
+                  code: "ease42_03",
+                  name: "03 - 如何缓解过敏引起的皮肤瘙痒？"
+                },
+                { code: "ease42_04", name: "04 - 什么是孕期水肿？" },
+                { code: "ease42_05", name: "05 - 什么样的肿胀是不正常的？" },
+                { code: "ease42_06", name: "06 - 如何预防孕期水肿？" },
                 { code: "ease42_07", name: "延伸阅读" }
               ]
             },
@@ -861,10 +863,13 @@ export default {
               children: [
                 {
                   code: "ease42_01",
-                  name: "01. 孕期牙龈出血有什么原因？该如何缓解？"
+                  name: "01 - 孕期牙龈出血有什么原因？该如何缓解？"
                 },
-                { code: "ease42_02", name: "02. 牙髓炎引起的疼痛该如何缓解？" },
-                { code: "ease42_03", name: "03. 嘴里发苦、反酸正常吗？" }
+                {
+                  code: "ease42_02",
+                  name: "02 - 牙髓炎引起的疼痛该如何缓解？"
+                },
+                { code: "ease42_03", name: "03 - 嘴里发苦、反酸正常吗？" }
               ]
             }
           ]
@@ -873,9 +878,9 @@ export default {
           code: "ease5_00",
           name: "五、便秘、腹泻、痔疮",
           children: [
-            { code: "ease5_01", name: "01. 如何避免便秘的发生或加重？" },
-            { code: "ease5_02", name: "02. 孕期腹泻怎么办？" },
-            { code: "ease5_03", name: "03. 孕期痔疮怎么办？" },
+            { code: "ease5_01", name: "01 - 如何避免便秘的发生或加重？" },
+            { code: "ease5_02", name: "02 - 孕期腹泻怎么办？" },
+            { code: "ease5_03", name: "03 - 孕期痔疮怎么办？" },
             { code: "ease5_04", name: "延伸阅读" }
           ]
         },
@@ -883,9 +888,9 @@ export default {
           code: "ease6_00",
           name: "六、母胎关系",
           children: [
-            { code: "ease6_01", name: "01. 一般感冒发热对胎儿有何影响？" },
-            { code: "ease6_02", name: "02. 辐射对胎儿有何影响？" },
-            { code: "ease6_03", name: "03. CT对胎儿有何影响？" }
+            { code: "ease6_01", name: "01 - 一般感冒发热对胎儿有何影响？" },
+            { code: "ease6_02", name: "02 - 辐射对胎儿有何影响？" },
+            { code: "ease6_03", name: "03 - CT对胎儿有何影响？" }
           ]
         },
         {
@@ -894,12 +899,12 @@ export default {
           children: [
             {
               code: "ease7_01",
-              name: "01. 阴道有红色或褐色果冻状分泌物是怎么回事？"
+              name: "01 - 阴道有红色或褐色果冻状分泌物是怎么回事？"
             },
-            { code: "ease7_02", name: "02. 哪些属于正常的白带增多现象？" },
+            { code: "ease7_02", name: "02 - 哪些属于正常的白带增多现象？" },
             {
               code: "ease7_03",
-              name: "03. 孕期出现何种阴道分泌物时，应立刻就诊？"
+              name: "03 - 孕期出现何种阴道分泌物时，应立刻就诊？"
             }
           ]
         },
@@ -907,22 +912,22 @@ export default {
           code: "ease8_00",
           name: "八、胎动、见红、破水、宫缩",
           children: [
-            { code: "ease8_01", name: "01. 什么是胎动？" },
-            { code: "ease8_02", name: "02. 怎么数胎动？" },
-            { code: "ease8_03", name: "03. 为什么晚上会胎动频繁？" },
-            { code: "ease8_04", name: "04. 肚子一跳一跳的像心跳怎么回事？" },
-            { code: "ease8_05", name: "05. 临产前出现何种情况需要立即就诊？" },
-            { code: "ease8_06", name: "06. 什么是见红？" },
-            { code: "ease8_07", name: "07. 见红后何时需就诊？" },
-            { code: "ease8_08", name: "08. 什么是破水？" },
-            { code: "ease8_09", name: "09. 破水和漏尿有什么区别？" },
-            { code: "ease8_10", name: "10. 破水后多久会分娩？" },
-            { code: "ease8_11", name: "11. 破水之后要注意什么？" },
+            { code: "ease8_01", name: "01 - 什么是胎动？" },
+            { code: "ease8_02", name: "02 - 怎么数胎动？" },
+            { code: "ease8_03", name: "03 - 为什么晚上会胎动频繁？" },
+            { code: "ease8_04", name: "04 - 肚子一跳一跳的像心跳怎么回事？" },
+            { code: "ease8_05", name: "05 - 临产前出现何种情况需要立即就诊？" },
+            { code: "ease8_06", name: "06 - 什么是见红？" },
+            { code: "ease8_07", name: "07 - 见红后何时需就诊？" },
+            { code: "ease8_08", name: "08 - 什么是破水？" },
+            { code: "ease8_09", name: "09 - 破水和漏尿有什么区别？" },
+            { code: "ease8_10", name: "10 - 破水后多久会分娩？" },
+            { code: "ease8_11", name: "11 - 破水之后要注意什么？" },
             {
               code: "ease8_12",
-              name: "12. 什么是宫缩？什么是假性宫缩？什么是真性宫缩？"
+              name: "12 - 什么是宫缩？什么是假性宫缩？什么是真性宫缩？"
             },
-            { code: "ease8_13", name: "13. 开始宫缩后何时需就诊？" },
+            { code: "ease8_13", name: "13 - 开始宫缩后何时需就诊？" },
             { code: "ease8_14", name: "延伸阅读" }
           ]
         },
@@ -943,25 +948,23 @@ export default {
   },
   methods: {
     showHide(index, selector) {
-      this.$refs.child[index].style.display = "list-item";
-      this.$refs.close[index].style.display = "none";
-      this.$refs.open[index].style.display = "inline-block";
-      this.$refs.child.forEach(function(element, indx) {
-        if (indx !== index) {
-          element.style.display = "none";
+      if (this.$refs.child[index].style.display === "list-item") {
+        this.$refs.child[index].style.display = "none";
+        this.$refs.close[index].style.display = "inline-block";
+        this.$refs.open[index].style.display = "none";
+        this.currentIndex = null;
+      } else {
+        this.$refs.child[index].style.display = "list-item";
+        this.$refs.close[index].style.display = "none";
+        this.$refs.open[index].style.display = "inline-block";
+        if (this.currentIndex !== null) {
+          this.$refs.child[this.currentIndex].style.display = "none";
+          this.$refs.close[this.currentIndex].style.display = "inline-block";
+          this.$refs.open[this.currentIndex].style.display = "none";
         }
-      });
-      this.$refs.close.forEach(function(element, indx) {
-        if (indx !== index) {
-          element.style.display = "inline-block";
-        }
-      });
-      this.$refs.open.forEach(function(element, indx) {
-        if (indx !== index) {
-          element.style.display = "none";
-        }
-      });
-      this.activeCode = selector;
+        this.currentIndex = index;
+      }
+      // this.goAnchor(selector);
     },
     handleNav(selector) {
       if (!selector) {
@@ -1090,6 +1093,13 @@ export default {
 }
 .block /deep/ .el-backtop {
   color: $--color-easy-main;
+}
+.block .el-icon-caret-right {
+  color: $--color-easy-main;
+}
+.block .el-icon-caret-bottom {
+  color: $--color-easy-main;
+  display: none;
 }
 .jump-link {
   position: absolute;
@@ -1404,6 +1414,7 @@ export default {
     list-style: none;
     span {
       padding-left: 20px;
+      display: inline-block;
     }
   }
   &-title {
