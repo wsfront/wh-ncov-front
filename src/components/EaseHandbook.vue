@@ -29,30 +29,41 @@
                 v-for="(item,index) in catalogs"
                 :key="item.code"
                 class="catalog-item mt-6">
-                <span :class="['catalog-title', { 'active': activeCode === item.code }]" @click="showHide(index)">
-                  <img v-if="index < 8"
+                <span v-if="index < 8" :class="['catalog-title', { 'active': activeCode === item.code }]" @click="showHide(index)">
+                  <img
                     class="arrow_icon_right"
                     src="../assets/arrow_right.png"
                     ref="close"
                   />
-                  <img v-if="index < 8"
+                  <img
                     ref="open"
                     class="arrow_icon_down"
                     src="../assets/arrow_down.png"
                   />{{ item.name }}
                 </span>
+                <span v-else :class="['catalog-title', { 'active': activeCode === item.code }]"  @click="goAnchor(item.code)">{{ item.name }}</span>
                 <ul
                   v-if="item.children && item.children.length"
                   class="catalog-ul-body" ref="child">
                   <li
                     v-for="citem in item.children"
                     :key="citem.code"
-                    :class="[
-                      'catalog-item',
-                      { active: activeCode === citem.code }
-                    ]"
-                  >
-                    <span @click="goAnchor(citem.code)">{{ citem.name }}</span>
+                    class="catalog-item mt-6">
+                    <span :class="{'bold': citem.children && citem.children.length }" @click="goAnchor(citem.code)">{{ citem.name }}</span>
+                    <ul
+                      v-if="citem.children && citem.children.length"
+                      >
+                      <li
+                        v-for="subcitem in citem.children"
+                        :key="subcitem.code"
+                        :class="[
+                          'catalog-item',
+                          { active: activeCode === subcitem.code }
+                        ]"
+                      >
+                        <span @click="goAnchor(subcitem.code)">{{ subcitem.name }}</span>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
               </li>
@@ -803,7 +814,7 @@ export default {
           children: [
             {
               code: "ease41_01",
-              name: "身体疼痛",
+              name: "4.1 身体疼痛",
               children: [
                 { code: "ease41_01", name: "01. 孕早期腹痛是怎么回事？" },
                 { code: "ease41_02", name: "02. 孕中期腹痛是怎么回事？" },
@@ -826,7 +837,7 @@ export default {
             },
             {
               code: "ease42_01",
-              name: "皮肤问题",
+              name: "4.2 皮肤问题",
               children: [
                 {
                   code: "ease42_01",
@@ -845,7 +856,7 @@ export default {
             },
             {
               code: "ease43_01",
-              name: "口腔问题",
+              name: "4.3 口腔问题",
               children: [
                 {
                   code: "ease42_01",
@@ -1326,7 +1337,7 @@ export default {
   }
   &-ul-body {
     display:none;
-    padding: 0;
+    padding-left: 35px;
     .active {
       font-weight: 600;
       color: white;
@@ -1350,6 +1361,9 @@ export default {
     display: block;
   }
 }
+.bold {
+  font-weight: bold;
+}
 .booklet {
   // position: relative;
   height: 100%;
@@ -1368,14 +1382,6 @@ export default {
   position: absolute;
   top: 38.7%;
   left: 37.5%;
-  display: block;
-}
-.findme {
-  width: 32.25%;
-  height: 2.35%;
-  position: absolute;
-  left: 14%;
-  bottom: 8.35%;
   display: block;
 }
 .get-more {
