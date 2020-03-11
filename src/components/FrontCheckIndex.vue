@@ -1,7 +1,7 @@
 <template>
   <div :class="['wh-container', { 'full': activeIndex !== 0 }]">
     <div v-show="activeIndex === 0" class="hearder-block">
-      <HeaderLayout :activeIndex="1" />
+      <HeaderLayout :activeIndex="1" @click="removeEvent"/>
     </div>
     <div v-if="activeIndex === 0" class="launch-main">
       <img @click="handleNav('prev1_01')" class="launch-btn" src="http://wuhan2099.oss-accelerate.aliyuncs.com/btn_epi.png" />
@@ -215,32 +215,64 @@ export default {
     },
     backHome() {
       window.scrollTo(0, 0);
-      this.$router.push({
-        path: "/FrontCheckIndex",
-        query: {} // preid: undefined
-      });
+      let currentHistory = this.$router.history.current;
+      if (
+        currentHistory.path === "/FrontCheckIndex" &&
+        !currentHistory.query.hasOwnProperty("preid")
+      ) {
+        console.log("same");
+      } else {
+        this.$router
+          .push({
+            path: "/FrontCheckIndex",
+            query: {} // preid: undefined
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
       this.activeIndex = 0;
       this.activeCode = false;
       Info.$emit("frameDisplay", true);
     },
     goAnchor(selector) {
       this.isShow = false;
-      this.$router
-        .push({
-          path: "/FrontCheckIndex",
-          query: { preid: selector }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      let currentHistory = this.$router.history.current;
+      if (
+        currentHistory.path === "/FrontCheckIndex" &&
+        currentHistory.query.hasOwnProperty("preid") &&
+        currentHistory.query.preid === selector
+      ) {
+        console.log("same");
+      } else {
+        this.$router
+          .push({
+            path: "/FrontCheckIndex",
+            query: { preid: selector }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
       this.activeCode = selector;
+    },
+    removeEvent() {
+      let that = this;
+      window.removeEventListener(
+        "hashchange",
+        that.handleHash.bind(that, event),
+        false
+      );
     },
     handleHash(event) {
       let selector = this.$route.query.preid;
-      if (selector) {
-        this.handleNav(selector);
-      } else {
-        this.backHome();
+      let currentHistory = this.$router.history.current;
+      if (currentHistory.path === "/FrontCheckIndex") {
+        if (selector) {
+          this.handleNav(selector);
+        } else {
+          this.backHome();
+        }
       }
     }
   },
@@ -255,6 +287,9 @@ export default {
   },
   beforeCreate() {
     localStorage.setItem("activeCode", null);
+  },
+  beforeDestroy() {
+    this.removeEvent();
   },
   updated() {
     let that = this;

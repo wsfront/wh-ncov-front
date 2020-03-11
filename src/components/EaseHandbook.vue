@@ -1,7 +1,7 @@
 <template>
   <div :class="['wh-container', { full: activeIndex !== 0 }]">
     <div v-show="activeIndex === 0" class="hearder-block">
-      <HeaderLayout :activeIndex="2" />
+      <HeaderLayout :activeIndex="2" @click="removeEvent" />
     </div>
     <div v-if="activeIndex === 0" class="launch-main">
       <img
@@ -943,17 +943,23 @@ export default {
   },
   methods: {
     showHide(index, selector) {
-      this.$refs.child[index].style.display = 'list-item';
-      this.$refs.close[index].style.display = 'none';
-      this.$refs.open[index].style.display = 'inline-block'
+      this.$refs.child[index].style.display = "list-item";
+      this.$refs.close[index].style.display = "none";
+      this.$refs.open[index].style.display = "inline-block";
       this.$refs.child.forEach(function(element, indx) {
-        if (indx !== index) { element.style.display = 'none'; }
+        if (indx !== index) {
+          element.style.display = "none";
+        }
       });
       this.$refs.close.forEach(function(element, indx) {
-        if (indx !== index) { element.style.display = 'inline-block'; }
+        if (indx !== index) {
+          element.style.display = "inline-block";
+        }
       });
       this.$refs.open.forEach(function(element, indx) {
-        if (indx !== index) { element.style.display = 'none'; }
+        if (indx !== index) {
+          element.style.display = "none";
+        }
       });
       this.activeCode = selector;
     },
@@ -967,32 +973,65 @@ export default {
     },
     backHome() {
       window.scrollTo(0, 0);
-      this.$router.push({
-        path: "/EaseHandbook",
-        query: {} // preid: undefined
-      });
+      let currentHistory = this.$router.history.current;
+      if (
+        currentHistory.path === "/EaseHandbook" &&
+        !currentHistory.query.hasOwnProperty("preid")
+      ) {
+        console.log("same");
+      } else {
+        this.$router
+          .push({
+            path: "/EaseHandbook",
+            query: {} // preid: undefined
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
       this.activeIndex = 0;
       this.activeCode = false;
       Info.$emit("frameDisplay", true);
     },
     goAnchor(selector) {
       this.isShow = false;
-      this.$router
-        .push({
-          path: "/EaseHandbook",
-          query: { preid: selector }
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      let currentHistory = this.$router.history.current;
+      if (
+        currentHistory.path === "/EaseHandbook" &&
+        currentHistory.query.hasOwnProperty("preid") &&
+        currentHistory.query.preid === selector
+      ) {
+        console.log("same");
+      } else {
+        this.$router
+          .push({
+            path: "/EaseHandbook",
+            query: { preid: selector }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+
       this.activeCode = selector;
+    },
+    removeEvent() {
+      let that = this;
+      window.removeEventListener(
+        "hashchange",
+        that.handleHash.bind(that, event),
+        false
+      );
     },
     handleHash(event) {
       let selector = this.$route.query.preid;
-      if (selector) {
-        this.handleNav(selector);
-      } else {
-        this.backHome();
+      let currentHistory = this.$router.history.current;
+      if (currentHistory.path === "/EaseHandbook") {
+        if (selector) {
+          this.handleNav(selector);
+        } else {
+          this.backHome();
+        }
       }
     }
   },
@@ -1006,7 +1045,10 @@ export default {
     );
   },
   beforeCreate() {
-    localStorage.setItem("activeCode", null);
+    localStorage.setItem("activeCode2", null);
+  },
+  beforeDestroy() {
+    this.removeEvent();
   },
   updated() {
     let that = this;
@@ -1018,7 +1060,7 @@ export default {
     if (that.isShow) {
       return;
     }
-    if (that.activeCode === localStorage.getItem("activeCode")) {
+    if (that.activeCode === localStorage.getItem("activeCode2")) {
       return;
     }
 
@@ -1029,13 +1071,13 @@ export default {
         targetPosition.scrollIntoView();
         Info.$emit("frameDisplay", false);
         // store current postion if there is no catelog operation
-        localStorage.setItem("activeCode", that.activeCode);
+        localStorage.setItem("activeCode2", that.activeCode);
       }
     });
     targetImg.onload = function() {
       targetPosition.scrollIntoView();
       Info.$emit("frameDisplay", false);
-      localStorage.setItem("activeCode", that.activeCode);
+      localStorage.setItem("activeCode2", that.activeCode);
     };
   }
 };
@@ -1045,6 +1087,9 @@ export default {
 <style lang="scss" scoped>
 .block /deep/ .el-drawer:focus {
   outline: none;
+}
+.block /deep/ .el-backtop {
+  color: $--color-easy-main;
 }
 .jump-link {
   position: absolute;
@@ -1227,7 +1272,7 @@ export default {
   }
 }
 .arrow_icon_right {
-  color: #2AA9AE;
+  color: #2aa9ae;
   width: 8.5px;
   height: 10px;
   margin: 5px 12px 0 12px;
@@ -1243,10 +1288,10 @@ export default {
   top: 66px;
   width: 100%;
   height: calc(100vh - 69px);
-  background-image: url("http://wuhan2099.oss-accelerate.aliyuncs.com/ease_cover.png");
+  background-image: url("http://wuhan2099.oss-accelerate.aliyuncs.com/ease_cover.jpg");
   background-size: 100% auto;
   background-repeat: no-repeat;
-  background-color: #d9f1fb;
+  background-color: $--color-easy;
   z-index: 2;
 }
 .launch-btn {
@@ -1342,7 +1387,7 @@ export default {
     list-style: none;
   }
   &-ul-body {
-    display:none;
+    display: none;
     padding-left: 35px;
     .active {
       font-weight: 600;
@@ -1351,7 +1396,7 @@ export default {
     }
   }
   &-sub-ul-body {
-     padding-left: 0px;
+    padding-left: 0px;
   }
   &-item {
     line-height: 36px;
