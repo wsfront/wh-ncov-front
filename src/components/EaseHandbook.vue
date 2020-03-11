@@ -26,22 +26,24 @@
           <div class="catalog-main">
             <ul class="catalog-body">
               <li
-                v-for="item in catalogs"
+                v-for="(item,index) in catalogs"
                 :key="item.code"
-                class="catalog-item mt-6"
-              >
-                <span
-                  @click="goAnchor(item.code)"
-                  :class="[
-                    'catalog-title',
-                    { active: activeCode === item.code }
-                  ]"
-                  >{{ item.name }}</span
-                >
+                class="catalog-item mt-6">
+                <span :class="['catalog-title', { 'active': activeCode === item.code }]" @click="showHide(index)">
+                  <img v-if="index < 8"
+                    class="arrow_icon_right"
+                    src="../assets/arrow_right.png"
+                    ref="close"
+                  />
+                  <img v-if="index < 8"
+                    ref="open"
+                    class="arrow_icon_down"
+                    src="../assets/arrow_down.png"
+                  />{{ item.name }}
+                </span>
                 <ul
                   v-if="item.children && item.children.length"
-                  class="catalog-ul-body"
-                >
+                  class="catalog-ul-body" ref="child">
                   <li
                     v-for="citem in item.children"
                     :key="citem.code"
@@ -730,6 +732,7 @@ export default {
       activeIndex: 0,
       isShow: false,
       activeCode: "ease1_00",
+      flag: [],
       catalogs: [
         {
           code: "ease1_00",
@@ -920,13 +923,24 @@ export default {
           name: "参考来源"
         },
         {
-          code: "ease9_02",
+          code: "ease9_03",
           name: "手册制作团队"
         }
       ]
     };
   },
   methods: {
+    showHide(index) {
+      if (this.$refs.child[index].style.display === 'none') {
+        this.$refs.child[index].style.display = 'list-item';
+        this.$refs.close[index].style.display = 'none';
+        this.$refs.open[index].style.display = 'inline-block'
+      } else {
+        this.$refs.child[index].style.display = 'none';
+        this.$refs.open[index].style.display = 'none';
+        this.$refs.close[index].style.display = 'inline-block'
+      }
+    },
     handleNav(selector) {
       if (!selector) {
         this.backHome();
@@ -1196,6 +1210,19 @@ export default {
     height: 100vh;
   }
 }
+.arrow_icon_right {
+  color: #2AA9AE;
+  width: 8.5px;
+  height: 10px;
+  margin: 5px 12px 0 12px;
+}
+.arrow_icon_down {
+  display: none;
+  width: 8.5px;
+  height: 10px;
+  margin: 5px 12px 0 12px;
+}
+
 .launch-main {
   top: 66px;
   width: 100%;
@@ -1298,6 +1325,7 @@ export default {
     list-style: none;
   }
   &-ul-body {
+    display:none;
     padding: 0;
     .active {
       font-weight: 600;
