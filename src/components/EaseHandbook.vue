@@ -21,6 +21,7 @@
         <div class="catalog">
           <div class="catalog-header">
             <p class="catalog-header-title">安心待产手册</p>
+            <p target=".booklet" :right="30" :top="20">回到顶部></p>
           </div>
           <div class="catalog-main">
             <ul class="catalog-body">
@@ -28,7 +29,7 @@
                 v-for="(item,index) in catalogs"
                 :key="item.code"
                 class="catalog-item mt-6">
-                <span :class="['catalog-title', { 'active': activeCode === item.code }]" @click="showHide(index)">
+                <span :class="['catalog-title', { 'active': activeCode === item.code }]" @click="showHide(index,item.code)">
                   <img v-if="index < 8"
                     class="arrow_icon_right"
                     src="../assets/arrow_right.png"
@@ -57,8 +58,7 @@
         </div>
       </el-drawer>
       <div class="booklet">
-        <el-backtop target=".booklet" :right="20" :bottom="40"></el-backtop>
-         <div id="ease1_00" class="booklet-item">
+        <div id="ease1_00" class="booklet-item">
           <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_00.png" />
         </div>
         <div id="ease1_01" class="booklet-item">
@@ -516,7 +516,7 @@ export default {
     };
   },
   methods: {
-    showHide(index) {
+    showHide(index, selector) {
       if (this.$refs.child[index].style.display === 'none') {
         this.$refs.child[index].style.display = 'list-item';
         this.$refs.close[index].style.display = 'none';
@@ -526,6 +526,7 @@ export default {
         this.$refs.open[index].style.display = 'none';
         this.$refs.close[index].style.display = 'inline-block'
       }
+      this.activeCode = selector;
     },
     handleNav(selector) {
       if (!selector) {
@@ -711,6 +712,7 @@ export default {
     height: 64px;
     padding: 10px 10px 5px;
     border-bottom: 1px solid #e6e5e5;
+    // justify-content: space-between;
     .catalog-header-title {
       float: left;
       font-size: 18px;
