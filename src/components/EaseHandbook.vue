@@ -22,6 +22,7 @@
         <div class="catalog">
           <div class="catalog-header">
             <p class="catalog-header-title">安心待产手册</p>
+            <p target=".booklet" :right="30" :top="20">回到顶部></p>
           </div>
           <div class="catalog-main">
             <ul class="catalog-body">
@@ -29,7 +30,7 @@
                 v-for="(item,index) in catalogs"
                 :key="item.code"
                 class="catalog-item mt-6">
-                <span v-if="index < 8" :class="['catalog-title', { 'active': activeCode === item.code }]" @click="showHide(index)">
+                <span v-if="index < 8" :class="['catalog-title', { 'active': activeCode === item.code }]" @click="showHide(index,item.code)">
                   <img
                     class="arrow_icon_right"
                     src="../assets/arrow_right.png"
@@ -941,16 +942,20 @@ export default {
     };
   },
   methods: {
-    showHide(index) {
-      if (this.$refs.child[index].style.display === 'none') {
-        this.$refs.child[index].style.display = 'list-item';
-        this.$refs.close[index].style.display = 'none';
-        this.$refs.open[index].style.display = 'inline-block'
-      } else {
-        this.$refs.child[index].style.display = 'none';
-        this.$refs.open[index].style.display = 'none';
-        this.$refs.close[index].style.display = 'inline-block'
-      }
+    showHide(index, selector) {
+      this.$refs.child[index].style.display = 'list-item';
+      this.$refs.close[index].style.display = 'none';
+      this.$refs.open[index].style.display = 'inline-block'
+      this.$refs.child.forEach(function(element, indx) {
+        if (indx !== index) { element.style.display = 'none'; }
+      });
+      this.$refs.close.forEach(function(element, indx) {
+        if (indx !== index) { element.style.display = 'inline-block'; }
+      });
+      this.$refs.open.forEach(function(element, indx) {
+        if (indx !== index) { element.style.display = 'none'; }
+      });
+      this.activeCode = selector;
     },
     handleNav(selector) {
       if (!selector) {
@@ -1306,6 +1311,7 @@ export default {
     height: 64px;
     padding: 10px 10px 5px;
     border-bottom: 1px solid #e6e5e5;
+    // justify-content: space-between;
     .catalog-header-title {
       float: left;
       font-size: 18px;
