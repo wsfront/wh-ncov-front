@@ -1,6 +1,6 @@
 import wx from 'weixin-js-sdk';
 
-let {origin} = location;
+let { origin } = location;
 const shareConf = {
   title: 'NCP生命支援-武汉孕妇就诊指南',
   desc: '为爱战“疫” 守护新生',
@@ -10,7 +10,7 @@ const shareConf = {
 export const wxShare = {
   data() {
     return {
-      diyShareTitle: false // 在实例中需要用自己的title，那就在route.js中配置，然后就会使用当前页面的document.title来做分享的标题
+      diyShareTitle: true // 在实例中需要用自己的title，那就在route.js中配置，然后就会使用当前页面的document.title来做分享的标题
     }
   },
   created() {
@@ -27,27 +27,27 @@ export const wxShare = {
           link: location.href,
           type: 'link'
         });
-      }).catch(() => {})
+      }).catch(() => { })
   },
   methods: {
     initJsSdk(jsApiListConf) {
       return new Promise((resolve, reject) => {
         this.$http
-          .post("/wh/wx/sign", {url: location.href.split('#')[0]})
-          .then(function(response) {
+          .post("/wh/wx/sign", { url: location.href.split('#')[0] })
+          .then(function (response) {
             if (response.data.code === "0000") {
               let config = response.data.result;
               let debug = false // process.env.NODE_ENV === 'production'
               let jsApiList = jsApiListConf || ['chooseImage', 'previewImage', 'uploadImage', 'openLocation', 'getLocation', 'chooseWXPay', 'getSystemInfo', 'onMenuShareAppMessage', 'onMenuShareTimeline', 'scanQRCode'];
 
-              wx.config({debug, ...config, jsApiList});
+              wx.config({ debug, ...config, jsApiList });
               wx.ready(function () {
                 console.log('wx ready')
                 resolve(wx) // 把变量传出去
               });
             }
           })
-          .catch(function(error) {
+          .catch(function (error) {
             console.log(error);
           });
       })
