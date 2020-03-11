@@ -50,7 +50,7 @@
                     :key="citem.code"
                     class="catalog-item mt-6">
                     <span :class="{'bold': citem.children && citem.children.length }" @click="goAnchor(citem.code)">{{ citem.name }}</span>
-                    <ul
+                    <ul class="catalog-sub-ul-body"
                       v-if="citem.children && citem.children.length"
                       >
                       <li
@@ -1343,6 +1343,9 @@ export default {
       color: white;
       background-color: #2aa9ae;
     }
+  }
+  &-sub-ul-body {
+     padding-left: 0px;
   }
   &-item {
     line-height: 36px;
