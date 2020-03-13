@@ -18,7 +18,7 @@
         <i class="el-icon-s-fold"></i>
         <span class="catalog-btn-text">目录</span>
       </div>
-      <el-drawer :visible.sync="isShow" size="64%" :with-header="false">
+      <el-drawer :visible.sync="isShow" size="70%" :with-header="false">
         <div class="catalog">
           <div class="catalog-header">
             <p class="catalog-header-title">安心待产手册</p>
@@ -48,7 +48,7 @@
                     v-for="citem in item.children"
                     :key="citem.code"
                     class="catalog-item mt-6">
-                    <span :class="{'bold': citem.children && citem.children.length }" @click="goAnchor(citem.code)">{{ citem.name }}</span>
+                    <span :class="{'catalog-bold': citem.children && citem.children.length }" @click="goAnchor(citem.code)">{{ citem.name }}</span>
                     <ul class="catalog-sub-ul-body"
                       v-if="citem.children && citem.children.length"
                       >
@@ -1425,10 +1425,11 @@ export default {
     color: #2aa9ae;
     display: block;
   }
+  &-bold {
+   font-weight: bold;
+  }
 }
-.bold {
-  font-weight: bold;
-}
+
 .booklet {
   // position: relative;
   height: 100%;
