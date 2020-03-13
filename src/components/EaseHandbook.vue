@@ -5,7 +5,7 @@
     </div>
     <div v-if="activeIndex === 0" class="launch-main">
       <img
-        @click="handleNav('ease1_01')"
+        @click="handleNav('ease1_00')"
         class="launch-btn"
         src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease_button.png"
       />
@@ -29,15 +29,15 @@
               <li
                 v-for="(item,index) in catalogs"
                 :key="item.code"
-                class="catalog-item mt-6">
-                <span v-if="index < 8" :class="['catalog-title', { 'active': activeCode === item.code }]" @click="showHide(index,item.code)">
+                class="catalog-body-container mt-6">
+                <span v-if="index < 8" class="catalog-title" @click="showHide(index,item.code)">
                   <i
-                    class="el-icon-caret-right"
+                    class="el-icon-caret-right icon"
                     ref="close"
                   />
                   <i
                     ref="open"
-                    class="el-icon-caret-bottom"
+                    class="el-icon-caret-bottom icon"
                   />{{ item.name }}
                 </span>
                 <span v-else :class="['catalog-title', { 'active': activeCode === item.code }]"  @click="goAnchor(item.code)">{{ item.name }}</span>
@@ -47,7 +47,7 @@
                   <li
                     v-for="citem in item.children"
                     :key="citem.code"
-                    class="catalog-item mt-6">
+                    class="catalog-item mt-6" :class=" { active: (activeCode === citem.code)&&!(citem.children && citem.children.length) }">
                     <span :class="{'catalog-bold': citem.children && citem.children.length }" @click="goAnchor(citem.code)">{{ citem.name }}</span>
                     <ul class="catalog-sub-ul-body"
                       v-if="citem.children && citem.children.length"
@@ -862,14 +862,14 @@ export default {
               name: "4.3 口腔问题",
               children: [
                 {
-                  code: "ease42_01",
+                  code: "ease43_01",
                   name: "01 - 孕期牙龈出血有什么原因？该如何缓解？"
                 },
                 {
-                  code: "ease42_02",
+                  code: "ease43_02",
                   name: "02 - 牙髓炎引起的疼痛该如何缓解？"
                 },
-                { code: "ease42_03", name: "03 - 嘴里发苦、反酸正常吗？" }
+                { code: "ease43_03", name: "03 - 嘴里发苦、反酸正常吗？" }
               ]
             }
           ]
@@ -1101,6 +1101,10 @@ export default {
   color: $--color-easy-main;
   display: none;
 }
+.block .icon {
+  width: 16px;
+  height: 16px;
+}
 .jump-link {
   position: absolute;
   height: 22px;
@@ -1306,7 +1310,7 @@ export default {
 }
 .launch-btn {
   width: 64%;
-  margin-top: 50vh;
+  margin-top: 60vh;
   &.mt-10 {
     margin-top: 3vh;
   }
@@ -1396,24 +1400,33 @@ export default {
     text-align: left;
     list-style: none;
   }
+  &-body-container {
+    line-height: 36px;
+    text-decoration: none;
+    list-style: none;
+  }
   &-ul-body {
     display: none;
-    padding-left: 35px;
+    padding-left: 0px;
     .active {
-      font-weight: 600;
-      color: white;
-      background-color: #2aa9ae;
+      background: rgba(0, 0, 0, 0.08);
+      // font-weight: 600;
+      // color: white;
+      // background-color: #2aa9ae;
     }
   }
   &-sub-ul-body {
     padding-left: 0px;
   }
   &-item {
-    line-height: 36px;
+    // line-height: 36px;
     text-decoration: none;
     list-style: none;
     span {
-      padding-left: 20px;
+      padding-left: 35px;
+      padding-right: 10px;
+      line-height: 20px;
+      padding-top: 10px;
       display: inline-block;
     }
   }
@@ -1426,7 +1439,7 @@ export default {
     display: block;
   }
   &-bold {
-   font-weight: bold;
+    font-weight: bold;
   }
 }
 
