@@ -8,7 +8,7 @@
       <img @click="handleNav('prev5_01')" class="launch-btn mt-10" src="http://wuhan2099.oss-accelerate.aliyuncs.com/btn_won.png" />
     </div>
     <div v-show="activeIndex !== 0" class="block">
-      <div @click="backHome" class="el-backtop" style="top: 40px; left: 20px;"><i class="el-icon-s-home"></i>
+      <div @click="backHome" class="el-backtop" style="top: 30px; left: 20px;"><i class="el-icon-s-home"></i>
       </div>
       <div v-if="!isShow"
         @click="isShow = true" class="catalog-btn"
@@ -21,7 +21,7 @@
         :with-header="false">
         <div class="catalog">
           <div class="catalog-header">
-            <p class="catalog-header-title">孕妇防疫手册</p>
+            孕妇防疫手册
           </div>
           <div class="catalog-main">
             <ul class="catalog-body">
@@ -408,22 +408,19 @@ export default {
     padding-left: 5px;
   }
   &-header {
-    height: 64px;
-    padding: 10px 10px 5px;
+    line-height: 56px;
     border-bottom: 1px solid #e6e5e5;
-    .catalog-header-title {
-      float: left;
-      font-size: 18px;
-      font-weight: 600;
-      padding-left: 10px;
-      color: $--color-primary;
-    }
+    font-size: 18px;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 20px;
+    color: $--color-primary;
     span {
       float: right;
     }
   }
   &-main {
-    height: calc(100vh - 84px);
+    height: calc(100vh - 55px);
     box-sizing: border-box;
     overflow-y: scroll;
   }
@@ -446,16 +443,23 @@ export default {
     text-decoration: none;
     list-style: none;
     span {
-      padding-left: 20px;
+      padding-left: 52px;
     }
   }
   &-title {
     margin-top: 10px;
-    padding-left: 20px;
-    font-size: 14px;
+    padding-left: 20px !important;
     font-weight: bold;
+    font-size: 16px;
     color: $--color-primary;
     display: block;
+  }
+}
+@media screen and (max-width: 350px){
+  .catalog{
+    &-title {
+      font-size: 15px;
+    }
   }
 }
 .booklet {
