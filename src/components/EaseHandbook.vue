@@ -5,7 +5,7 @@
     </div>
     <div v-if="activeIndex === 0" class="launch-main">
       <img
-        @click="handleNav('ease1_00')"
+        @click="handleNav('ease0_00')"
         class="launch-btn"
         src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease_button.png"
       />
@@ -72,16 +72,17 @@
       </el-drawer>
       <div class="booklet">
         <el-backtop target=".booklet" :right="20" :bottom="40"></el-backtop>
-        <div id="ease1_00" class="booklet-item">
-          <img
-            class="booklet-img"
-            src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_00.png"
-          />
-        </div>
         <div id="ease0_00" class="booklet-item">
           <img
             class="booklet-img"
             src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease0_00.png"
+          />
+        </div>
+
+        <div id="ease1_00" class="booklet-item">
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_00.png"
           />
         </div>
         <div id="ease1_01" class="booklet-item">
@@ -488,6 +489,12 @@
           />
         </div>
 
+        <div id="ease5_00" class="booklet-item">
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease5/ease5_00.png"
+          />
+        </div>
         <div id="ease5_01" class="booklet-item">
           <img
             class="booklet-img"
@@ -528,6 +535,12 @@
           ></a>
         </div>
 
+        <div id="ease6_00" class="booklet-item">
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease6/ease6_00.png"
+          />
+        </div>
         <div id="ease6_01" class="booklet-item">
           <img
             class="booklet-img"
@@ -578,7 +591,12 @@
         <div id="ease6_04" class="booklet-item">
           <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease6/ease6_04.png" />
         </div> -->
-
+        <div id="ease7_00" class="booklet-item">
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease7/ease7_00.png"
+          />
+        </div>
         <div id="ease7_01" class="booklet-item">
           <img
             class="booklet-img"
