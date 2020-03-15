@@ -5,7 +5,7 @@
     </div>
     <div v-if="activeIndex === 0" class="launch-main">
       <img
-        @click="handleNav('ease1_01')"
+        @click="handleNav('ease1_00')"
         class="launch-btn"
         src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease_button.png"
       />
@@ -27,31 +27,51 @@
           <div class="catalog-main">
             <ul class="catalog-body">
               <li
-                v-for="(item,index) in catalogs"
+                v-for="(item, index) in catalogs"
                 :key="item.code"
-                class="catalog-item mt-6">
-                <span v-if="index < 8" :class="['catalog-title', { 'active': activeCode === item.code }]" @click="showHide(index,item.code)">
-                  <i
-                    class="el-icon-caret-right"
-                    ref="close"
-                  />
-                  <i
-                    ref="open"
-                    class="el-icon-caret-bottom"
-                  />{{ item.name }}
+                class="catalog-item mt-6"
+              >
+                <span
+                  v-if="index < 8"
+                  :class="[
+                    'catalog-title',
+                    { active: activeCode === item.code }
+                  ]"
+                  @click="showHide(index, item.code)"
+                >
+                  <i class="el-icon-caret-right" ref="close" />
+                  <i ref="open" class="el-icon-caret-bottom" />{{ item.name }}
                 </span>
-                <span v-else :class="['catalog-title', { 'active': activeCode === item.code }]"  @click="goAnchor(item.code)">{{ item.name }}</span>
+                <span
+                  v-else
+                  :class="[
+                    'catalog-title',
+                    { active: activeCode === item.code }
+                  ]"
+                  @click="goAnchor(item.code)"
+                  >{{ item.name }}</span
+                >
                 <ul
                   v-if="item.children && item.children.length"
-                  class="catalog-ul-body" ref="child">
+                  class="catalog-ul-body"
+                  ref="child"
+                >
                   <li
                     v-for="citem in item.children"
                     :key="citem.code"
-                    class="catalog-item mt-6">
-                    <span :class="{'catalog-bold': citem.children && citem.children.length }" @click="goAnchor(citem.code)">{{ citem.name }}</span>
-                    <ul class="catalog-sub-ul-body"
+                    class="catalog-item mt-6"
+                  >
+                    <span
+                      :class="{
+                        'catalog-bold': citem.children && citem.children.length
+                      }"
+                      @click="goAnchor(citem.code)"
+                      >{{ citem.name }}</span
+                    >
+                    <ul
+                      class="catalog-sub-ul-body"
                       v-if="citem.children && citem.children.length"
-                      >
+                    >
                       <li
                         v-for="subcitem in citem.children"
                         :key="subcitem.code"
@@ -60,7 +80,9 @@
                           { active: activeCode === subcitem.code }
                         ]"
                       >
-                        <span @click="goAnchor(subcitem.code)">{{ subcitem.name }}</span>
+                        <span @click="goAnchor(subcitem.code)">{{
+                          subcitem.name
+                        }}</span>
                       </li>
                     </ul>
                   </li>
@@ -70,7 +92,7 @@
           </div>
         </div>
       </el-drawer>
-      <div class="booklet">
+      <div class="booklet" ref="container">
         <el-backtop target=".booklet" :right="20" :bottom="40"></el-backtop>
         <div id="ease1_00" class="booklet-item">
           <img
@@ -731,6 +753,14 @@ import HeaderLayout from "./HeaderLayout";
 import { wxShare } from "../common/mixins";
 import Info from "./info";
 
+let hashEvent = null;
+
+// function tryContinue(flagFn, maxTimes, interval, cb){
+//   let timer = null;
+
+// }
+let pageHeight
+
 export default {
   name: "EaseHandbook",
   mixins: [wxShare],
@@ -973,9 +1003,43 @@ export default {
       this.activeIndex = selector;
       Info.$emit("frameDisplay", false);
       this.goAnchor(selector);
+      
+      this.bindProcess();
+      var pageProcess = 0;
+      if(pageProcess = Number(localStorage.getItem('page-process'))){
+        window.scrollTo({
+          top: pageProcess * pageHeight
+        })
+      }
+    },
+    bindProcess() {
+      let that = this;
+      let imgList = this.$el.querySelectorAll(".booklet-img");
+      let len = imgList.length
+      setTimeout(() => {
+        [...imgList].forEach(s=>{
+          s.onload = function(){
+            len--;
+            if(!len){
+              requestAnimationFrame(()=>{
+                pageHeight = document.body.scrollHeight;
+                // console.log(document.body.scrollHeight)/
+                window.onscroll = function(){
+                  let selector = that.$route.query.preid;
+                  if(selector){
+
+                    localStorage.setItem('page-process', (window.pageYOffset/pageHeight).toString())
+                  }
+                }
+              })
+            }
+          }
+        })
+      }, 0);
+      
     },
     backHome() {
-      window.scrollTo(0, 0);
+      // window.scrollTo(0, 0);
       let currentHistory = this.$router.history.current;
       if (
         currentHistory.path === "/EaseHandbook" &&
@@ -1019,12 +1083,7 @@ export default {
       this.activeCode = selector;
     },
     removeEvent() {
-      let that = this;
-      window.removeEventListener(
-        "hashchange",
-        that.handleHash.bind(that, event),
-        false
-      );
+      window.removeEventListener("hashchange", hashEvent, false);
     },
     handleHash(event) {
       let selector = this.$route.query.preid;
@@ -1041,11 +1100,8 @@ export default {
   mounted() {
     let that = this;
     that.handleHash();
-    window.addEventListener(
-      "hashchange",
-      that.handleHash.bind(that, event),
-      false
-    );
+    hashEvent = that.handleHash.bind(that);
+    window.addEventListener("hashchange", hashEvent, false);
   },
   beforeCreate() {
     localStorage.setItem("activeCode2", null);
@@ -1312,11 +1368,11 @@ export default {
   }
 }
 .block {
-  height: 100%;
+  // height: 100%;
   background: #faf1fa;
   box-sizing: border-box;
-  overflow-y: scroll;
-  scroll-behavior: smooth;
+  // overflow-y: scroll;
+  // scroll-behavior: smooth;
   .el-drawer:focus {
     box-shadow: none;
   }
@@ -1426,14 +1482,14 @@ export default {
     display: block;
   }
   &-bold {
-   font-weight: bold;
+    font-weight: bold;
   }
 }
 
 .booklet {
   // position: relative;
-  height: 100%;
-  overflow-y: scroll;
+  // height: 100%;
+  // overflow-y: scroll;
   &-img {
     width: 100%;
     display: block;
