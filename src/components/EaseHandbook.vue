@@ -5,7 +5,7 @@
     </div>
     <div v-if="activeIndex === 0" class="launch-main">
       <img
-        @click="handleNav('ease1_01')"
+        @click="handleNav('ease1_00')"
         class="launch-btn"
         src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease_button.png"
       />
@@ -29,15 +29,15 @@
               <li
                 v-for="(item,index) in catalogs"
                 :key="item.code"
-                class="catalog-item mt-6">
-                <span v-if="index < 8" :class="['catalog-title', { 'active': activeCode === item.code }]" @click="showHide(index,item.code)">
+                class="catalog-body-container mt-6">
+                <span v-if="index < 8" class="catalog-title" @click="showHide(index,item.code)">
                   <i
-                    class="el-icon-caret-right"
+                    class="el-icon-caret-right icon"
                     ref="close"
                   />
                   <i
                     ref="open"
-                    class="el-icon-caret-bottom"
+                    class="el-icon-caret-bottom icon"
                   />{{ item.name }}
                 </span>
                 <span v-else :class="['catalog-title', { 'active': activeCode === item.code }]"  @click="goAnchor(item.code)">{{ item.name }}</span>
@@ -47,7 +47,7 @@
                   <li
                     v-for="citem in item.children"
                     :key="citem.code"
-                    class="catalog-item mt-6">
+                    class="catalog-item mt-6" :class=" { active: (activeCode === citem.code)&&!(citem.children && citem.children.length) }">
                     <span :class="{'catalog-bold': citem.children && citem.children.length }" @click="goAnchor(citem.code)">{{ citem.name }}</span>
                     <ul class="catalog-sub-ul-body"
                       v-if="citem.children && citem.children.length"
@@ -76,6 +76,12 @@
           <img
             class="booklet-img"
             src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease1_00.png"
+          />
+        </div>
+        <div id="ease0_00" class="booklet-item">
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease0_00.png"
           />
         </div>
         <div id="ease1_01" class="booklet-item">
@@ -155,15 +161,18 @@
           />
           <a
             class="jump-link _0109 _1"
+            @click="recordAnchor('ease1_09')"
             href="https://mp.weixin.qq.com/s/JT_1i0EUK5fYmEJ80G_QQg"
           ></a>
           <a
             class="jump-link _0109 _2"
             href="https://mp.weixin.qq.com/s/giltubRO0bEGNwc8ArJZdw"
+            @click="recordAnchor('ease1_09')"
           ></a>
           <a
             class="jump-link _0109 _3"
             href="https://mp.weixin.qq.com/s/ZVicqJ2WIIeXjsAVDySwfw"
+            @click="recordAnchor('ease1_09')"
           ></a>
         </div>
 
@@ -223,10 +232,12 @@
           <a
             class="jump-link _0208 _1"
             href="https://mp.weixin.qq.com/s/ybr7ilvo6OCMsY6Mnx-hdg"
+            @click="recordAnchor('ease2_08')"
           ></a>
           <a
             class="jump-link _0208 _2"
             href="https://mp.weixin.qq.com/s/XKdf7jws70K1yisl-CLauA"
+            @click="recordAnchor('ease2_08')"
           ></a>
         </div>
 
@@ -308,18 +319,22 @@
           <a
             class="jump-link _0311 _1"
             href="https://mp.weixin.qq.com/s/6wM0H_-YoQwwsD113HHVVQ"
+            @click="recordAnchor('ease3_11')"
           ></a>
           <a
             class="jump-link _0311 _2"
             href="https://mp.weixin.qq.com/s/uTELIEQnnmTRwrdGeAHfAA"
+            @click="recordAnchor('ease3_11')"
           ></a>
           <a
             class="jump-link _0311 _3"
             href="https://mp.weixin.qq.com/s/G3L5-cjJ-4Zpwz80T4aRgg"
+            @click="recordAnchor('ease3_11')"
           ></a>
           <a
             class="jump-link _0311 _4"
             href="https://mp.weixin.qq.com/s/1EOMi6WZ86tN9JMuz9M_2w"
+            @click="recordAnchor('ease3_11')"
           ></a>
         </div>
 
@@ -399,6 +414,7 @@
           <a
             class="jump-link _4108"
             href="https://mp.weixin.qq.com/s/ptKpJm9bvm93gcUOY1ex5w"
+            @click="recordAnchor('ease41_08')"
           ></a>
         </div>
         <div id="ease42_01" class="booklet-item">
@@ -450,6 +466,7 @@
           <a
             class="jump-link _4207"
             href="https://mp.weixin.qq.com/s/ZNeDLvQ3hWIHo3hImMFyPQ"
+            @click="recordAnchor('ease42_07')"
           ></a>
         </div>
         <div id="ease43_01" class="booklet-item">
@@ -497,14 +514,17 @@
           <a
             class="jump-link _0504 _1"
             href="https://mp.weixin.qq.com/s/YpeCW6MG9iCS_E0an4dwwQ"
+            @click="recordAnchor('ease5_04')"
           ></a>
           <a
             class="jump-link _0504 _2"
             href="https://mp.weixin.qq.com/s/Qce07ZQksUpf5lO8Kc1-_Q"
+            @click="recordAnchor('ease5_04')"
           ></a>
           <a
             class="jump-link _0504 _3"
             href="https://mp.weixin.qq.com/s/cCGXPwG4IXD8OfrM3hw3Qw"
+            @click="recordAnchor('ease5_04')"
           ></a>
         </div>
 
@@ -531,14 +551,17 @@
           <img
             class="booklet-img"
             src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease6/ease6_04.png"
+            @click="recordAnchor('ease6_04')"
           />
           <a
             class="jump-link _0604 _1"
             href="https://m.youku.com/video/id_XNTQwOTE1NDk2"
+            @click="recordAnchor('ease6_04')"
           ></a>
           <a
             class="jump-link _0604 _2"
             href="https://mp.weixin.qq.com/s/pQZXL2jLff3wpIPywJhDhA"
+            @click="recordAnchor('ease6_04')"
           ></a>
         </div>
 
@@ -584,14 +607,17 @@
           <img
             class="booklet-img"
             src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease7/ease7_04.png"
+            @click="recordAnchor('ease7_04')"
           />
           <a
             class="jump-link _0704 _1"
             href="https://mp.weixin.qq.com/s/-kpqtpQSpsOfmbmv97J3nA"
+            @click="recordAnchor('ease7_04')"
           ></a>
           <a
             class="jump-link _0704 _2"
             href="https://mp.weixin.qq.com/s/d1kSt1R-Ldh7hW3Qq1aeKA"
+            @click="recordAnchor('ease7_04')"
           ></a>
         </div>
 
@@ -687,10 +713,12 @@
           <a
             class="jump-link _0814 _1"
             href="https://mp.weixin.qq.com/s/p1MlMry_8EemeztyfLSFoQ"
+            @click="recordAnchor('ease8_14')"
           ></a>
           <a
             class="jump-link _0814 _2"
             href="https://mp.weixin.qq.com/s/o-hdevvXf6gswpYh-JJNBg"
+            @click="recordAnchor('ease8_14')"
           ></a>
         </div>
 
@@ -702,10 +730,12 @@
           <a
             class="jump-link _0901 _1"
             href="https://zhuanlan.zhihu.com/p/53282194"
+             @click="recordAnchor('ease9_01')"
           ></a>
           <a
             class="jump-link _0901 _2"
             href="https://www.bilibili.com/video/av38408846/"
+            @click="recordAnchor('ease9_01')"
           ></a>
         </div>
         <div id="ease9_02" class="booklet-item">
@@ -719,7 +749,10 @@
             class="booklet-img"
             src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease9/ease9_03.png"
           />
-          <a class="jump-link _0903" href="https://weibo.com/u/6892480749"></a>
+          <a
+          class="jump-link _0903"
+          href="https://weibo.com/u/6892480749"
+          @click="recordAnchor('ease9_03')"></a>
         </div>
       </div>
     </div>
@@ -755,19 +788,19 @@ export default {
             },
             { code: "ease1_02", name: "02 - 大排畸不做，做小排畸可以吗？" },
             { code: "ease1_03", name: "03 - 糖筛可以跳过吗？" },
-            { code: "ease1_04", name: "04 - 小排畸可以跳过吗？" },
             {
-              code: "ease1_05",
-              name: "05 - 36-37周小结可以不做，直接等生产吗？"
+              code: "ease1_04",
+              name: "04 - 36-37周小结可以不做，直接等生产吗？"
             },
-            { code: "ease1_06", name: "06 - 哪些属于孕期常见的不适情况？" },
-            { code: "ease1_07", name: "07 - 哪些情况必须要去医院做检查？" },
+            { code: "ease1_05", name: "05 - 哪些属于孕期常见的不适情况？" },
+            { code: "ease1_06", name: "06 - 哪些情况必须要去医院做检查？" },
             {
-              code: "ease1_08",
+              code: "ease1_07",
               name:
-                "08 - 临床孕周和超声孕周有何区别？应该以哪个为准？超生孕周偏大或偏小要紧吗？"
+                "07 - 临床孕周和超声孕周有何区别？应该以哪个为准？超生孕周偏大或偏小要紧吗？"
             },
-            { code: "ease1_09", name: "09 - 脐带绕颈" }
+            { code: "ease1_08", name: "08 - 脐带绕颈" },
+            { code: "ease1_09", name: "延伸阅读" }
           ]
         },
         {
@@ -781,7 +814,7 @@ export default {
             },
             {
               code: "ease2_03",
-              name: "01 - 睡觉盗汗怕热，胸口出汗很多，是怎么回事？"
+              name: "03 - 睡觉盗汗怕热，胸口出汗很多，是怎么回事？"
             },
             {
               code: "ease2_04",
@@ -789,7 +822,8 @@ export default {
             },
             { code: "ease2_05", name: "05 - 孕期一定要左侧卧睡吗？" },
             { code: "ease2_06", name: "06 - 孕期失眠该怎么办？" },
-            { code: "ease2_07", name: "07 - 怀孕之后做梦特别多，是怎么回事？" }
+            { code: "ease2_07", name: "07 - 怀孕之后做梦特别多，是怎么回事？" },
+            { code: "ease2_08", name: "延伸阅读" }
           ]
         },
         {
@@ -805,7 +839,8 @@ export default {
             { code: "ease3_07", name: "07 - 孕期血糖偏高如何管理？" },
             { code: "ease3_08", name: "08 - 血压偏低正常吗？" },
             { code: "ease3_09", name: "09 - 什么情况会被视为孕期血压偏高？" },
-            { code: "ease3_10", name: "10 - 孕期高血压有哪些注意事项？" }
+            { code: "ease3_10", name: "10 - 孕期高血压有哪些注意事项？" },
+            { code: "ease3_11", name: "延伸阅读" }
           ]
         },
         {
@@ -862,14 +897,14 @@ export default {
               name: "4.3 口腔问题",
               children: [
                 {
-                  code: "ease42_01",
+                  code: "ease43_01",
                   name: "01 - 孕期牙龈出血有什么原因？该如何缓解？"
                 },
                 {
-                  code: "ease42_02",
+                  code: "ease43_02",
                   name: "02 - 牙髓炎引起的疼痛该如何缓解？"
                 },
-                { code: "ease42_03", name: "03 - 嘴里发苦、反酸正常吗？" }
+                { code: "ease43_03", name: "03 - 嘴里发苦、反酸正常吗？" }
               ]
             }
           ]
@@ -890,7 +925,8 @@ export default {
           children: [
             { code: "ease6_01", name: "01 - 一般感冒发热对胎儿有何影响？" },
             { code: "ease6_02", name: "02 - 辐射对胎儿有何影响？" },
-            { code: "ease6_03", name: "03 - CT对胎儿有何影响？" }
+            { code: "ease6_03", name: "03 - CT对胎儿有何影响？" },
+            { code: "ease6_04", name: "延伸阅读" }
           ]
         },
         {
@@ -905,7 +941,8 @@ export default {
             {
               code: "ease7_03",
               name: "03 - 孕期出现何种阴道分泌物时，应立刻就诊？"
-            }
+            },
+            { code: "ease7_04", name: "延伸阅读" }
           ]
         },
         {
@@ -995,6 +1032,20 @@ export default {
       this.activeIndex = 0;
       this.activeCode = false;
       Info.$emit("frameDisplay", true);
+    },
+    recordAnchor(selector) {
+      if (this.activeCode === selector) {
+        return;
+      }
+      this.$router
+        .push({
+          path: "/EaseHandbook",
+          query: { preid: selector }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      this.activeCode = selector;
     },
     goAnchor(selector) {
       this.isShow = false;
@@ -1100,6 +1151,10 @@ export default {
 .block .el-icon-caret-bottom {
   color: $--color-easy-main;
   display: none;
+}
+.block .icon {
+  width: 16px;
+  height: 16px;
 }
 .jump-link {
   position: absolute;
@@ -1306,7 +1361,7 @@ export default {
 }
 .launch-btn {
   width: 64%;
-  margin-top: 50vh;
+  margin-top: 60vh;
   &.mt-10 {
     margin-top: 3vh;
   }
@@ -1396,24 +1451,33 @@ export default {
     text-align: left;
     list-style: none;
   }
+  &-body-container {
+    line-height: 36px;
+    text-decoration: none;
+    list-style: none;
+  }
   &-ul-body {
     display: none;
-    padding-left: 35px;
+    padding-left: 0px;
     .active {
-      font-weight: 600;
-      color: white;
-      background-color: #2aa9ae;
+      background: rgba(0, 0, 0, 0.08);
+      // font-weight: 600;
+      // color: white;
+      // background-color: #2aa9ae;
     }
   }
   &-sub-ul-body {
     padding-left: 0px;
   }
   &-item {
-    line-height: 36px;
+    // line-height: 36px;
     text-decoration: none;
     list-style: none;
     span {
-      padding-left: 20px;
+      padding-left: 35px;
+      padding-right: 10px;
+      line-height: 20px;
+      padding-top: 10px;
       display: inline-block;
     }
   }
@@ -1426,7 +1490,7 @@ export default {
     display: block;
   }
   &-bold {
-   font-weight: bold;
+    font-weight: bold;
   }
 }
 
