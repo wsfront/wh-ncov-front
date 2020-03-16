@@ -127,6 +127,9 @@
           <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_02.jpg" />
           <a class="get-more" href="https://weibo.com/u/6892480749"></a>
         </div>
+        <div id="prev6_03" class="booklet-item">
+          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_03.jpg" />
+        </div>
       </div>
     </div>
   </div>
@@ -200,6 +203,10 @@ export default {
         {
           code: "prev6_02",
           name: "手册制作团队"
+        },
+        {
+          code: "prev6_03",
+          name: "版权申明"
         }
       ]
     };
