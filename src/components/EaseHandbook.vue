@@ -754,6 +754,12 @@
           href="https://weibo.com/u/6892480749"
           @click="recordAnchor('ease9_03')"></a>
         </div>
+        <div id="ease9_04" class="booklet-item">
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease9/ease9_04.png"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -979,6 +985,10 @@ export default {
         {
           code: "ease9_03",
           name: "手册制作团队"
+        },
+        {
+          code: "ease9_04",
+          name: "版权申明"
         }
       ]
     };
