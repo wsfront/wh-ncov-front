@@ -3,13 +3,15 @@
     <div v-show="activeIndex === 0" class="hearder-block">
       <HeaderLayout :activeIndex="2" @click="removeEvent" />
     </div>
-    <div v-if="activeIndex === 0" class="launch-main">
-      <img
-        @click="handleNav('ease1_00')"
-        class="launch-btn"
-        src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease_button.png"
-      />
-    </div>
+    <v-touch v-on:swipeup="handleNav('ease1_00')">
+      <div v-if="activeIndex === 0" class="launch-main">
+        <img
+          @click="handleNav('ease1_00')"
+          class="launch-btn"
+          src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease_button.png"
+        />
+      </div>
+    </v-touch>
     <div v-show="activeIndex !== 0" class="block">
       <div @click="backHome" class="el-backtop" style="top: 30px; left: 20px;">
         <i class="el-icon-s-home"></i>
@@ -1423,13 +1425,13 @@ export default {
     padding-left: 20px;
     border-bottom: 1px solid #e6e5e5;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: bold;
     text-align: left;
     color: #2aa9ae;
     .catalog-header-back {
       float: right;
       font-size: 0.36rem;
-      font-weight: 600;
+      font-weight: bold;
       padding-left: 10px;
       color: #666;
     }
@@ -1458,7 +1460,7 @@ export default {
     padding-left: 0px;
     .active {
       background: rgba(0, 0, 0, 0.08);
-      // font-weight: 600;
+      // font-weight: bold;
       // color: white;
       // background-color: #2aa9ae;
     }
@@ -1484,7 +1486,7 @@ export default {
     font-weight: bold;
     color: #2aa9ae;
     display: block;
-    font-weight: 600;
+    font-weight: bold;
   }
   &-bold {
     font-weight: bold;
@@ -1509,6 +1511,7 @@ export default {
 .booklet {
   // position: relative;
   height: 100%;
+  -webkit-overflow-scrolling : touch;
   overflow-y: scroll;
   &-img {
     width: 100%;

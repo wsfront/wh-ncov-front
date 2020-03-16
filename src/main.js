@@ -7,7 +7,9 @@ import 'element-ui/packages/theme-chalk/src/index.scss'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import VueTouch from 'vue-touch'
 
+Vue.use(VueTouch, {name: 'v-touch'})
 Vue.use(ElementUI)
 Vue.prototype.$http = axios
 Vue.prototype.$EventBus = new Vue()

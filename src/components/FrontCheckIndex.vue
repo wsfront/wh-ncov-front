@@ -3,10 +3,12 @@
     <div v-show="activeIndex === 0" class="hearder-block">
       <HeaderLayout :activeIndex="1" @click="removeEvent"/>
     </div>
-    <div v-if="activeIndex === 0" class="launch-main">
-      <img @click="handleNav('prev1_01')" class="launch-btn" src="http://wuhan2099.oss-accelerate.aliyuncs.com/btn_epi.png" />
-      <img @click="handleNav('prev5_01')" class="launch-btn mt-10" src="http://wuhan2099.oss-accelerate.aliyuncs.com/btn_won.png" />
-    </div>
+    <v-touch v-on:swipeup="handleNav('prev1_01')">
+      <div v-if="activeIndex === 0" class="launch-main">
+        <img @click="handleNav('prev1_01')" class="launch-btn" src="http://wuhan2099.oss-accelerate.aliyuncs.com/btn_epi.png" />
+        <img @click="handleNav('prev5_01')" class="launch-btn mt-10" src="http://wuhan2099.oss-accelerate.aliyuncs.com/btn_won.png" />
+      </div>
+    </v-touch>
     <div v-show="activeIndex !== 0" class="block">
       <div @click="backHome" class="el-backtop" style="top: 30px; left: 20px;"><i class="el-icon-s-home"></i>
       </div>
@@ -411,7 +413,7 @@ export default {
     line-height: 56px;
     border-bottom: 1px solid #e6e5e5;
     font-size: 18px;
-    font-weight: 600;
+    font-weight: bold;
     text-align: left;
     padding-left: 20px;
     color: $--color-primary;
@@ -433,7 +435,7 @@ export default {
   &-ul-body {
     padding: 0;
     .active {
-      font-weight: 600;
+      font-weight: bold;
       color: white;
       background-color: $--color-primary;
     }
@@ -465,6 +467,7 @@ export default {
 .booklet {
   // position: relative;
   height: 100%;
+  -webkit-overflow-scrolling : touch;
   overflow-y: scroll;
   &-img {
     width: 100%;
