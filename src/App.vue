@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header class="tips" v-show="frameDisplay">
+    <header class="tips" v-show="frameDisplay && (this.$route.path=='/' || this.$route.path=='/FrontIndex')">
       <span v-if="lastUpdateTime">{{ lastUpdateTime }}更新; </span>
         数据至少两天更新一次
     </header>

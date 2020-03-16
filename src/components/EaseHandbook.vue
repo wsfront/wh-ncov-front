@@ -3,25 +3,27 @@
     <div v-show="activeIndex === 0" class="hearder-block">
       <HeaderLayout :activeIndex="2" @click="removeEvent" />
     </div>
-    <div v-if="activeIndex === 0" class="launch-main">
-      <img
-        @click="handleNav('ease0_00')"
-        class="launch-btn"
-        src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease_button.png"
-      />
-    </div>
+    <v-touch v-on:swipeup="handleNav('ease1_00')">
+      <div v-if="activeIndex === 0" class="launch-main">
+        <img
+          @click="handleNav('ease1_00')"
+          class="launch-btn"
+          src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease_button.png"
+        />
+      </div>
+    </v-touch>
     <div v-show="activeIndex !== 0" class="block">
-      <div @click="backHome" class="el-backtop" style="top: 40px; left: 20px;">
+      <div @click="backHome" class="el-backtop" style="top: 30px; left: 20px;">
         <i class="el-icon-s-home"></i>
       </div>
       <div v-if="!isShow" @click="isShow = true" class="catalog-btn">
         <i class="el-icon-s-fold"></i>
         <span class="catalog-btn-text">目录</span>
       </div>
-      <el-drawer :visible.sync="isShow" size="70%" :with-header="false">
+      <el-drawer :visible.sync="isShow" size="72%" :with-header="false">
         <div class="catalog">
           <div class="catalog-header">
-            <p class="catalog-header-title">安心待产手册</p>
+            安心待产手册
             <!-- <p target=".booklet" :right="30" :top="20">回到顶部></p> -->
           </div>
           <div class="catalog-main">
@@ -38,7 +40,8 @@
                   <i
                     ref="open"
                     class="el-icon-caret-bottom icon"
-                  />{{ item.name }}
+                  />
+                  <span class="catalog-title-text">{{ item.name }}</span>
                 </span>
                 <span v-else :class="['catalog-title', { 'active': activeCode === item.code }]"  @click="goAnchor(item.code)">{{ item.name }}</span>
                 <ul
@@ -1446,21 +1449,17 @@ export default {
     padding-left: 5px;
   }
   &-header {
-    height: 64px;
-    padding: 10px 10px 5px;
+    line-height: 54px;
+    padding-left: 20px;
     border-bottom: 1px solid #e6e5e5;
-    // justify-content: space-between;
-    .catalog-header-title {
-      float: left;
-      font-size: 18px;
-      font-weight: 600;
-      padding-left: 10px;
-      color: #2aa9ae;
-    }
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+    color: #2aa9ae;
     .catalog-header-back {
       float: right;
       font-size: 0.36rem;
-      font-weight: 600;
+      font-weight: bold;
       padding-left: 10px;
       color: #666;
     }
@@ -1469,7 +1468,7 @@ export default {
     }
   }
   &-main {
-    height: calc(100vh - 84px);
+    height: calc(100vh - 55px);
     box-sizing: border-box;
     overflow-y: scroll;
   }
@@ -1489,7 +1488,7 @@ export default {
     padding-left: 0px;
     .active {
       background: rgba(0, 0, 0, 0.08);
-      // font-weight: 600;
+      // font-weight: bold;
       // color: white;
       // background-color: #2aa9ae;
     }
@@ -1502,7 +1501,7 @@ export default {
     text-decoration: none;
     list-style: none;
     span {
-      padding-left: 35px;
+      padding-left: 40px;
       padding-right: 10px;
       line-height: 20px;
       padding-top: 10px;
@@ -1512,19 +1511,35 @@ export default {
   &-title {
     margin-top: 10px;
     padding-left: 20px;
-    font-size: 14px;
     font-weight: bold;
     color: #2aa9ae;
     display: block;
+    font-weight: bold;
   }
   &-bold {
     font-weight: bold;
   }
 }
-
+@media screen and (max-width: 350px){
+  .catalog{
+    font-size: 13px;
+    &-header {
+      font-size: 15px;
+    }
+  }
+}
+@media screen and (min-width: 400px){
+  .catalog{
+    font-size: 15px;
+    &-header {
+      font-size: 17px;
+    }
+  }
+}
 .booklet {
   // position: relative;
   height: 100%;
+  -webkit-overflow-scrolling : touch;
   overflow-y: scroll;
   &-img {
     width: 100%;
