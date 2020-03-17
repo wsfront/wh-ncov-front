@@ -1,10 +1,13 @@
 <template>
   <div id="app">
-    <header class="tips" v-show="frameDisplay">
+    <header class="tips" v-show="frameDisplay && (this.$route.path=='/' || this.$route.path=='/FrontIndex')">
       <span v-if="lastUpdateTime">{{ lastUpdateTime }}更新; </span>
         数据至少两天更新一次
     </header>
-    <router-view />
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive"></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
     <footer class="footer" v-show="frameDisplay">
       <a href="https://shimo.im/docs/5zAZVlQzEDc5FgAo">
         <img class="text-icon" src="@/assets/icon_atme.png" />

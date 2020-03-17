@@ -7,6 +7,7 @@ import EndIndex from '@/components/EndIndex'
 import EndHospitalDetail from '@/components/EndHospitalDetail'
 import EndHospitalEdit from '@/components/EndHospitalEdit'
 import Login from '@/components/Login'
+import WaitManual from '@/components/WaitManual'
 
 Vue.use(Router)
 
@@ -69,6 +70,19 @@ export default new Router({
       component: EaseHandbook,
       meta: {
         title: 'NCP生命支援 - 安心待产手册'
+      },
+      beforeEnter: (to, from, next) => {
+        document.title = to.meta.title
+        next();
+      }
+    },
+    {
+      path: '/WaitManual',
+      name: 'WaitManual',
+      component: WaitManual,
+      meta: {
+        title: 'NCP生命支援 - 安心待产手册',
+        keepAlive: true
       },
       beforeEnter: (to, from, next) => {
         document.title = to.meta.title
