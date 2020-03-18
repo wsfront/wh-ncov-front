@@ -322,6 +322,18 @@ export default {
         },
         {
           type: "check",
+          symbol: "dna",
+          name: "无创 DNA",
+          checked: false
+        },
+        {
+          type: "check",
+          symbol: "puncture",
+          name: "羊水穿刺",
+          checked: false
+        },
+        {
+          type: "check",
           symbol: "receive_accouche",
           name: "接生",
           checked: false
