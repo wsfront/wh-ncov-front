@@ -1,7 +1,5 @@
-
 <template>
   <div>
-   
     <div class="block">
       <div @click="backHome" class="el-backtop" style="top: 30px; left: 20px;">
         <i class="el-icon-s-home"></i>
@@ -19,32 +17,54 @@
           <div class="catalog-main">
             <ul class="catalog-body">
               <li
-                v-for="(item,index) in catalogs"
+                v-for="(item, index) in catalogs"
                 :key="item.code"
-                class="catalog-body-container mt-6">
-                <span v-if="index < 8" class="catalog-title" @click="showHide(index,item.code)">
-                  <i
-                    class="el-icon-caret-right icon"
-                    ref="close"
-                  />
-                  <i
-                    ref="open"
-                    class="el-icon-caret-bottom icon"
-                  />
+                class="catalog-body-container mt-6"
+              >
+                <span
+                  v-if="index < 8"
+                  class="catalog-title"
+                  @click="showHide(index, item.code)"
+                >
+                  <i class="el-icon-caret-right icon" ref="close" />
+                  <i ref="open" class="el-icon-caret-bottom icon" />
                   <span class="catalog-title-text">{{ item.name }}</span>
                 </span>
-                <span v-else :class="['catalog-title', { 'active': activeCode === item.code }]"  @click="goAnchor(item.code)">{{ item.name }}</span>
+                <span
+                  v-else
+                  :class="[
+                    'catalog-title',
+                    { active: activeCode === item.code }
+                  ]"
+                  @click="goAnchor(item.code)"
+                  >{{ item.name }}</span
+                >
                 <ul
                   v-if="item.children && item.children.length"
-                  class="catalog-ul-body" ref="child">
+                  class="catalog-ul-body"
+                  ref="child"
+                >
                   <li
                     v-for="citem in item.children"
                     :key="citem.code"
-                    class="catalog-item mt-6" :class=" { active: (activeCode === citem.code)&&!(citem.children && citem.children.length) }">
-                    <span :class="{'catalog-bold': citem.children && citem.children.length }" @click="goAnchor(citem.code)">{{ citem.name }}</span>
-                    <ul class="catalog-sub-ul-body"
+                    class="catalog-item mt-6"
+                    :class="{
+                      active:
+                        activeCode === citem.code &&
+                        !(citem.children && citem.children.length)
+                    }"
+                  >
+                    <span
+                      :class="{
+                        'catalog-bold': citem.children && citem.children.length
+                      }"
+                      @click="goAnchor(citem.code)"
+                      >{{ citem.name }}</span
+                    >
+                    <ul
+                      class="catalog-sub-ul-body"
                       v-if="citem.children && citem.children.length"
-                      >
+                    >
                       <li
                         v-for="subcitem in citem.children"
                         :key="subcitem.code"
@@ -53,7 +73,9 @@
                           { active: activeCode === subcitem.code }
                         ]"
                       >
-                        <span @click="goAnchor(subcitem.code)">{{ subcitem.name }}</span>
+                        <span @click="goAnchor(subcitem.code)">{{
+                          subcitem.name
+                        }}</span>
                       </li>
                     </ul>
                   </li>
@@ -155,18 +177,15 @@
           />
           <a
             class="jump-link _0109 _1"
-            
             href="https://mp.weixin.qq.com/s/JT_1i0EUK5fYmEJ80G_QQg"
           ></a>
           <a
             class="jump-link _0109 _2"
             href="https://mp.weixin.qq.com/s/giltubRO0bEGNwc8ArJZdw"
-            
           ></a>
           <a
             class="jump-link _0109 _3"
             href="https://mp.weixin.qq.com/s/ZVicqJ2WIIeXjsAVDySwfw"
-            
           ></a>
         </div>
 
@@ -226,12 +245,10 @@
           <a
             class="jump-link _0208 _1"
             href="https://mp.weixin.qq.com/s/ybr7ilvo6OCMsY6Mnx-hdg"
-            
           ></a>
           <a
             class="jump-link _0208 _2"
             href="https://mp.weixin.qq.com/s/XKdf7jws70K1yisl-CLauA"
-            
           ></a>
         </div>
 
@@ -313,22 +330,18 @@
           <a
             class="jump-link _0311 _1"
             href="https://mp.weixin.qq.com/s/6wM0H_-YoQwwsD113HHVVQ"
-            
           ></a>
           <a
             class="jump-link _0311 _2"
             href="https://mp.weixin.qq.com/s/uTELIEQnnmTRwrdGeAHfAA"
-            
           ></a>
           <a
             class="jump-link _0311 _3"
             href="https://mp.weixin.qq.com/s/G3L5-cjJ-4Zpwz80T4aRgg"
-            
           ></a>
           <a
             class="jump-link _0311 _4"
             href="https://mp.weixin.qq.com/s/1EOMi6WZ86tN9JMuz9M_2w"
-            
           ></a>
         </div>
 
@@ -408,7 +421,6 @@
           <a
             class="jump-link _4108"
             href="https://mp.weixin.qq.com/s/ptKpJm9bvm93gcUOY1ex5w"
-            
           ></a>
         </div>
         <div id="ease42_01" class="booklet-item">
@@ -460,7 +472,6 @@
           <a
             class="jump-link _4207"
             href="https://mp.weixin.qq.com/s/ZNeDLvQ3hWIHo3hImMFyPQ"
-            
           ></a>
         </div>
         <div id="ease43_01" class="booklet-item">
@@ -514,17 +525,14 @@
           <a
             class="jump-link _0504 _1"
             href="https://mp.weixin.qq.com/s/YpeCW6MG9iCS_E0an4dwwQ"
-            
           ></a>
           <a
             class="jump-link _0504 _2"
             href="https://mp.weixin.qq.com/s/Qce07ZQksUpf5lO8Kc1-_Q"
-            
           ></a>
           <a
             class="jump-link _0504 _3"
             href="https://mp.weixin.qq.com/s/cCGXPwG4IXD8OfrM3hw3Qw"
-            
           ></a>
         </div>
 
@@ -557,17 +565,14 @@
           <img
             class="booklet-img"
             src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease6/ease6_04.png"
-            
           />
           <a
             class="jump-link _0604 _1"
             href="https://m.youku.com/video/id_XNTQwOTE1NDk2"
-            
           ></a>
           <a
             class="jump-link _0604 _2"
             href="https://mp.weixin.qq.com/s/pQZXL2jLff3wpIPywJhDhA"
-            
           ></a>
         </div>
 
@@ -618,17 +623,14 @@
           <img
             class="booklet-img"
             src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease7/ease7_04.png"
-            
           />
           <a
             class="jump-link _0704 _1"
             href="https://mp.weixin.qq.com/s/-kpqtpQSpsOfmbmv97J3nA"
-            
           ></a>
           <a
             class="jump-link _0704 _2"
             href="https://mp.weixin.qq.com/s/d1kSt1R-Ldh7hW3Qq1aeKA"
-            
           ></a>
         </div>
 
@@ -724,12 +726,10 @@
           <a
             class="jump-link _0814 _1"
             href="https://mp.weixin.qq.com/s/p1MlMry_8EemeztyfLSFoQ"
-            
           ></a>
           <a
             class="jump-link _0814 _2"
             href="https://mp.weixin.qq.com/s/o-hdevvXf6gswpYh-JJNBg"
-            
           ></a>
         </div>
 
@@ -741,12 +741,10 @@
           <a
             class="jump-link _0901 _1"
             href="https://zhuanlan.zhihu.com/p/53282194"
-             
           ></a>
           <a
             class="jump-link _0901 _2"
             href="https://www.bilibili.com/video/av38408846/"
-            
           ></a>
         </div>
         <div id="ease9_02" class="booklet-item">
@@ -760,10 +758,7 @@
             class="booklet-img"
             src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease9/ease9_03.png"
           />
-          <a
-          class="jump-link _0903"
-          href="https://weibo.com/u/6892480749"
-          ></a>
+          <a class="jump-link _0903" href="https://weibo.com/u/6892480749"></a>
         </div>
         <div id="ease9_04" class="booklet-item">
           <img
@@ -784,16 +779,16 @@ import Info from "./info";
 let pageHeight;
 let scrollEvent;
 
-function throlle(func){
-    let lock = false
-    return (...args)=>{
-        if(lock) return
-        func(...args)
-        lock = true
-        requestAnimationFrame(()=>{
-            lock = false
-        })
-    }
+function throlle(func) {
+  let lock = false;
+  return (...args) => {
+    if (lock) return;
+    func(...args);
+    lock = true;
+    requestAnimationFrame(() => {
+      lock = false;
+    });
+  };
 }
 export default {
   name: "EaseHandbook",
@@ -1038,82 +1033,81 @@ export default {
       }
     },
     backHome() {
-      this.$router.push('EaseHandbook')
+      this.$router.push("EaseHandbook");
     },
-     bindProcess() {
-      let that = this;
+    bindProcess() {
+      // let that = this;
       let imgList = this.$el.querySelectorAll(".booklet-img");
-      let len = imgList.length
+      let len = imgList.length;
 
       // console.log(imgList)
       setTimeout(() => {
-        [...imgList].forEach(s=>{
-          s.onload = function(){
+        [...imgList].forEach(s => {
+          s.onload = function() {
             len--;
-            if(!len){
-
-              requestAnimationFrame(()=>{
+            if (!len) {
+              requestAnimationFrame(() => {
                 pageHeight = document.body.scrollHeight;
                 // console.log(document.body.scrollHeight)/
                 // if(window.pageYOffset == 0){debugger}
-                scrollEvent = throlle(function(){
-                    localStorage.setItem('page-process', (window.pageYOffset/pageHeight).toString())
+                scrollEvent = throlle(function() {
+                  localStorage.setItem(
+                    "page-process",
+                    (window.pageYOffset / pageHeight).toString()
+                  );
                   // }
-                })
-                window.addEventListener('scroll', scrollEvent)
-              })
+                });
+                window.addEventListener("scroll", scrollEvent);
+              });
             }
-          }
-        })
+          };
+        });
       }, 0);
-      
     },
     goAnchor(selector) {
       this.isShow = false;
       let that = this;
       this.activeCode = selector;
-        let targetImg = that.$el.querySelector("#" + that.activeCode + " img");
-    let targetPosition = that.$el.querySelector("#" + that.activeCode);
+      let targetImg = that.$el.querySelector("#" + that.activeCode + " img");
+      let targetPosition = that.$el.querySelector("#" + that.activeCode);
 
       this.$nextTick(function() {
-      // Code that will run only after the
-      // entire view has been re-rendered
-      if (targetImg.complete && targetImg.src.indexOf(that.activeCode) > -1) {
-        targetPosition.scrollIntoView();
-      }
+        // Code that will run only after the
+        // entire view has been re-rendered
+        if (targetImg.complete && targetImg.src.indexOf(that.activeCode) > -1) {
+          targetPosition.scrollIntoView();
+        }
       });
-    },
+    }
   },
   mounted() {
-    let that = this;
+    // let that = this;
     this.bindProcess();
-    
   },
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {
     next(vm => {
       // access to component instance via `vm`
-      scrollEvent && window.addEventListener('scroll', scrollEvent)
-      var pageProcess = Number(localStorage.getItem('page-process'));
-      if(pageProcess && pageHeight){
+      scrollEvent && window.addEventListener("scroll", scrollEvent);
+      var pageProcess = Number(localStorage.getItem("page-process"));
+      if (pageProcess && pageHeight) {
         window.scrollTo({
-            top: pageProcess * pageHeight
-          })
-        }
-      })
+          top: pageProcess * pageHeight
+        });
+      }
+    });
   },
   beforeCreate() {
-    this.$nextTick(()=>{
+    this.$nextTick(() => {
       Info.$emit("frameDisplay", false);
-    })
+    });
   },
-  beforeRouteLeave (to, from, next) {
+  beforeRouteLeave(to, from, next) {
     // debugger
-    scrollEvent && window.removeEventListener('scroll', scrollEvent)
-    setTimeout(()=>{
-      next()
-    },0)
-  },
-  
+    scrollEvent && window.removeEventListener("scroll", scrollEvent);
+    setTimeout(() => {
+      next();
+    }, 0);
+  }
 };
 </script>
 
@@ -1469,16 +1463,16 @@ export default {
     font-weight: bold;
   }
 }
-@media screen and (max-width: 350px){
-  .catalog{
+@media screen and (max-width: 350px) {
+  .catalog {
     font-size: 13px;
     &-header {
       font-size: 15px;
     }
   }
 }
-@media screen and (min-width: 400px){
-  .catalog{
+@media screen and (min-width: 400px) {
+  .catalog {
     font-size: 15px;
     &-header {
       font-size: 17px;
@@ -1488,7 +1482,7 @@ export default {
 .booklet {
   // position: relative;
   // height: 100%;
-  -webkit-overflow-scrolling : touch;
+  -webkit-overflow-scrolling: touch;
   overflow-y: scroll;
   &-img {
     width: 100%;

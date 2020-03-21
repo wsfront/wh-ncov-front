@@ -1,7 +1,7 @@
 <template>
   <div :class="['wh-container']">
     <div class="hearder-block">
-      <HeaderLayout :activeIndex="2"/>
+      <HeaderLayout :activeIndex="2" />
     </div>
     <v-touch v-on:swipeup="handleNav()">
       <div class="launch-main">
@@ -12,7 +12,6 @@
         />
       </div>
     </v-touch>
-    
   </div>
 </template>
 
@@ -26,28 +25,19 @@ export default {
   mixins: [wxShare],
   components: { HeaderLayout },
   data() {
-    return {
-     
-    };
+    return {};
   },
   methods: {
-   
     handleNav() {
-      this.$router.push('WaitManual')
-    },
-
-   
-   
+      this.$router.push("WaitManual");
+    }
   },
-  mounted() {
-
-  },
+  mounted() {},
   beforeCreate() {
-    this.$nextTick(()=>{
+    this.$nextTick(() => {
       Info.$emit("frameDisplay", true);
-    })
-  },
-  
+    });
+  }
 };
 </script>
 
@@ -75,8 +65,6 @@ export default {
   height: calc(100vh - 82px);
   color: #333;
 }
-
-
 
 .jump-link {
   position: absolute;
@@ -332,4 +320,3 @@ img[lazy="loading"] {
   margin: 0 auto;
 }
 </style>
-
