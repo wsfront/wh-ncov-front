@@ -1051,7 +1051,7 @@ export default {
                 // console.log(document.body.scrollHeight)/
                 // if(window.pageYOffset == 0){debugger}
                 scrollEvent = throlle(function() {
-                  localStorage.setItem(
+                  sessionStorage.setItem(
                     "page-process",
                     (window.pageYOffset / pageHeight).toString()
                   );
@@ -1088,11 +1088,15 @@ export default {
     next(vm => {
       // access to component instance via `vm`
       scrollEvent && window.addEventListener("scroll", scrollEvent);
-      var pageProcess = Number(localStorage.getItem("page-process"));
-      if (pageProcess && pageHeight) {
-        window.scrollTo({
-          top: pageProcess * pageHeight
-        });
+      console.log(from);
+      if (from.name === "EaseHandbook") {
+      } else {
+        var pageProcess = Number(sessionStorage.getItem("page-process"));
+        if (pageProcess && pageHeight) {
+          window.scrollTo({
+            top: pageProcess * pageHeight
+          });
+        }
       }
     });
   },
