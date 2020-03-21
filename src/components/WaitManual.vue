@@ -36,7 +36,7 @@
                     'catalog-title',
                     { active: activeCode === item.code }
                   ]"
-                  @click="goAnchor(item.code)"
+                  @click.stop.prevent="goAnchor(item.code)"
                   >{{ item.name }}</span
                 >
                 <ul
@@ -58,7 +58,7 @@
                       :class="{
                         'catalog-bold': citem.children && citem.children.length
                       }"
-                      @click="goAnchor(citem.code)"
+                      @click.stop.prevent="goAnchor(citem.code)"
                       >{{ citem.name }}</span
                     >
                     <ul
@@ -73,7 +73,7 @@
                           { active: activeCode === subcitem.code }
                         ]"
                       >
-                        <span @click="goAnchor(subcitem.code)">{{
+                        <span @click.stop.prevent="goAnchor(subcitem.code)">{{
                           subcitem.name
                         }}</span>
                       </li>
@@ -124,7 +124,7 @@
           <a
             class="jump-link _03"
             href="javascript:void(0);"
-            @click="goAnchor('ease3_06')"
+            @click.stop.prevent="goAnchor('ease3_06')"
           ></a>
         </div>
         <div id="ease1_04" class="booklet-item">
@@ -148,7 +148,7 @@
           <a
             class="jump-link _06"
             href="javascript:void(0);"
-            @click="goAnchor('ease8_01')"
+            @click.stop.prevent="goAnchor('ease8_01')"
           ></a>
           <a class="jump-link _0602" href="/"></a>
         </div>
@@ -167,7 +167,7 @@
           <a
             class="jump-link _0108"
             href="javascript:void(0);"
-            @click="goAnchor('ease8_01')"
+            @click.stop.prevent="goAnchor('ease8_01')"
           ></a>
         </div>
         <div id="ease1_09" class="booklet-item">
@@ -359,7 +359,7 @@
           <a
             class="jump-link _4101"
             href="javascript:void(0);"
-            @click="goAnchor('ease8_05')"
+            @click.stop.prevent="goAnchor('ease8_05')"
           ></a>
         </div>
         <div id="ease41_02" class="booklet-item">
@@ -370,12 +370,12 @@
           <a
             class="jump-link _4102 _1"
             href="javascript:void(0);"
-            @click="goAnchor('ease7_01')"
+            @click.stop.prevent="goAnchor('ease7_01')"
           ></a>
           <a
             class="jump-link _4102 _2"
             href="javascript:void(0);"
-            @click="goAnchor('ease8_01')"
+            @click.stop.prevent="goAnchor('ease8_01')"
           ></a>
         </div>
         <div id="ease41_03" class="booklet-item">
@@ -386,7 +386,7 @@
           <a
             class="jump-link _4103"
             href="javascript:void(0);"
-            @click="goAnchor('ease8_05')"
+            @click.stop.prevent="goAnchor('ease8_05')"
           ></a>
         </div>
         <div id="ease41_04" class="booklet-item">
@@ -461,7 +461,7 @@
           <a
             class="jump-link _4206"
             href="javascript:void(0);"
-            @click="goAnchor('ease2_05')"
+            @click.stop.prevent="goAnchor('ease2_05')"
           ></a>
         </div>
         <div id="ease42_07" class="booklet-item">
@@ -603,7 +603,7 @@
           <a
             class="jump-link _0701"
             href="javascript:void(0);"
-            @click="goAnchor('ease8_05')"
+            @click.stop.prevent="goAnchor('ease8_05')"
           ></a>
         </div>
         <div id="ease7_02" class="booklet-item">
@@ -1085,10 +1085,10 @@ export default {
     this.bindProcess();
   },
   beforeRouteEnter(to, from, next) {
+    Info.$emit("frameDisplay", false);
     next(vm => {
       // access to component instance via `vm`
       scrollEvent && window.addEventListener("scroll", scrollEvent);
-      console.log(from);
       if (from.name === "EaseHandbook") {
       } else {
         var pageProcess = Number(sessionStorage.getItem("page-process"));
@@ -1098,11 +1098,6 @@ export default {
           });
         }
       }
-    });
-  },
-  beforeCreate() {
-    this.$nextTick(() => {
-      Info.$emit("frameDisplay", false);
     });
   },
   beforeRouteLeave(to, from, next) {
