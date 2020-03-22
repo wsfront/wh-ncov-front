@@ -18,7 +18,6 @@
 <script>
 import HeaderLayout from "./HeaderLayout";
 import { wxShare } from "../common/mixins";
-import Info from "./info";
 
 export default {
   name: "EaseHandbook",
@@ -31,12 +30,6 @@ export default {
     handleNav() {
       this.$router.push("WaitManual");
     }
-  },
-  mounted() {},
-  beforeCreate() {
-    this.$nextTick(() => {
-      Info.$emit("frameDisplay", true);
-    });
   }
 };
 </script>
