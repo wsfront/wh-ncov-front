@@ -93,7 +93,6 @@
             src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease0_00.png"
           />
         </div>
-
         <div id="ease1_00" class="booklet-item">
           <img
             class="booklet-img"
@@ -774,7 +773,6 @@
 <script>
 import HeaderLayout from "./HeaderLayout";
 import { wxShare } from "../common/mixins";
-import Info from "./info";
 
 let pageHeight;
 let scrollEvent;
@@ -1008,7 +1006,7 @@ export default {
         },
         {
           code: "ease9_04",
-          name: "版权申明"
+          name: "版权声明"
         }
       ]
     };

@@ -140,7 +140,6 @@
 <script>
 import HeaderLayout from "./HeaderLayout";
 import { wxShare } from "../common/mixins";
-import Info from "./info";
 
 export default {
   name: "FrontCheckIndex",
@@ -208,18 +207,18 @@ export default {
         },
         {
           code: "prev6_03",
-          name: "版权申明"
+          name: "版权声明"
         }
       ]
     };
   },
   methods: {
     handleNav(selector) {
+      document.documentElement.scrollTop = 0;
       if (!selector) {
         this.backHome();
       }
       this.activeIndex = selector;
-      Info.$emit("frameDisplay", false);
       this.goAnchor(selector);
     },
     backHome() {
@@ -242,7 +241,6 @@ export default {
       }
       this.activeIndex = 0;
       this.activeCode = false;
-      Info.$emit("frameDisplay", true);
     },
     goAnchor(selector) {
       this.isShow = false;
@@ -319,14 +317,12 @@ export default {
       // entire view has been re-rendered
       if (targetImg.complete && targetImg.src.indexOf(that.activeCode) > -1) {
         targetPosition.scrollIntoView();
-        Info.$emit("frameDisplay", false);
         // store current postion if there is no catelog operation
         localStorage.setItem("activeCode", that.activeCode);
       }
     });
     targetImg.onload = function() {
       targetPosition.scrollIntoView();
-      Info.$emit("frameDisplay", false);
       localStorage.setItem("activeCode", that.activeCode);
     };
   }
@@ -472,7 +468,6 @@ export default {
   }
 }
 .booklet {
-  // position: relative;
   height: 100%;
   -webkit-overflow-scrolling : touch;
   overflow-y: scroll;
