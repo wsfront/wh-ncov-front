@@ -85,8 +85,8 @@
           </div>
         </div>
       </el-drawer>
-      <div class="booklet">
-        <el-backtop target=".booklet" :right="20" :bottom="40"></el-backtop>
+      <div class="booklet" :class="{shade:isShow}">
+        <el-backtop target="" :right="20" :bottom="40"></el-backtop>
         <div id="ease0_00" class="booklet-item">
           <img
             class="booklet-img"
@@ -1045,8 +1045,10 @@ export default {
         [...imgList].forEach(s => {
           s.onload = function() {
             len--;
+            debugger;
             if (!len) {
               requestAnimationFrame(() => {
+                debugger;
                 pageHeight = document.body.scrollHeight;
                 // console.log(document.body.scrollHeight)/
                 // if(window.pageYOffset == 0){debugger}
@@ -1491,7 +1493,11 @@ export default {
   &-item {
     position: relative;
   }
+  .shade {
+     overflow-y: hidden;
+  }
 }
+
 .goto {
   width: 26.5%;
   height: 5%;
