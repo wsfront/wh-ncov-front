@@ -1132,6 +1132,9 @@ export default {
   width: 16px;
   height: 16px;
 }
+.block .shade {
+  overflow-y: hidden;
+}
 .jump-link {
   position: absolute;
   height: 22px;
@@ -1492,9 +1495,6 @@ export default {
   }
   &-item {
     position: relative;
-  }
-  .shade {
-     overflow-y: hidden;
   }
 }
 
