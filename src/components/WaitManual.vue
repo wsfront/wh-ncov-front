@@ -773,6 +773,7 @@
 <script>
 import HeaderLayout from "./HeaderLayout";
 import { wxShare } from "../common/mixins";
+import Info from "./info";
 
 let pageHeight;
 let scrollEvent;
