@@ -43,12 +43,8 @@ export default {
     });
   },
   watch: {
-    '$route' (to, from) {
-      if (to.path === '/EaseHandbook' || to.fullPath === '/FrontCheckIndex' || to.path === '/' || to.path === '/FrontIndex') {
-        Info.$emit("frameDisplay", true);
-      } else {
-        Info.$emit("frameDisplay", false);
-      }
+    '$route' () {
+      this.changeFrameDisplay()
     }
   },
   mounted() {
@@ -56,6 +52,16 @@ export default {
       sessionStorage.setItem("lastUpdateTime", time);
       this.lastUpdateTime = time;
     });
+    this.changeFrameDisplay();
+  },
+  methods: {
+    changeFrameDisplay() {
+      if (this.$route.path === '/EaseHandbook' || this.$route.fullPath === '/FrontCheckIndex' || this.$route.path === '/' || this.$route.path === '/FrontIndex') {
+        Info.$emit("frameDisplay", true);
+      } else {
+        Info.$emit("frameDisplay", false);
+      }
+    }
   }
 };
 </script>
