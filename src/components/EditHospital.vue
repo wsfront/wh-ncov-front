@@ -112,7 +112,7 @@ export default {
         },
         {
           type: "check",
-          key: "puncture",
+          key: "receive_clour_ultrasound",
           name: "中孕期三维排畸彩超（大排畸）",
           value: ""
         },
@@ -124,7 +124,7 @@ export default {
         },
         {
           type: "check",
-          key: "receive_clour_ultrasound",
+          key: "puncture",
           name: "羊水穿刺",
           value: ""
         },
