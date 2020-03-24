@@ -86,7 +86,7 @@
         </div>
       </el-drawer>
       <div class="booklet">
-        <el-backtop :right="20" :bottom="40"></el-backtop>
+        <el-backtop target=".booklet" :right="20" :bottom="40"></el-backtop>
         <div id="ease0_00" class="booklet-item">
           <img
             class="booklet-img"
