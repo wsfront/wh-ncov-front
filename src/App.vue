@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <header class="tips" v-show="frameDisplay && (this.$route.path=='/' || this.$route.path=='/FrontIndex')">
-      <span v-if="lastUpdateTime">{{ lastUpdateTime }}更新; </span>
-        数据至少两天更新一次
+      <span v-if="lastUpdateTime">{{ lastUpdateTime }}更新</span>
     </header>
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive"></router-view>
@@ -43,15 +42,26 @@ export default {
       this.frameDisplay = data;
     });
   },
+  watch: {
+    '$route' () {
+      this.changeFrameDisplay()
+    }
+  },
   mounted() {
-    this.frameDisplay = true;
     this.$EventBus.$on("refreshUpdateTime", time => {
       sessionStorage.setItem("lastUpdateTime", time);
       this.lastUpdateTime = time;
     });
-    Info.$on("frameDisplay", data => {
-      this.frameDisplay = data;
-    });
+    this.changeFrameDisplay();
+  },
+  methods: {
+    changeFrameDisplay() {
+      if (this.$route.path === '/EaseHandbook' || this.$route.fullPath === '/FrontCheckIndex' || this.$route.path === '/' || this.$route.path === '/FrontIndex') {
+        Info.$emit("frameDisplay", true);
+      } else {
+        Info.$emit("frameDisplay", false);
+      }
+    }
   }
 };
 </script>

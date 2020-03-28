@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wh-container full">
     <div class="block">
       <div @click="backHome" class="el-backtop" style="top: 30px; left: 20px;">
         <i class="el-icon-s-home"></i>
@@ -93,7 +93,6 @@
             src="http://wuhan2099.oss-accelerate.aliyuncs.com/ease1/ease0_00.png"
           />
         </div>
-
         <div id="ease1_00" class="booklet-item">
           <img
             class="booklet-img"
@@ -1008,7 +1007,7 @@ export default {
         },
         {
           code: "ease9_04",
-          name: "版权申明"
+          name: "版权声明"
         }
       ]
     };
@@ -1480,7 +1479,7 @@ export default {
 }
 .booklet {
   // position: relative;
-  // height: 100%;
+  height: 100%;
   -webkit-overflow-scrolling: touch;
   overflow-y: scroll;
   &-img {

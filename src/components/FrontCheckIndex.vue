@@ -1,26 +1,31 @@
 <template>
-  <div :class="['wh-container', { 'full': activeIndex !== 0 }]">
+  <div :class="['wh-container', { full: activeIndex !== 0 }]">
     <div v-show="activeIndex === 0" class="hearder-block">
-      <HeaderLayout :activeIndex="1" @click="removeEvent"/>
+      <HeaderLayout :activeIndex="1" @click="removeEvent" />
     </div>
     <v-touch v-on:swipeup="handleNav('prev1_01')">
       <div v-if="activeIndex === 0" class="launch-main">
-        <img @click="handleNav('prev1_01')" class="launch-btn" src="http://wuhan2099.oss-accelerate.aliyuncs.com/btn_epi.png" />
-        <img @click="handleNav('prev5_01')" class="launch-btn mt-10" src="http://wuhan2099.oss-accelerate.aliyuncs.com/btn_won.png" />
+        <img
+          @click="handleNav('prev1_01')"
+          class="launch-btn"
+          src="http://wuhan2099.oss-accelerate.aliyuncs.com/btn_epi.png"
+        />
+        <img
+          @click="handleNav('prev5_01')"
+          class="launch-btn mt-10"
+          src="http://wuhan2099.oss-accelerate.aliyuncs.com/btn_won.png"
+        />
       </div>
     </v-touch>
     <div v-show="activeIndex !== 0" class="block">
-      <div @click="backHome" class="el-backtop" style="top: 30px; left: 20px;"><i class="el-icon-s-home"></i>
+      <div @click="backHome" class="el-backtop" style="top: 30px; left: 20px;">
+        <i class="el-icon-s-home"></i>
       </div>
-      <div v-if="!isShow"
-        @click="isShow = true" class="catalog-btn"
-        ><i class="el-icon-s-fold"></i>
+      <div v-if="!isShow" @click="isShow = true" class="catalog-btn">
+        <i class="el-icon-s-fold"></i>
         <span class="catalog-btn-text">目录</span>
       </div>
-      <el-drawer
-        :visible.sync="isShow"
-        size="64%"
-        :with-header="false">
+      <el-drawer :visible.sync="isShow" size="64%" :with-header="false">
         <div class="catalog">
           <div class="catalog-header">
             孕妇防疫手册
@@ -30,17 +35,27 @@
               <li
                 v-for="item in catalogs"
                 :key="item.code"
-                class="catalog-item mt-6">
+                class="catalog-item mt-6"
+              >
                 <span
                   @click="goAnchor(item.code)"
-                  :class="['catalog-title', { 'active': activeCode === item.code }]">{{ item.name }}</span>
+                  :class="[
+                    'catalog-title',
+                    { active: activeCode === item.code }
+                  ]"
+                  >{{ item.name }}</span
+                >
                 <ul
                   v-if="item.children && item.children.length"
-                  class="catalog-ul-body">
+                  class="catalog-ul-body"
+                >
                   <li
                     v-for="citem in item.children"
                     :key="citem.code"
-                    :class="['catalog-item', { 'active': activeCode === citem.code }]"
+                    :class="[
+                      'catalog-item',
+                      { active: activeCode === citem.code }
+                    ]"
                   >
                     <span @click="goAnchor(citem.code)">{{ citem.name }}</span>
                   </li>
@@ -53,84 +68,156 @@
       <div class="booklet">
         <el-backtop target=".booklet" :right="20" :bottom="40"></el-backtop>
         <div id="prev1_01" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_01.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_01.jpg"
+          />
         </div>
         <div id="prev1_02" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_02.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_02.jpg"
+          />
         </div>
         <div id="prev1_03" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_03.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_03.jpg"
+          />
         </div>
         <div id="prev1_04" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_04.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_04.jpg"
+          />
         </div>
         <div id="prev1_05" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_05.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_05.jpg"
+          />
         </div>
         <div id="prev1_06" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_06.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_06.jpg"
+          />
           <a class="goto" href="http://yf.shcnwl.cn/"></a>
         </div>
 
         <div id="prev2_01" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_01.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_01.jpg"
+          />
         </div>
         <div id="prev2_02" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_02.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_02.jpg"
+          />
         </div>
         <div id="prev2_03" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_03.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_03.jpg"
+          />
         </div>
 
         <div id="prev3_01" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_01.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_01.jpg"
+          />
         </div>
         <div id="prev3_02" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_02.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_02.jpg"
+          />
         </div>
         <div id="prev3_03" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_03.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_03.jpg"
+          />
           <a class="findme" href="https://weibo.com/ncplifecare"></a>
         </div>
 
         <div id="prev4_01" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_01.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_01.jpg"
+          />
         </div>
         <div id="prev4_02" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_02.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_02.jpg"
+          />
         </div>
         <div id="prev4_03" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_03.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_03.jpg"
+          />
         </div>
 
         <div id="prev5_01" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_01.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_01.jpg"
+          />
         </div>
         <div id="prev5_02" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_02.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_02.jpg"
+          />
         </div>
         <div id="prev5_03" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_03.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_03.jpg"
+          />
         </div>
         <div id="prev5_04" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_04.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_04.jpg"
+          />
         </div>
         <div id="prev5_05" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_05.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_05.jpg"
+          />
         </div>
         <div id="prev5_06" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_06.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_06.jpg"
+          />
         </div>
 
         <div id="prev6_01" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_01.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_01.jpg"
+          />
         </div>
         <div id="prev6_02" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_02.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_02.jpg"
+          />
           <a class="get-more" href="https://weibo.com/u/6892480749"></a>
         </div>
         <div id="prev6_03" class="booklet-item">
-          <img class="booklet-img" src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_03.jpg" />
+          <img
+            class="booklet-img"
+            src="http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_03.jpg"
+          />
         </div>
       </div>
     </div>
@@ -140,7 +227,6 @@
 <script>
 import HeaderLayout from "./HeaderLayout";
 import { wxShare } from "../common/mixins";
-import Info from "./info";
 
 export default {
   name: "FrontCheckIndex",
@@ -208,18 +294,18 @@ export default {
         },
         {
           code: "prev6_03",
-          name: "版权申明"
+          name: "版权声明"
         }
       ]
     };
   },
   methods: {
     handleNav(selector) {
+      document.documentElement.scrollTop = 0;
       if (!selector) {
         this.backHome();
       }
       this.activeIndex = selector;
-      Info.$emit("frameDisplay", false);
       this.goAnchor(selector);
     },
     backHome() {
@@ -242,7 +328,6 @@ export default {
       }
       this.activeIndex = 0;
       this.activeCode = false;
-      Info.$emit("frameDisplay", true);
     },
     goAnchor(selector) {
       this.isShow = false;
@@ -319,14 +404,12 @@ export default {
       // entire view has been re-rendered
       if (targetImg.complete && targetImg.src.indexOf(that.activeCode) > -1) {
         targetPosition.scrollIntoView();
-        Info.$emit("frameDisplay", false);
         // store current postion if there is no catelog operation
         localStorage.setItem("activeCode", that.activeCode);
       }
     });
     targetImg.onload = function() {
       targetPosition.scrollIntoView();
-      Info.$emit("frameDisplay", false);
       localStorage.setItem("activeCode", that.activeCode);
     };
   }
@@ -464,17 +547,16 @@ export default {
     display: block;
   }
 }
-@media screen and (max-width: 350px){
-  .catalog{
+@media screen and (max-width: 350px) {
+  .catalog {
     &-title {
       font-size: 15px;
     }
   }
 }
 .booklet {
-  // position: relative;
   height: 100%;
-  -webkit-overflow-scrolling : touch;
+  -webkit-overflow-scrolling: touch;
   overflow-y: scroll;
   &-img {
     width: 100%;
