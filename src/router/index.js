@@ -8,6 +8,7 @@ import EndHospitalDetail from '@/components/EndHospitalDetail'
 import EndHospitalEdit from '@/components/EndHospitalEdit'
 import Login from '@/components/Login'
 import WaitManual from '@/components/WaitManual'
+import EpidemicManual from '@/components/EpidemicManual'
 
 Vue.use(Router)
 
@@ -65,11 +66,25 @@ export default new Router({
       }
     },
     {
+      path: '/EpidemicManual',
+      name: 'EpidemicManual',
+      component: EpidemicManual,
+      meta: {
+        title: 'NCP生命支援 - 孕妇防疫手册',
+        keepAlive: true
+      },
+      beforeEnter: (to, from, next) => {
+        document.title = to.meta.title
+        next();
+      }
+    },
+    {
       path: '/EaseHandbook',
       name: 'EaseHandbook',
       component: EaseHandbook,
       meta: {
-        title: 'NCP生命支援 - 安心待产手册'
+        title: 'NCP生命支援 - 安心待产手册',
+        keepAlive: true
       },
       beforeEnter: (to, from, next) => {
         document.title = to.meta.title

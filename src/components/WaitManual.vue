@@ -1479,9 +1479,9 @@ export default {
 }
 .booklet {
   // position: relative;
-  height: 100%;
-  -webkit-overflow-scrolling: touch;
-  overflow-y: scroll;
+  // height: 100%;
+  // -webkit-overflow-scrolling: touch;
+  // overflow-y: scroll;
   &-img {
     width: 100%;
     display: block;
