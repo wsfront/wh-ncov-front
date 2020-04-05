@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import HeaderLayout from "./HeaderLayout";
-import { wxShare } from "../common/mixins";
+import HeaderLayout from './HeaderLayout'
+import { wxShare } from '../common/mixins'
 
 export default {
-  name: "FrontCheckIndex",
+  name: 'FrontCheckIndex',
   mixins: [wxShare],
   components: { HeaderLayout },
   data() {
@@ -33,19 +33,49 @@ export default {
       diyShareTitle: true,
       loading: true,
       activeIndex: 0
-    };
-  },
-  methods: {
-    handleNav(selector = "") {
-      this.$router.push({
-        path: "EpidemicManual",
-        // params: { selector },
-        query: { selector }
-      });
     }
   },
-  mounted() {}
-};
+  methods: {
+    handleNav(selector = '') {
+      this.$router.push({
+        path: 'EpidemicManual',
+        // params: { selector },
+        query: { selector }
+      })
+    }
+  },
+  mounted() {
+    [
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_01.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_02.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_03.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_04.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_05.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev1/prev1_06.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_01.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_02.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev2/prev2_03.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_01.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_02.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev3/prev3_03.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_01.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_02.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev4/prev4_03.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_01.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_02.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_03.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_04.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_05.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev5/prev5_06.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_01.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_02.jpg',
+      'http://wuhan2099.oss-accelerate.aliyuncs.com/prev6/prev6_03.jpg'
+    ].forEach(url => {
+      let imageDom = new Image()
+      imageDom.src = url
+    })
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -68,7 +98,7 @@ export default {
   top: 66px;
   width: 100%;
   height: calc(100vh - 69px);
-  background-image: url("http://wuhan2099.oss-accelerate.aliyuncs.com/bg_antie.jpg");
+  background-image: url('http://wuhan2099.oss-accelerate.aliyuncs.com/bg_antie.jpg');
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-color: #d9f1fb;
@@ -90,5 +120,4 @@ export default {
     box-shadow: none;
   }
 }
-
 </style>

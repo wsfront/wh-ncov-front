@@ -208,29 +208,29 @@
 </template>
 
 <script>
-import HeaderLayout from "./HeaderLayout";
-import { wxShare } from "../common/mixins";
-import Info from "./info";
+import HeaderLayout from './HeaderLayout'
+import { wxShare } from '../common/mixins'
+import Info from './info'
 
-let pageHeight;
-let scrollEvent;
+let pageHeight
+let scrollEvent
 // let bindProcessing = false;
-let first = true;
+let first = true
 
 function throlle(func) {
-  let lock = false;
+  let lock = false
   return (...args) => {
-    if (lock) return;
-    func(...args);
-    lock = true;
+    if (lock) return
+    func(...args)
+    lock = true
     requestAnimationFrame(() => {
-      lock = false;
-    });
-  };
+      lock = false
+    })
+  }
 }
 
 export default {
-  name: "FrontCheckIndex",
+  name: 'FrontCheckIndex',
   mixins: [wxShare],
   components: { HeaderLayout },
   data() {
@@ -239,66 +239,66 @@ export default {
       // loading: true,
       activeIndex: 0,
       isShow: false,
-      activeCode: "prev1_01",
+      activeCode: 'prev1_01',
       catalogs: [
         {
-          code: "prev1_01",
-          name: "一、产前防疫",
+          code: 'prev1_01',
+          name: '一、产前防疫',
           children: [
-            { code: "prev1_02", name: "01 产检频率" },
-            { code: "prev1_05", name: "02 产检防护" },
-            { code: "prev1_06", name: "03 武汉孕妇就诊指南" }
+            { code: 'prev1_02', name: '01 产检频率' },
+            { code: 'prev1_05', name: '02 产检防护' },
+            { code: 'prev1_06', name: '03 武汉孕妇就诊指南' }
           ]
         },
         {
-          code: "prev2_01",
-          name: "二、产后防疫",
+          code: 'prev2_01',
+          name: '二、产后防疫',
           children: [
-            { code: "prev2_02", name: "01 产后发热" },
-            { code: "prev2_03", name: "02 母乳喂养" }
+            { code: 'prev2_02', name: '01 产后发热' },
+            { code: 'prev2_03', name: '02 母乳喂养' }
           ]
         },
         {
-          code: "prev3_01",
-          name: "三、心理抗疫",
+          code: 'prev3_01',
+          name: '三、心理抗疫',
           children: [
-            { code: "prev3_02", name: "01 识别症状" },
-            { code: "prev3_03", name: "02 缓解方式" }
+            { code: 'prev3_02', name: '01 识别症状' },
+            { code: 'prev3_03', name: '02 缓解方式' }
           ]
         },
         {
-          code: "prev4_01",
-          name: "四、宝宝防疫",
+          code: 'prev4_01',
+          name: '四、宝宝防疫',
           children: [
-            { code: "prev4_02", name: "01 新生儿隔离" },
-            { code: "prev4_03", name: "02 宝宝防护和用品清洁" }
+            { code: 'prev4_02', name: '01 新生儿隔离' },
+            { code: 'prev4_03', name: '02 宝宝防护和用品清洁' }
           ]
         },
         {
-          code: "prev5_01",
-          name: "五、疑似/感染孕产妇须知",
+          code: 'prev5_01',
+          name: '五、疑似/感染孕产妇须知',
           children: [
-            { code: "prev5_02", name: "01 胸部CT检查" },
-            { code: "prev5_03", name: "02 接诊医院" },
-            { code: "prev5_04", name: "03 用药须知" },
-            { code: "prev5_05", name: "04 感染康复后" },
-            { code: "prev5_06", name: "05 宝宝隔离" }
+            { code: 'prev5_02', name: '01 胸部CT检查' },
+            { code: 'prev5_03', name: '02 接诊医院' },
+            { code: 'prev5_04', name: '03 用药须知' },
+            { code: 'prev5_05', name: '04 感染康复后' },
+            { code: 'prev5_06', name: '05 宝宝隔离' }
           ]
         },
         {
-          code: "prev6_01",
-          name: "参考来源"
+          code: 'prev6_01',
+          name: '参考来源'
         },
         {
-          code: "prev6_02",
-          name: "手册制作团队"
+          code: 'prev6_02',
+          name: '手册制作团队'
         },
         {
-          code: "prev6_03",
-          name: "版权声明"
+          code: 'prev6_03',
+          name: '版权声明'
         }
       ]
-    };
+    }
   },
   methods: {
     // handleNav(selector) {
@@ -371,7 +371,7 @@ export default {
     //   }
     // }
     backHome() {
-      this.$router.push("FrontCheckIndex");
+      this.$router.push('FrontCheckIndex')
     },
     bindProcess() {
       // let that = this;
@@ -380,56 +380,57 @@ export default {
       // }
       // bindProcessing = true;
       return new Promise((resolve, reject) => {
-        let imgList = this.$el.querySelectorAll(".booklet-img");
-        let len = imgList.length;
+        let imgList = this.$el.querySelectorAll('.booklet-img')
+        let len = imgList.length
 
         // console.log(imgList)
         setTimeout(() => {
-          [...imgList].forEach(s => {
-            s.onload = function() {
-              len--;
+          ;[...imgList].forEach((s) => {
+            s.onload = function () {
+              len--
               if (!len) {
                 requestAnimationFrame(() => {
-                  pageHeight = document.body.scrollHeight;
+                  pageHeight = document.body.scrollHeight
                   // console.log(document.body.scrollHeight)/
                   // if(window.pageYOffset == 0){debugger}
-                  scrollEvent = throlle(function() {
+                  scrollEvent = throlle(function () {
                     sessionStorage.setItem(
-                      "page-process-1",
+                      'page-process-1',
                       (window.pageYOffset / pageHeight).toString()
-                    );
+                    )
                     // }
-                  });
-                  window.addEventListener("scroll", scrollEvent);
+                  })
+                  window.addEventListener('scroll', scrollEvent)
                   // bindProcessing = false;
-                  first = false;
-                  resolve();
-                });
+                  first = false
+                  resolve()
+                })
               }
-            };
-          });
+            }
+          })
           // setTimeout(() => {
           //   reject();
           // }, 10000);
-        }, 0);
-      });
+        }, 0)
+      })
     },
     goAnchor(selector) {
-      this.isShow = false;
-      let that = this;
-      this.activeCode = selector;
-      let targetImg = that.$el.querySelector("#" + that.activeCode + " img");
-      let targetPosition = that.$el.querySelector("#" + that.activeCode);
-      this.$nextTick(function() {
+      this.isShow = false
+      let that = this
+      this.activeCode = selector
+      let targetImg = that.$el.querySelector('#' + that.activeCode + ' img')
+      let targetPosition = that.$el.querySelector('#' + that.activeCode)
+      this.$nextTick(function () {
         // Code that will run only after the
         // entire view has been re-rendered
         if (targetImg.complete && targetImg.src.indexOf(that.activeCode) > -1) {
-          targetPosition.scrollIntoView();
+          targetPosition.scrollIntoView()
         }
-      });
+      })
     }
   },
   mounted() {
+    console.log('mount')
     // let that = this;
     // that.handleHash();
     // window.addEventListener(
@@ -437,7 +438,14 @@ export default {
     //   that.handleHash.bind(that, event),
     //   false
     // );
-    this.bindProcess();
+    this.bindProcess()
+
+    // window.onload = function () {
+    //   console.log('onload')
+    //   if (this.$route.query.selector) {
+    //     this.goAnchor(this.$route.query.selector)
+    //   }
+    // }
   },
   beforeCreate() {
     // sessionStorage.setItem("activeCode", null);
@@ -446,41 +454,37 @@ export default {
     // this.removeEvent();
   },
   beforeRouteEnter(to, from, next) {
-    Info.$emit("frameDisplay", false);
-    next(vm => {
+    Info.$emit('frameDisplay', false)
+    next((vm) => {
       // access to component instance via `vm`
-      scrollEvent && window.addEventListener("scroll", scrollEvent);
-      if (from.name === "FrontCheckIndex") {
+      scrollEvent && window.addEventListener('scroll', scrollEvent)
+      if (from.name === 'FrontCheckIndex') {
         if (vm.$route.query.selector) {
           // console.log(first);
           if (first) {
             setTimeout(() => {
-              vm.goAnchor(vm.$route.query.selector);
-            }, 1000);
-            // TODO: 偷懒，使用了主观的预计
-            // vm.bindProcess().then(() => {
-            //   vm.goAnchor(vm.$route.query.selector);
-            // });
+              vm.goAnchor(vm.$route.query.selector)
+            }, 500)
           } else {
-            vm.goAnchor(vm.$route.query.selector);
+            vm.goAnchor(vm.$route.query.selector)
           }
         }
       } else {
-        var pageProcess = Number(sessionStorage.getItem("page-process-1"));
+        var pageProcess = Number(sessionStorage.getItem('page-process-1'))
         if (pageProcess && pageHeight) {
           window.scrollTo({
             top: pageProcess * pageHeight
-          });
+          })
         }
       }
-    });
+    })
   },
   beforeRouteLeave(to, from, next) {
     // debugger
-    scrollEvent && window.removeEventListener("scroll", scrollEvent);
+    scrollEvent && window.removeEventListener('scroll', scrollEvent)
     setTimeout(() => {
-      next();
-    }, 0);
+      next()
+    }, 0)
   }
   // updated() {
   //   let that = this;
@@ -510,7 +514,7 @@ export default {
   //     sessionStorage.setItem("activeCode", that.activeCode);
   //   };
   // }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -533,7 +537,7 @@ export default {
   top: 66px;
   width: 100%;
   height: calc(100vh - 69px);
-  background-image: url("http://wuhan2099.oss-accelerate.aliyuncs.com/bg_antie.jpg");
+  background-image: url('http://wuhan2099.oss-accelerate.aliyuncs.com/bg_antie.jpg');
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-color: #d9f1fb;
@@ -687,7 +691,7 @@ export default {
   bottom: 17%;
   display: block;
 }
-img[lazy="loading"] {
+img[lazy='loading'] {
   width: 32px;
   margin: 0 auto;
 }
