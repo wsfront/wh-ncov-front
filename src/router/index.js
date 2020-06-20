@@ -9,6 +9,7 @@ import EndHospitalEdit from '@/components/EndHospitalEdit'
 import Login from '@/components/Login'
 import WaitManual from '@/components/WaitManual'
 import EpidemicManual from '@/components/EpidemicManual'
+import SumPrev from '@/components/SumPrev'
 
 Vue.use(Router)
 
@@ -71,6 +72,19 @@ export default new Router({
       component: EpidemicManual,
       meta: {
         title: 'NCP生命支援 - 孕妇防疫手册',
+        keepAlive: true
+      },
+      beforeEnter: (to, from, next) => {
+        document.title = to.meta.title
+        next();
+      }
+    },
+    {
+      path: '/SumPrev',
+      name: 'sumprev',
+      component: SumPrev,
+      meta: {
+        title: 'NCP生命支援 - 孕产妇夏季防疫指南',
         keepAlive: true
       },
       beforeEnter: (to, from, next) => {

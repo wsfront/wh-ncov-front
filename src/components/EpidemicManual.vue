@@ -385,15 +385,15 @@ export default {
 
         // console.log(imgList)
         setTimeout(() => {
-          ;[...imgList].forEach((s) => {
-            s.onload = function () {
+          ;[...imgList].forEach(s => {
+            s.onload = function() {
               len--
               if (!len) {
                 requestAnimationFrame(() => {
                   pageHeight = document.body.scrollHeight
                   // console.log(document.body.scrollHeight)/
                   // if(window.pageYOffset == 0){debugger}
-                  scrollEvent = throlle(function () {
+                  scrollEvent = throlle(function() {
                     sessionStorage.setItem(
                       'page-process-1',
                       (window.pageYOffset / pageHeight).toString()
@@ -420,7 +420,7 @@ export default {
       this.activeCode = selector
       let targetImg = that.$el.querySelector('#' + that.activeCode + ' img')
       let targetPosition = that.$el.querySelector('#' + that.activeCode)
-      this.$nextTick(function () {
+      this.$nextTick(function() {
         // Code that will run only after the
         // entire view has been re-rendered
         if (targetImg.complete && targetImg.src.indexOf(that.activeCode) > -1) {
@@ -455,7 +455,7 @@ export default {
   },
   beforeRouteEnter(to, from, next) {
     Info.$emit('frameDisplay', false)
-    next((vm) => {
+    next(vm => {
       // access to component instance via `vm`
       scrollEvent && window.addEventListener('scroll', scrollEvent)
       if (from.name === 'FrontCheckIndex') {
