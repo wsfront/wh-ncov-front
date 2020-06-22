@@ -3,19 +3,22 @@
     <div class="hearder-block">
       <HeaderLayout :activeIndex="1" />
     </div>
-    <v-touch v-on:swipeup="handleNav()">
+    <v-touch v-on:swipeup="handleNav('SumPrev')">
       <div class="launch-main">
-        <div class="btns">
-          <img
-            @click.prevent="handleNav('SumPrev')"
-            class="launch-btn"
-            src="//ncp.qingclouds.cn/summer/btn_sumprev.png"
-          />
-          <img
-            @click="handleNav('EpidemicManual')"
-            class="launch-btn mt-10"
-            src="//wuhan2099.oss-accelerate.aliyuncs.com/btn_epi.png"
-          />
+        <div class="launch-poster">
+          <img src="//ncp.qingclouds.cn/summer/bg_sumprev.jpg" alt="" class="bg"/>
+          <div class="btns">
+            <img
+              @click.prevent="handleNav('SumPrev')"
+              class="launch-btn"
+              src="//ncp.qingclouds.cn/summer/btn_sumprev.png"
+            />
+            <img
+              @click="handleNav('EpidemicManual')"
+              class="launch-btn mt-10"
+              src="//wuhan2099.oss-accelerate.aliyuncs.com/btn_epi.png"
+            />
+          </div>
         </div>
       </div>
     </v-touch>
@@ -99,19 +102,26 @@ export default {
   }
 }
 .launch-main {
-  top: 66px;
+  // top: 66px;
   width: 100%;
   height: calc(100vh - 69px);
-  background-image: url('//ncp.qingclouds.cn/summer/bg_sumprev.jpg');
+  // background-image: url('//ncp.qingclouds.cn/summer/bg_sumprev.jpg');
   background-size: 100% auto;
   background-repeat: no-repeat;
-  background-color: #d9f1fb;
+  background-color: #f8dff2;
   z-index: 2;
   overflow: hidden;
-}
-.btns{
-  margin-top: 52vh;
   position: relative;
+}
+.launch-poster {
+  position: relative;
+  .bg {
+    width: 100%;
+  }
+}
+.btns {
+  position: absolute;
+  top: 54%;
   text-align: right;
   padding-right: 3%;
 }

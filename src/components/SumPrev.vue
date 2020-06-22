@@ -1,7 +1,7 @@
 <template>
   <div class="wh-container full">
     <div class="block">
-      <div @click="backHome" class="el-backtop" style="top: 30px; left: 20px;">
+      <div @click="backHome" class="el-backhome" style="top: 30px; left: 20px;">
         <i class="el-icon-s-home"></i>
       </div>
       <div v-if="!isShow" @click="isShow = true" class="catalog-btn">
@@ -49,7 +49,6 @@
         </div>
       </el-drawer>
       <div class="booklet">
-        <el-backtop :right="20" :bottom="40"></el-backtop>
         <div id="sumprev0_00" class="booklet-item">
           <img
             class="booklet-img"
@@ -231,6 +230,10 @@
         </div>
       </div>
     </div>
+    <el-backtop
+      :right="20"
+      :bottom="40"
+    ></el-backtop>
   </div>
 </template>
 
@@ -266,6 +269,7 @@ export default {
       isShow: false,
       activeCode: 'sumprev_02',
       // flag: [],
+      // backTopShow: false,
       catalogs: [
         {
           code: 'sumprev1_01',
@@ -336,7 +340,7 @@ export default {
           ]
         },
         {
-          code: 'sumprev5_05',
+          code: 'sumprev5_06',
           name: '参考来源和医学顾问'
         },
         {
@@ -435,6 +439,16 @@ export default {
   mounted() {
     // let that = this;
     this.bindProcess()
+    // window.addEventListener('scroll', () => {
+    //   if (!this.backTopShow) {
+    //     return
+    //   }
+    //   if (window.scrollY > 200) {
+    //     this.backTopShow = true
+    //   } else {
+    //     this.backTopShow = false
+    //   }
+    // })
   },
   beforeRouteEnter(to, from, next) {
     Info.$emit('frameDisplay', false)
@@ -475,11 +489,35 @@ export default {
 }
 .wh-container {
   position: relative;
-  height: calc(100vh - 82px);
+  // height: calc(100vh - 82px);
   color: #333;
   &.full {
-    height: 100vh;
+    // height: 100vh;
   }
+}
+.el-backhome {
+  // background: red;
+  // z-index: 2222222;
+  position: fixed;
+  background-color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #5887ff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  font-size: 20px;
+  -webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  z-index: 5;
 }
 .jump-link {
   position: absolute;
@@ -487,7 +525,7 @@ export default {
   width: 20%;
   bottom: 10%;
   left: 10%;
-  background: antiquewhite;
+  // background: antiquewhite;
   opacity: 0.8;
   &._2_03 {
     width: 25%;

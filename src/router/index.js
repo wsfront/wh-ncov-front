@@ -59,7 +59,7 @@ export default new Router({
       name: 'FrontCheckIndex',
       component: FrontCheckIndex,
       meta: {
-        title: 'NCP生命支援 - 孕妇防疫手册'
+        title: 'NCP生命支援 - 孕产妇夏季防疫指南'
       },
       beforeEnter: (to, from, next) => {
         document.title = to.meta.title
